@@ -1,0 +1,6 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"page-assessments-desc": "This extension is for storing article assessments in a database table with the help of a parser function"
+}

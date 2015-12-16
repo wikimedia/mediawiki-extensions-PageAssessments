@@ -1,0 +1,9 @@
+This extension is for the purposes of storing article assessments as they happen in a new database table.
+This extension was designed keeping in mind Wikiprojects use-cases but they can be used for a number of other similar purposes.
+
+The parser function for invoking a new review is: {{#review: <Name of the wikiproject> | <Class> | <Importance>}} where 'review'
+is a magic word.
+
+The review parser function is expected to be on the Talk page of the page under review, however it may be included on the main page itself.
+
+A page may have more than one review function for different projects.

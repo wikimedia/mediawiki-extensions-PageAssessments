@@ -1,0 +1,39 @@
+{
+	"name": "PageAssessments",
+	"version": "0.0.0",
+	"author": [
+		"Niharika Kohli"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:PageAssessments",
+	"descriptionmsg": "page-assessments-desc",
+	"license-name": "GPL-2.0+",
+	"type": "parserhook",
+	"AutoloadClasses": {
+		"PageAssessmentsHooks": "PageAssessments.hooks.php",
+		"PageAssessmentsBody": "PageAssessmentsBody.php"
+	},
+	"ExtensionMessagesFiles": {
+		"PageAssessmentsMagic": "PageAssessments.i18n.magic.php"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"PageAssessmentsHooks::onParserFirstCallInit"
+		],
+		"LoadExtensionSchemaUpdates": [
+			"PageAssessmentsHooks::onLoadExtensionSchemaUpdates"
+		],
+		"OutputPageParserOutput": [
+			"PageAssessmentsHooks::onOutputPageParserOutput"
+		]
+	},
+	"MessagesDirs": {
+		"PageAssessments": [
+			"i18n"
+		]
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "examples/PageAssessments"
+	},
+	"manifest_version": 1
+}

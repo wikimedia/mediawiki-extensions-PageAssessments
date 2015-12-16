@@ -1,0 +1,7 @@
+.*.swp
+*~
+.project
+composer.lock
+vendor
+node_modules
+.DS_Store
