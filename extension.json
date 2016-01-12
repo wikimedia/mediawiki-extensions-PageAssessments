@@ -10,7 +10,8 @@
 	"type": "parserhook",
 	"AutoloadClasses": {
 		"PageAssessmentsHooks": "PageAssessments.hooks.php",
-		"PageAssessmentsBody": "PageAssessmentsBody.php"
+		"PageAssessmentsBody": "PageAssessmentsBody.php",
+		"PageAssessmentsSaveJob": "PageAssessmentsSaveJob.php"
 	},
 	"ExtensionMessagesFiles": {
 		"PageAssessmentsMagic": "PageAssessments.i18n.magic.php"
@@ -30,6 +31,9 @@
 		"PageAssessments": [
 			"i18n"
 		]
+	},
+	"JobClasses": {
+		"AssessmentSaveJob": "PageAssessmentsSaveJob"
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",

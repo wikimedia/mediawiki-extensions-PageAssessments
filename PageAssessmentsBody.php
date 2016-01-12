@@ -41,6 +41,7 @@ class PageAssessmentsBody {
 		$toInsert = array_diff( $projects, $projectsInDb );
 		$toDelete = array_diff( $projectsInDb, $projects );
 		$toUpdate = array_intersect( $projects, $projectsInDb );
+		$jobs = array();
 
 		foreach ( $assessmentData as $parserData ) {
 			$project = $parserData[0];
@@ -56,14 +57,23 @@ class PageAssessmentsBody {
 				'pa_page_revision' => $revisionId
 			);
 			if ( in_array( $project, $toInsert ) ) {
-				PageAssessmentsBody::insertRecord( $values );
+				$values['job_type'] = 'insert';
 			} elseif ( in_array( $project, $toUpdate ) ) {
-				PageAssessmentsBody::updateRecord( $values );
+				$values['job_type'] = 'update';
 			}
+			$jobs[] = new PageAssessmentsSaveJob( $titleObj, $values );
 		}
+		// Add deletion jobs to job array
 		foreach ( $toDelete as $project ) {
-			PageAssessmentsBody::deleteRecord( $pageTitle, $project );
+			$values = array(
+				'pa_page_name' => $pageTitle,
+				'pa_project' => $project,
+				'job_type' => 'delete'
+			);
+			$jobs[] = new PageAssessmentsSaveJob( $titleObj, $values );
 		}
+
+		JobQueueGroup::singleton()->push( $jobs );
 		return;
 	}
 
@@ -121,15 +131,14 @@ class PageAssessmentsBody {
 
 	/**
 	 * Delete a record from DB
-	 * @param string $title Page title
-	 * @param string $project Project
+	 * @param array $values Conditions for looking up records to delete
 	 * @return bool True/False on query success/fail
 	 */
-	public static function deleteRecord ( $title, $project ) {
+	public static function deleteRecord ( $values ) {
 		$dbw = wfGetDB( DB_MASTER );
 		$conds = array(
-			'pa_page_name' => $title,
-			'pa_project' => $project
+			'pa_page_name' => $values['pa_page_name'],
+			'pa_project' => $values['pa_project']
 		);
 		$dbw->delete( 'page_assessments', $conds, __METHOD__ );
 		return true;
