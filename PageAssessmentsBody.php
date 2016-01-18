@@ -79,16 +79,31 @@ class PageAssessmentsBody {
 
 
 	/**
-	 * Update record in DB with new values
+	 * Update record in DB if there are new values
 	 * @param array $values New values to be entered into the DB
 	 * @return bool True/False on query success/fail
 	 */
 	public static function updateRecord ( $values ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbr = wfGetDB( DB_SLAVE );
 		$conds =  array(
 			'pa_page_name' => $values['pa_page_name'],
 			'pa_project'  => $values['pa_project']
 		);
+		// Check if there are no updates to be done
+		$record = $dbr->select(
+			'page_assessments',
+			array( 'pa_class', 'pa_importance', 'pa_project', 'pa_page_name' ),
+			$conds
+		);
+		foreach ( $record as $row ) {
+			if ( $row->pa_importance == $values['pa_importance'] &&
+				$row->pa_class == $values['pa_class'] ) {
+				// Return if no updates
+				return true;
+			}
+		}
+		// Make updates if there are changes
+		$dbw = wfGetDB( DB_MASTER );
 		$dbw->update( 'page_assessments', $values, $conds, __METHOD__ );
 		return true;
 	}
