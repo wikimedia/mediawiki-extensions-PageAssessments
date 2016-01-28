@@ -11,5 +11,4 @@ CREATE TABLE IF NOT EXISTS /*_*/page_assessments (
 )/*$wgDBTableOptions*/;
 
 CREATE INDEX /*i*/pa_project ON /*_*/ page_assessments (pa_project);
-CREATE INDEX /*i*/pa_page_name ON /*_*/ page_assessments (pa_page_name);
 CREATE UNIQUE INDEX /*i*/pa_page_project ON /*_*/ page_assessments (pa_page_name, pa_project);
