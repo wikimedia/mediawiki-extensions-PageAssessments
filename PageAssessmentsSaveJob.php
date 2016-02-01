@@ -24,8 +24,6 @@ class PageAssessmentsSaveJob extends Job {
 			// Compile the array to be inserted to the DB
 			$values = array(
 				'pa_page_id' => $this->params['pa_page_id'],
-				'pa_page_name' => $this->params['pa_page_name'],
-				'pa_page_namespace' => $this->params['pa_page_namespace'],
 				'pa_project' => $this->params['pa_project'],
 				'pa_class' => $this->params['pa_class'],
 				'pa_importance' => $this->params['pa_importance'],
@@ -36,8 +34,6 @@ class PageAssessmentsSaveJob extends Job {
 			// Compile the array to be inserted to the DB
 			$values = array(
 				'pa_page_id' => $this->params['pa_page_id'],
-				'pa_page_name' => $this->params['pa_page_name'],
-				'pa_page_namespace' => $this->params['pa_page_namespace'],
 				'pa_project' => $this->params['pa_project'],
 				'pa_class' => $this->params['pa_class'],
 				'pa_importance' => $this->params['pa_importance'],
@@ -46,7 +42,7 @@ class PageAssessmentsSaveJob extends Job {
 			PageAssessmentsBody::updateRecord( $values );
 		} elseif ( $jobType == 'delete' ) {
 			$values = array(
-				'pa_page_name' => $this->params['pa_page_name'],
+				'pa_page_id' => $this->params['pa_page_id'],
 				'pa_project' => $this->params['pa_project']
 			);
 			PageAssessmentsBody::deleteRecord( $values );

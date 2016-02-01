@@ -27,8 +27,6 @@ class PageAssessmentsBody {
 	 * Driver function
 	 */
 	public static function execute ( $titleObj, $assessmentData ) {
-		$pageTitle = $titleObj->getText();
-		$pageNamespace = $titleObj->getNamespace();
 		$pageId = $titleObj->getArticleID();
 		$revisionId = $titleObj->getLatestRevID();
 		// Compile a list of projects to find out which ones to be deleted afterwards
@@ -36,7 +34,7 @@ class PageAssessmentsBody {
 		foreach ( $assessmentData as $parserData ) {
 			$projects[] = $parserData[0];
 		}
-		$projectsInDb = PageAssessmentsBody::getAllProjects( $pageTitle );
+		$projectsInDb = PageAssessmentsBody::getAllProjects( $pageId );
 		$toInsert = array_diff( $projects, $projectsInDb );
 		$toDelete = array_diff( $projectsInDb, $projects );
 		$toUpdate = array_intersect( $projects, $projectsInDb );
@@ -48,8 +46,6 @@ class PageAssessmentsBody {
 			$importance = $parserData[2];
 			$values = array(
 				'pa_page_id' => $pageId,
-				'pa_page_name' => $pageTitle,
-				'pa_page_namespace' => $pageNamespace,
 				'pa_project' => $project,
 				'pa_class' => $class,
 				'pa_importance' => $importance,
@@ -65,7 +61,7 @@ class PageAssessmentsBody {
 		// Add deletion jobs to job array
 		foreach ( $toDelete as $project ) {
 			$values = array(
-				'pa_page_name' => $pageTitle,
+				'pa_page_id' => $pageId,
 				'pa_project' => $project,
 				'job_type' => 'delete'
 			);
@@ -85,13 +81,13 @@ class PageAssessmentsBody {
 	public static function updateRecord ( $values ) {
 		$dbr = wfGetDB( DB_SLAVE );
 		$conds =  array(
-			'pa_page_name' => $values['pa_page_name'],
+			'pa_page_id' => $values['pa_page_id'],
 			'pa_project'  => $values['pa_project']
 		);
 		// Check if there are no updates to be done
 		$record = $dbr->select(
 			'page_assessments',
-			array( 'pa_class', 'pa_importance', 'pa_project', 'pa_page_name' ),
+			array( 'pa_class', 'pa_importance', 'pa_project', 'pa_page_id' ),
 			$conds
 		);
 		foreach ( $record as $row ) {
@@ -122,16 +118,16 @@ class PageAssessmentsBody {
 
 	/**
 	 * Get all records for give page
-	 * @param string $title Page title
+	 * @param int $id Page ID
 	 * @param string $project Project
 	 * @return array $results All projects associated with given page title
 	 */
-	public static function getAllProjects ( $title ) {
+	public static function getAllProjects ( $pageId ) {
 		$dbr = wfGetDB( DB_SLAVE );
 		$res = $dbr->select(
 			'page_assessments',
 			'pa_project',
-			array( 'pa_page_name' => $title )
+			array( 'pa_page_id' => $pageId )
 		);
 		$results = array();
 		if ( $res ) {
@@ -151,7 +147,7 @@ class PageAssessmentsBody {
 	public static function deleteRecord ( $values ) {
 		$dbw = wfGetDB( DB_MASTER );
 		$conds = array(
-			'pa_page_name' => $values['pa_page_name'],
+			'pa_page_id' => $values['pa_page_id'],
 			'pa_project' => $values['pa_project']
 		);
 		$dbw->delete( 'page_assessments', $conds, __METHOD__ );
