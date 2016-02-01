@@ -31,7 +31,6 @@ class PageAssessmentsBody {
 		$pageNamespace = $titleObj->getNamespace();
 		$pageId = $titleObj->getArticleID();
 		$revisionId = $titleObj->getLatestRevID();
-		$userId = Revision::newFromId( $revisionId )->getUser();
 		// Compile a list of projects to find out which ones to be deleted afterwards
 		$projects = array();
 		foreach ( $assessmentData as $parserData ) {

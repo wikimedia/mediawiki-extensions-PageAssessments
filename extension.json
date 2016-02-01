@@ -25,6 +25,9 @@
 		],
 		"OutputPageParserOutput": [
 			"PageAssessmentsHooks::onOutputPageParserOutput"
+		],
+		"UnitTestsList": [
+			"PageAssessmentsHooks::onUnitTestsList"
 		]
 	},
 	"MessagesDirs": {
