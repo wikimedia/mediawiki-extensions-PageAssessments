@@ -8,7 +8,7 @@
 
 class PageAssessmentsSaveJob extends Job {
 
-	public function __construct ( $title, $params ) {
+	public function __construct( $title, $params ) {
 		parent::__construct( 'AssessmentSaveJob', $title, $params );
 	}
 
@@ -17,7 +17,7 @@ class PageAssessmentsSaveJob extends Job {
 	 *
 	 * @return bool
 	 */
-	public function run () {
+	public function run() {
 		$jobType = $this->params['job_type'];
 		// Perform updates
 		if ( $jobType == 'insert' ) {

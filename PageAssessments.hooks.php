@@ -27,7 +27,7 @@ class PageAssessmentsHooks {
 	 * @param $parser Parser
 	 * @return bool
 	 */
-	public static function onParserFirstCallInit ( &$parser ) {
+	public static function onParserFirstCallInit( &$parser ) {
 		$parser->setFunctionHook( 'assessment', 'PageAssessmentsBody::cacheAssessment' );
 	}
 
@@ -36,7 +36,7 @@ class PageAssessmentsHooks {
 	 * @param OutputPage $out OutputPage object
 	 * @param ParserOutput $pOut ParserOutput object
 	 */
-	public static function onOutputPageParserOutput ( OutputPage $out, ParserOutput $pOut ) {
+	public static function onOutputPageParserOutput( OutputPage $out, ParserOutput $pOut ) {
 		if ( $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' ) != null ) {
 			$assessmentData = $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' );
 			$title = $pOut->getDisplayTitle();
@@ -52,7 +52,7 @@ class PageAssessmentsHooks {
 	 * Run database updates
 	 * @param DatabaseUpdater $updater DatabaseUpdater object
 	 */
-	public static function onLoadExtensionSchemaUpdates ( DatabaseUpdater $updater = null ) {
+	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater = null ) {
 		$dbDir = __DIR__ . '/db';
 		$updater->addExtensionUpdate( array( 'addtable', 'page_assessments', "$dbDir/addReviewsTable.sql", true ) );
 		return true;
@@ -63,6 +63,14 @@ class PageAssessmentsHooks {
 	 */
 	public static function onUnitTestsList( &$files ) {
 		$files = array_merge( $files, glob( __DIR__ . '/tests/phpunit/*Test.php' ) );
+		return true;
+	}
+
+	/**
+	 * Delete assessment records when page is deleted
+	 */
+	public static function onArticleDeleteComplete( &$article, &$user, $reason, $id, $content = null, $logEntry ) {
+		PageAssessmentsBody::deleteRecordsForPage( $id );
 		return true;
 	}
 

@@ -28,6 +28,9 @@
 		],
 		"UnitTestsList": [
 			"PageAssessmentsHooks::onUnitTestsList"
+		],
+		"ArticleDeleteComplete": [
+			"PageAssessmentsHooks::onArticleDeleteComplete"
 		]
 	},
 	"MessagesDirs": {

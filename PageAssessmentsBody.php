@@ -26,7 +26,7 @@ class PageAssessmentsBody {
 	/**
 	 * Driver function
 	 */
-	public static function execute ( $titleObj, $assessmentData ) {
+	public static function execute( $titleObj, $assessmentData ) {
 		$pageId = $titleObj->getArticleID();
 		$revisionId = $titleObj->getLatestRevID();
 		// Compile a list of projects to find out which ones to be deleted afterwards
@@ -76,9 +76,9 @@ class PageAssessmentsBody {
 	/**
 	 * Update record in DB if there are new values
 	 * @param array $values New values to be entered into the DB
-	 * @return bool True/False on query success/fail
+	 * @return bool true
 	 */
-	public static function updateRecord ( $values ) {
+	public static function updateRecord( $values ) {
 		$dbr = wfGetDB( DB_SLAVE );
 		$conds =  array(
 			'pa_page_id' => $values['pa_page_id'],
@@ -107,9 +107,9 @@ class PageAssessmentsBody {
 	/**
 	 * Insert a new record in DB
 	 * @param array $values New values to be entered into the DB
-	 * @return bool True/False on query success/fail
+	 * @return bool true
 	 */
-	public static function insertRecord ( $values ) {
+	public static function insertRecord( $values ) {
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->insert( 'page_assessments', $values, __METHOD__ );
 		return true;
@@ -122,7 +122,7 @@ class PageAssessmentsBody {
 	 * @param string $project Project
 	 * @return array $results All projects associated with given page title
 	 */
-	public static function getAllProjects ( $pageId ) {
+	public static function getAllProjects( $pageId ) {
 		$dbr = wfGetDB( DB_SLAVE );
 		$res = $dbr->select(
 			'page_assessments',
@@ -142,13 +142,30 @@ class PageAssessmentsBody {
 	/**
 	 * Delete a record from DB
 	 * @param array $values Conditions for looking up records to delete
-	 * @return bool True/False on query success/fail
+	 * @return bool true
 	 */
-	public static function deleteRecord ( $values ) {
+	public static function deleteRecord( $values ) {
 		$dbw = wfGetDB( DB_MASTER );
 		$conds = array(
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project' => $values['pa_project']
+		);
+		$dbw->delete( 'page_assessments', $conds, __METHOD__ );
+		return true;
+	}
+
+
+	/**
+	 * Delete all records for a given page when page is deleted
+	 * Note: We don't take care of undeletions explicitly, the records are restored
+	 * when the page is parsed again.
+	 * @param int $id Page ID of deleted page
+	 * @return bool true
+	 */
+	public static function deleteRecordsForPage( $id ) {
+		$dbw = wfGetDB( DB_MASTER );
+		$conds = array(
+			'pa_page_id' => $id,
 		);
 		$dbw->delete( 'page_assessments', $conds, __METHOD__ );
 		return true;
@@ -162,7 +179,7 @@ class PageAssessmentsBody {
 	 * @param string $class Class of article
 	 * @param string $importance Importance of article
 	 */
-	public static function cacheAssessment ( &$parser, $project = '', $class = '', $importance = '' ) {
+	public static function cacheAssessment( &$parser, $project = '', $class = '', $importance = '' ) {
 		$parserData = $parser->getOutput()->getExtensionData( 'ext-pageassessment-assessmentdata' );
 		$values = array( $project, $class, $importance );
 		if ( $parserData == null ) {
