@@ -5,7 +5,7 @@
 		"Niharika Kohli"
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:PageAssessments",
-	"descriptionmsg": "page-assessments-desc",
+	"descriptionmsg": "pageassessments-desc",
 	"license-name": "GPL-2.0+",
 	"type": "parserhook",
 	"AutoloadClasses": {
