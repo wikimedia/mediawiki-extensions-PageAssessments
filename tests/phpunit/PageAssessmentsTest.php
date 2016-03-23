@@ -24,7 +24,7 @@ class PageAssessmentTest extends MediaWikiTestCase {
 		$pageBody = new PageAssessmentsBody;
 		$values = array(
 			'pa_page_id' => '10',
-			'pa_project' => 'Medicine',
+			'pa_project_id' => '3',
 			'pa_class' => 'A',
 			'pa_importance' => 'High',
 			'pa_page_revision' => '20'
@@ -47,7 +47,7 @@ class PageAssessmentTest extends MediaWikiTestCase {
 		$pageBody = new PageAssessmentsBody;
 		$values = array(
 			'pa_page_id' => '10',
-			'pa_project' => 'Medicine',
+			'pa_project_id' => '3',
 			'pa_class' => 'B',
 			'pa_importance' => 'Low',
 			'pa_page_revision' => '21'
@@ -70,7 +70,7 @@ class PageAssessmentTest extends MediaWikiTestCase {
 		$pageBody = new PageAssessmentsBody;
 		$values = array(
 			'pa_page_id' => '10',
-			'pa_project' => 'Medicine'
+			'pa_project_id' => '3'
 		);
 		$pageBody->deleteRecord( $values );
 		$res = $this->db->select( 'page_assessments', '*' );
@@ -88,7 +88,7 @@ class PageAssessmentTest extends MediaWikiTestCase {
 		$this->testInsert();
 		$values = array(
 			'pa_page_id' => '10',
-			'pa_project' => 'History',
+			'pa_project_id' => '4',
 			'pa_class' => 'B',
 			'pa_importance' => 'Low',
 			'pa_page_revision' => '21'
@@ -96,7 +96,7 @@ class PageAssessmentTest extends MediaWikiTestCase {
 		// Insert another record
 		$pageBody->insertRecord( $values );
 		$res = $pageBody->getAllProjects( '10' );
-		$expected = array( 'Medicine', 'History' );
+		$expected = array( 3, 4 );
 		// Since the projects may be returned in any order, we can't do a simple
 		// assertEquals() on the arrays. Instead we compare the arrays using array_diff()
 		// in both directions and make sure that the results are empty.

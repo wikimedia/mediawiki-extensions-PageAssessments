@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,11 +21,15 @@
  * @file
  * @ingroup Extensions
  */
-
 class PageAssessmentsBody {
+
+	/** @var array Instance cache associating project IDs with project names */
+	protected static $projectNames = [];
 
 	/**
 	 * Driver function
+	 * @param object $titleObj Title class object
+	 * @param array $assessmentData Data for all assessments compiled
 	 */
 	public static function execute( $titleObj, $assessmentData ) {
 		$pageId = $titleObj->getArticleID();
@@ -32,44 +37,108 @@ class PageAssessmentsBody {
 		// Compile a list of projects to find out which ones to be deleted afterwards
 		$projects = array();
 		foreach ( $assessmentData as $parserData ) {
-			$projects[] = $parserData[0];
+			// For each project, get the corresponding ID from page_assessments_projects table
+			$projectId = PageAssessmentsBody::getProjectId( $parserData[0] );
+			if ( $projectId === false ) {
+				$projectId = PageAssessmentsBody::insertProject( $parserData[0] );
+			}
+			$projects[$parserData[0]] = $projectId;
 		}
 		$projectsInDb = PageAssessmentsBody::getAllProjects( $pageId );
 		$toInsert = array_diff( $projects, $projectsInDb );
 		$toDelete = array_diff( $projectsInDb, $projects );
 		$toUpdate = array_intersect( $projects, $projectsInDb );
 		$jobs = array();
-
 		foreach ( $assessmentData as $parserData ) {
-			$project = $parserData[0];
-			$class = $parserData[1];
-			$importance = $parserData[2];
-			$values = array(
-				'pa_page_id' => $pageId,
-				'pa_project' => $project,
-				'pa_class' => $class,
-				'pa_importance' => $importance,
-				'pa_page_revision' => $revisionId
-			);
-			if ( in_array( $project, $toInsert ) ) {
-				$values['job_type'] = 'insert';
-			} elseif ( in_array( $project, $toUpdate ) ) {
-				$values['job_type'] = 'update';
+			$projectId = $projects[$parserData[0]];
+			if ( $projectId ) {
+				$class = $parserData[1];
+				$importance = $parserData[2];
+				$values = array(
+					'pa_page_id' => $pageId,
+					'pa_project_id' => $projectId,
+					'pa_class' => $class,
+					'pa_importance' => $importance,
+					'pa_page_revision' => $revisionId
+				);
+				if ( in_array( $projectId, $toInsert ) ) {
+					$values['job_type'] = 'insert';
+				} elseif ( in_array( $projectId, $toUpdate ) ) {
+					$values['job_type'] = 'update';
+				}
+				$jobs[] = new PageAssessmentsSaveJob( $titleObj, $values );
 			}
-			$jobs[] = new PageAssessmentsSaveJob( $titleObj, $values );
 		}
 		// Add deletion jobs to job array
 		foreach ( $toDelete as $project ) {
 			$values = array(
 				'pa_page_id' => $pageId,
-				'pa_project' => $project,
+				'pa_project_id' => $project,
 				'job_type' => 'delete'
 			);
 			$jobs[] = new PageAssessmentsSaveJob( $titleObj, $values );
 		}
-
 		JobQueueGroup::singleton()->push( $jobs );
 		return;
+	}
+
+
+	/**
+	 * Get name for the given wikiproject
+	 * @param integer $projectId The ID of the project
+	 * @return string|false The name of the project or false if not found
+	 */
+	public static function getProjectName( $projectId ) {
+		// Check for a valid project ID
+		if ( $projectId > 0 ) {
+			// See if the project name is already in the instance cache
+			if ( isset( self::$projectNames[$projectId] ) ) {
+				return self::$projectNames[$projectId];
+			} else {
+				$dbr = wfGetDB( DB_SLAVE );
+				$projectName = $dbr->selectField(
+					'page_assessments_projects',
+					'pap_project_title',
+					[ 'pap_project_id' => $projectId ]
+				);
+				// Store the project name in instance cache
+				self::$projectNames[$projectId] = $projectName;
+				return $projectName;
+			}
+		}
+		return false;
+	}
+
+
+	/**
+	 * Get project ID for a give wikiproject title
+	 * @param string $project Project title
+	 * @return int|false project ID or false if not found
+	 */
+	public static function getProjectId( $project ) {
+		$dbr = wfGetDB( DB_SLAVE );
+		return $dbr->selectField(
+			'page_assessments_projects',
+			'pap_project_id',
+			[ 'pap_project_title' => $project ]
+		);
+	}
+
+
+	/**
+	 * Insert a new wikiproject into the projects table
+	 * @param string $project Wikiproject title
+	 * @return int Insert Id for new project
+	 */
+	public static function insertProject( $project ) {
+		$dbw = wfGetDB( DB_MASTER );
+		$values = array(
+			'pap_project_title' => $project,
+			'pap_project_id' => $dbw->nextSequenceValue( 'pap_project_id_seq' )
+		);
+		$dbw->insert( 'page_assessments_projects', $values, __METHOD__ );
+		$id = $dbw->insertId();
+		return $id;
 	}
 
 
@@ -80,19 +149,20 @@ class PageAssessmentsBody {
 	 */
 	public static function updateRecord( $values ) {
 		$dbr = wfGetDB( DB_SLAVE );
-		$conds =  array(
+		$conds = array(
 			'pa_page_id' => $values['pa_page_id'],
-			'pa_project'  => $values['pa_project']
+			'pa_project_id' => $values['pa_project_id']
 		);
 		// Check if there are no updates to be done
 		$record = $dbr->select(
 			'page_assessments',
-			array( 'pa_class', 'pa_importance', 'pa_project', 'pa_page_id' ),
+			array( 'pa_class', 'pa_importance', 'pa_project_id', 'pa_page_id' ),
 			$conds
 		);
 		foreach ( $record as $row ) {
 			if ( $row->pa_importance == $values['pa_importance'] &&
-				$row->pa_class == $values['pa_class'] ) {
+				$row->pa_class == $values['pa_class']
+			) {
 				// Return if no updates
 				return true;
 			}
@@ -118,21 +188,20 @@ class PageAssessmentsBody {
 
 	/**
 	 * Get all records for give page
-	 * @param int $id Page ID
-	 * @param string $project Project
+	 * @param int $pageId Page ID
 	 * @return array $results All projects associated with given page title
 	 */
 	public static function getAllProjects( $pageId ) {
 		$dbr = wfGetDB( DB_SLAVE );
 		$res = $dbr->select(
 			'page_assessments',
-			'pa_project',
+			'pa_project_id',
 			array( 'pa_page_id' => $pageId )
 		);
 		$results = array();
 		if ( $res ) {
 			foreach ( $res as $row ) {
-				$results[] = $row->pa_project;
+				$results[] = $row->pa_project_id;
 			}
 		}
 		return $results;
@@ -148,7 +217,7 @@ class PageAssessmentsBody {
 		$dbw = wfGetDB( DB_MASTER );
 		$conds = array(
 			'pa_page_id' => $values['pa_page_id'],
-			'pa_project' => $values['pa_project']
+			'pa_project_id' => $values['pa_project_id']
 		);
 		$dbw->delete( 'page_assessments', $conds, __METHOD__ );
 		return true;

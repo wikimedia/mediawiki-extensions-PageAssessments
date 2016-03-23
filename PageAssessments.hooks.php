@@ -54,6 +54,7 @@ class PageAssessmentsHooks {
 	 */
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater = null ) {
 		$dbDir = __DIR__ . '/db';
+		$updater->addExtensionUpdate( array( 'addTable', 'page_assessments_projects', "$dbDir/addProjectsTable.sql", true ) );
 		$updater->addExtensionUpdate( array( 'addTable', 'page_assessments', "$dbDir/addReviewsTable.sql", true ) );
 		return true;
 	}

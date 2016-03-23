@@ -2,16 +2,25 @@
 	"name": "PageAssessments",
 	"version": "0.0.0",
 	"author": [
-		"Niharika Kohli"
+		"Niharika Kohli",
+		"Frances Hocutt"
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:PageAssessments",
 	"descriptionmsg": "pageassessments-desc",
 	"license-name": "GPL-2.0+",
 	"type": "parserhook",
+	"APIListModules": {
+		"projectpages": "ApiQueryProjectPages"
+	},
+	"APIPropModules": {
+		"pageassessments": "ApiQueryPageAssessments"
+	},
 	"AutoloadClasses": {
 		"PageAssessmentsHooks": "PageAssessments.hooks.php",
 		"PageAssessmentsBody": "PageAssessmentsBody.php",
-		"PageAssessmentsSaveJob": "PageAssessmentsSaveJob.php"
+		"PageAssessmentsSaveJob": "PageAssessmentsSaveJob.php",
+		"ApiQueryPageAssessments": "api/ApiQueryPageAssessments.php",
+		"ApiQueryProjectPages": "api/ApiQueryProjectPages.php"
 	},
 	"ExtensionMessagesFiles": {
 		"PageAssessmentsMagic": "PageAssessments.i18n.magic.php"
