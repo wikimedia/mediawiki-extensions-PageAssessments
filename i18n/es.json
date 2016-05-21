@@ -4,5 +4,6 @@
 			"Macofe"
 		]
 	},
-	"pageassessments-desc": "Añade una función de análisis para almacenar evaluaciones de páginas"
+	"pageassessments-desc": "Añade una función de análisis para almacenar evaluaciones de páginas",
+	"apihelp-query+projectpages-description": "Listar todas las páginas asociadas con uno o más proyectos. Consulta https://www.mediawiki.org/wiki/Extension:PageAssessments."
 }

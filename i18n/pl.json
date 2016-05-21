@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chrumps"
+		]
+	},
+	"apihelp-query+projectpages-param-limit": "Maksymalna liczba zwracanych stron."
+}

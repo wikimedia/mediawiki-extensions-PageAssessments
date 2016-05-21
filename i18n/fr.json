@@ -1,8 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gomoko"
+			"Gomoko",
+			"Pols12",
+			"Wladek92"
 		]
 	},
-	"pageassessments-desc": "Ajoute une fonction d’analyse pour stocker les évaluations de la page"
+	"pageassessments-desc": "Cette extension permet de stocker les évaluations de la page dans une table de base de données à l'aide d'une fonction d'analyse syntaxique.",
+	"apihelp-query+projectpages-param-projects": "Les projets dont il faut lister les pages. Si ce paramètre est omis, tous les projets seront inclus.",
+	"apihelp-query+projectpages-param-limit": "Le nombre maximal de pages à renvoyer.",
+	"apihelp-query+projectpages-example-simple-1": "Obtenez les 10 premières pages associées avec n'importe quel projet wikipédia.",
+	"apihelp-query+projectpages-example-simple-2": "Obtenir les 10 premières pages associées au projet wikipédia <kbd>la Médecine</kbd>, avec l'évaluation des données, incluse."
 }

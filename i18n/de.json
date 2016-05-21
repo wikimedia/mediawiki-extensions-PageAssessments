@@ -4,5 +4,6 @@
 			"Metalhead64"
 		]
 	},
-	"pageassessments-desc": "Diese Erweiterung dient der Speicherung von Seitenbewertungen in einer Datenbanktabelle mithilfe einer Parserfunktion"
+	"pageassessments-desc": "Diese Erweiterung dient der Speicherung von Seitenbewertungen in einer Datenbanktabelle mithilfe einer Parserfunktion",
+	"apihelp-query+projectpages-example-simple-1": "Ruft die ersten 10 Seiten ab, die mit einem beliebigen Wikiprojekt verknüpft sind."
 }
