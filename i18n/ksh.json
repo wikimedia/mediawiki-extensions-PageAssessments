@@ -4,5 +4,12 @@
 			"Purodha"
 		]
 	},
-	"apihelp-query+projectpages-example-simple-1": "Holl de eezte zehn Sigge, di med öhnds_enem Wiki_Projäk ze donn han"
+	"pageassessments-desc": "Zohsazprojramm för Bewertonge vun Sigge övver Paaserfonxjuhn en de Dahtebangk ze donn.",
+	"apihelp-query+pageassessments-example-formatversion": "Holl de Projäkdahte un Bewertong vun dä Sigge <kbd lang=\"en\" xml:lang=\"en\" dir=\"ltr\">Apple</kbd> and <kbd lang=\"en\" xml:lang=\"en\" dir=\"ltr\">Pear</kbd> em neujere Fommahd uß.",
+	"apihelp-query+pageassessments-example-simple": "Holl de Projäkdahte un Bewertong vun dä Sigg <kbd lang=\"en\" xml:lang=\"en\" dir=\"ltr\">Apple</kbd>.",
+	"apihelp-query+projectpages-param-assessments": "Jiv och de Bewertong vun dä Sigge uß.",
+	"apihelp-query+projectpages-param-limit": "De jrüüßte Zahl Sigge för ußzejävve.",
+	"apihelp-query+projectpages-example-simple-1": "Holl de eezte zehn Sigge, di med öhnds_enem Wiki_Projäk ze donn han",
+	"apihelp-query+projectpages-example-simple-2": "Holl de eezde zehn Sigge em WikiProjäk <kbd lang=\"en\" xml:lang=\"en\" dir=\"ltr\">Medicine</kbd> un dänne ier Berwertonge.",
+	"apihelp-query+projectpages-example-generator": "Holl de Dahte vun dä eezde zehn Sigge em WikiProjäk <kbd lang=\"en\" xml:lang=\"en\" dir=\"ltr\">Textile Arts</kbd>."
 }

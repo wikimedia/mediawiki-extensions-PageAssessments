@@ -7,8 +7,12 @@
 		]
 	},
 	"pageassessments-desc": "Cette extension permet de stocker les évaluations de la page dans une table de base de données à l'aide d'une fonction d'analyse syntaxique.",
+	"apihelp-query+pageassessments-param-limit": "Limite du nombre total de projets retournés (total pour toutes les pages).",
+	"apihelp-query+pageassessments-example-simple": "Obtenir le projet et les données d'évaluation pour la page <kbd>Apple</kbd>.",
+	"apihelp-query+projectpages-param-assessments": "Retourne également des évaluations pour les pages renvoyées.",
 	"apihelp-query+projectpages-param-projects": "Les projets dont il faut lister les pages. Si ce paramètre est omis, tous les projets seront inclus.",
 	"apihelp-query+projectpages-param-limit": "Le nombre maximal de pages à renvoyer.",
 	"apihelp-query+projectpages-example-simple-1": "Obtenez les 10 premières pages associées avec n'importe quel projet wikipédia.",
-	"apihelp-query+projectpages-example-simple-2": "Obtenir les 10 premières pages associées au projet wikipédia <kbd>la Médecine</kbd>, avec l'évaluation des données, incluse."
+	"apihelp-query+projectpages-example-simple-2": "Obtenir les 10 premières pages associées au projet wikipédia <kbd>la Médecine</kbd>, avec l'évaluation des données, incluse.",
+	"apihelp-query+projectpages-example-generator": "Obtenir la page d'information pour les 10 premières pages associées au projet Wiki <kbd>Textile Arts</kbd>."
 }

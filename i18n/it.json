@@ -4,5 +4,6 @@
 			"Beta16"
 		]
 	},
-	"pageassessments-desc": "Aggiunge una funzione parser per memorizzare le valutazioni di pagina"
+	"pageassessments-desc": "Questa estensione è per memorizzare le valutazioni di pagina in una tabella di database con l'aiuto di una funzione parser",
+	"apihelp-query+projectpages-param-limit": "Il numero massimo di pagine da restituire."
 }
