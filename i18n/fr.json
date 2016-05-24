@@ -7,8 +7,10 @@
 		]
 	},
 	"pageassessments-desc": "Cette extension permet de stocker les évaluations de la page dans une table de base de données à l'aide d'une fonction d'analyse syntaxique.",
+	"apihelp-query+pageassessments-description": "Retourne les projets et les évaluations associés pour les pages indiquées. Voir https://www.mediawiki.org/wiki/Extension:PageAssessments.",
 	"apihelp-query+pageassessments-param-limit": "Limite du nombre total de projets retournés (total pour toutes les pages).",
 	"apihelp-query+pageassessments-example-simple": "Obtenir le projet et les données d'évaluation pour la page <kbd>Apple</kbd>.",
+	"apihelp-query+projectpages-description": "Donne toutes les pages associées à un ou plusieurs projets. Voir https://www.mediawiki.org/wiki/Extension:PageAssessments.",
 	"apihelp-query+projectpages-param-assessments": "Retourne également des évaluations pour les pages renvoyées.",
 	"apihelp-query+projectpages-param-projects": "Les projets dont il faut lister les pages. Si ce paramètre est omis, tous les projets seront inclus.",
 	"apihelp-query+projectpages-param-limit": "Le nombre maximal de pages à renvoyer.",
