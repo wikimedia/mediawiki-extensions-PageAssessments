@@ -4,5 +4,6 @@
 			"Elisardojm"
 		]
 	},
-	"pageassessments-desc": "Engade unha función de análise para almacenar evaluacións de páxinas"
+	"pageassessments-desc": "Engade unha función de análise para almacenar evaluacións de páxinas",
+	"apihelp-query+pageassessments-param-limit": "Límite do número total de proxectos devoltos (total para todas as páxinas)"
 }

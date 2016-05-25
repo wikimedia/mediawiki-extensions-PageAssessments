@@ -1,9 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Beta16"
+			"Beta16",
+			"Matteocng"
 		]
 	},
 	"pageassessments-desc": "Questa estensione è per memorizzare le valutazioni di pagina in una tabella di database con l'aiuto di una funzione parser",
-	"apihelp-query+projectpages-param-limit": "Il numero massimo di pagine da restituire."
+	"apihelp-query+pageassessments-param-limit": "Limite per il numero totale di progetti restituito (totale per tutte le pagine).",
+	"apihelp-query+projectpages-description": "Elenco di tutte le pagine associate a uno o più progetti. Vedere https://www.mediawiki.org/wiki/Extension:PageAssessments.",
+	"apihelp-query+projectpages-param-projects": "I progetti per cui elencare le pagine. Se questo parametro è omesso, tutti i progetti saranno inclusi.",
+	"apihelp-query+projectpages-param-limit": "Il numero massimo di pagine da restituire.",
+	"apihelp-query+projectpages-example-simple-1": "Ottieni le prime 10 pagine associate con qualsiasi WikiProject.",
+	"apihelp-query+projectpages-example-simple-2": "Ottieni le prime 10 pagine associate con il WikiProject <kbd>Medicine</kbd>, tra cui la valutazione dei dati.",
+	"apihelp-query+projectpages-example-generator": "Ottieni informazioni sulla pagina per le prime 10 pagine associate con il WikiProject <kbd>Textile Arts</kbd>."
 }
