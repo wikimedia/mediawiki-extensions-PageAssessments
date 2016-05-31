@@ -5,5 +5,11 @@
 		]
 	},
 	"pageassessments-desc": "Engade unha función de análise para almacenar evaluacións de páxinas",
-	"apihelp-query+pageassessments-param-limit": "Límite do número total de proxectos devoltos (total para todas as páxinas)"
+	"apihelp-query+pageassessments-description": "Devolve os proxectos e as avaliacións asociadas para as páxinas indicadas. Consulte https://www.mediawiki.org/wiki/Extension:PageAssessments.",
+	"apihelp-query+pageassessments-param-limit": "Límite do número total de proxectos devoltos (total para todas as páxinas)",
+	"apihelp-query+pageassessments-example-formatversion": "Obtén os datos do proxecto e de avaliación para as páxinas <kbd>Mazá</kbd> and <kbd>Pera</kbd>, usando o formato da nova API.",
+	"apihelp-query+pageassessments-example-simple": "Obtén o proxecto e os datos de avaliación para a páxina <kbd>Mazá</kbd>.",
+	"apihelp-query+projectpages-description": "Lista todas as páxinas asociadas con un ou máis proxectos. Consulte https://www.mediawiki.org/wiki/Extension:PageAssessments.",
+	"apihelp-query+projectpages-param-assessments": "Tamén devolve a avaliación das páxinas devoltas.",
+	"apihelp-query+projectpages-param-limit": "Número máximo de resultados a devolver."
 }
