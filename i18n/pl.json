@@ -4,5 +4,6 @@
 			"Chrumps"
 		]
 	},
+	"apihelp-query+pageassessments-param-limit": "Limit łącznej liczby zwracanych projektów (łącznie na wszystkich stronach).",
 	"apihelp-query+projectpages-param-limit": "Maksymalna liczba zwracanych stron."
 }
