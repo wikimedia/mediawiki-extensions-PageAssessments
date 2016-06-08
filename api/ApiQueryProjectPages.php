@@ -169,10 +169,12 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	}
 
 	private function generateResultVals( $row ) {
+		$title = Title::makeTitle( $row->namespace, $row->title );
+
 		$vals = array(
 			'pageid' => (int)$row->page_id,
 			'ns' => (int)$row->namespace,
-			'title' => $row->title,
+			'title' => $title->getPrefixedText(),
 		);
 
 		if ( isset( $row->class ) && isset( $row->importance ) ) {
