@@ -12,5 +12,7 @@
 	"apihelp-query+projectpages-description": "Lista todas as páxinas asociadas con un ou máis proxectos. Consulte https://www.mediawiki.org/wiki/Extension:PageAssessments.",
 	"apihelp-query+projectpages-param-assessments": "Tamén devolve a avaliación das páxinas devoltas.",
 	"apihelp-query+projectpages-param-limit": "Número máximo de resultados a devolver.",
-	"apihelp-query+projectpages-example-simple-1": "Obtén as dez primeiras páxinas asociadas cun Wikiproxecto."
+	"apihelp-query+projectpages-example-simple-1": "Obtén as dez primeiras páxinas asociadas cun Wikiproxecto.",
+	"apihelp-query+projectpages-example-simple-2": "Obter as 10 primeiras páxinas asociadas co Wikiproxecto <kbd>Medicina</kbd>, incluíndo os datos de avaliación.",
+	"apihelp-query+projectpages-example-generator": "Obter a información de páxina para as 10 primeiras páxinas asociadas co WikiProxecto <kbd>Textile Arts</kbd>."
 }
