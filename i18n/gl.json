@@ -4,7 +4,7 @@
 			"Elisardojm"
 		]
 	},
-	"pageassessments-desc": "Engade unha función de análise para almacenar evaluacións de páxinas",
+	"pageassessments-desc": "Esta extensión permite almacenar as avaliacións de páxinas nunha táboa dunha base de datos coa axuda dunha función de análise sintáctica.",
 	"apihelp-query+pageassessments-description": "Devolve os proxectos e as avaliacións asociadas para as páxinas indicadas. Consulte https://www.mediawiki.org/wiki/Extension:PageAssessments.",
 	"apihelp-query+pageassessments-param-limit": "Límite do número total de proxectos devoltos (total para todas as páxinas)",
 	"apihelp-query+pageassessments-example-formatversion": "Obtén os datos do proxecto e de avaliación para as páxinas <kbd>Mazá</kbd> and <kbd>Pera</kbd>, usando o formato da nova API.",
