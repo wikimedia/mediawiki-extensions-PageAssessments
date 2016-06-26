@@ -15,5 +15,6 @@
 	"apihelp-query+projectpages-param-projects": "Проекти, для яких виводити список сторінок. Якщо цей параметр пропущено, буде включено усі проекти.",
 	"apihelp-query+projectpages-param-limit": "Максимальна кількість сторінок для виведення.",
 	"apihelp-query+projectpages-example-simple-1": "Отримати перші 10 сторінок, пов'язаних з будь-яким вікіпроектом.",
-	"apihelp-query+projectpages-example-simple-2": "Отримати перші 10 сторінок, пов'язані з вікіпроектом <kbd>Medicine</kbd>, включаючи дані про оцінки."
+	"apihelp-query+projectpages-example-simple-2": "Отримати перші 10 сторінок, пов'язані з вікіпроектом <kbd>Medicine</kbd>, включаючи дані про оцінки.",
+	"apihelp-query+projectpages-example-generator": "Отримати інформацію про сторінку для перших 10 сторінок, що пов'язані з вікіпроектом <kbd>Textile Arts</kbd>."
 }
