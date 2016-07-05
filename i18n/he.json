@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Guycn2"
+			"Guycn2",
+			"Amire80"
 		]
 	},
+	"pageassessments-desc": "ההרחבה הזאת נועדה לאחסן הערכות דפים בטבלת מסד נתונים בעזרת פונקציית מפענח",
+	"apihelp-query+pageassessments-description": "להחזיר מיזמים משויכים והערכות לדפים שניתנו. ר' https://www.mediawiki.org/wiki/Extension:PageAssessments.",
+	"apihelp-query+pageassessments-param-limit": "מגבלה למספר הכולל של המיזמים שיוחזרו (הסך לכל הדפים).",
 	"apihelp-query+projectpages-param-limit": "המספר המרבי של הדפים שיוחזרו."
 }
