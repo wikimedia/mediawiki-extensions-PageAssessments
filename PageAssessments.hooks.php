@@ -25,7 +25,6 @@ class PageAssessmentsHooks {
 	/**
 	 * Register the parser function hook
 	 * @param $parser Parser
-	 * @return bool
 	 */
 	public static function onParserFirstCallInit( &$parser ) {
 		$parser->setFunctionHook( 'assessment', 'PageAssessmentsBody::cacheAssessment' );
@@ -56,7 +55,6 @@ class PageAssessmentsHooks {
 		$dbDir = __DIR__ . '/db';
 		$updater->addExtensionUpdate( array( 'addTable', 'page_assessments_projects', "$dbDir/addProjectsTable.sql", true ) );
 		$updater->addExtensionUpdate( array( 'addTable', 'page_assessments', "$dbDir/addReviewsTable.sql", true ) );
-		return true;
 	}
 
 	/**
@@ -64,7 +62,6 @@ class PageAssessmentsHooks {
 	 */
 	public static function onUnitTestsList( &$files ) {
 		$files = array_merge( $files, glob( __DIR__ . '/tests/phpunit/*Test.php' ) );
-		return true;
 	}
 
 	/**
@@ -72,7 +69,6 @@ class PageAssessmentsHooks {
 	 */
 	public static function onArticleDeleteComplete( &$article, &$user, $reason, $id, $content = null, $logEntry ) {
 		PageAssessmentsBody::deleteRecordsForPage( $id );
-		return true;
 	}
 
 }
