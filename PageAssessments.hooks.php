@@ -58,13 +58,6 @@ class PageAssessmentsHooks {
 	}
 
 	/**
-	 * Run unit tests
-	 */
-	public static function onUnitTestsList( &$files ) {
-		$files = array_merge( $files, glob( __DIR__ . '/tests/phpunit/*Test.php' ) );
-	}
-
-	/**
 	 * Delete assessment records when page is deleted
 	 */
 	public static function onArticleDeleteComplete( &$article, &$user, $reason, $id, $content = null, $logEntry ) {

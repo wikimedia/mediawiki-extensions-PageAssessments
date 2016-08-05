@@ -35,9 +35,6 @@
 		"OutputPageParserOutput": [
 			"PageAssessmentsHooks::onOutputPageParserOutput"
 		],
-		"UnitTestsList": [
-			"PageAssessmentsHooks::onUnitTestsList"
-		],
 		"ArticleDeleteComplete": [
 			"PageAssessmentsHooks::onArticleDeleteComplete"
 		]
