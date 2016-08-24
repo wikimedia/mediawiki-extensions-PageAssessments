@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Minh Nguyen"
+		]
+	},
+	"pageassessments-desc": "Phần mở rộng này lưu các đánh giá trang vào một bảng cơ cở dữ liệu với sự giúp đỡ của một hàm xử lý"
+}
