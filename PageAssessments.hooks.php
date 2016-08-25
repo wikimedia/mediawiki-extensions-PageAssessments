@@ -31,19 +31,17 @@ class PageAssessmentsHooks {
 	}
 
 	/**
-	 * Obtain parser data after parsing is complete
-	 * @param OutputPage $out OutputPage object
-	 * @param ParserOutput $pOut ParserOutput object
+	 * Insert assessment records after page is saved
+	 * @param LinksUpdate $linksUpdate
 	 */
-	public static function onOutputPageParserOutput( OutputPage $out, ParserOutput $pOut ) {
-		if ( $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' ) != null ) {
+	public static function onLinksUpdateComplete( &$linksUpdate ) {
+		$pOut = $linksUpdate->getParserOutput();
+		if ( $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' ) !== null ) {
 			$assessmentData = $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' );
-			$title = $pOut->getDisplayTitle();
-			if ( $title !== null ) {
-				// Get Title class object for the subject page for the talk page
-				$titleObj = Title::newFromText( $title )->getSubjectPage();
-				PageAssessmentsBody::execute( $titleObj, $assessmentData );
-			}
+			$title = $linksUpdate->getTitle();
+			// Get Title object for the subject page for the talk page
+			$subjectTitle = $title->getSubjectPage();
+			PageAssessmentsBody::doUpdates( $subjectTitle, $assessmentData );
 		}
 	}
 
