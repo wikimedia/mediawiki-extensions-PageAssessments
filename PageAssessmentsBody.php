@@ -21,34 +21,44 @@
  * @file
  * @ingroup Extensions
  */
-class PageAssessmentsBody {
+
+use MediaWiki\MediaWikiServices;
+
+class PageAssessmentsBody implements IDBAccessObject {
 
 	/** @var array Instance cache associating project IDs with project names */
 	protected static $projectNames = [];
 
 	/**
-	 * Driver function
-	 * @param object $titleObj Title class object
+	 * Driver function that handles updating assessment data in database
+	 * @param Title $titleObj Title object of the subject page
 	 * @param array $assessmentData Data for all assessments compiled
 	 */
-	public static function execute( $titleObj, $assessmentData ) {
+	public static function doUpdates( $titleObj, $assessmentData ) {
+		global $wgUpdateRowsPerQuery;
+
 		$pageId = $titleObj->getArticleID();
 		$revisionId = $titleObj->getLatestRevID();
 		// Compile a list of projects to find out which ones to be deleted afterwards
 		$projects = array();
 		foreach ( $assessmentData as $parserData ) {
 			// For each project, get the corresponding ID from page_assessments_projects table
-			$projectId = PageAssessmentsBody::getProjectId( $parserData[0] );
+			$projectId = self::getProjectId( $parserData[0] );
 			if ( $projectId === false ) {
-				$projectId = PageAssessmentsBody::insertProject( $parserData[0] );
+				$projectId = self::insertProject( $parserData[0] );
 			}
 			$projects[$parserData[0]] = $projectId;
 		}
-		$projectsInDb = PageAssessmentsBody::getAllProjects( $pageId );
+		$projectsInDb = self::getAllProjects( $pageId, self::READ_LATEST );
 		$toInsert = array_diff( $projects, $projectsInDb );
 		$toDelete = array_diff( $projectsInDb, $projects );
 		$toUpdate = array_intersect( $projects, $projectsInDb );
-		$jobs = array();
+
+		$factory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$ticket = $factory->getEmptyTransactionTicket( __METHOD__ );
+		$i = 0;
+
+		// Add and update records to the database
 		foreach ( $assessmentData as $parserData ) {
 			$projectId = $projects[$parserData[0]];
 			if ( $projectId ) {
@@ -62,26 +72,34 @@ class PageAssessmentsBody {
 					'pa_page_revision' => $revisionId
 				);
 				if ( in_array( $projectId, $toInsert ) ) {
-					$values['job_type'] = 'insert';
+					self::insertRecord( $values );
 				} elseif ( in_array( $projectId, $toUpdate ) ) {
-					$values['job_type'] = 'update';
+					self::updateRecord( $values );
 				}
-				$jobs[] = new PageAssessmentsSaveJob( $titleObj, $values );
+				// Check for database lag if there's a huge number of assessments
+				if ( $i > 0 && $i % $wgUpdateRowsPerQuery == 0 ) {
+					$factory->commitAndWaitForReplication( __METHOD__, $ticket );
+				}
+				$i++;
 			}
 		}
-		// Add deletion jobs to job array
+
+		// Delete records from the database
 		foreach ( $toDelete as $project ) {
 			$values = array(
 				'pa_page_id' => $pageId,
-				'pa_project_id' => $project,
-				'job_type' => 'delete'
+				'pa_project_id' => $project
 			);
-			$jobs[] = new PageAssessmentsSaveJob( $titleObj, $values );
+			self::deleteRecord( $values );
+			// Check for database lag if there's a huge number of deleted assessments
+			if ( $i > 0 && $i % $wgUpdateRowsPerQuery == 0 ) {
+				$factory->commitAndWaitForReplication( __METHOD__, $ticket );
+			}
+			$i++;
 		}
-		JobQueueGroup::singleton()->push( $jobs );
+
 		return;
 	}
-
 
 	/**
 	 * Get name for the given wikiproject
@@ -163,7 +181,7 @@ class PageAssessmentsBody {
 			if ( $row->pa_importance == $values['pa_importance'] &&
 				$row->pa_class == $values['pa_class']
 			) {
-				// Return if no updates
+				// Return if no update is needed
 				return true;
 			}
 		}
@@ -187,16 +205,21 @@ class PageAssessmentsBody {
 
 
 	/**
-	 * Get all records for give page
+	 * Get all projects associated with a given page (as project IDs)
 	 * @param int $pageId Page ID
-	 * @return array $results All projects associated with given page title
+	 * @param int $flags IDBAccessObject::READ_* constant. This can be used to
+	 *     force reading from the master database. See docs at IDBAccessObject.php.
+	 * @return array $results All projects associated with given page
 	 */
-	public static function getAllProjects( $pageId ) {
-		$dbr = wfGetDB( DB_SLAVE );
-		$res = $dbr->select(
+	public static function getAllProjects( $pageId, $flags = self::READ_NORMAL ) {
+		list( $index, $options ) = DBAccessObjectUtils::getDBOptions( $flags );
+		$db = wfGetDB( $index );
+		$res = $db->select(
 			'page_assessments',
 			'pa_project_id',
-			array( 'pa_page_id' => $pageId )
+			array( 'pa_page_id' => $pageId ),
+			__METHOD__,
+			$options
 		);
 		$results = array();
 		if ( $res ) {

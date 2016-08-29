@@ -18,7 +18,6 @@
 	"AutoloadClasses": {
 		"PageAssessmentsHooks": "PageAssessments.hooks.php",
 		"PageAssessmentsBody": "PageAssessmentsBody.php",
-		"PageAssessmentsSaveJob": "PageAssessmentsSaveJob.php",
 		"ApiQueryPageAssessments": "api/ApiQueryPageAssessments.php",
 		"ApiQueryProjectPages": "api/ApiQueryProjectPages.php"
 	},
@@ -32,8 +31,8 @@
 		"LoadExtensionSchemaUpdates": [
 			"PageAssessmentsHooks::onLoadExtensionSchemaUpdates"
 		],
-		"OutputPageParserOutput": [
-			"PageAssessmentsHooks::onOutputPageParserOutput"
+		"LinksUpdateComplete": [
+			"PageAssessmentsHooks::onLinksUpdateComplete"
 		],
 		"ArticleDeleteComplete": [
 			"PageAssessmentsHooks::onArticleDeleteComplete"
@@ -43,9 +42,6 @@
 		"PageAssessments": [
 			"i18n"
 		]
-	},
-	"JobClasses": {
-		"AssessmentSaveJob": "PageAssessmentsSaveJob"
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
