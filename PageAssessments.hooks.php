@@ -38,11 +38,16 @@ class PageAssessmentsHooks {
 		$pOut = $linksUpdate->getParserOutput();
 		if ( $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' ) !== null ) {
 			$assessmentData = $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' );
-			$title = $linksUpdate->getTitle();
-			// Get Title object for the subject page for the talk page
-			$subjectTitle = $title->getSubjectPage();
-			PageAssessmentsBody::doUpdates( $subjectTitle, $assessmentData );
+		} else {
+			// Even if there is no assessment data, we still need to run doUpdates
+			// in case any assessment data was deleted from the page.
+			$assessmentData = [];
 		}
+		$title = $linksUpdate->getTitle();
+		// In most cases $title will be a talk page, but we want to associate the
+		// assessment data with the subject page.
+		$subjectTitle = $title->getSubjectPage();
+		PageAssessmentsBody::doUpdates( $subjectTitle, $assessmentData );
 	}
 
 	/**
