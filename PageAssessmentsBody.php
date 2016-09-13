@@ -37,6 +37,9 @@ class PageAssessmentsBody implements IDBAccessObject {
 	public static function doUpdates( $titleObj, $assessmentData ) {
 		global $wgUpdateRowsPerQuery;
 
+		$factory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$ticket = $factory->getEmptyTransactionTicket( __METHOD__ );
+
 		$pageId = $titleObj->getArticleID();
 		$revisionId = $titleObj->getLatestRevID();
 		// Compile a list of projects to find out which ones to be deleted afterwards
@@ -54,8 +57,6 @@ class PageAssessmentsBody implements IDBAccessObject {
 		$toDelete = array_diff( $projectsInDb, $projects );
 		$toUpdate = array_intersect( $projects, $projectsInDb );
 
-		$factory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$ticket = $factory->getEmptyTransactionTicket( __METHOD__ );
 		$i = 0;
 
 		// Add and update records to the database
