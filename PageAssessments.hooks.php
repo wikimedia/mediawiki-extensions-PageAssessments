@@ -33,8 +33,9 @@ class PageAssessmentsHooks {
 	/**
 	 * Insert assessment records after page is saved
 	 * @param LinksUpdate $linksUpdate
+	 * @param mixed $ticket
 	 */
-	public static function onLinksUpdateComplete( &$linksUpdate ) {
+	public static function onLinksUpdateComplete( &$linksUpdate, $ticket = null ) {
 		$pOut = $linksUpdate->getParserOutput();
 		if ( $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' ) !== null ) {
 			$assessmentData = $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' );
@@ -47,7 +48,7 @@ class PageAssessmentsHooks {
 		// In most cases $title will be a talk page, but we want to associate the
 		// assessment data with the subject page.
 		$subjectTitle = $title->getSubjectPage();
-		PageAssessmentsBody::doUpdates( $subjectTitle, $assessmentData );
+		PageAssessmentsBody::doUpdates( $subjectTitle, $assessmentData, $ticket );
 	}
 
 	/**

@@ -33,12 +33,13 @@ class PageAssessmentsBody implements IDBAccessObject {
 	 * Driver function that handles updating assessment data in database
 	 * @param Title $titleObj Title object of the subject page
 	 * @param array $assessmentData Data for all assessments compiled
+	 * @param mixed $ticket Transaction ticket
 	 */
-	public static function doUpdates( $titleObj, $assessmentData ) {
+	public static function doUpdates( $titleObj, $assessmentData, $ticket = null ) {
 		global $wgUpdateRowsPerQuery;
 
 		$factory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$ticket = $factory->getEmptyTransactionTicket( __METHOD__ );
+		$ticket = $ticket ?: $factory->getEmptyTransactionTicket( __METHOD__ );
 
 		$pageId = $titleObj->getArticleID();
 		$revisionId = $titleObj->getLatestRevID();
