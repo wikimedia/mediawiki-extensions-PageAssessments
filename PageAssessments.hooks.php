@@ -31,24 +31,28 @@ class PageAssessmentsHooks {
 	}
 
 	/**
-	 * Insert assessment records after page is saved
+	 * Update assessment records after talk page is saved
 	 * @param LinksUpdate $linksUpdate
 	 * @param mixed $ticket
 	 */
 	public static function onLinksUpdateComplete( &$linksUpdate, $ticket = null ) {
-		$pOut = $linksUpdate->getParserOutput();
-		if ( $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' ) !== null ) {
-			$assessmentData = $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' );
-		} else {
-			// Even if there is no assessment data, we still need to run doUpdates
-			// in case any assessment data was deleted from the page.
-			$assessmentData = [];
-		}
 		$title = $linksUpdate->getTitle();
-		// In most cases $title will be a talk page, but we want to associate the
-		// assessment data with the subject page.
-		$subjectTitle = $title->getSubjectPage();
-		PageAssessmentsBody::doUpdates( $subjectTitle, $assessmentData, $ticket );
+		// This assumes that the assessment parser function is only used on talk pages.
+		// See T147906 for why assessments are not supported in either namespace.
+		if ( $title->getNamespace() === NS_TALK ) {
+			$pOut = $linksUpdate->getParserOutput();
+			if ( $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' ) !== null ) {
+				$assessmentData = $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' );
+			} else {
+				// Even if there is no assessment data, we still need to run doUpdates
+				// in case any assessment data was deleted from the page.
+				$assessmentData = [];
+			}
+			// The title is a talk page, but we want to associate the assessment data
+			// with the subject page.
+			$subjectTitle = $title->getSubjectPage();
+			PageAssessmentsBody::doUpdates( $subjectTitle, $assessmentData, $ticket );
+		}
 	}
 
 	/**
