@@ -47,5 +47,8 @@
 		"localBasePath": "",
 		"remoteExtPath": "examples/PageAssessments"
 	},
+	"config": {
+		"PageAssessmentsOnTalkPages": true
+	},
 	"manifest_version": 1
 }

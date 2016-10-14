@@ -36,10 +36,12 @@ class PageAssessmentsHooks {
 	 * @param mixed $ticket
 	 */
 	public static function onLinksUpdateComplete( &$linksUpdate, $ticket = null ) {
+		$assessmentsOnTalkPages = RequestContext::getMain()->getConfig()->get( 'PageAssessmentsOnTalkPages' );
 		$title = $linksUpdate->getTitle();
-		// This assumes that the assessment parser function is only used on talk pages.
-		// See T147906 for why assessments are not supported in either namespace.
-		if ( $title->getNamespace() === NS_TALK ) {
+		// Only check for assessment data where assessments are actually made.
+		if ( ( $assessmentsOnTalkPages && $title->isTalkPage() ) ||
+			( !$assessmentsOnTalkPages && !$title->isTalkPage() )
+		) {
 			$pOut = $linksUpdate->getParserOutput();
 			if ( $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' ) !== null ) {
 				$assessmentData = $pOut->getExtensionData( 'ext-pageassessment-assessmentdata' );
@@ -48,10 +50,12 @@ class PageAssessmentsHooks {
 				// in case any assessment data was deleted from the page.
 				$assessmentData = [];
 			}
-			// The title is a talk page, but we want to associate the assessment data
-			// with the subject page.
-			$subjectTitle = $title->getSubjectPage();
-			PageAssessmentsBody::doUpdates( $subjectTitle, $assessmentData, $ticket );
+			// Assessment data should only be associated with subject pages regardless
+			// of whether it is recorded on talk pages or subject pages.
+			if ( $title->isTalkPage() ) {
+				$title = $title->getSubjectPage();
+			}
+			PageAssessmentsBody::doUpdates( $title, $assessmentData, $ticket );
 		}
 	}
 
