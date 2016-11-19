@@ -17,6 +17,8 @@
 	"apihelp-query+projectpages-example-simple-1": "{{doc-apihelp-example|query+projectpages}}",
 	"apihelp-query+projectpages-example-simple-2": "{{doc-apihelp-example|query+projectpages}}",
 	"apihelp-query+projectpages-example-generator": "{{doc-apihelp-example|query+projectpages}}",
+	"apihelp-query+projects-description": "{{doc-apihelp-description|query+projects}}",
+	"apihelp-query+projects-example": "{{doc-apihelp-example|query+projects}}",
 	"pageassessments-special": "Name of the Special page",
 	"pageassessments-project": "Form label for the WikiProject search field and the results table column header",
 	"pageassessments-page-namespace": "Form label for the page namespace dropdown select field",
