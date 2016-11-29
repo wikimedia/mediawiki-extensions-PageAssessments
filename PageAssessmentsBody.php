@@ -46,12 +46,14 @@ class PageAssessmentsBody implements IDBAccessObject {
 		// Compile a list of projects to find out which ones to be deleted afterwards
 		$projects = array();
 		foreach ( $assessmentData as $parserData ) {
-			// For each project, get the corresponding ID from page_assessments_projects table
-			$projectId = self::getProjectId( $parserData[0] );
-			if ( $projectId === false ) {
-				$projectId = self::insertProject( $parserData[0] );
+			if ( isset( $parserData[0] ) && $parserData[0] !== '' ) {
+				// For each project, get the corresponding ID from page_assessments_projects table
+				$projectId = self::getProjectId( $parserData[0] );
+				if ( $projectId === false ) {
+					$projectId = self::insertProject( $parserData[0] );
+				}
+				$projects[$parserData[0]] = $projectId;
 			}
-			$projects[$parserData[0]] = $projectId;
 		}
 		$projectsInDb = self::getAllProjects( $pageId, self::READ_LATEST );
 		$toInsert = array_diff( $projects, $projectsInDb );
