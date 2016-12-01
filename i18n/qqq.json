@@ -16,5 +16,14 @@
 	"apihelp-query+projectpages-param-limit": "{{doc-apihelp-param|query+projectpages|limit}}",
 	"apihelp-query+projectpages-example-simple-1": "{{doc-apihelp-example|query+projectpages}}",
 	"apihelp-query+projectpages-example-simple-2": "{{doc-apihelp-example|query+projectpages}}",
-	"apihelp-query+projectpages-example-generator": "{{doc-apihelp-example|query+projectpages}}"
+	"apihelp-query+projectpages-example-generator": "{{doc-apihelp-example|query+projectpages}}",
+	"pageassessments-special": "Name of the Special page",
+	"pageassessments-project": "Form label for the WikiProject search field and the results table column header",
+	"pageassessments-page-namespace": "Form label for the page namespace dropdown select field",
+	"pageassessments-page-title": "Form label for the page title search field and the results table column header",
+	"pageassessments-search": "Search form submit button label",
+	"pageassessments-importance": "Label for the results table column header",
+	"pageassessments-class": "Label for the results table column header",
+	"pageassessments-timestamp": "Label for the results table column header",
+	"pageassessments-total-results": "Summary shown above the search results, with total number found"
 }

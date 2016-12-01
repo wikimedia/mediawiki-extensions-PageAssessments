@@ -19,7 +19,10 @@
 		"PageAssessmentsHooks": "PageAssessments.hooks.php",
 		"PageAssessmentsBody": "PageAssessmentsBody.php",
 		"ApiQueryPageAssessments": "api/ApiQueryPageAssessments.php",
-		"ApiQueryProjectPages": "api/ApiQueryProjectPages.php"
+		"ApiQueryProjectPages": "api/ApiQueryProjectPages.php",
+		"PageAssessments\\SpecialPage": "src/SpecialPage.php",
+		"PageAssessments\\Pager": "src/Pager.php",
+		"PageAssessments\\NamespaceSelect": "src/NamespaceSelect.php"
 	},
 	"ExtensionMessagesFiles": {
 		"PageAssessmentsMagic": "PageAssessments.i18n.magic.php"
@@ -46,6 +49,9 @@
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
 		"remoteExtPath": "examples/PageAssessments"
+	},
+	"SpecialPages": {
+		"PageAssessments": "PageAssessments\\SpecialPage"
 	},
 	"config": {
 		"PageAssessmentsOnTalkPages": true
