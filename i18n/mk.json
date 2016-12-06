@@ -15,5 +15,14 @@
 	"apihelp-query+projectpages-param-limit": "Максимален број на страници за прикажување.",
 	"apihelp-query+projectpages-example-simple-1": "Добивање на првите 10 страници поврзани со било кој википроект.",
 	"apihelp-query+projectpages-example-simple-2": "Добивање на првите десет страници поврзани со википроектот <kbd>Медицина</kbd>, вклучувајќи ги податоците од оценувањето.",
-	"apihelp-query+projectpages-example-generator": "Добивање на првите десет страници поврзани со википроектот <kbd>Текстилни уметности</kbd>."
+	"apihelp-query+projectpages-example-generator": "Добивање на првите десет страници поврзани со википроектот <kbd>Текстилни уметности</kbd>.",
+	"pageassessments-special": "Проверка на страници",
+	"pageassessments-project": "Проект",
+	"pageassessments-page-namespace": "Именски простор на страницата",
+	"pageassessments-page-title": "Наслов на страницата",
+	"pageassessments-search": "Пребарај",
+	"pageassessments-importance": "Важност",
+	"pageassessments-class": "Класа",
+	"pageassessments-timestamp": "Време и датум",
+	"pageassessments-total-results": "Вкупен исход: $1"
 }

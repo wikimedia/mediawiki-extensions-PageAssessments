@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Niharika Kohli",
-			"Frances Hocutt"
+			"Frances Hocutt",
+			"Liuxinyu970226"
 		]
 	},
 	"pageassessments-desc": "{{desc|name=PageAssessments|url=https://www.mediawiki.org/wiki/Extension:PageAssessments}}",
@@ -20,12 +21,12 @@
 	"apihelp-query+projects-description": "{{doc-apihelp-description|query+projects}}",
 	"apihelp-query+projects-example": "{{doc-apihelp-example|query+projects}}",
 	"pageassessments-special": "Name of the Special page",
-	"pageassessments-project": "Form label for the WikiProject search field and the results table column header",
+	"pageassessments-project": "Form label for the WikiProject search field and the results table column header\n{{Identical|Project}}",
 	"pageassessments-page-namespace": "Form label for the page namespace dropdown select field",
-	"pageassessments-page-title": "Form label for the page title search field and the results table column header",
-	"pageassessments-search": "Search form submit button label",
-	"pageassessments-importance": "Label for the results table column header",
-	"pageassessments-class": "Label for the results table column header",
-	"pageassessments-timestamp": "Label for the results table column header",
+	"pageassessments-page-title": "Form label for the page title search field and the results table column header\n{{Identical|Page title}}",
+	"pageassessments-search": "Search form submit button label\n{{Identical|Search}}",
+	"pageassessments-importance": "Label for the results table column header\n{{Identical|Importance}}",
+	"pageassessments-class": "Label for the results table column header\n{{Identical|Class}}",
+	"pageassessments-timestamp": "Label for the results table column header\n{{Identical|Timestamp}}",
 	"pageassessments-total-results": "Summary shown above the search results, with total number found"
 }

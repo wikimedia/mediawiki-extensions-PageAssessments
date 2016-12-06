@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"pageassessments-project": "Proggette",
+	"pageassessments-page-namespace": "Namespace d'a pàgene",
+	"pageassessments-page-title": "Titole d'a vôsce",
+	"pageassessments-search": "Cirche",
+	"pageassessments-importance": "'Mbortanze",
+	"pageassessments-class": "Classe",
+	"pageassessments-timestamp": "Orarie de stambe",
+	"pageassessments-total-results": "Resultate totale: $1"
+}

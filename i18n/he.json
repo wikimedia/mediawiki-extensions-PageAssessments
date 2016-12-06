@@ -16,5 +16,14 @@
 	"apihelp-query+projectpages-param-limit": "המספר המרבי של הדפים שיוחזרו.",
 	"apihelp-query+projectpages-example-simple-1": "קבלת 10 הדפים הראשונים שמשויכים למיזם ויקי כלשהו.",
 	"apihelp-query+projectpages-example-simple-2": "קבלת 10 הדפים הראשונים שמשויכים למיזם ויקי <kbd>Medicine</kbd>, כולל נתוני הערכה.",
-	"apihelp-query+projectpages-example-generator": "קבלת מידע על הדף עבור 10 הדפים הראשונים שמשויכים למיזם הוויקי <kbd>Textile Arts</kbd>."
+	"apihelp-query+projectpages-example-generator": "קבלת מידע על הדף עבור 10 הדפים הראשונים שמשויכים למיזם הוויקי <kbd>Textile Arts</kbd>.",
+	"pageassessments-special": "הערכות דף",
+	"pageassessments-project": "מיזם",
+	"pageassessments-page-namespace": "מרחב השם של הדף",
+	"pageassessments-page-title": "כותרת הדף",
+	"pageassessments-search": "חיפוש",
+	"pageassessments-importance": "חשיבות",
+	"pageassessments-class": "מחלקה",
+	"pageassessments-timestamp": "חותם זמן",
+	"pageassessments-total-results": "סך התוצאות: $1"
 }
