@@ -13,13 +13,15 @@
 		"projectpages": "ApiQueryProjectPages"
 	},
 	"APIPropModules": {
-		"pageassessments": "ApiQueryPageAssessments"
+		"pageassessments": "ApiQueryPageAssessments",
+		"projects": "ApiQueryProjects"
 	},
 	"AutoloadClasses": {
 		"PageAssessmentsHooks": "PageAssessments.hooks.php",
 		"PageAssessmentsBody": "PageAssessmentsBody.php",
 		"ApiQueryPageAssessments": "api/ApiQueryPageAssessments.php",
 		"ApiQueryProjectPages": "api/ApiQueryProjectPages.php",
+		"ApiQueryProjects": "api/ApiQueryProjects.php",
 		"PageAssessments\\SpecialPage": "src/SpecialPage.php",
 		"PageAssessments\\Pager": "src/Pager.php",
 		"PageAssessments\\NamespaceSelect": "src/NamespaceSelect.php"
