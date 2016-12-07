@@ -19,6 +19,8 @@
 	"apihelp-query+projectpages-example-generator": "Get page info for first 10 pages associated with WikiProject <kbd>Textile Arts</kbd>.",
 	"apihelp-query+projects-description": "List all the projects. See https://www.mediawiki.org/wiki/Extension:PageAssessments.",
 	"apihelp-query+projects-example": "Get a list of all the projects.",
+	"apiwarn-pageassessments-nogeneratorassessments": "It is not possible to retrieve page assessment results from <kbd>generator=projectpages</kbd>.",
+	"apiwarn-pageassessments-badproject": "Project name not recognized: $1.",
 	"pageassessments-special": "Page assessments",
 	"pageassessments-project": "Project",
 	"pageassessments-page-namespace": "Page namespace",

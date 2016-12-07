@@ -32,7 +32,11 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 		$params = $this->extractRequestParams();
 
 		if ( $params['assessments'] && isset( $resultPageSet ) ) {
-			$this->setWarning( 'It is not possible to retrieve page assessment results from generator=projectpages.' );
+			if ( is_callable( array( $this, 'addWarning' ) ) ) {
+				$this->addWarning( 'apiwarn-pageassessments-nogeneratorassessments' );
+			} else {
+				$this->setWarning( 'It is not possible to retrieve page assessment results from generator=projectpages.' );
+			}
 		}
 
 		$this->buildDbQuery( $params, $resultPageSet );
@@ -134,7 +138,11 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 				if ( $id ) {
 					$this->projectIds[] = $id;
 				} else {
-					$this->setWarning( 'Project name not recognized: ' . $project );
+					if ( is_callable( array( $this, 'addWarning' ) ) ) {
+						$this->addWarning( array( 'apiwarn-pageassessments-badproject', wfEscapeWikiText( $project ) ) );
+					} else {
+						$this->setWarning( 'Project name not recognized: ' . $project );
+					}
 				}
 			}
 		}
