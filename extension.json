@@ -23,7 +23,6 @@
 		"ApiQueryProjectPages": "api/ApiQueryProjectPages.php",
 		"ApiQueryProjects": "api/ApiQueryProjects.php",
 		"PageAssessments\\SpecialPage": "src/SpecialPage.php",
-		"PageAssessments\\Pager": "src/Pager.php",
 		"PageAssessments\\NamespaceSelect": "src/NamespaceSelect.php"
 	},
 	"ExtensionMessagesFiles": {
