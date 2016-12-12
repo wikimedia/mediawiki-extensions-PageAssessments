@@ -53,6 +53,15 @@
 		"localBasePath": "",
 		"remoteExtPath": "examples/PageAssessments"
 	},
+	"ResourceModules": {
+		"ext.pageassessments.special": {
+			"scripts": "modules/ext.pageassessments.special.js",
+			"dependencies": [
+				"oojs-ui-core",
+				"jquery.suggestions"
+			]
+		}
+	},
 	"SpecialPages": {
 		"PageAssessments": "PageAssessments\\SpecialPage"
 	},

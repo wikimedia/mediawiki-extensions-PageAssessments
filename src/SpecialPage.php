@@ -255,27 +255,50 @@ class SpecialPage extends QueryPage {
 	}
 
 	/**
-	 * Get the search form.
+	 * Get the search form. This also loads the required Javascript module and global JS variable.
 	 * @return HTMLForm
 	 */
 	protected function getForm() {
+		$this->getOutput()->addModules( 'ext.pageassessments.special' );
+
+		// Add a list of all currently-used projects to the page's JS.
+		$projects = wfGetDB( DB_SLAVE )->select(
+			[ 'page_assessments_projects', 'page_assessments' ],
+			'pap_project_title',
+			'',
+			__METHOD__,
+			[ 'ORDER BY' => 'pap_project_title' ],
+			[ 'page_assessments_projects' => [ 'JOIN', 'pa_project_id = pap_project_id' ] ]
+		);
+		$projectOptions = [];
+		foreach ( $projects as $project ) {
+			$projectOptions[] = $project->pap_project_title;
+		}
+		$this->getOutput()->addJsConfigVars( 'wgPageAssessmentProjects', $projectOptions );
+
+		// Define the form fields.
 		$formDescriptor = [
 			'project' => [
+				'id' => 'pageassessments-project',
 				'class' => HTMLTextField::class,
 				'name' => 'project',
 				'label-message' => 'pageassessments-project',
 			],
 			'namespace' => [
+				'id' => 'pageassessments-namespace',
 				'class' => NamespaceSelect::class,
 				'name' => 'namespace',
 				'label-message' => 'pageassessments-page-namespace',
 			],
 			'page_title' => [
+				'id' => 'pageassessments-page-title',
 				'class' => HTMLTextField::class,
 				'name' => 'page_title',
 				'label-message' => 'pageassessments-page-title',
 			],
 		];
+
+		// Construct and return the form.
 		$form = HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() );
 		$form->setMethod( 'get' );
 		$form->setSubmitTextMsg( 'pageassessments-search' );

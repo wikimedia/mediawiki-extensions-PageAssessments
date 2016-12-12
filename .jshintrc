@@ -16,5 +16,11 @@
   "globals": {
     "mw": false,
     "$": false
-  }
+  },
+
+  "predef": [
+    "jQuery",
+    "mediaWiki",
+    "OO"
+  ]
 }
