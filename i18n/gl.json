@@ -15,5 +15,13 @@
 	"apihelp-query+projectpages-param-limit": "Número máximo de resultados a devolver.",
 	"apihelp-query+projectpages-example-simple-1": "Obtén as dez primeiras páxinas asociadas cun Wikiproxecto.",
 	"apihelp-query+projectpages-example-simple-2": "Obter as 10 primeiras páxinas asociadas co Wikiproxecto <kbd>Medicina</kbd>, incluíndo os datos de avaliación.",
-	"apihelp-query+projectpages-example-generator": "Obter a información de páxina para as 10 primeiras páxinas asociadas co WikiProxecto <kbd>Textile Arts</kbd>."
+	"apihelp-query+projectpages-example-generator": "Obter a información de páxina para as 10 primeiras páxinas asociadas co WikiProxecto <kbd>Textile Arts</kbd>.",
+	"pageassessments-project": "Proxecto",
+	"pageassessments-page-namespace": "Espazo de nomes da páxina",
+	"pageassessments-page-title": "Título da páxina",
+	"pageassessments-search": "Procurar",
+	"pageassessments-importance": "Importancia",
+	"pageassessments-class": "Clase",
+	"pageassessments-timestamp": "Data e hora",
+	"pageassessments-total-results": "Resultados totais: $1"
 }

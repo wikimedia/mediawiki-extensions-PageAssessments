@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ykhwong"
+		]
+	},
+	"apihelp-query+projects-example": "모든 프로젝트의 목록을 가져옵니다.",
+	"apiwarn-pageassessments-badproject": "프로젝트 이름을 인식할 수 없습니다: $1.",
+	"pageassessments-project": "프로젝트",
+	"pageassessments-page-title": "문서 제목",
+	"pageassessments-search": "검색"
+}

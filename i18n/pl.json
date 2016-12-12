@@ -5,5 +5,10 @@
 		]
 	},
 	"apihelp-query+pageassessments-param-limit": "Limit łącznej liczby zwracanych projektów (łącznie na wszystkich stronach).",
-	"apihelp-query+projectpages-param-limit": "Maksymalna liczba zwracanych stron."
+	"apihelp-query+projectpages-param-limit": "Maksymalna liczba zwracanych stron.",
+	"pageassessments-project": "Projekt",
+	"pageassessments-page-title": "Tytuł strony",
+	"pageassessments-search": "Szukaj",
+	"pageassessments-class": "Klasa",
+	"pageassessments-timestamp": "Sygnatura czasowa"
 }

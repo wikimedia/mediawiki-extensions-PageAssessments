@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eitvys200"
+		]
+	},
+	"apihelp-query+projects-example": "Gauti visų projektų sąrašą.",
+	"apiwarn-pageassessments-badproject": "Projekto pavadinimas neatpažintas: $1."
+}
