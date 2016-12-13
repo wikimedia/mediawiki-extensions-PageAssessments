@@ -2,15 +2,21 @@
 
 namespace PageAssessments;
 
+use Html;
 use HTMLForm;
 use HTMLTextField;
-use SpecialPage as MediaWikiSpecialPage;
+use IDatabase;
+use OutputPage;
+use QueryPage;
+use ResultWrapper;
+use Skin;
+use Title;
 
 /**
  * A special page for searching Page Assessments. Can also be transcluded (in which case the
  * search results' sorting links will be disabled).
  */
-class SpecialPage extends MediaWikiSpecialPage {
+class SpecialPage extends QueryPage {
 
 	/**
 	 * Create this special page, giving it a name and making it transcludable.
@@ -38,8 +44,172 @@ class SpecialPage extends MediaWikiSpecialPage {
 	 *
 	 * @return string
 	 */
-	function getDescription() {
+	public function getDescription() {
 		return $this->msg( 'pageassessments-special' )->text();
+	}
+
+	/**
+	 * The information for the database query. Don't include an ORDER or LIMIT clause, they will
+	 * be added.
+	 * @return string[]
+	 */
+	public function getQueryInfo() {
+		$info = [
+			'tables' => [ 'page_assessments', 'page_assessments_projects', 'page', 'revision' ],
+			'fields' => [
+				'project' => 'pap_project_title',
+				'class' => 'pa_class',
+				'importance' => 'pa_importance',
+				'timestamp' => 'rev_timestamp',
+				'page_title' => 'page_title',
+				'page_revision' => 'pa_page_revision',
+				'page_namespace' => 'page_namespace',
+			],
+			'conds' => [],
+			'options' => [],
+			'join_conds' => [
+				'page_assessments_projects' => [ 'JOIN', 'pa_project_id = pap_project_id' ],
+				'page' => [ 'JOIN', 'pa_page_id = page_id' ],
+				'revision' => [ 'JOIN', 'page_id = rev_page AND pa_page_revision = rev_id' ],
+			],
+		];
+		// Project.
+		$project = $this->getRequest()->getVal( 'project' );
+		if ( strlen( $project ) > 0 ) {
+			$info['conds']['pap_project_title'] = $project;
+		}
+		// Namespace (if it's set, it's either an integer >= 0, 'all', or the empty string).
+		$namespace = $this->getRequest()->getVal( 'namespace' );
+		if ( strlen( $namespace ) > 0 && $namespace !== 'all' ) {
+			$info['conds']['page_namespace'] = $namespace;
+		}
+		// Page title.
+		$pageTitle = $this->getRequest()->getVal( 'page_title' );
+		if ( strlen( $pageTitle ) > 0 ) {
+			$title = Title::newFromText( $pageTitle )->getDBkey();
+			$info['conds']['page_title'] = $title;
+		}
+		return $info;
+	}
+
+	/**
+	 * Format and output report results.
+	 *
+	 * @param OutputPage $out OutputPage to print to
+	 * @param Skin $skin User skin to use
+	 * @param IDatabase $dbr Database (read) connection to use
+	 * @param ResultWrapper $res Result pointer
+	 * @param int $num Number of available result rows
+	 * @param int $offset Paging offset
+	 * @return boolean False if no results are displayed, true otherwise.
+	 */
+	protected function outputResults( $out, $skin, $dbr, $res, $num, $offset ) {
+		// Don't display anything if there are no results.
+		if ( $num < 1 ) {
+			return false;
+		}
+		$out->addModuleStyles( 'mediawiki.pager.tablePager' );
+		$tableClasses = 'mw-datatable page-assessments TablePager';
+		$html = Html::openElement( 'table', [ 'class' => $tableClasses ] )
+			. Html::openElement( 'thead' )
+			. Html::openElement( 'tr' )
+			. $this->getTableHeader( 'project', 'project' )
+			. $this->getTableHeader( 'page_title', 'page-title' )
+			. Html::rawElement( 'th', [], wfMessage( 'pageassessments-importance' )->text() )
+			. Html::rawElement( 'th', [], wfMessage( 'pageassessments-class' )->text() )
+			. $this->getTableHeader( 'timestamp', 'timestamp' )
+			. Html::closeElement( 'tr' )
+			. Html::closeElement( 'thead' )
+			. Html::openElement( 'tbody' );
+		$row = $res->fetchObject();
+		while ( $row ) {
+			$html .= $this->formatResult( $skin, $row );
+			$row = $res->fetchObject();
+		}
+		$html .= HTML::closeElement( 'tbody' )
+			. HTML::closeElement( 'table' );
+		$out->addHTML( $html );
+		return true;
+	}
+
+	/**
+	 * Get a HTML TH element, with a link to sort the column.
+	 * @param string $field The field that this column contains.
+	 * @param string $messageKey The i18n message (suffix) for the column header.
+	 * @return string HTML table header.
+	 */
+	protected function getTableHeader( $field, $messageKey ) {
+		$text = wfMessage( 'pageassessments-' . $messageKey )->text();
+
+		// If this special page is being included, don't enable header sorting.
+		if ( $this->including() ) {
+			return Html::rawElement( 'th', [], $text );
+		}
+
+		// Otherwise, set up the correct link.
+		$query = $this->getRequest()->getValues();
+		$cellAttrs = [];
+		if ( $this->getOrderFields() == [ $field ] ) {
+			// Currently sorted by this field.
+			$query['dir'] = $this->sortDescending() ? 'asc' : 'desc';
+			$currentDir = $this->sortDescending() ? 'descending' : 'ascending';
+			$cellAttrs['class'] = 'TablePager_sort-' . $currentDir;
+		} else {
+			$query['dir'] = 'asc';
+			$query['sort'] = $field;
+		}
+		$link = $this->getLinkRenderer()->makeLink( $this->getPageTitle(), $text, [], $query );
+		return Html::rawElement( 'th', $cellAttrs, $link );
+	}
+
+	/**
+	 * Add the sort parameters to the paging links (prev/next/lengths).
+	 * @return string[]
+	 */
+	public function linkParameters() {
+		$params = [];
+		foreach ( [ 'sort', 'dir' ] as $key ) {
+			$val = $this->getRequest()->getVal( $key );
+			if ( $val ) {
+				$params[$key] = $val;
+			}
+		}
+		return $params;
+	}
+
+	/**
+	 * Formats the results of the query for display. The skin is the current
+	 * skin; you can use it for making links. The result is a single row of
+	 * result data. You should be able to grab SQL results off of it.
+	 * If the function returns false, the line output will be skipped.
+	 * @param Skin $skin The current skin
+	 * @param object $result Result row
+	 * @return string|bool String or false to skip
+	 */
+	public function formatResult( $skin, $result ) {
+		$renderer = $this->getLinkRenderer();
+		$pageTitle = Title::newFromText(
+			$result->page_title,
+			$result->page_namespace
+		);
+
+		// Link to the page.
+		$pageLink = $renderer->makeKnownLink( $pageTitle );
+
+		// Timestamp of assessed revision.
+		$lang = $this->getLanguage();
+		$ts = $lang->userTimeAndDate( $result->timestamp, $this->getUser() );
+		$linkQuery = [ 'oldid' => $result->page_revision ];
+		$timestampLink = $renderer->makeKnownLink( $pageTitle, $ts, [], $linkQuery );
+
+		// HTML table row.
+		return Html::rawElement( 'tr', [],
+			Html::rawElement( 'td', [], $result->project ).
+			Html::rawElement( 'td', [], $pageLink ).
+			Html::rawElement( 'td', [], $result->importance ).
+			Html::rawElement( 'td', [], $result->class ).
+			Html::rawElement( 'td', [], $timestampLink )
+		);
 	}
 
 	/**
@@ -50,7 +220,7 @@ class SpecialPage extends MediaWikiSpecialPage {
 		// Set up.
 		$out = $this->getOutput();
 		$out->setPageTitle( $this->getDescription() );
-		$this->addHelpLink( 'Help:Extension:PageAssessments' );
+		$this->addHelpLink( 'Extension:PageAssessments' );
 
 		// Output form.
 		if ( !$this->including() ) {
@@ -58,19 +228,30 @@ class SpecialPage extends MediaWikiSpecialPage {
 			$form->show();
 		}
 
-		// Output results, if a search has been performed.
-		$queryValues = $this->getRequest()->getQueryValues();
-		// The request has 'title' when this special page is not transcluded.
-		unset( $queryValues['title'] );
-		if ( count( $queryValues ) > 0 ) {
-			$pager = new Pager();
-			$pager->setSortable( !$this->including() );
-			// Summary of search resutls.
-			$total = wfMessage( 'pageassessments-total-results', $pager->getNumRows() );
-			$out->addElement( 'p', ['class'=>'total-results'], $total );
-			// Table pager.
-			$out->addParserOutput( $pager->getFullOutput() );
+		// Leave the output of the search results to QueryPage.
+		parent::execute( $parameters );
+	}
+
+	/**
+	 * Get the fields that the results are currently ordered by.
+	 * @return string[]
+	 */
+	function getOrderFields() {
+		$permitted = [ 'project', 'page_title', 'timestamp' ];
+		$requested = $this->getRequest()->getVal( 'sort' );
+		if ( in_array( $requested, $permitted ) ) {
+			return [ $requested ];
 		}
+		return [ 'project' ];
+	}
+
+	/**
+	 * Whether we're currently sorting descending, or ascending. Based on the request 'dir'
+	 * value; anything starting with 'desc' is considered 'desecending'.
+	 * @return boolean
+	 */
+	function sortDescending() {
+		return stripos( $this->getRequest()->getVal( 'dir' ), 'desc' ) === 0;
 	}
 
 	/**
