@@ -21,9 +21,9 @@ class NamespaceSelect extends HTMLSelectNamespace {
 	 */
 	public function getInputOOUI( $value ) {
 		$nsIds = array_keys( MWNamespace::getCanonicalNamespaces() );
-		$excludedNsIds = array_filter( $nsIds, function( $ns ) {
+		$excludedNsIds = array_values( array_filter( $nsIds, function( $ns ) {
 			return MWNamespace::isTalk( $ns );
-		} );
+		} ) );
 		$widget = new NamespaceInputWidget( [
 			'value' => $value,
 			'name' => $this->mName,
