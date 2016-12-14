@@ -1,9 +1,11 @@
 {
 	"name": "PageAssessments",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"author": [
 		"Niharika Kohli",
-		"Frances Hocutt"
+		"Frances Hocutt",
+		"Ryan Kaldari",
+		"Sam Wilson"
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:PageAssessments",
 	"descriptionmsg": "pageassessments-desc",
