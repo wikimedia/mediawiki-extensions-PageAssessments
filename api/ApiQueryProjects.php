@@ -46,7 +46,11 @@ class ApiQueryProjects extends ApiQueryBase {
 	 */
 	public function getExamplesMessages() {
 		return [
-			'action=query&prop=projects' => 'apihelp-query+projects-example',
+			'action=query&list=projects' => 'apihelp-query+projects-example',
 		];
+	}
+
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/Extension:PageAssessments';
 	}
 }
