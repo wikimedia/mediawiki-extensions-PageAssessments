@@ -43,19 +43,25 @@ class PageAssessmentsBody implements IDBAccessObject {
 
 		$pageId = $titleObj->getArticleID();
 		$revisionId = $titleObj->getLatestRevID();
-		// Compile a list of projects to find out which ones to be deleted afterwards
+		// Compile a list of projects found in the parserData to find out which
+		// assessment records need to be inserted, deleted, or updated.
 		$projects = array();
 		foreach ( $assessmentData as $parserData ) {
+			// If the name of the project is set...
 			if ( isset( $parserData[0] ) && $parserData[0] !== '' ) {
-				// For each project, get the corresponding ID from page_assessments_projects table
+				// ...get the corresponding ID from page_assessments_projects table.
 				$projectId = self::getProjectId( $parserData[0] );
+				// If there is no existing project by that name, add it to the table.
 				if ( $projectId === false ) {
 					$projectId = self::insertProject( $parserData[0] );
 				}
+				// Add the project's ID to the array.
 				$projects[$parserData[0]] = $projectId;
 			}
 		}
+		// Get a list of all the projects previously assigned to the page.
 		$projectsInDb = self::getAllProjects( $pageId, self::READ_LATEST );
+
 		$toInsert = array_diff( $projects, $projectsInDb );
 		$toDelete = array_diff( $projectsInDb, $projects );
 		$toUpdate = array_intersect( $projects, $projectsInDb );
@@ -203,7 +209,9 @@ class PageAssessmentsBody implements IDBAccessObject {
 	 */
 	public static function insertRecord( $values ) {
 		$dbw = wfGetDB( DB_MASTER );
-		$dbw->insert( 'page_assessments', $values, __METHOD__ );
+		// Use IGNORE in case 2 records for the same project are added at once.
+		// This normally shouldn't happen, but is possible. (See T152080)
+		$dbw->insert( 'page_assessments', $values, __METHOD__, [ 'IGNORE' ] );
 		return true;
 	}
 
