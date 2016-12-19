@@ -12,11 +12,11 @@
 	"license-name": "GPL-2.0+",
 	"type": "parserhook",
 	"APIListModules": {
-		"projectpages": "ApiQueryProjectPages"
+		"projectpages": "ApiQueryProjectPages",
+		"projects": "ApiQueryProjects"
 	},
 	"APIPropModules": {
-		"pageassessments": "ApiQueryPageAssessments",
-		"projects": "ApiQueryProjects"
+		"pageassessments": "ApiQueryPageAssessments"
 	},
 	"AutoloadClasses": {
 		"PageAssessmentsHooks": "PageAssessments.hooks.php",
