@@ -21,6 +21,7 @@
 	"apihelp-query+projectpages-example-generator": "Obtenir la page d'information pour les 10 premières pages associées au projet Wiki <kbd>Textile Arts</kbd>.",
 	"apihelp-query+projects-description": "Afficher tous les projects. Voir https://www.mediawiki.org/wiki/Extension:PageAssessments.",
 	"apihelp-query+projects-example": "Obtenir une liste de tous les projets.",
+	"apiwarn-pageassessments-nogeneratorassessments": "Il n’est pas possible de récupérer les résultats d’affectation de page avec <kbd>generator=projectpages</kbd>.",
 	"apiwarn-pageassessments-badproject": "Nom de projet non reconnu: $1.",
 	"pageassessments-special": "Affectations de la page",
 	"pageassessments-project": "Projet",
