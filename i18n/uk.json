@@ -16,5 +16,18 @@
 	"apihelp-query+projectpages-param-limit": "Максимальна кількість сторінок для виведення.",
 	"apihelp-query+projectpages-example-simple-1": "Отримати перші 10 сторінок, пов'язаних з будь-яким вікіпроектом.",
 	"apihelp-query+projectpages-example-simple-2": "Отримати перші 10 сторінок, пов'язані з вікіпроектом <kbd>Medicine</kbd>, включаючи дані про оцінки.",
-	"apihelp-query+projectpages-example-generator": "Отримати інформацію про сторінку для перших 10 сторінок, що пов'язані з вікіпроектом <kbd>Textile Arts</kbd>."
+	"apihelp-query+projectpages-example-generator": "Отримати інформацію про сторінку для перших 10 сторінок, що пов'язані з вікіпроектом <kbd>Textile Arts</kbd>.",
+	"apihelp-query+projects-description": "Вивести список усіх проектів. Див. https://www.mediawiki.org/wiki/Extension:PageAssessments.",
+	"apihelp-query+projects-example": "Отримати список усіх проектів.",
+	"apiwarn-pageassessments-nogeneratorassessments": "Неможливо отримати результати оцінювання сторінок із <kbd>generator=projectpages</kbd>.",
+	"apiwarn-pageassessments-badproject": "Нерозпізнана назва проекту: $1.",
+	"pageassessments-special": "Оцінювання сторінок",
+	"pageassessments-project": "Проект",
+	"pageassessments-page-namespace": "Простір назв сторінки",
+	"pageassessments-page-title": "Назва сторінки",
+	"pageassessments-search": "Пошук",
+	"pageassessments-importance": "Важливість",
+	"pageassessments-class": "Клас",
+	"pageassessments-timestamp": "Часова мітка",
+	"pageassessments-total-results": "Загальна кількість результатів: $1"
 }

@@ -12,7 +12,7 @@
 	"apihelp-query+projectpages-description": "Список на сите страници поврзани со еден или повеќе проекти. Погл. https://www.mediawiki.org/wiki/Extension:PageAssessments.",
 	"apihelp-query+projectpages-param-assessments": "Дај ги и оценките за добиените страници.",
 	"apihelp-query+projectpages-param-projects": "За кои проекти да се наведат страници. Ако параметаров се изостави, тогаш ќе бидат вклучени сите проекти.",
-	"apihelp-query+projectpages-param-limit": "Максимален број на страници за прикажување.",
+	"apihelp-query+projectpages-param-limit": "Највеќе страници за прикажување.",
 	"apihelp-query+projectpages-example-simple-1": "Добивање на првите 10 страници поврзани со било кој википроект.",
 	"apihelp-query+projectpages-example-simple-2": "Добивање на првите десет страници поврзани со википроектот <kbd>Медицина</kbd>, вклучувајќи ги податоците од оценувањето.",
 	"apihelp-query+projectpages-example-generator": "Добивање на првите десет страници поврзани со википроектот <kbd>Текстилни уметности</kbd>.",
