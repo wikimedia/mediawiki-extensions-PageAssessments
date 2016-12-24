@@ -5,5 +5,12 @@
 		]
 	},
 	"apihelp-query+projects-example": "Gauti visų projektų sąrašą.",
-	"apiwarn-pageassessments-badproject": "Projekto pavadinimas neatpažintas: $1."
+	"apiwarn-pageassessments-badproject": "Projekto pavadinimas neatpažintas: $1.",
+	"pageassessments-project": "Projektas",
+	"pageassessments-page-title": "Puslapio pavadinimas",
+	"pageassessments-search": "Ieškoti",
+	"pageassessments-importance": "Svarba",
+	"pageassessments-class": "Klasė",
+	"pageassessments-timestamp": "Laiko žyma",
+	"pageassessments-total-results": "Viso rezultatų: $1"
 }
