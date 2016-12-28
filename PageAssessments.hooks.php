@@ -67,6 +67,7 @@ class PageAssessmentsHooks {
 		$dbDir = __DIR__ . '/db';
 		$updater->addExtensionUpdate( array( 'addTable', 'page_assessments_projects', "$dbDir/addProjectsTable.sql", true ) );
 		$updater->addExtensionUpdate( array( 'addTable', 'page_assessments', "$dbDir/addReviewsTable.sql", true ) );
+		$updater->addExtensionUpdate( array( 'addField', 'page_assessments_projects', 'pap_parent_id', "$dbDir/patch-subprojects.sql", true ) );
 	}
 
 	/**
