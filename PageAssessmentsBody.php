@@ -49,14 +49,18 @@ class PageAssessmentsBody implements IDBAccessObject {
 		foreach ( $assessmentData as $parserData ) {
 			// If the name of the project is set...
 			if ( isset( $parserData[0] ) && $parserData[0] !== '' ) {
+				$projectName = $parserData[0];
 				// ...get the corresponding ID from page_assessments_projects table.
-				$projectId = self::getProjectId( $parserData[0] );
+				$projectId = self::getProjectId( $projectName );
 				// If there is no existing project by that name, add it to the table.
 				if ( $projectId === false ) {
-					$projectId = self::insertProject( $parserData[0] );
+					// Extract possible parent from the project name.
+					$parentId = self::extractParentProjectId( $projectName );
+					// Insert project data into the database table.
+					$projectId = self::insertProject( $projectName, $parentId );
 				}
 				// Add the project's ID to the array.
-				$projects[$parserData[0]] = $projectId;
+				$projects[$projectName] = $projectId;
 			}
 		}
 		// Get a list of all the projects previously assigned to the page.
@@ -137,9 +141,24 @@ class PageAssessmentsBody implements IDBAccessObject {
 		return false;
 	}
 
+	/**
+	 * Extract parent from a project name and return the ID. For example, if the
+	 * project name is "Novels/Crime task force", the parent will be "Novels",
+	 * i.e. WikiProject Novels.
+	 *
+	 * @param string $projectName Project title
+	 * @return int|false project ID or false if not found
+	 */
+	protected static function extractParentProjectId( $projectName ) {
+		$projectNameParts = explode( '/', $projectName );
+		if ( count( $projectNameParts ) > 1 && $projectNameParts[0] !== '' ) {
+			return self::getProjectId( $projectNameParts[0] );
+		}
+		return false;
+	}
 
 	/**
-	 * Get project ID for a give wikiproject title
+	 * Get project ID for a given wikiproject title
 	 * @param string $project Project title
 	 * @return int|false project ID or false if not found
 	 */
@@ -156,14 +175,18 @@ class PageAssessmentsBody implements IDBAccessObject {
 	/**
 	 * Insert a new wikiproject into the projects table
 	 * @param string $project Wikiproject title
+	 * @param int $parentId ID of the parent project (for subprojects) (optional)
 	 * @return int Insert Id for new project
 	 */
-	public static function insertProject( $project ) {
+	public static function insertProject( $project, $parentId = null ) {
 		$dbw = wfGetDB( DB_MASTER );
-		$values = array(
+		$values = [
 			'pap_project_title' => $project,
 			'pap_project_id' => $dbw->nextSequenceValue( 'pap_project_id_seq' )
-		);
+		];
+		if ( $parentId ) {
+			$values[ 'pap_parent_id' ] = (int)$parentId;
+		}
 		$dbw->insert( 'page_assessments_projects', $values, __METHOD__ );
 		$id = $dbw->insertId();
 		return $id;
