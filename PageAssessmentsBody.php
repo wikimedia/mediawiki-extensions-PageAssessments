@@ -71,7 +71,7 @@ class PageAssessmentsBody implements IDBAccessObject {
 		// Add and update records to the database
 		foreach ( $assessmentData as $parserData ) {
 			$projectId = $projects[$parserData[0]];
-			if ( $projectId ) {
+			if ( $projectId && $pageId ) {
 				$class = $parserData[1];
 				$importance = $parserData[2];
 				$values = array(
