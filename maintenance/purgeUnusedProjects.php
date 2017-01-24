@@ -26,14 +26,36 @@ class PurgeUnusedProjects extends Maintenance {
 		// Count all the projects
 		$initialCount = $dbr->selectField( 'page_assessments_projects', 'COUNT(*)' );
 		$this->output( "Projects before purge: $initialCount\n" );
+
+		// Build a list of all the projects that are parents of other projects
+		$projectIds1 = [];
+		$res = $dbr->select( 'page_assessments_projects', 'DISTINCT( pap_parent_id )' );
+		foreach ( $res as $row ) {
+			if ( $row->pap_parent_id ) {
+				$projectIds1[] = $row->pap_parent_id;
+			}
+		}
+
+		// Build a list of all the projects that are used in assessments
+		$projectIds2 = [];
+		$res = $dbr->select( 'page_assessments', 'DISTINCT( pa_project_id )' );
+		foreach ( $res as $row ) {
+			if ( $row->pa_project_id ) {
+				$projectIds2[] = $row->pa_project_id;
+			}
+		}
+
+		// Combine the two lists
+		$usedProjectIds = array_unique( array_merge( $projectIds1, $projectIds2 ) );
+
 		if ( $this->hasOption( 'dry-run' ) ) {
-			// Count all the projects used in current assessments
-			$finalCount = $dbr->selectField( 'page_assessments', 'COUNT( DISTINCT pa_project_id )' );
+			$finalCount = count( $usedProjectIds );
 		} else {
 			$this->output( "Purging unused projects from page_assessments_projects...\n" );
 			// Delete all the projects that aren't used in any current assessments
-			$cond = 'pap_project_id NOT IN ( SELECT DISTINCT( pa_project_id ) FROM page_assessments )';
-			$dbw->delete( 'page_assessments_projects', [ $cond ], __METHOD__ );
+			// and aren't parents of other projects.
+			$conds = [ 'pap_project_id NOT IN (' . $dbr->makeList( $usedProjectIds ) . ')' ];
+			$dbw->delete( 'page_assessments_projects', $conds, __METHOD__ );
 			$this->output( "Done.\n" );
 			wfWaitForSlaves();
 			// Recount all the projects

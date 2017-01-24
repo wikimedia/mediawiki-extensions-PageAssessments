@@ -75,6 +75,9 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 			)
 		) );
 		$this->addWhereFld( 'pa_page_id', array_keys( $pages ) );
+		if ( !$params['subprojects'] ) {
+			$this->addWhere( 'pap_parent_id IS NULL' );
+		}
 		$this->addOption( 'LIMIT', $params['limit'] + 1 );
 
 		// handle continuation if present
@@ -112,6 +115,10 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 				ApiBase::PARAM_MAX => ApiBase::LIMIT_BIG1,
 				ApiBase::PARAM_MAX2 => ApiBase::LIMIT_BIG2,
 			),
+			'subprojects' => array(
+				ApiBase::PARAM_DFLT => false,
+				ApiBase::PARAM_TYPE => 'boolean',
+			),
 		);
 	}
 
@@ -121,6 +128,8 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 				=> 'apihelp-query+pageassessments-example-formatversion',
 			'action=query&prop=pageassessments&titles=Apple'
 				=> 'apihelp-query+pageassessments-example-simple',
+			'action=query&prop=pageassessments&titles=Apple&subprojects=true'
+				=> 'apihelp-query+pageassessments-example-subprojects',
 		);
 	}
 }

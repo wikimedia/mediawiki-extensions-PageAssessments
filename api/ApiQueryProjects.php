@@ -22,10 +22,15 @@ class ApiQueryProjects extends ApiQueryBase {
 	 * Evaluate the parameters, perform the requested query, and set up the result
 	 */
 	public function execute() {
+		$params = $this->extractRequestParams();
 
 		// Set the database query parameters
 		$this->addTables( [ 'page_assessments_projects' ] );
 		$this->addFields( [ 'project_title' => 'pap_project_title' ] );
+		// Exclude subprojects/task forces by default
+		if ( !$params['subprojects'] ) {
+			$this->addWhere( 'pap_parent_id IS NULL' );
+		}
 		$this->addOption( 'ORDER BY', 'pap_project_title' );
 
 		// Execute the query and put the results in an array
@@ -40,6 +45,15 @@ class ApiQueryProjects extends ApiQueryBase {
 		$result->addValue( 'query', 'projects', $projects );
 	}
 
+	public function getAllowedParams() {
+		return array(
+			'subprojects' => array(
+				ApiBase::PARAM_DFLT => false,
+				ApiBase::PARAM_TYPE => 'boolean',
+			),
+		);
+	}
+
 	/**
 	 * Return usage examples for this module
 	 * @return array
@@ -47,6 +61,8 @@ class ApiQueryProjects extends ApiQueryBase {
 	public function getExamplesMessages() {
 		return [
 			'action=query&list=projects' => 'apihelp-query+projects-example',
+			'action=query&list=projects&subprojects=true'
+				=> 'apihelp-query+projects-example-subprojects',
 		];
 	}
 
