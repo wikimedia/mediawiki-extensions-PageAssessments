@@ -242,7 +242,7 @@ class SpecialPage extends QueryPage {
 		if ( in_array( $requested, $permitted ) ) {
 			return [ $requested ];
 		}
-		return [ 'project' ];
+		return [];
 	}
 
 	/**
