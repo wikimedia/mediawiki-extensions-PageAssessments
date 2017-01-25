@@ -14,6 +14,8 @@
 	"apihelp-query+projectpages-example-simple-1": "Ottieni le prime 10 pagine associate con qualsiasi WikiProject.",
 	"apihelp-query+projectpages-example-simple-2": "Ottieni le prime 10 pagine associate con il WikiProject <kbd>Medicine</kbd>, tra cui la valutazione dei dati.",
 	"apihelp-query+projectpages-example-generator": "Ottieni informazioni sulla pagina per le prime 10 pagine associate con il WikiProject <kbd>Textile Arts</kbd>.",
+	"apihelp-query+projects-param-subprojects": "Includi anche i sottoprogetti.",
+	"apihelp-query+projects-example-subprojects": "Ottieni un elenco di tutti i progetti e sottoprogetti.",
 	"pageassessments-project": "Progetto",
 	"pageassessments-page-title": "Titolo della pagina",
 	"pageassessments-search": "Cerca",

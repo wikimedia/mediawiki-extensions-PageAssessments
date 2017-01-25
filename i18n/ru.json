@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alex Great"
+		]
+	},
+	"apihelp-query+projects-example-subprojects": "Получить список всех проектов и подпроектов."
+}
