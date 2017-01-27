@@ -13,7 +13,7 @@
 	"apihelp-query+pageassessments-param-subprojects": "Renvoyer aussi les affectations par sous-projets.",
 	"apihelp-query+pageassessments-example-formatversion": "Obtenez les données du projet et d'évaluation pour les pages <kbd>Pomme</kbd> et <kbd>Poire</kbd>, en utilisant le format de la nouvelle API.",
 	"apihelp-query+pageassessments-example-simple": "Obtenir le projet et les données d'évaluation pour la page <kbd>Apple</kbd>.",
-	"apihelp-query+pageassessments-example-subprojects": "Obtenir les données de projet et d’affectation (y compris les sous-projets) pour la page <kbd>Apple</kbd>.",
+	"apihelp-query+pageassessments-example-subprojects": "Obtenir les données de projet et d’affectation (y compris des sous-projets) pour la page <kbd>Apple</kbd>.",
 	"apihelp-query+projectpages-description": "Donne toutes les pages associées à un ou plusieurs projets. Voir https://www.mediawiki.org/wiki/Extension:PageAssessments.",
 	"apihelp-query+projectpages-param-assessments": "Retourne également des évaluations pour les pages renvoyées.",
 	"apihelp-query+projectpages-param-projects": "Les projets dont il faut lister les pages. Si ce paramètre est omis, tous les projets seront inclus.",
