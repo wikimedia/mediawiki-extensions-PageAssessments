@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Emem.calist"
+		]
+	},
+	"apihelp-query+projects-param-subprojects": "Ilahad pati ang mga 'subprojects'.",
+	"apihelp-query+projects-example-subprojects": "Pakilista ang lahat ng mga proyekto at panukalang proyekto."
+}
