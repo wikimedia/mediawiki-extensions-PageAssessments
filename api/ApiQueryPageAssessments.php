@@ -59,6 +59,8 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 	}
 
 	private function buildDbQuery( array $pages, array $params ) {
+		global $wgPageAssessmentsSubprojects;
+
 		// build basic DB query
 		$this->addTables( array( 'page_assessments', 'page_assessments_projects' ) );
 		$this->addFields( array(
@@ -75,7 +77,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 			)
 		) );
 		$this->addWhereFld( 'pa_page_id', array_keys( $pages ) );
-		if ( !$params['subprojects'] ) {
+		if ( !$params['subprojects'] && $wgPageAssessmentsSubprojects ) {
 			$this->addWhere( 'pap_parent_id IS NULL' );
 		}
 		$this->addOption( 'LIMIT', $params['limit'] + 1 );

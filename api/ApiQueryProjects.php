@@ -22,13 +22,15 @@ class ApiQueryProjects extends ApiQueryBase {
 	 * Evaluate the parameters, perform the requested query, and set up the result
 	 */
 	public function execute() {
+		global $wgPageAssessmentsSubprojects;
+
 		$params = $this->extractRequestParams();
 
 		// Set the database query parameters
 		$this->addTables( [ 'page_assessments_projects' ] );
 		$this->addFields( [ 'project_title' => 'pap_project_title' ] );
 		// Exclude subprojects/task forces by default
-		if ( !$params['subprojects'] ) {
+		if ( !$params['subprojects'] && $wgPageAssessmentsSubprojects ) {
 			$this->addWhere( 'pap_parent_id IS NULL' );
 		}
 		$this->addOption( 'ORDER BY', 'pap_project_title' );

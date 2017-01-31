@@ -36,7 +36,7 @@ class PageAssessmentsBody implements IDBAccessObject {
 	 * @param mixed $ticket Transaction ticket
 	 */
 	public static function doUpdates( $titleObj, $assessmentData, $ticket = null ) {
-		global $wgUpdateRowsPerQuery;
+		global $wgUpdateRowsPerQuery, $wgPageAssessmentsSubprojects;
 
 		$factory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$ticket = $ticket ?: $factory->getEmptyTransactionTicket( __METHOD__ );
@@ -54,10 +54,14 @@ class PageAssessmentsBody implements IDBAccessObject {
 				$projectId = self::getProjectId( $projectName );
 				// If there is no existing project by that name, add it to the table.
 				if ( $projectId === false ) {
-					// Extract possible parent from the project name.
-					$parentId = self::extractParentProjectId( $projectName );
-					// Insert project data into the database table.
-					$projectId = self::insertProject( $projectName, $parentId );
+					if ( $wgPageAssessmentsSubprojects ) {
+						// Extract possible parent from the project name.
+						$parentId = self::extractParentProjectId( $projectName );
+						// Insert project data into the database table.
+						$projectId = self::insertProject( $projectName, $parentId );
+					} else {
+						$projectId = self::insertProject( $projectName );
+					}
 				}
 				// Add the project's ID to the array.
 				$projects[$projectName] = $projectId;
