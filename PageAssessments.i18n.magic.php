@@ -9,5 +9,3 @@ $magicWords = array();
 $magicWords['en'] = array(
 	'assessment' => array( 0, 'assessment' ),
 );
-
-?>
