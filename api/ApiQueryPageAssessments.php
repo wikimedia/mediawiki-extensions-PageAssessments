@@ -130,7 +130,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 				=> 'apihelp-query+pageassessments-example-formatversion',
 			'action=query&prop=pageassessments&titles=Apple'
 				=> 'apihelp-query+pageassessments-example-simple',
-			'action=query&prop=pageassessments&titles=Apple&subprojects=true'
+			'action=query&prop=pageassessments&titles=Apple&pasubprojects=true'
 				=> 'apihelp-query+pageassessments-example-subprojects',
 		);
 	}

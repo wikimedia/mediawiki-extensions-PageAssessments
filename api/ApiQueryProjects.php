@@ -63,7 +63,7 @@ class ApiQueryProjects extends ApiQueryBase {
 	public function getExamplesMessages() {
 		return [
 			'action=query&list=projects' => 'apihelp-query+projects-example',
-			'action=query&list=projects&subprojects=true'
+			'action=query&list=projects&pjsubprojects=true'
 				=> 'apihelp-query+projects-example-subprojects',
 		];
 	}
