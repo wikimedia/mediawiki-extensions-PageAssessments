@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Red Winged Duck"
+			"Red Winged Duck",
+			"Renessaince"
 		]
 	},
-	"pageassessments-desc": "Дадае функцыю парсэру для захоўваньня ацэнак старонак"
+	"pageassessments-desc": "Гэтае пашырэньне прызначанае для захоўваньня ацэнак старонак у табліцы базы зьвестак з дапамогаю функцыі парсэру"
 }
