@@ -261,20 +261,15 @@ class SpecialPage extends QueryPage {
 	protected function getForm() {
 		$this->getOutput()->addModules( 'ext.pageassessments.special' );
 
-		// Add a list of all currently-used projects to the page's JS.
-		$projects = wfGetDB( DB_SLAVE )->select(
-			[ 'page_assessments_projects', 'page_assessments' ],
+		// Add a list of all projects to the page's JS.
+		$projects = wfGetDB( DB_SLAVE )->selectFieldValues(
+			[ 'page_assessments_projects' ],
 			'pap_project_title',
 			'',
 			__METHOD__,
-			[ 'ORDER BY' => 'pap_project_title' ],
-			[ 'page_assessments_projects' => [ 'JOIN', 'pa_project_id = pap_project_id' ] ]
+			[ 'ORDER BY' => 'pap_project_title' ]
 		);
-		$projectOptions = [];
-		foreach ( $projects as $project ) {
-			$projectOptions[] = $project->pap_project_title;
-		}
-		$this->getOutput()->addJsConfigVars( 'wgPageAssessmentProjects', $projectOptions );
+		$this->getOutput()->addJsConfigVars( 'wgPageAssessmentProjects', $projects );
 
 		// Define the form fields.
 		$formDescriptor = [
