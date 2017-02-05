@@ -28,7 +28,8 @@
 		"PageAssessments\\NamespaceSelect": "src/NamespaceSelect.php"
 	},
 	"ExtensionMessagesFiles": {
-		"PageAssessmentsMagic": "PageAssessments.i18n.magic.php"
+		"PageAssessmentsMagic": "PageAssessments.i18n.magic.php",
+		"PageAssessmentsAlias": "PageAssessments.i18n.alias.php"
 	},
 	"Hooks": {
 		"ParserFirstCallInit": [
