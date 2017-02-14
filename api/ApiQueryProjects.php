@@ -29,8 +29,9 @@ class ApiQueryProjects extends ApiQueryBase {
 		// Set the database query parameters
 		$this->addTables( [ 'page_assessments_projects' ] );
 		$this->addFields( [ 'project_title' => 'pap_project_title' ] );
-		// Exclude subprojects/task forces by default
-		if ( !$params['subprojects'] && $wgPageAssessmentsSubprojects ) {
+		// If this wiki distinguishes between projects and subprojects, exclude
+		// subprojects (i.e. projects with parents) unless explicitly asked for.
+		if ( $wgPageAssessmentsSubprojects && !$params['subprojects'] ) {
 			$this->addWhere( 'pap_parent_id IS NULL' );
 		}
 		$this->addOption( 'ORDER BY', 'pap_project_title' );
@@ -48,12 +49,16 @@ class ApiQueryProjects extends ApiQueryBase {
 	}
 
 	public function getAllowedParams() {
-		return array(
-			'subprojects' => array(
+		global $wgPageAssessmentsSubprojects;
+
+		$allowedParams = [];
+		if ( $wgPageAssessmentsSubprojects ) {
+			$allowedParams[ 'subprojects' ] = [
 				ApiBase::PARAM_DFLT => false,
 				ApiBase::PARAM_TYPE => 'boolean',
-			),
-		);
+			];
+		}
+		return $allowedParams;
 	}
 
 	/**
@@ -61,11 +66,16 @@ class ApiQueryProjects extends ApiQueryBase {
 	 * @return array
 	 */
 	public function getExamplesMessages() {
-		return [
+		global $wgPageAssessmentsSubprojects;
+
+		$exampleMessages = [
 			'action=query&list=projects' => 'apihelp-query+projects-example',
-			'action=query&list=projects&pjsubprojects=true'
-				=> 'apihelp-query+projects-example-subprojects',
 		];
+		if ( $wgPageAssessmentsSubprojects ) {
+			$exampleMessages[ 'action=query&list=projects&pjsubprojects=true' ] =
+				'apihelp-query+projects-example-subprojects';
+		}
+		return $exampleMessages;
 	}
 
 	public function getHelpUrls() {

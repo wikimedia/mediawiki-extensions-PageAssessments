@@ -227,4 +227,8 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 				=> 'apihelp-query+projectpages-example-generator',
 		);
 	}
+
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/Extension:PageAssessments';
+	}
 }

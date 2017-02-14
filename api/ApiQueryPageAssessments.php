@@ -77,7 +77,9 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 			)
 		) );
 		$this->addWhereFld( 'pa_page_id', array_keys( $pages ) );
-		if ( !$params['subprojects'] && $wgPageAssessmentsSubprojects ) {
+		// If this wiki distinguishes between projects and subprojects, exclude
+		// subprojects (i.e. projects with parents) unless explicitly asked for.
+		if ( $wgPageAssessmentsSubprojects && !$params['subprojects'] ) {
 			$this->addWhere( 'pap_parent_id IS NULL' );
 		}
 		$this->addOption( 'LIMIT', $params['limit'] + 1 );
@@ -108,7 +110,9 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 	}
 
 	public function getAllowedParams() {
-		return array(
+		global $wgPageAssessmentsSubprojects;
+
+		$allowedParams = [
 			'continue' => array( ApiBase::PARAM_HELP_MSG => 'api-help-param-continue' ),
 			'limit' => array(
 				ApiBase::PARAM_DFLT => '10',
@@ -117,21 +121,33 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 				ApiBase::PARAM_MAX => ApiBase::LIMIT_BIG1,
 				ApiBase::PARAM_MAX2 => ApiBase::LIMIT_BIG2,
 			),
-			'subprojects' => array(
+		];
+		if ( $wgPageAssessmentsSubprojects ) {
+			$allowedParams[ 'subprojects' ] = [
 				ApiBase::PARAM_DFLT => false,
 				ApiBase::PARAM_TYPE => 'boolean',
-			),
-		);
+			];
+		}
+		return $allowedParams;
 	}
 
 	public function getExamplesMessages() {
-		return array(
+		global $wgPageAssessmentsSubprojects;
+
+		$exampleMessages = [
 			'action=query&prop=pageassessments&titles=Apple|Pear&formatversion=2'
 				=> 'apihelp-query+pageassessments-example-formatversion',
 			'action=query&prop=pageassessments&titles=Apple'
 				=> 'apihelp-query+pageassessments-example-simple',
-			'action=query&prop=pageassessments&titles=Apple&pasubprojects=true'
-				=> 'apihelp-query+pageassessments-example-subprojects',
-		);
+		];
+		if ( $wgPageAssessmentsSubprojects ) {
+			$exampleMessages[ 'action=query&prop=pageassessments&titles=Apple&pasubprojects=true' ] =
+				'apihelp-query+pageassessments-example-subprojects';
+		}
+		return $exampleMessages;
+	}
+
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/Extension:PageAssessments';
 	}
 }
