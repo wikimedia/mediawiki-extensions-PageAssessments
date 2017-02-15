@@ -4,6 +4,7 @@
 			"Robby"
 		]
 	},
+	"apihelp-query+projects-description": "All Projeten opzielen.",
 	"apihelp-query+projects-param-subprojects": "Och Ënnerprojeten abegräifen",
 	"apihelp-query+projects-example": "Eng Lëscht vun alle Projete kréien.",
 	"apihelp-query+projects-example-subprojects": "Eng Lëscht vun alle Projeten an Ënnerprojete kréien."
