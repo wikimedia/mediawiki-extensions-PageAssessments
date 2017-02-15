@@ -49,7 +49,7 @@ class PageAssessmentsBody implements IDBAccessObject {
 		foreach ( $assessmentData as $parserData ) {
 			// If the name of the project is set...
 			if ( isset( $parserData[0] ) && $parserData[0] !== '' ) {
-				$projectName = $parserData[0];
+				$projectName = self::cleanProjectTitle( $parserData[0] );
 				// ...get the corresponding ID from page_assessments_projects table.
 				$projectId = self::getProjectId( $projectName );
 				// If there is no existing project by that name, add it to the table.
@@ -196,6 +196,25 @@ class PageAssessmentsBody implements IDBAccessObject {
 		return $id;
 	}
 
+	/**
+	 * Clean up the title of the project (or subproject)
+	 *
+	 * Since the project title comes from a template parameter, it can basically
+	 * be anything. This function accounts for common cases where editors put
+	 * extra stuff into the parameter besides just the name of the project.
+	 * @param string $project WikiProject title
+	 * @return string Cleaned-up WikiProject title
+	 */
+	public static function cleanProjectTitle( $project ) {
+		// Remove any bold formatting.
+		$project = str_replace( "'''", "", $project );
+		// Remove "the" prefix for subprojects (common on English Wikipedia).
+		// This is case-sensitive on purpose, as there are some legitimate
+		// subproject titles starting with "The", e.g. "The Canterbury Tales".
+		$project = str_replace( "/the ", "/", $project );
+		// Truncate to 255 characters to avoid DB warnings.
+		return substr( $project, 0, 255 );
+	}
 
 	/**
 	 * Update record in DB if there are new values
