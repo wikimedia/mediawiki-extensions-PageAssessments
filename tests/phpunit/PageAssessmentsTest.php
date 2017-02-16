@@ -105,6 +105,17 @@ class PageAssessmentTest extends MediaWikiTestCase {
 
 
 	/**
+	 * Test the cleanProjectTitle() function in PageAssessmentsBody class
+	 */
+	public function testCleanProjectTitle() {
+		$pageBody = new PageAssessmentsBody;
+		$projectTitle = "Drinks/the '''Coffee task force'''";
+		$cleanedProjectTitle = $pageBody->cleanProjectTitle( $projectTitle );
+		$this->assertEquals( "Drinks/Coffee task force", $cleanedProjectTitle );
+	}
+
+
+	/**
 	 * Tear down - called at the end
 	 */
 	protected function tearDown() {
