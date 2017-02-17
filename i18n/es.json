@@ -8,6 +8,7 @@
 	"pageassessments-desc": "Añade una función de análisis para almacenar evaluaciones de páginas",
 	"apihelp-query+projectpages-description": "Mostrar todas las páginas asociadas con uno o más proyectos.",
 	"apihelp-query+projectpages-param-limit": "Número máximo de páginas que devolver.",
+	"apihelp-query+projects-description": "Listar todos los proyectos.",
 	"pageassessments-project": "Proyecto",
 	"pageassessments-page-namespace": "Espacio de nombres de la página",
 	"pageassessments-page-title": "Título de la página",
