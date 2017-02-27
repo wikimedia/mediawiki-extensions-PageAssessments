@@ -46,11 +46,15 @@ class PageAssessmentsBody implements IDBAccessObject {
 		// Compile a list of projects found in the parserData to find out which
 		// assessment records need to be inserted, deleted, or updated.
 		$projects = array();
-		foreach ( $assessmentData as $parserData ) {
+		foreach ( $assessmentData as $key => $parserData ) {
 			// If the name of the project is set...
 			if ( isset( $parserData[0] ) && $parserData[0] !== '' ) {
+				// Clean the project name.
 				$projectName = self::cleanProjectTitle( $parserData[0] );
-				// ...get the corresponding ID from page_assessments_projects table.
+				// Replace the original project name with the cleaned project
+				// name in the assessment data, since we'll need it to match later.
+				$assessmentData[$key][0] = $projectName;
+				// Get the corresponding ID from page_assessments_projects table.
 				$projectId = self::getProjectId( $projectName );
 				// If there is no existing project by that name, add it to the table.
 				if ( $projectId === false ) {
@@ -76,7 +80,7 @@ class PageAssessmentsBody implements IDBAccessObject {
 
 		$i = 0;
 
-		// Add and update records to the database
+		// Add and update assessment records to the database
 		foreach ( $assessmentData as $parserData ) {
 			$projectId = $projects[$parserData[0]];
 			if ( $projectId && $pageId ) {
