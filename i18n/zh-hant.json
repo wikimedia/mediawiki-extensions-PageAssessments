@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"烈羽"
 		]
 	},
+	"apihelp-query+projects-description": "列出所有專案",
 	"pageassessments-project": "專題"
 }
