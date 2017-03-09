@@ -6,6 +6,7 @@
 	},
 	"pageassessments-desc": "Diese Erweiterung dient der Speicherung von Seitenbewertungen in einer Datenbanktabelle mithilfe einer Parserfunktion",
 	"apihelp-query+pageassessments-param-limit": "Grenze für die Gesamtanzahl der zurückgegebenen Projekte (gesamt für alle Seiten).",
+	"apihelp-query+projectpages-description": "Listet alle Seiten auf, die mit einem oder mehreren Projekten verbunden sind.",
 	"apihelp-query+projectpages-param-assessments": "Gibt auch Bewertungen für die zurückgegebenen Seiten zurück.",
 	"apihelp-query+projectpages-param-limit": "Die maximale Anzahl der zurückzugebenden Seiten.",
 	"apihelp-query+projectpages-example-simple-1": "Ruft die ersten 10 Seiten ab, die mit einem beliebigen Wikiprojekt verknüpft sind.",
