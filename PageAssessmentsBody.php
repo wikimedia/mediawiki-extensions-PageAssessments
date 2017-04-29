@@ -179,7 +179,6 @@ class PageAssessmentsBody implements IDBAccessObject {
 		);
 	}
 
-
 	/**
 	 * Insert a new wikiproject into the projects table
 	 * @param string $project Wikiproject title
@@ -251,7 +250,6 @@ class PageAssessmentsBody implements IDBAccessObject {
 		return true;
 	}
 
-
 	/**
 	 * Insert a new record in DB
 	 * @param array $values New values to be entered into the DB
@@ -264,7 +262,6 @@ class PageAssessmentsBody implements IDBAccessObject {
 		$dbw->insert( 'page_assessments', $values, __METHOD__, [ 'IGNORE' ] );
 		return true;
 	}
-
 
 	/**
 	 * Get all projects associated with a given page (as project IDs)
@@ -292,7 +289,6 @@ class PageAssessmentsBody implements IDBAccessObject {
 		return $results;
 	}
 
-
 	/**
 	 * Delete a record from DB
 	 * @param array $values Conditions for looking up records to delete
@@ -307,7 +303,6 @@ class PageAssessmentsBody implements IDBAccessObject {
 		$dbw->delete( 'page_assessments', $conds, __METHOD__ );
 		return true;
 	}
-
 
 	/**
 	 * Delete all records for a given page when page is deleted
@@ -324,7 +319,6 @@ class PageAssessmentsBody implements IDBAccessObject {
 		$dbw->delete( 'page_assessments', $conds, __METHOD__ );
 		return true;
 	}
-
 
 	/**
 	 * Function called on parser init

@@ -16,7 +16,6 @@ class PageAssessmentTest extends MediaWikiTestCase {
 		$this->tablesUsed = array( 'page_assessments' );
 	}
 
-
 	/**
 	 * Test the insertRecord() function in PageAssessmentsBody class
 	 */
@@ -37,7 +36,6 @@ class PageAssessmentTest extends MediaWikiTestCase {
 			array( array( '10', 'A', 'High' ) ) // Expected values
 		);
 	}
-
 
 	/**
 	 * Test the updateRecord() function in PageAssessmentsBody class
@@ -61,7 +59,6 @@ class PageAssessmentTest extends MediaWikiTestCase {
 		);
 	}
 
-
 	/**
 	 * Test the deleteRecord() function in PageAssessmentsBody class
 	 */
@@ -77,7 +74,6 @@ class PageAssessmentTest extends MediaWikiTestCase {
 		$row = $res->fetchRow();
 		$this->assertEmpty( $row );
 	}
-
 
 	/**
 	 * Test the getAllProjects() function in PageAssessmentsBody class
@@ -103,7 +99,6 @@ class PageAssessmentTest extends MediaWikiTestCase {
 		$this->assertEmpty( array_merge( array_diff( $expected, $res ), array_diff( $res, $expected ) ) );
 	}
 
-
 	/**
 	 * Test the cleanProjectTitle() function in PageAssessmentsBody class
 	 */
@@ -114,12 +109,10 @@ class PageAssessmentTest extends MediaWikiTestCase {
 		$this->assertEquals( "Drinks/Coffee task force", $cleanedProjectTitle );
 	}
 
-
 	/**
 	 * Tear down - called at the end
 	 */
 	protected function tearDown() {
 		parent::tearDown();
 	}
-
 }

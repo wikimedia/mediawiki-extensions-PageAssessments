@@ -6,7 +6,7 @@
  */
 class ApiQueryPageAssessments extends ApiQueryBase {
 
-	public function __construct( ApiQuery $query, $moduleName  ) {
+	public function __construct( ApiQuery $query, $moduleName ) {
 		parent::__construct( $query, $moduleName, 'pa' );
 	}
 
@@ -53,8 +53,8 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 			}
 
 			// Make it easier to parse XML-formatted results
-			$result->addArrayType( array('query', 'pages', $row->page_id, $this->getModuleName() ), 'kvp', 'project' );
-			$result->addIndexedTagName( array('query', 'pages', $row->page_id, $this->getModuleName() ), 'p' );
+			$result->addArrayType( array( 'query', 'pages', $row->page_id, $this->getModuleName() ), 'kvp', 'project' );
+			$result->addIndexedTagName( array( 'query', 'pages', $row->page_id, $this->getModuleName() ), 'p' );
 		}
 	}
 
@@ -103,8 +103,8 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 
 		$continuePage = (int)$continues[0];
 		$continueProject = (int)$continues[1];
-		$this->dieContinueUsageIf( $continues[0] !== (string)$continuePage );  //die if PHP has made unhelpful falsy conversions
-		$this->dieContinueUsageIf( $continues[1] !== (string)$continueProject );  //die if PHP has made unhelpful falsy conversions
+		$this->dieContinueUsageIf( $continues[0] !== (string)$continuePage ); // die if PHP has made unhelpful falsy conversions
+		$this->dieContinueUsageIf( $continues[1] !== (string)$continueProject ); // die if PHP has made unhelpful falsy conversions
 
 		$this->addWhere( "pa_page_id > $continuePage OR (pa_page_id = $continuePage AND pa_project_id >= $continueProject)" );
 	}

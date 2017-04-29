@@ -170,8 +170,8 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 
 		$continueProject = (int)$continues[0];
 		$continuePage = (int)$continues[1];
-		$this->dieContinueUsageIf( $continues[0] !== (string)$continueProject );  //die if PHP has made unhelpful falsy conversions
-		$this->dieContinueUsageIf( $continues[1] !== (string)$continuePage );  //die if PHP has made unhelpful falsy conversions
+		$this->dieContinueUsageIf( $continues[0] !== (string)$continueProject ); // die if PHP has made unhelpful falsy conversions
+		$this->dieContinueUsageIf( $continues[1] !== (string)$continuePage ); // die if PHP has made unhelpful falsy conversions
 
 		$this->addWhere( "pa_project_id > $continueProject OR (pa_project_id = $continueProject AND pa_page_id >= $continuePage)" );
 	}
