@@ -1,0 +1,10 @@
+{
+	"extends": "wikimedia",
+	"env": {
+		"jquery": true
+	},
+	"globals": {
+		"mediaWiki": false,
+		"OO": false
+	}
+}

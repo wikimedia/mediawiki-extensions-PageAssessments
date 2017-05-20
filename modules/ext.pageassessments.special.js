@@ -49,4 +49,4 @@
 		}
 	} );
 
-} )( jQuery, mediaWiki, OO );
+}( jQuery, mediaWiki, OO ) );
