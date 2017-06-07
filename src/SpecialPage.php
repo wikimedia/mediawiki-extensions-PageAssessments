@@ -163,12 +163,12 @@ class SpecialPage extends QueryPage {
 	}
 
 	/**
-	 * Add the sort parameters to the paging links (prev/next/lengths).
+	 * Add the query and sort parameters to the paging links (prev/next/lengths).
 	 * @return string[]
 	 */
 	public function linkParameters() {
 		$params = [];
-		foreach ( [ 'sort', 'dir' ] as $key ) {
+		foreach ( [ 'project', 'namespace', 'page_title', 'sort', 'dir' ] as $key ) {
 			$val = $this->getRequest()->getVal( $key );
 			if ( $val ) {
 				$params[$key] = $val;
