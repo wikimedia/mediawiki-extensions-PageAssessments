@@ -22,6 +22,7 @@
 	"apihelp-query+projectpages-example-simple-2": "Obtenir les 10 premières pages associées au projet wikipédia <kbd>la Médecine</kbd>, avec l'évaluation des données, incluse.",
 	"apihelp-query+projectpages-example-generator": "Obtenir la page d'information pour les 10 premières pages associées au projet Wiki <kbd>Textile Arts</kbd>.",
 	"apihelp-query+projects-description": "Afficher tous les projects.",
+	"apihelp-query+projects-summary": "Affiche tous les projets.",
 	"apihelp-query+projects-param-subprojects": "Inclure également les sous-projets.",
 	"apihelp-query+projects-example": "Obtenir une liste de tous les projets.",
 	"apihelp-query+projects-example-subprojects": "Obtenir une liste de tous les projets et sous-projets.",
