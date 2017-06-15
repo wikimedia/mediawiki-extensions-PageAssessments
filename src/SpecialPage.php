@@ -28,12 +28,11 @@ class SpecialPage extends QueryPage {
 	}
 
 	/**
-	 * Do not include this one in the list of special pages at Special:SpecialPages, at least until
-	 * it's more functional that it currently is.
-	 * @return bool False.
+	 * List the page under "Page tools" at Special:SpecialPages
+	 * @return string
 	 */
-	public function isListed() {
-		return false;
+	protected function getGroupName() {
+		return 'pagetools';
 	}
 
 	/**
