@@ -32,10 +32,10 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 				break;
 			}
 
-			$projectValues = array(
+			$projectValues = [
 				'class' => $row->class,
 				'importance'=> $row->importance,
-			);
+			];
 
 			$projectName = $row->project_name;
 			// If the project name can't be found, skip adding it to the results.
@@ -44,7 +44,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 			}
 
 			$fit = $result->addValue(
-				array( 'query', 'pages', $row->page_id, $this->getModuleName() ), $projectName, $projectValues
+				[ 'query', 'pages', $row->page_id, $this->getModuleName() ], $projectName, $projectValues
 			);
 
 			if ( !$fit ) {
@@ -53,8 +53,8 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 			}
 
 			// Make it easier to parse XML-formatted results
-			$result->addArrayType( array( 'query', 'pages', $row->page_id, $this->getModuleName() ), 'kvp', 'project' );
-			$result->addIndexedTagName( array( 'query', 'pages', $row->page_id, $this->getModuleName() ), 'p' );
+			$result->addArrayType( [ 'query', 'pages', $row->page_id, $this->getModuleName() ], 'kvp', 'project' );
+			$result->addIndexedTagName( [ 'query', 'pages', $row->page_id, $this->getModuleName() ], 'p' );
 		}
 	}
 
@@ -62,20 +62,20 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		global $wgPageAssessmentsSubprojects;
 
 		// build basic DB query
-		$this->addTables( array( 'page_assessments', 'page_assessments_projects' ) );
-		$this->addFields( array(
+		$this->addTables( [ 'page_assessments', 'page_assessments_projects' ] );
+		$this->addFields( [
 			'project_id' => 'pa_project_id',
 			'class' => 'pa_class',
 			'importance' => 'pa_importance',
 			'page_id' => 'pa_page_id',
 			'project_name' => 'pap_project_title'
-		) );
-		$this->addJoinConds( array(
-			'page_assessments_projects' => array(
+		] );
+		$this->addJoinConds( [
+			'page_assessments_projects' => [
 				'JOIN',
-				array( 'pa_project_id = pap_project_id' ),
-			)
-		) );
+				[ 'pa_project_id = pap_project_id' ],
+			]
+		] );
 		$this->addWhereFld( 'pa_page_id', array_keys( $pages ) );
 		// If this wiki distinguishes between projects and subprojects, exclude
 		// subprojects (i.e. projects with parents) unless explicitly asked for.
@@ -113,14 +113,14 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		global $wgPageAssessmentsSubprojects;
 
 		$allowedParams = [
-			'continue' => array( ApiBase::PARAM_HELP_MSG => 'api-help-param-continue' ),
-			'limit' => array(
+			'continue' => [ ApiBase::PARAM_HELP_MSG => 'api-help-param-continue' ],
+			'limit' => [
 				ApiBase::PARAM_DFLT => '10',
 				ApiBase::PARAM_TYPE => 'limit',
 				ApiBase::PARAM_MIN => 1,
 				ApiBase::PARAM_MAX => ApiBase::LIMIT_BIG1,
 				ApiBase::PARAM_MAX2 => ApiBase::LIMIT_BIG2,
-			),
+			],
 		];
 		if ( $wgPageAssessmentsSubprojects ) {
 			$allowedParams[ 'subprojects' ] = [

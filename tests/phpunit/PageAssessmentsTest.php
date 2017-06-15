@@ -13,7 +13,7 @@ class PageAssessmentTest extends MediaWikiTestCase {
 	 */
 	protected function setUp() {
 		parent::setUp();
-		$this->tablesUsed = array( 'page_assessments' );
+		$this->tablesUsed = [ 'page_assessments' ];
 	}
 
 	/**
@@ -21,19 +21,19 @@ class PageAssessmentTest extends MediaWikiTestCase {
 	 */
 	public function testInsert() {
 		$pageBody = new PageAssessmentsBody;
-		$values = array(
+		$values = [
 			'pa_page_id' => '10',
 			'pa_project_id' => '3',
 			'pa_class' => 'A',
 			'pa_importance' => 'High',
 			'pa_page_revision' => '20'
-		);
+		];
 		$pageBody->insertRecord( $values );
 		$this->assertSelect(
 			'page_assessments', // Table
-			array( 'pa_page_id', 'pa_class', 'pa_importance' ), // Fields to select
-			array(), // Conditions
-			array( array( '10', 'A', 'High' ) ) // Expected values
+			[ 'pa_page_id', 'pa_class', 'pa_importance' ], // Fields to select
+			[], // Conditions
+			[ [ '10', 'A', 'High' ] ] // Expected values
 		);
 	}
 
@@ -43,19 +43,19 @@ class PageAssessmentTest extends MediaWikiTestCase {
 	public function testUpdate() {
 		$this->testInsert();
 		$pageBody = new PageAssessmentsBody;
-		$values = array(
+		$values = [
 			'pa_page_id' => '10',
 			'pa_project_id' => '3',
 			'pa_class' => 'B',
 			'pa_importance' => 'Low',
 			'pa_page_revision' => '21'
-		);
+		];
 		$pageBody->updateRecord( $values );
 		$this->assertSelect(
 			'page_assessments',
-			array( 'pa_page_id', 'pa_class', 'pa_importance' ),
-			array(),
-			array( array( '10', 'B', 'Low' ) )
+			[ 'pa_page_id', 'pa_class', 'pa_importance' ],
+			[],
+			[ [ '10', 'B', 'Low' ] ]
 		);
 	}
 
@@ -65,10 +65,10 @@ class PageAssessmentTest extends MediaWikiTestCase {
 	public function testDelete() {
 		$this->testInsert();
 		$pageBody = new PageAssessmentsBody;
-		$values = array(
+		$values = [
 			'pa_page_id' => '10',
 			'pa_project_id' => '3'
-		);
+		];
 		$pageBody->deleteRecord( $values );
 		$res = $this->db->select( 'page_assessments', '*' );
 		$row = $res->fetchRow();
@@ -82,17 +82,17 @@ class PageAssessmentTest extends MediaWikiTestCase {
 		$pageBody = new PageAssessmentsBody;
 		// Insert a record
 		$this->testInsert();
-		$values = array(
+		$values = [
 			'pa_page_id' => '10',
 			'pa_project_id' => '4',
 			'pa_class' => 'B',
 			'pa_importance' => 'Low',
 			'pa_page_revision' => '21'
-		);
+		];
 		// Insert another record
 		$pageBody->insertRecord( $values );
 		$res = $pageBody->getAllProjects( '10' );
-		$expected = array( 3, 4 );
+		$expected = [ 3, 4 ];
 		// Since the projects may be returned in any order, we can't do a simple
 		// assertEquals() on the arrays. Instead we compare the arrays using array_diff()
 		// in both directions and make sure that the results are empty.

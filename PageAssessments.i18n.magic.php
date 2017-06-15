@@ -3,9 +3,9 @@
 /**
  *  Magic words for extension.
  */
-$magicWords = array();
+$magicWords = [];
 
 /** English (English) */
-$magicWords['en'] = array(
-	'assessment' => array( 0, 'assessment' ),
-);
+$magicWords['en'] = [
+	'assessment' => [ 0, 'assessment' ],
+];

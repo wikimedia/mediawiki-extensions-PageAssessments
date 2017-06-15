@@ -10,7 +10,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	 * Array of project IDs for the projects listed in the API query
 	 * @var array
 	 */
-	private $projectIds = array();
+	private $projectIds = [];
 
 	public function __construct( ApiQuery $query, $moduleName ) {
 		// The prefix pp is already used by the pageprops module, so using wpp instead.
@@ -32,7 +32,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 		$params = $this->extractRequestParams();
 
 		if ( $params['assessments'] && isset( $resultPageSet ) ) {
-			if ( is_callable( array( $this, 'addWarning' ) ) ) {
+			if ( is_callable( [ $this, 'addWarning' ] ) ) {
 				$this->addWarning( 'apiwarn-pageassessments-nogeneratorassessments' );
 			} else {
 				$this->setWarning( 'It is not possible to retrieve page assessment results from generator=projectpages.' );
@@ -46,7 +46,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 			$db_res = $this->select( __METHOD__ );
 		// Otherwise, just set the result to an empty array (still works with foreach).
 		} else {
-			$db_res = array();
+			$db_res = [];
 		}
 
 		if ( $resultPageSet === null ) {
@@ -67,7 +67,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 				// Add information to result
 				$vals = $this->generateResultVals( $row );
 				$fit = $result->addValue(
-					array( 'query', 'projects', $projectTitle ), $row->page_id, $vals
+					[ 'query', 'projects', $projectTitle ], $row->page_id, $vals
 				);
 
 				if ( !$fit ) {
@@ -76,12 +76,12 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 				}
 
 				// Add metadata to make XML results for pages parse better
-				$result->addIndexedTagName( array( 'query', 'projects', $projectTitle ), 'page' );
-				$result->addArrayType( array( 'query', 'projects', $projectTitle ), 'array' );
+				$result->addIndexedTagName( [ 'query', 'projects', $projectTitle ], 'page' );
+				$result->addArrayType( [ 'query', 'projects', $projectTitle ], 'array' );
 			}
 			// Add metadata to make XML results for projects parse better
-			$result->addIndexedTagName( array( 'query', 'projects' ), 'project' );
-			$result->addArrayType( array( 'query', 'projects' ), 'kvp', 'name' );
+			$result->addIndexedTagName( [ 'query', 'projects' ], 'project' );
+			$result->addArrayType( [ 'query', 'projects' ], 'kvp', 'name' );
 		} else {
 			$count = 0;
 			foreach ( $db_res as $row ) {
@@ -96,36 +96,36 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	}
 
 	private function buildDbQuery( array $params, $resultPageSet ) {
-		$this->addTables( array( 'page', 'page_assessments' ) );
-		$this->addFields( array(
+		$this->addTables( [ 'page', 'page_assessments' ] );
+		$this->addFields( [
 			'page_id' => 'pa_page_id',
 			'project_id' => 'pa_project_id',
-		) );
-		$this->addJoinConds( array(
-			'page' => array(
+		] );
+		$this->addJoinConds( [
+			'page' => [
 				'JOIN',
-				array( 'page_id = pa_page_id' ),
-			)
-		) );
+				[ 'page_id = pa_page_id' ],
+			]
+		] );
 
 		if ( $resultPageSet === null ) {
 			$this->addTables( 'page_assessments_projects' );
-			$this->addFields( array(
+			$this->addFields( [
 				'title' => 'page_title',
 				'namespace' => 'page_namespace',
 				'project_name' => 'pap_project_title'
-			) );
-			$this->addJoinConds( array(
-				'page_assessments_projects' => array(
+			] );
+			$this->addJoinConds( [
+				'page_assessments_projects' => [
 					'JOIN',
-					array( 'pa_project_id = pap_project_id' ),
-				)
-			) );
+					[ 'pa_project_id = pap_project_id' ],
+				]
+			] );
 			if ( $params['assessments'] ) {
-				$this->addFields( array(
+				$this->addFields( [
 					'class' => 'pa_class',
 					'importance' => 'pa_importance'
-				) );
+				] );
 			}
 		} else {
 			$this->addFields( $resultPageSet->getPageTableFields() );
@@ -138,8 +138,8 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 				if ( $id ) {
 					$this->projectIds[] = $id;
 				} else {
-					if ( is_callable( array( $this, 'addWarning' ) ) ) {
-						$this->addWarning( array( 'apiwarn-pageassessments-badproject', wfEscapeWikiText( $project ) ) );
+					if ( is_callable( [ $this, 'addWarning' ] ) ) {
+						$this->addWarning( [ 'apiwarn-pageassessments-badproject', wfEscapeWikiText( $project ) ] );
 					} else {
 						$this->setWarning( 'Project name not recognized: ' . $project );
 					}
@@ -179,53 +179,53 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	private function generateResultVals( $row ) {
 		$title = Title::makeTitle( $row->namespace, $row->title );
 
-		$vals = array(
+		$vals = [
 			'pageid' => (int)$row->page_id,
 			'ns' => (int)$row->namespace,
 			'title' => $title->getPrefixedText(),
-		);
+		];
 
 		if ( isset( $row->class ) && isset( $row->importance ) ) {
-			$vals['assessment'] = array(
+			$vals['assessment'] = [
 				'class' => $row->class,
 				'importance' => $row->importance,
-			);
+			];
 		}
 
 		return $vals;
 	}
 
 	public function getAllowedParams() {
-		return array(
-			'assessments' => array(
+		return [
+			'assessments' => [
 				ApiBase::PARAM_DFLT => false,
 				ApiBase::PARAM_TYPE => 'boolean',
-			),
-			'projects' => array(
+			],
+			'projects' => [
 				ApiBase::PARAM_ISMULTI => true
-			),
-			'limit' => array(
+			],
+			'limit' => [
 				ApiBase::PARAM_DFLT => '10',
 				ApiBase::PARAM_TYPE => 'limit',
 				ApiBase::PARAM_MIN => 1,
 				ApiBase::PARAM_MAX => ApiBase::LIMIT_BIG1,
 				ApiBase::PARAM_MAX2 => ApiBase::LIMIT_BIG2,
-			),
-			'continue' => array(
+			],
+			'continue' => [
 				ApiBase::PARAM_HELP_MSG => 'api-help-param-continue',
-			),
-		);
+			],
+		];
 	}
 
 	public function getExamplesMessages() {
-		return array(
+		return [
 			'action=query&list=projectpages'
 				=> 'apihelp-query+projectpages-example-simple-1',
 			'action=query&list=projectpages&wppprojects=Medicine&wppassessments=true'
 				=> 'apihelp-query+projectpages-example-simple-2',
 			'action=query&generator=projectpages&prop=info&gwppprojects=Textile%20Arts'
 				=> 'apihelp-query+projectpages-example-generator',
-		);
+		];
 	}
 
 	public function getHelpUrls() {

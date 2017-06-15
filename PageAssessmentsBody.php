@@ -45,7 +45,7 @@ class PageAssessmentsBody implements IDBAccessObject {
 		$revisionId = $titleObj->getLatestRevID();
 		// Compile a list of projects found in the parserData to find out which
 		// assessment records need to be inserted, deleted, or updated.
-		$projects = array();
+		$projects = [];
 		foreach ( $assessmentData as $key => $parserData ) {
 			// If the name of the project is set...
 			if ( isset( $parserData[0] ) && $parserData[0] !== '' ) {
@@ -86,13 +86,13 @@ class PageAssessmentsBody implements IDBAccessObject {
 			if ( $projectId && $pageId ) {
 				$class = $parserData[1];
 				$importance = $parserData[2];
-				$values = array(
+				$values = [
 					'pa_page_id' => $pageId,
 					'pa_project_id' => $projectId,
 					'pa_class' => $class,
 					'pa_importance' => $importance,
 					'pa_page_revision' => $revisionId
-				);
+				];
 				if ( in_array( $projectId, $toInsert ) ) {
 					self::insertRecord( $values );
 				} elseif ( in_array( $projectId, $toUpdate ) ) {
@@ -108,10 +108,10 @@ class PageAssessmentsBody implements IDBAccessObject {
 
 		// Delete records from the database
 		foreach ( $toDelete as $project ) {
-			$values = array(
+			$values = [
 				'pa_page_id' => $pageId,
 				'pa_project_id' => $project
-			);
+			];
 			self::deleteRecord( $values );
 			// Check for database lag if there's a huge number of deleted assessments
 			if ( $i > 0 && $i % $wgUpdateRowsPerQuery == 0 ) {
@@ -226,14 +226,14 @@ class PageAssessmentsBody implements IDBAccessObject {
 	 */
 	public static function updateRecord( $values ) {
 		$dbr = wfGetDB( DB_SLAVE );
-		$conds = array(
+		$conds = [
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project_id' => $values['pa_project_id']
-		);
+		];
 		// Check if there are no updates to be done
 		$record = $dbr->select(
 			'page_assessments',
-			array( 'pa_class', 'pa_importance', 'pa_project_id', 'pa_page_id' ),
+			[ 'pa_class', 'pa_importance', 'pa_project_id', 'pa_page_id' ],
 			$conds
 		);
 		foreach ( $record as $row ) {
@@ -276,11 +276,11 @@ class PageAssessmentsBody implements IDBAccessObject {
 		$res = $db->select(
 			'page_assessments',
 			'pa_project_id',
-			array( 'pa_page_id' => $pageId ),
+			[ 'pa_page_id' => $pageId ],
 			__METHOD__,
 			$options
 		);
-		$results = array();
+		$results = [];
 		if ( $res ) {
 			foreach ( $res as $row ) {
 				$results[] = $row->pa_project_id;
@@ -296,10 +296,10 @@ class PageAssessmentsBody implements IDBAccessObject {
 	 */
 	public static function deleteRecord( $values ) {
 		$dbw = wfGetDB( DB_MASTER );
-		$conds = array(
+		$conds = [
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project_id' => $values['pa_project_id']
-		);
+		];
 		$dbw->delete( 'page_assessments', $conds, __METHOD__ );
 		return true;
 	}
@@ -313,9 +313,9 @@ class PageAssessmentsBody implements IDBAccessObject {
 	 */
 	public static function deleteRecordsForPage( $id ) {
 		$dbw = wfGetDB( DB_MASTER );
-		$conds = array(
+		$conds = [
 			'pa_page_id' => $id,
-		);
+		];
 		$dbw->delete( 'page_assessments', $conds, __METHOD__ );
 		return true;
 	}
@@ -329,9 +329,9 @@ class PageAssessmentsBody implements IDBAccessObject {
 	 */
 	public static function cacheAssessment( &$parser, $project = '', $class = '', $importance = '' ) {
 		$parserData = $parser->getOutput()->getExtensionData( 'ext-pageassessment-assessmentdata' );
-		$values = array( $project, $class, $importance );
+		$values = [ $project, $class, $importance ];
 		if ( $parserData == null ) {
-			$parserData = array();
+			$parserData = [];
 		}
 		$parserData[] = $values;
 		$parser->getOutput()->setExtensionData( 'ext-pageassessment-assessmentdata', $parserData );
