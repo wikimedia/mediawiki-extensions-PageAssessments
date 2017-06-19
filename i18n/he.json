@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Guycn2",
-			"Amire80"
+			"Amire80",
+			"המקיסט"
 		]
 	},
 	"pageassessments-desc": "ההרחבה הזאת נועדה לאחסן הערכות דפים בטבלת מסד נתונים בעזרת פונקציית מפענח",
@@ -20,6 +21,7 @@
 	"apihelp-query+projectpages-example-simple-2": "קבלת 10 הדפים הראשונים שמשויכים למיזם ויקי <kbd>Medicine</kbd>, כולל נתוני הערכה.",
 	"apihelp-query+projectpages-example-generator": "קבלת מידע על הדף עבור 10 הדפים הראשונים שמשויכים למיזם הוויקי <kbd>Textile Arts</kbd>.",
 	"apihelp-query+projects-description": "לרשום את כל המיזמים.",
+	"apihelp-query+projects-summary": "רשום את כל המיזמים",
 	"apihelp-query+projects-param-subprojects": "כולל גם תת־מיזמים.",
 	"apihelp-query+projects-example": "קבלת רשימת כל המיזמים.",
 	"apihelp-query+projects-example-subprojects": "קבלת רשימה של כל המיזמים והתת־מיזמים.",
