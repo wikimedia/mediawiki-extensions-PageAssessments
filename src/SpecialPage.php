@@ -296,7 +296,7 @@ class SpecialPage extends QueryPage {
 		$form = HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() );
 		$form->setMethod( 'get' );
 		$form->setSubmitTextMsg( 'pageassessments-search' );
-		$form->setSubmitCallback( function() {
+		$form->setSubmitCallback( function () {
 			// No callback required, but HTMLForm says we have to set one.
 		} );
 		return $form;

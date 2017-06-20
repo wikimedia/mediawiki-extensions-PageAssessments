@@ -161,7 +161,6 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 		} else {
 			$this->addOption( 'ORDER BY', 'pa_page_id' );
 		}
-
 	}
 
 	private function handleQueryContinuation( $continueParam ) {
