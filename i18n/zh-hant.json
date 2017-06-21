@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Liuxinyu970226",
-			"烈羽"
+			"烈羽",
+			"Corainn"
 		]
 	},
 	"apihelp-query+projects-description": "列出所有專案",
+	"apihelp-query+projects-summary": "列出所有專案",
 	"pageassessments-project": "專題"
 }
