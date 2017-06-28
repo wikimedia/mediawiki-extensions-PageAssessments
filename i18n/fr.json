@@ -4,17 +4,20 @@
 			"Gomoko",
 			"Pols12",
 			"Wladek92",
-			"Trial"
+			"Trial",
+			"Thibaut120094"
 		]
 	},
 	"pageassessments-desc": "Cette extension permet de stocker les évaluations de la page dans une table de base de données à l'aide d'une fonction d'analyse syntaxique.",
 	"apihelp-query+pageassessments-description": "Retourne les projets et les évaluations associés pour les pages indiquées.",
+	"apihelp-query+pageassessments-summary": "Retourner les projets et les évaluations associés pour les pages indiquées.",
 	"apihelp-query+pageassessments-param-limit": "Limite du nombre total de projets retournés (total pour toutes les pages).",
 	"apihelp-query+pageassessments-param-subprojects": "Renvoyer aussi les affectations par sous-projets.",
 	"apihelp-query+pageassessments-example-formatversion": "Obtenez les données du projet et d'évaluation pour les pages <kbd>Pomme</kbd> et <kbd>Poire</kbd>, en utilisant le format de la nouvelle API.",
 	"apihelp-query+pageassessments-example-simple": "Obtenir le projet et les données d'évaluation pour la page <kbd>Apple</kbd>.",
 	"apihelp-query+pageassessments-example-subprojects": "Obtenir les données de projet et d’affectation (y compris des sous-projets) pour la page <kbd>Apple</kbd>.",
 	"apihelp-query+projectpages-description": "Donne toutes les pages associées à un ou plusieurs projets.",
+	"apihelp-query+projectpages-summary": "Liste toutes les pages associées à un ou plusieurs projets.",
 	"apihelp-query+projectpages-param-assessments": "Retourne également des évaluations pour les pages renvoyées.",
 	"apihelp-query+projectpages-param-projects": "Les projets dont il faut lister les pages. Si ce paramètre est omis, tous les projets seront inclus.",
 	"apihelp-query+projectpages-param-limit": "Le nombre maximal de pages à renvoyer.",
