@@ -44,7 +44,9 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 			}
 
 			$fit = $result->addValue(
-				[ 'query', 'pages', $row->page_id, $this->getModuleName() ], $projectName, $projectValues
+				[ 'query', 'pages', $row->page_id, $this->getModuleName() ],
+				$projectName,
+				$projectValues
 			);
 
 			if ( !$fit ) {
@@ -53,8 +55,12 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 			}
 
 			// Make it easier to parse XML-formatted results
-			$result->addArrayType( [ 'query', 'pages', $row->page_id, $this->getModuleName() ], 'kvp', 'project' );
-			$result->addIndexedTagName( [ 'query', 'pages', $row->page_id, $this->getModuleName() ], 'p' );
+			$result->addArrayType(
+				[ 'query', 'pages', $row->page_id, $this->getModuleName() ], 'kvp', 'project'
+			);
+			$result->addIndexedTagName(
+				[ 'query', 'pages', $row->page_id, $this->getModuleName() ], 'p'
+			);
 		}
 	}
 
@@ -89,7 +95,8 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 			$this->handleQueryContinuation( $params['continue'] );
 		}
 
-		// assure strict ordering, but mysql gets cranky if you order by a field when there's only one to sort
+		// assure strict ordering, but mysql gets cranky if you order by a field
+		// when there's only one to sort
 		if ( count( $pages ) > 1 ) {
 			$this->addOption( 'ORDER BY', 'pa_page_id, pa_project_id' );
 		} else {
@@ -103,10 +110,12 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 
 		$continuePage = (int)$continues[0];
 		$continueProject = (int)$continues[1];
-		$this->dieContinueUsageIf( $continues[0] !== (string)$continuePage ); // die if PHP has made unhelpful falsy conversions
-		$this->dieContinueUsageIf( $continues[1] !== (string)$continueProject ); // die if PHP has made unhelpful falsy conversions
+		// die if PHP has made unhelpful falsy conversions
+		$this->dieContinueUsageIf( $continues[0] !== (string)$continuePage );
+		$this->dieContinueUsageIf( $continues[1] !== (string)$continueProject );
 
-		$this->addWhere( "pa_page_id > $continuePage OR (pa_page_id = $continuePage AND pa_project_id >= $continueProject)" );
+		$this->addWhere( "pa_page_id > $continuePage OR " .
+			"(pa_page_id = $continuePage AND pa_project_id >= $continueProject)" );
 	}
 
 	public function getAllowedParams() {
@@ -141,7 +150,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 				=> 'apihelp-query+pageassessments-example-simple',
 		];
 		if ( $wgPageAssessmentsSubprojects ) {
-			$exampleMessages[ 'action=query&prop=pageassessments&titles=Apple&pasubprojects=true' ] =
+			$exampleMessages['action=query&prop=pageassessments&titles=Apple&pasubprojects=true'] =
 				'apihelp-query+pageassessments-example-subprojects';
 		}
 		return $exampleMessages;

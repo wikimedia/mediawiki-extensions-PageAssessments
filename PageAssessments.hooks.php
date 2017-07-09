@@ -36,7 +36,9 @@ class PageAssessmentsHooks {
 	 * @param mixed $ticket
 	 */
 	public static function onLinksUpdateComplete( &$linksUpdate, $ticket = null ) {
-		$assessmentsOnTalkPages = RequestContext::getMain()->getConfig()->get( 'PageAssessmentsOnTalkPages' );
+		$assessmentsOnTalkPages = RequestContext::getMain()->getConfig()->get(
+			'PageAssessmentsOnTalkPages'
+		);
 		$title = $linksUpdate->getTitle();
 		// Only check for assessment data where assessments are actually made.
 		if ( ( $assessmentsOnTalkPages && $title->isTalkPage() ) ||
@@ -65,15 +67,20 @@ class PageAssessmentsHooks {
 	 */
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater = null ) {
 		$dbDir = __DIR__ . '/db';
-		$updater->addExtensionTable( 'page_assessments_projects', "$dbDir/addProjectsTable.sql", true );
-		$updater->addExtensionTable( 'page_assessments', "$dbDir/addReviewsTable.sql", true );
-		$updater->addExtensionField( 'page_assessments_projects', 'pap_parent_id', "$dbDir/patch-subprojects.sql", true );
+		$updater->addExtensionTable( 'page_assessments_projects',
+			"$dbDir/addProjectsTable.sql", true );
+		$updater->addExtensionTable( 'page_assessments',
+			"$dbDir/addReviewsTable.sql", true );
+		$updater->addExtensionField( 'page_assessments_projects',
+			'pap_parent_id', "$dbDir/patch-subprojects.sql", true );
 	}
 
 	/**
 	 * Delete assessment records when page is deleted
 	 */
-	public static function onArticleDeleteComplete( &$article, &$user, $reason, $id, $content = null, $logEntry ) {
+	public static function onArticleDeleteComplete(
+		&$article, &$user, $reason, $id, $content = null, $logEntry
+	) {
 		PageAssessmentsBody::deleteRecordsForPage( $id );
 	}
 

@@ -17,7 +17,8 @@ class PurgeUnusedProjects extends Maintenance {
 		parent::__construct();
 		$this->requireExtension( 'PageAssessments' );
 		$this->addDescription( "Purge unused projects from the page_assessments_projects table" );
-		$this->addOption( 'dry-run', "Show how many projects would be deleted, but don't actually purge them." );
+		$this->addOption( 'dry-run',
+			"Show how many projects would be deleted, but don't actually purge them." );
 	}
 
 	public function execute() {

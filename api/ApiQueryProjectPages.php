@@ -35,7 +35,8 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 			if ( is_callable( [ $this, 'addWarning' ] ) ) {
 				$this->addWarning( 'apiwarn-pageassessments-nogeneratorassessments' );
 			} else {
-				$this->setWarning( 'It is not possible to retrieve page assessment results from generator=projectpages.' );
+				$this->setWarning( 'It is not possible to retrieve page assessment results from ' .
+					'generator=projectpages.' );
 			}
 		}
 
@@ -139,7 +140,8 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 					$this->projectIds[] = $id;
 				} else {
 					if ( is_callable( [ $this, 'addWarning' ] ) ) {
-						$this->addWarning( [ 'apiwarn-pageassessments-badproject', wfEscapeWikiText( $project ) ] );
+						$this->addWarning( [ 'apiwarn-pageassessments-badproject',
+							wfEscapeWikiText( $project ) ] );
 					} else {
 						$this->setWarning( 'Project name not recognized: ' . $project );
 					}
@@ -169,10 +171,12 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 
 		$continueProject = (int)$continues[0];
 		$continuePage = (int)$continues[1];
-		$this->dieContinueUsageIf( $continues[0] !== (string)$continueProject ); // die if PHP has made unhelpful falsy conversions
-		$this->dieContinueUsageIf( $continues[1] !== (string)$continuePage ); // die if PHP has made unhelpful falsy conversions
+		// die if PHP has made unhelpful falsy conversions
+		$this->dieContinueUsageIf( $continues[0] !== (string)$continueProject );
+		$this->dieContinueUsageIf( $continues[1] !== (string)$continuePage );
 
-		$this->addWhere( "pa_project_id > $continueProject OR (pa_project_id = $continueProject AND pa_page_id >= $continuePage)" );
+		$this->addWhere( "pa_project_id > $continueProject OR " .
+			"(pa_project_id = $continueProject AND pa_page_id >= $continuePage)" );
 	}
 
 	private function generateResultVals( $row ) {
