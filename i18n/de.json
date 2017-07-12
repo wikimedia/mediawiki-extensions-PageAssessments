@@ -24,5 +24,6 @@
 	"pageassessments-importance": "Wichtigkeit",
 	"pageassessments-class": "Klasse",
 	"pageassessments-timestamp": "Zeitstempel",
-	"pageassessments-total-results": "Ergebnisse insgesamt: $1"
+	"pageassessments-total-results": "Ergebnisse insgesamt: $1",
+	"pageassessments-error-namespace-filter": "Eine Filterung nach Namensraum erfordert auch eine Filterung nach Projekt oder Seitentitel."
 }
