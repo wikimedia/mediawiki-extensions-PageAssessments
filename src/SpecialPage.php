@@ -121,10 +121,13 @@ class SpecialPage extends QueryPage {
 			. Html::closeElement( 'tr' )
 			. Html::closeElement( 'thead' )
 			. Html::openElement( 'tbody' );
-		$row = $res->fetchObject();
-		while ( $row ) {
-			$html .= $this->formatResult( $skin, $row );
+		for ( $i = 0; $i < $num; $i++ ) {
 			$row = $res->fetchObject();
+			if ( $row ) {
+				$html .= $this->formatResult( $skin, $row );
+			} else {
+				break;
+			}
 		}
 		$html .= HTML::closeElement( 'tbody' )
 			. HTML::closeElement( 'table' );
