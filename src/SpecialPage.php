@@ -10,6 +10,7 @@ use OutputPage;
 use QueryPage;
 use ResultWrapper;
 use Skin;
+use Status;
 use Title;
 
 /**
@@ -77,16 +78,16 @@ class SpecialPage extends QueryPage {
 		if ( strlen( $project ) > 0 ) {
 			$info['conds']['pap_project_title'] = $project;
 		}
-		// Namespace (if it's set, it's either an integer >= 0, 'all', or the empty string).
-		$namespace = $this->getRequest()->getVal( 'namespace' );
-		if ( strlen( $namespace ) > 0 && $namespace !== 'all' ) {
-			$info['conds']['page_namespace'] = $namespace;
-		}
 		// Page title.
 		$pageTitle = $this->getRequest()->getVal( 'page_title' );
 		if ( strlen( $pageTitle ) > 0 ) {
 			$title = Title::newFromText( $pageTitle )->getDBkey();
 			$info['conds']['page_title'] = $title;
+		}
+		// Namespace (if it's set, it's either an integer >= 0, 'all', or the empty string).
+		$namespace = $this->getRequest()->getVal( 'namespace' );
+		if ( strlen( $namespace ) > 0 && $namespace !== 'all' ) {
+			$info['conds']['page_namespace'] = $namespace;
 		}
 		return $info;
 	}
@@ -296,10 +297,18 @@ class SpecialPage extends QueryPage {
 		$form = HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() );
 		$form->setMethod( 'get' );
 		$form->setSubmitTextMsg( 'pageassessments-search' );
-		$form->setSubmitCallback( function () {
-			// No callback required, but HTMLForm says we have to set one.
+		$form->setSubmitCallback( function ( array $data, HTMLForm $form ) {
+			// Filtering only by namespace can be slow, disallow it:
+			// https://phabricator.wikimedia.org/T168599
+			if ( $data['namespace'] !== null
+				&& $data['namespace'] !== 'all'
+				// strlen( null ) produces 0
+				&& !strlen( $data['project'] )
+				&& !strlen( $data['page_title'] )
+			) {
+				return Status::newFatal( 'pageassessments-error-namespace-filter' );
+			}
 		} );
 		return $form;
 	}
-
 }

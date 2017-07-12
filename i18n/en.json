@@ -36,5 +36,6 @@
 	"pageassessments-importance": "Importance",
 	"pageassessments-class": "Class",
 	"pageassessments-timestamp": "Timestamp",
-	"pageassessments-total-results": "Total results: $1"
+	"pageassessments-total-results": "Total results: $1",
+	"pageassessments-error-namespace-filter": "Filtering by namespace also requires filtering by project or page title."
 }

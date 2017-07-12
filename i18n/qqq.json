@@ -38,5 +38,6 @@
 	"pageassessments-importance": "Label for the results table column header\n{{Identical|Importance}}",
 	"pageassessments-class": "Label for the results table column header\n{{Identical|Class}}",
 	"pageassessments-timestamp": "Label for the results table column header\n{{Identical|Timestamp}}",
-	"pageassessments-total-results": "Summary shown above the search results, with total number found"
+	"pageassessments-total-results": "Summary shown above the search results, with total number found",
+	"pageassessments-error-namespace-filter": "Shown by Special:PageAssessments when an invalid combination of filters is used"
 }
