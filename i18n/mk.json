@@ -35,5 +35,6 @@
 	"pageassessments-importance": "Важност",
 	"pageassessments-class": "Класа",
 	"pageassessments-timestamp": "Време и датум",
-	"pageassessments-total-results": "Вкупен исход: $1"
+	"pageassessments-total-results": "Вкупен исход: $1",
+	"pageassessments-error-namespace-filter": "Филтрирањето по именски простор воедно бара и филтрирање по проект или наслов на страница."
 }
