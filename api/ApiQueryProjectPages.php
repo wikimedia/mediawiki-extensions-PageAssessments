@@ -42,8 +42,8 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 
 		$this->buildDbQuery( $params, $resultPageSet );
 
-		// If matching projects were found, or no specific projects were requested, run the query.
-		if ( $this->projectIds || !$params['projects'] ) {
+		// If matching projects were found, run the query.
+		if ( $this->projectIds ) {
 			$db_res = $this->select( __METHOD__ );
 		// Otherwise, just set the result to an empty array (still works with foreach).
 		} else {
@@ -157,8 +157,8 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 			$this->handleQueryContinuation( $params['continue'] );
 		}
 
-		// If more than 1 project is requested (or all projects), order by project first.
-		if ( count( $this->projectIds ) !== 1 ) {
+		// If more than 1 project is requested, order by project first.
+		if ( count( $this->projectIds ) > 1 ) {
 			$this->addOption( 'ORDER BY', 'pa_project_id, pa_page_id' );
 		} else {
 			$this->addOption( 'ORDER BY', 'pa_page_id' );
@@ -205,7 +205,8 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 				ApiBase::PARAM_TYPE => 'boolean',
 			],
 			'projects' => [
-				ApiBase::PARAM_ISMULTI => true
+				ApiBase::PARAM_ISMULTI => true,
+				ApiBase::PARAM_REQUIRED => true,
 			],
 			'limit' => [
 				ApiBase::PARAM_DFLT => '10',
@@ -222,7 +223,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 
 	public function getExamplesMessages() {
 		return [
-			'action=query&list=projectpages'
+			'action=query&list=projectpages&wppprojects=Medicine|Anatomy'
 				=> 'apihelp-query+projectpages-example-simple-1',
 			'action=query&list=projectpages&wppprojects=Medicine&wppassessments=true'
 				=> 'apihelp-query+projectpages-example-simple-2',
