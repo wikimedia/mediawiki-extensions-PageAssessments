@@ -4,5 +4,12 @@
 			"Felipe L. Ewald"
 		]
 	},
-	"pageassessments-page-title": "Título da página"
+	"apihelp-query+projectpages-description": "Liste todas as páginas associadas a um ou mais projetos.",
+	"apihelp-query+projectpages-summary": "Liste todas as páginas associadas a um ou mais projetos.",
+	"apihelp-query+projects-description": "Lista todos os projetos.",
+	"apihelp-query+projects-summary": "Lista todos os projetos.",
+	"pageassessments-page-namespace": "Domínio da página",
+	"pageassessments-page-title": "Título da página",
+	"pageassessments-search": "Pesquisar",
+	"pageassessments-timestamp": "Timestamp"
 }
