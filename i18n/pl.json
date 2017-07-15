@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Chrumps"
+			"Chrumps",
+			"InternerowyGołąb"
 		]
 	},
 	"apihelp-query+pageassessments-param-limit": "Limit łącznej liczby zwracanych projektów (łącznie na wszystkich stronach).",
 	"apihelp-query+projectpages-param-limit": "Maksymalna liczba zwracanych stron.",
+	"apihelp-query+projectpages-example-simple-1": "Znajdź pierwsze 10 stron powiązanych z WikiProjektem <kbd>Medicine</kbd> lub WikiProjektem </kbd>Anatomy</kbd>.",
 	"pageassessments-project": "Projekt",
 	"pageassessments-page-title": "Tytuł strony",
 	"pageassessments-search": "Szukaj",
