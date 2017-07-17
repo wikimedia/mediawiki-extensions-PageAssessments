@@ -8,8 +8,10 @@
 	"apihelp-query+projectpages-summary": "Liste todas as páginas associadas a um ou mais projetos.",
 	"apihelp-query+projects-description": "Lista todos os projetos.",
 	"apihelp-query+projects-summary": "Lista todos os projetos.",
+	"pageassessments-project": "Projeto",
 	"pageassessments-page-namespace": "Domínio da página",
 	"pageassessments-page-title": "Título da página",
 	"pageassessments-search": "Pesquisar",
+	"pageassessments-class": "Classe",
 	"pageassessments-timestamp": "Timestamp"
 }

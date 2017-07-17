@@ -13,7 +13,7 @@
 	"apihelp-query+projectpages-summary": "Elenco di tutte le pagine associate a uno o più progetti.",
 	"apihelp-query+projectpages-param-projects": "I progetti per cui elencare le pagine. Se questo parametro è omesso, tutti i progetti saranno inclusi.",
 	"apihelp-query+projectpages-param-limit": "Il numero massimo di pagine da restituire.",
-	"apihelp-query+projectpages-example-simple-1": "Ottieni le prime 10 pagine associate con qualsiasi WikiProject.",
+	"apihelp-query+projectpages-example-simple-1": "Ottieni le prime 10 pagine associate con il WikiProject <kbd>Medicine</kbd> o <kbd>Anatomy</kbd>.",
 	"apihelp-query+projectpages-example-simple-2": "Ottieni le prime 10 pagine associate con il WikiProject <kbd>Medicine</kbd>, tra cui la valutazione dei dati.",
 	"apihelp-query+projectpages-example-generator": "Ottieni informazioni sulla pagina per le prime 10 pagine associate con il WikiProject <kbd>Textile Arts</kbd>.",
 	"apihelp-query+projects-description": "Elenca tutti i progetti.",
