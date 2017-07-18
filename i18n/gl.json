@@ -15,7 +15,7 @@
 	"apihelp-query+projectpages-param-assessments": "Tamén devolve a avaliación das páxinas devoltas.",
 	"apihelp-query+projectpages-param-projects": "Proxectos para os que listar as páxinas. Se non se indica o parámetro, incluiranse tódolos proxectos.",
 	"apihelp-query+projectpages-param-limit": "Número máximo de resultados a devolver.",
-	"apihelp-query+projectpages-example-simple-1": "Obtén as dez primeiras páxinas asociadas cun Wikiproxecto.",
+	"apihelp-query+projectpages-example-simple-1": "Obtén as dez primeiras páxinas asociadas ó proxecto wiki <kbd>Medicina</kbd> ou ó proxecto wiki <kbd>Anatomía</kbd>.",
 	"apihelp-query+projectpages-example-simple-2": "Obter as 10 primeiras páxinas asociadas co Wikiproxecto <kbd>Medicina</kbd>, incluíndo os datos de avaliación.",
 	"apihelp-query+projectpages-example-generator": "Obter a información de páxina para as 10 primeiras páxinas asociadas co WikiProxecto <kbd>Textile Arts</kbd>.",
 	"apihelp-query+projects-description": "Listar tódolos proxectos.",
