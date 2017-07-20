@@ -4,5 +4,6 @@
 			"Mikel Ibaiba"
 		]
 	},
-	"apihelp-query+projectpages-example-simple-1": "Erlazionatutako 10 orrialdeak lortu hauetako batekin: WikiProject <kbd>Medicine</kbd> edo WikiProject <kbd>Anatomy</kbd>."
+	"apihelp-query+projectpages-example-simple-1": "Erlazionatutako 10 orrialdeak lortu hauetako batekin: WikiProject <kbd>Medicine</kbd> edo WikiProject <kbd>Anatomy</kbd>.",
+	"pageassessments-error-namespace-filter": "Aurrezkien bidez hautatzeak proiektu edo orrialdearen izenburuaren arabera aukeratzea behar du."
 }

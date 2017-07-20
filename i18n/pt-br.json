@@ -8,11 +8,13 @@
 	"apihelp-query+projectpages-summary": "Liste todas as páginas associadas a um ou mais projetos.",
 	"apihelp-query+projects-description": "Lista todos os projetos.",
 	"apihelp-query+projects-summary": "Lista todos os projetos.",
+	"pageassessments-special": "Avaliações de página",
 	"pageassessments-project": "Projeto",
 	"pageassessments-page-namespace": "Domínio da página",
 	"pageassessments-page-title": "Título da página",
 	"pageassessments-search": "Pesquisar",
 	"pageassessments-importance": "Importância",
 	"pageassessments-class": "Classe",
-	"pageassessments-timestamp": "Data e hora"
+	"pageassessments-timestamp": "Data e hora",
+	"pageassessments-total-results": "Resultados totais: $1"
 }
