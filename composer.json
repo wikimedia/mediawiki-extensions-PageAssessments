@@ -4,7 +4,7 @@
 	"description": "This extension adds a parser function which can be used for storing article assessments in a database table.",
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "0.9.*",
-		"mediawiki/mediawiki-codesniffer": "0.10.0",
+		"mediawiki/mediawiki-codesniffer": "0.10.1",
 		"jakub-onderka/php-console-highlighter": "0.3.2"
 	},
 	"scripts": {
