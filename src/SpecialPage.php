@@ -101,7 +101,7 @@ class SpecialPage extends QueryPage {
 	 * @param ResultWrapper $res Result pointer
 	 * @param int $num Number of available result rows
 	 * @param int $offset Paging offset
-	 * @return boolean False if no results are displayed, true otherwise.
+	 * @return bool False if no results are displayed, true otherwise.
 	 */
 	protected function outputResults( $out, $skin, $dbr, $res, $num, $offset ) {
 		// Don't display anything if there are no results.
@@ -251,7 +251,7 @@ class SpecialPage extends QueryPage {
 	/**
 	 * Whether we're currently sorting descending, or ascending. Based on the request 'dir'
 	 * value; anything starting with 'desc' is considered 'desecending'.
-	 * @return boolean
+	 * @return bool
 	 */
 	function sortDescending() {
 		return stripos( $this->getRequest()->getVal( 'dir' ), 'desc' ) === 0;
