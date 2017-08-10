@@ -125,7 +125,7 @@ class PageAssessmentsBody implements IDBAccessObject {
 
 	/**
 	 * Get name for the given wikiproject
-	 * @param integer $projectId The ID of the project
+	 * @param int $projectId The ID of the project
 	 * @return string|false The name of the project or false if not found
 	 */
 	public static function getProjectName( $projectId ) {
@@ -322,7 +322,7 @@ class PageAssessmentsBody implements IDBAccessObject {
 
 	/**
 	 * Function called on parser init
-	 * @param Parser $parser Parser object
+	 * @param Parser &$parser Parser object
 	 * @param string $project Wikiproject name
 	 * @param string $class Class of article
 	 * @param string $importance Importance of article

@@ -24,7 +24,7 @@ class PageAssessmentsHooks {
 
 	/**
 	 * Register the parser function hook
-	 * @param $parser Parser
+	 * @param Parser &$parser
 	 */
 	public static function onParserFirstCallInit( &$parser ) {
 		$parser->setFunctionHook( 'assessment', 'PageAssessmentsBody::cacheAssessment' );
@@ -32,7 +32,7 @@ class PageAssessmentsHooks {
 
 	/**
 	 * Update assessment records after talk page is saved
-	 * @param LinksUpdate $linksUpdate
+	 * @param LinksUpdate &$linksUpdate
 	 * @param mixed $ticket
 	 */
 	public static function onLinksUpdateComplete( &$linksUpdate, $ticket = null ) {
@@ -77,6 +77,12 @@ class PageAssessmentsHooks {
 
 	/**
 	 * Delete assessment records when page is deleted
+	 * @param Article &$article
+	 * @param User &$user
+	 * @param string $reason
+	 * @param int $id
+	 * @param Content $content
+	 * @param LogEntry $logEntry
 	 */
 	public static function onArticleDeleteComplete(
 		&$article, &$user, $reason, $id, $content = null, $logEntry
