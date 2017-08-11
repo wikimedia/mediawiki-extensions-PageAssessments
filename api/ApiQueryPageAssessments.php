@@ -34,7 +34,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 
 			$projectValues = [
 				'class' => $row->class,
-				'importance'=> $row->importance,
+				'importance' => $row->importance,
 			];
 
 			$projectName = $row->project_name;
