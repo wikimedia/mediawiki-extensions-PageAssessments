@@ -11,6 +11,7 @@
 	"apihelp-query+projectpages-param-limit": "Die maximale Anzahl der zurückzugebenden Seiten.",
 	"apihelp-query+projectpages-example-simple-1": "Ruft die ersten 10 Seiten ab, die mit den Wikiprojekten <kbd>Medizin</kbd> oder <kbd>Anatomie</kbd> verknüpft sind.",
 	"apihelp-query+projects-description": "Listet alle Projekte auf.",
+	"apihelp-query+projects-summary": "Listet alle Projekte auf.",
 	"apihelp-query+projects-param-subprojects": "Schließt auch Unterprojekte ein.",
 	"apihelp-query+projects-example": "Ruft eine Liste aller Projekte ab.",
 	"apihelp-query+projects-example-subprojects": "Holt eine Liste von allen Projekten und Unterprojekten.",
