@@ -135,7 +135,7 @@ class PageAssessmentsBody implements IDBAccessObject {
 			if ( isset( self::$projectNames[$projectId] ) ) {
 				return self::$projectNames[$projectId];
 			} else {
-				$dbr = wfGetDB( DB_SLAVE );
+				$dbr = wfGetDB( DB_REPLICA );
 				$projectName = $dbr->selectField(
 					'page_assessments_projects',
 					'pap_project_title',
@@ -171,7 +171,7 @@ class PageAssessmentsBody implements IDBAccessObject {
 	 * @return int|false project ID or false if not found
 	 */
 	public static function getProjectId( $project ) {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		return $dbr->selectField(
 			'page_assessments_projects',
 			'pap_project_id',
@@ -225,7 +225,7 @@ class PageAssessmentsBody implements IDBAccessObject {
 	 * @return bool true
 	 */
 	public static function updateRecord( $values ) {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		$conds = [
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project_id' => $values['pa_project_id']
