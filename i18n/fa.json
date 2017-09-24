@@ -1,8 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Arash.pt"
+			"Arash.pt",
+			"Reza1615"
 		]
 	},
-	"apihelp-query+projects-description": "فهرست همه پروژه‌ها"
+	"apihelp-query+projects-description": "فهرست همه پروژه‌ها",
+	"pageassessments-project": "پروژه",
+	"pageassessments-page-namespace": "فضای نام صفحه",
+	"pageassessments-page-title": "عنوان صفحه",
+	"pageassessments-search": "جستجو کن",
+	"pageassessments-class": "کلاس",
+	"pageassessments-timestamp": "برچسب زمان"
 }
