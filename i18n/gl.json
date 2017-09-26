@@ -23,6 +23,7 @@
 	"apihelp-query+projects-param-subprojects": "Incluír tamén os subproxectos.",
 	"apihelp-query+projects-example": "Obter unha lista de tódolos proxectos.",
 	"apihelp-query+projects-example-subprojects": "Obter unha lista de tódolos proxectos e subproxectos.",
+	"apiwarn-pageassessments-nogeneratorassessments": "Non é posible obter resultados de avaliación de páxinas de <kbd>generator=projectpages</kbd>.",
 	"apiwarn-pageassessments-badproject": "Nome de proxecto non recoñecidoː $1.",
 	"pageassessments-special": "Asignacións da páxina",
 	"pageassessments-project": "Proxecto",
@@ -32,5 +33,6 @@
 	"pageassessments-importance": "Importancia",
 	"pageassessments-class": "Clase",
 	"pageassessments-timestamp": "Data e hora",
-	"pageassessments-total-results": "Resultados totais: $1"
+	"pageassessments-total-results": "Resultados totais: $1",
+	"pageassessments-error-namespace-filter": "O filtro por espazo de nomes tamén require un filtro por proxecto ou título de páxina."
 }
