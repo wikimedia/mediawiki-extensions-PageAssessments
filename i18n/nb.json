@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"pageassessments-project": "Prosjekt",
+	"pageassessments-page-namespace": "Sidenavnerom",
+	"pageassessments-page-title": "Sidetittel",
+	"pageassessments-search": "Søk",
+	"pageassessments-importance": "Viktighet",
+	"pageassessments-class": "Klasse",
+	"pageassessments-timestamp": "Tidsstempel",
+	"pageassessments-total-results": "Totalt antall resultater: $1"
+}
