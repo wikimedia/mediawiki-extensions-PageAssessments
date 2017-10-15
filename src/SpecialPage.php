@@ -129,8 +129,8 @@ class SpecialPage extends QueryPage {
 				break;
 			}
 		}
-		$html .= HTML::closeElement( 'tbody' )
-			. HTML::closeElement( 'table' );
+		$html .= Html::closeElement( 'tbody' )
+			. Html::closeElement( 'table' );
 		$out->addHTML( $html );
 		return true;
 	}
