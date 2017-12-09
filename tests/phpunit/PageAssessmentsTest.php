@@ -6,7 +6,7 @@
  * @group Database
  * @group PageAssessments
  */
-class PageAssessmentTest extends MediaWikiTestCase {
+class PageAssessmentsTest extends MediaWikiTestCase {
 
 	/**
 	 * Setup for tests
