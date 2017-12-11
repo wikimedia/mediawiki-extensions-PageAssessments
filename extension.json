@@ -19,7 +19,7 @@
 		"pageassessments": "ApiQueryPageAssessments"
 	},
 	"AutoloadClasses": {
-		"PageAssessmentsHooks": "PageAssessments.hooks.php",
+		"PageAssessmentsHooks": "PageAssessmentsHooks.php",
 		"PageAssessmentsBody": "PageAssessmentsBody.php",
 		"ApiQueryPageAssessments": "api/ApiQueryPageAssessments.php",
 		"ApiQueryProjectPages": "api/ApiQueryProjectPages.php",
