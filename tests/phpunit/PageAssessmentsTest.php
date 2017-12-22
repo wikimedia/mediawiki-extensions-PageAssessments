@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Extension\PageAssessments\PageAssessmentsDAO;
+
 /**
  * Test the database access and core functionality of PageAssessmentsBody.
  *
@@ -20,7 +22,7 @@ class PageAssessmentsTest extends MediaWikiTestCase {
 	 * Test the insertRecord() function in PageAssessmentsBody class
 	 */
 	public function testInsert() {
-		$pageBody = new PageAssessmentsBody;
+		$pageBody = new PageAssessmentsDAO;
 		$values = [
 			'pa_page_id' => '10',
 			'pa_project_id' => '3',
@@ -42,7 +44,7 @@ class PageAssessmentsTest extends MediaWikiTestCase {
 	 */
 	public function testUpdate() {
 		$this->testInsert();
-		$pageBody = new PageAssessmentsBody;
+		$pageBody = new PageAssessmentsDAO;
 		$values = [
 			'pa_page_id' => '10',
 			'pa_project_id' => '3',
@@ -64,7 +66,7 @@ class PageAssessmentsTest extends MediaWikiTestCase {
 	 */
 	public function testDelete() {
 		$this->testInsert();
-		$pageBody = new PageAssessmentsBody;
+		$pageBody = new PageAssessmentsDAO;
 		$values = [
 			'pa_page_id' => '10',
 			'pa_project_id' => '3'
@@ -79,7 +81,7 @@ class PageAssessmentsTest extends MediaWikiTestCase {
 	 * Test the getAllProjects() function in PageAssessmentsBody class
 	 */
 	public function testGetAllProjects() {
-		$pageBody = new PageAssessmentsBody;
+		$pageBody = new PageAssessmentsDAO;
 		// Insert a record
 		$this->testInsert();
 		$values = [
@@ -103,7 +105,7 @@ class PageAssessmentsTest extends MediaWikiTestCase {
 	 * Test the cleanProjectTitle() function in PageAssessmentsBody class
 	 */
 	public function testCleanProjectTitle() {
-		$pageBody = new PageAssessmentsBody;
+		$pageBody = new PageAssessmentsDAO;
 		$projectTitle = "Drinks/the '''Coffee task force'''";
 		$cleanedProjectTitle = $pageBody->cleanProjectTitle( $projectTitle );
 		$this->assertEquals( "Drinks/Coffee task force", $cleanedProjectTitle );

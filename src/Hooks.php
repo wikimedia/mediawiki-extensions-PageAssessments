@@ -17,17 +17,30 @@
  *
  * Hooks for PageAssessments extension
  *
+ * @file
  * @ingroup Extensions
  */
 
-class PageAssessmentsHooks {
+namespace MediaWiki\Extension\PageAssessments;
+
+use Article;
+use Content;
+use DatabaseUpdater;
+use LinksUpdate;
+use LogEntry;
+use Parser;
+use RequestContext;
+use User;
+
+class Hooks {
 
 	/**
 	 * Register the parser function hook
 	 * @param Parser &$parser
 	 */
-	public static function onParserFirstCallInit( &$parser ) {
-		$parser->setFunctionHook( 'assessment', 'PageAssessmentsBody::cacheAssessment' );
+	public static function onParserFirstCallInit( Parser &$parser ) {
+		$callback = PageAssessmentsDAO::class . '::cacheAssessment';
+		$parser->setFunctionHook( 'assessment', $callback );
 	}
 
 	/**
@@ -57,7 +70,7 @@ class PageAssessmentsHooks {
 			if ( $title->isTalkPage() ) {
 				$title = $title->getSubjectPage();
 			}
-			PageAssessmentsBody::doUpdates( $title, $assessmentData, $ticket );
+			PageAssessmentsDAO::doUpdates( $title, $assessmentData, $ticket );
 		}
 	}
 
@@ -66,7 +79,7 @@ class PageAssessmentsHooks {
 	 * @param DatabaseUpdater $updater DatabaseUpdater object
 	 */
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater = null ) {
-		$dbDir = __DIR__ . '/db';
+		$dbDir = __DIR__ . '/../db';
 		$updater->addExtensionTable( 'page_assessments_projects',
 			"$dbDir/addProjectsTable.sql", true );
 		$updater->addExtensionTable( 'page_assessments',
@@ -87,7 +100,7 @@ class PageAssessmentsHooks {
 	public static function onArticleDeleteComplete(
 		&$article, &$user, $reason, $id, $content = null, $logEntry
 	) {
-		PageAssessmentsBody::deleteRecordsForPage( $id );
+		PageAssessmentsDAO::deleteRecordsForPage( $id );
 	}
 
 }
