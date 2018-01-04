@@ -19,13 +19,13 @@
 		"pageassessments": "ApiQueryPageAssessments"
 	},
 	"AutoloadClasses": {
-		"PageAssessmentsHooks": "PageAssessmentsHooks.php",
-		"PageAssessmentsBody": "PageAssessmentsBody.php",
 		"ApiQueryPageAssessments": "api/ApiQueryPageAssessments.php",
 		"ApiQueryProjectPages": "api/ApiQueryProjectPages.php",
 		"ApiQueryProjects": "api/ApiQueryProjects.php",
-		"PageAssessments\\SpecialPage": "src/SpecialPage.php",
-		"PageAssessments\\NamespaceSelect": "src/NamespaceSelect.php"
+		"MediaWiki\\Extension\\PageAssessments\\Hooks": "src/Hooks.php",
+		"MediaWiki\\Extension\\PageAssessments\\NamespaceSelect": "src/NamespaceSelect.php",
+		"MediaWiki\\Extension\\PageAssessments\\PageAssessmentsDAO": "src/PageAssessmentsDAO.php",
+		"MediaWiki\\Extension\\PageAssessments\\SpecialPage": "src/SpecialPage.php"
 	},
 	"ExtensionMessagesFiles": {
 		"PageAssessmentsMagic": "PageAssessments.i18n.magic.php",
@@ -33,16 +33,16 @@
 	},
 	"Hooks": {
 		"ParserFirstCallInit": [
-			"PageAssessmentsHooks::onParserFirstCallInit"
+			"MediaWiki\\Extension\\PageAssessments\\Hooks::onParserFirstCallInit"
 		],
 		"LoadExtensionSchemaUpdates": [
-			"PageAssessmentsHooks::onLoadExtensionSchemaUpdates"
+			"MediaWiki\\Extension\\PageAssessments\\Hooks::onLoadExtensionSchemaUpdates"
 		],
 		"LinksUpdateComplete": [
-			"PageAssessmentsHooks::onLinksUpdateComplete"
+			"MediaWiki\\Extension\\PageAssessments\\Hooks::onLinksUpdateComplete"
 		],
 		"ArticleDeleteComplete": [
-			"PageAssessmentsHooks::onArticleDeleteComplete"
+			"MediaWiki\\Extension\\PageAssessments\\Hooks::onArticleDeleteComplete"
 		]
 	},
 	"MessagesDirs": {
@@ -64,7 +64,7 @@
 		}
 	},
 	"SpecialPages": {
-		"PageAssessments": "PageAssessments\\SpecialPage"
+		"PageAssessments": "MediaWiki\\Extension\\PageAssessments\\SpecialPage"
 	},
 	"config": {
 		"PageAssessmentsOnTalkPages": true,

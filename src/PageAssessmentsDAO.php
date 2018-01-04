@@ -22,9 +22,15 @@
  * @ingroup Extensions
  */
 
-use MediaWiki\MediaWikiServices;
+namespace MediaWiki\Extension\PageAssessments;
 
-class PageAssessmentsBody implements IDBAccessObject {
+use DBAccessObjectUtils;
+use IDBAccessObject;
+use MediaWiki\MediaWikiServices;
+use Parser;
+use Title;
+
+class PageAssessmentsDAO implements IDBAccessObject {
 
 	/** @var array Instance cache associating project IDs with project names */
 	protected static $projectNames = [];
@@ -82,6 +88,10 @@ class PageAssessmentsBody implements IDBAccessObject {
 
 		// Add and update assessment records to the database
 		foreach ( $assessmentData as $parserData ) {
+			// Make sure the name of the project is set.
+			if ( !isset( $parserData[0] ) || $parserData[0] == '' ) {
+				continue;
+			}
 			$projectId = $projects[$parserData[0]];
 			if ( $projectId && $pageId ) {
 				$class = $parserData[1];
