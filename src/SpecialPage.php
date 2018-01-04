@@ -24,13 +24,13 @@ namespace MediaWiki\Extension\PageAssessments;
 use Html;
 use HTMLForm;
 use HTMLTextField;
-use IDatabase;
 use OutputPage;
 use QueryPage;
-use ResultWrapper;
 use Skin;
 use Status;
 use Title;
+use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * A special page for searching Page Assessments. Can also be transcluded (in which case the
