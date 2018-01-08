@@ -3,10 +3,17 @@
 		"authors": [
 			"Liuxinyu970226",
 			"烈羽",
-			"Corainn"
+			"Corainn",
+			"Kly"
 		]
 	},
+	"pageassessments-desc": "此擴充用於在資料庫表格裡，以解析函式的協助之下來儲存頁面評比",
 	"apihelp-query+projects-description": "列出所有專案",
 	"apihelp-query+projects-summary": "列出所有專案",
-	"pageassessments-project": "專題"
+	"pageassessments-project": "專題",
+	"pageassessments-page-namespace": "頁面命名空間",
+	"pageassessments-page-title": "頁面標題",
+	"pageassessments-search": "搜尋",
+	"pageassessments-timestamp": "時間戳記",
+	"pageassessments-total-results": "結果總數：$1"
 }
