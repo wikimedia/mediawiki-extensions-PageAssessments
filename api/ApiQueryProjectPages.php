@@ -135,7 +135,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 		if ( isset( $params['projects'] ) ) {
 			// Convert the project names into corresponding IDs
 			foreach ( $params['projects'] as $project ) {
-				$id = PageAssessmentsBody::getProjectId( $project );
+				$id = PageAssessmentsDAO::getProjectId( $project );
 				if ( $id ) {
 					$this->projectIds[] = $id;
 				} else {
