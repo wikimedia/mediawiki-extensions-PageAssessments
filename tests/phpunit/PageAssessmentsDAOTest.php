@@ -3,12 +3,13 @@
 use MediaWiki\Extension\PageAssessments\PageAssessmentsDAO;
 
 /**
- * Test the database access and core functionality of PageAssessmentsBody.
+ * Test the database access and core functionality of PageAssessmentsDAO.
  *
+ * @covers MediaWiki\Extension\PageAssessments\PageAssessmentsDAO
  * @group Database
  * @group PageAssessments
  */
-class PageAssessmentsTest extends MediaWikiTestCase {
+class PageAssessmentsDAOTest extends MediaWikiTestCase {
 
 	/**
 	 * Setup for tests
@@ -19,7 +20,7 @@ class PageAssessmentsTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * Test the insertRecord() function in PageAssessmentsBody class
+	 * @covers MediaWiki\Extension\PageAssessments\PageAssessmentsDAO::insertRecord()
 	 */
 	public function testInsert() {
 		$pageBody = new PageAssessmentsDAO;
@@ -40,7 +41,7 @@ class PageAssessmentsTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * Test the updateRecord() function in PageAssessmentsBody class
+	 * @covers MediaWiki\Extension\PageAssessments\PageAssessmentsDAO::updateRecord()
 	 */
 	public function testUpdate() {
 		$this->testInsert();
@@ -62,7 +63,7 @@ class PageAssessmentsTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * Test the deleteRecord() function in PageAssessmentsBody class
+	 * @covers MediaWiki\Extension\PageAssessments\PageAssessmentsDAO::deleteRecord()
 	 */
 	public function testDelete() {
 		$this->testInsert();
@@ -78,7 +79,7 @@ class PageAssessmentsTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * Test the getAllProjects() function in PageAssessmentsBody class
+	 * @covers MediaWiki\Extension\PageAssessments\PageAssessmentsDAO::getAllProjects()
 	 */
 	public function testGetAllProjects() {
 		$pageBody = new PageAssessmentsDAO;
@@ -102,19 +103,12 @@ class PageAssessmentsTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * Test the cleanProjectTitle() function in PageAssessmentsBody class
+	 * @covers MediaWiki\Extension\PageAssessments\PageAssessmentsDAO::cleanProjectTitle()
 	 */
 	public function testCleanProjectTitle() {
 		$pageBody = new PageAssessmentsDAO;
 		$projectTitle = "Drinks/the '''Coffee task force'''";
 		$cleanedProjectTitle = $pageBody->cleanProjectTitle( $projectTitle );
 		$this->assertEquals( "Drinks/Coffee task force", $cleanedProjectTitle );
-	}
-
-	/**
-	 * Tear down - called at the end
-	 */
-	protected function tearDown() {
-		parent::tearDown();
 	}
 }
