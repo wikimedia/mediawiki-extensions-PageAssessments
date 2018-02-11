@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Extension\PageAssessments\PageAssessmentsDAO;
+
 /*
  * API module for retrieving all the pages associated with a project, for example,
  * WikiProject Medicine. (T119997)
