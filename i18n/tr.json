@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Diyapazon"
+		]
+	},
+	"pageassessments-special": "Sayfa değerlendirmeleri",
+	"pageassessments-project": "Proje",
+	"pageassessments-page-namespace": "Sayfa ad alanı",
+	"pageassessments-page-title": "Sayfa başlığı",
+	"pageassessments-search": "Ara",
+	"pageassessments-importance": "Önem",
+	"pageassessments-class": "Sınıf",
+	"pageassessments-timestamp": "Zaman damgası"
+}
