@@ -76,16 +76,16 @@ class Hooks {
 
 	/**
 	 * Run database updates
-	 * @param DatabaseUpdater $updater DatabaseUpdater object
+	 * @param DatabaseUpdater|null $updater DatabaseUpdater object
 	 */
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater = null ) {
 		$dbDir = __DIR__ . '/../db';
 		$updater->addExtensionTable( 'page_assessments_projects',
-			"$dbDir/addProjectsTable.sql", true );
+			"$dbDir/addProjectsTable.sql" );
 		$updater->addExtensionTable( 'page_assessments',
-			"$dbDir/addReviewsTable.sql", true );
+			"$dbDir/addReviewsTable.sql" );
 		$updater->addExtensionField( 'page_assessments_projects',
-			'pap_parent_id', "$dbDir/patch-subprojects.sql", true );
+			'pap_parent_id', "$dbDir/patch-subprojects.sql" );
 	}
 
 	/**
