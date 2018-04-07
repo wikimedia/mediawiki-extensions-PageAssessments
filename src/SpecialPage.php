@@ -30,7 +30,7 @@ use Skin;
 use Status;
 use Title;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * A special page for searching Page Assessments. Can also be transcluded (in which case the
@@ -117,7 +117,7 @@ class SpecialPage extends QueryPage {
 	 * @param OutputPage $out OutputPage to print to
 	 * @param Skin $skin User skin to use
 	 * @param IDatabase $dbr Database (read) connection to use
-	 * @param ResultWrapper $res Result pointer
+	 * @param IResultWrapper $res Result pointer
 	 * @param int $num Number of available result rows
 	 * @param int $offset Paging offset
 	 * @return bool False if no results are displayed, true otherwise.
