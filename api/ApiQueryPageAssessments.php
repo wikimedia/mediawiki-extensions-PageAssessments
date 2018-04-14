@@ -124,7 +124,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		$allowedParams = [
 			'continue' => [ ApiBase::PARAM_HELP_MSG => 'api-help-param-continue' ],
 			'limit' => [
-				ApiBase::PARAM_DFLT => '10',
+				ApiBase::PARAM_DFLT => 10,
 				ApiBase::PARAM_TYPE => 'limit',
 				ApiBase::PARAM_MIN => 1,
 				ApiBase::PARAM_MAX => ApiBase::LIMIT_BIG1,

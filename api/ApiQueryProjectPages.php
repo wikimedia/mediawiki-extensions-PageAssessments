@@ -211,7 +211,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 				ApiBase::PARAM_REQUIRED => true,
 			],
 			'limit' => [
-				ApiBase::PARAM_DFLT => '10',
+				ApiBase::PARAM_DFLT => 10,
 				ApiBase::PARAM_TYPE => 'limit',
 				ApiBase::PARAM_MIN => 1,
 				ApiBase::PARAM_MAX => ApiBase::LIMIT_BIG1,
