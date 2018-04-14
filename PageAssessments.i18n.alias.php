@@ -12,3 +12,7 @@ $specialPageAliases = [];
 $specialPageAliases['en'] = [
 	'PageAssessments' => [ 'PageAssessments' ],
 ];
+
+$speciaPageAliases['hu'] = [
+	'PageAssessments' => [ 'Cikkértékelés' ],
+];
