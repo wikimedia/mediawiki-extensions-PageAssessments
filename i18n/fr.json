@@ -5,7 +5,8 @@
 			"Pols12",
 			"Wladek92",
 			"Trial",
-			"Thibaut120094"
+			"Thibaut120094",
+			"Orlodrim"
 		]
 	},
 	"pageassessments-desc": "Cette extension permet de stocker les évaluations de la page dans une table de base de données à l'aide d'une fonction d'analyse syntaxique.",
@@ -31,7 +32,7 @@
 	"apihelp-query+projects-example-subprojects": "Obtenir une liste de tous les projets et sous-projets.",
 	"apiwarn-pageassessments-nogeneratorassessments": "Il n’est pas possible de récupérer les résultats d’affectation de page avec <kbd>generator=projectpages</kbd>.",
 	"apiwarn-pageassessments-badproject": "Nom de projet non reconnu: $1.",
-	"pageassessments-special": "Affectations de la page",
+	"pageassessments-special": "Évaluations de page",
 	"pageassessments-project": "Projet",
 	"pageassessments-page-namespace": "Espace de nom de la page",
 	"pageassessments-page-title": "Titre de la page",
