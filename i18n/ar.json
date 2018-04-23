@@ -13,7 +13,7 @@
 	"apihelp-query+pageassessments-param-subprojects": "أيضًا اعرض تقييمات المشاريع الفرعية.",
 	"apihelp-query+pageassessments-example-formatversion": "احصل على بيانات المشروع والتقييم للصفحات <kbd>Apple</kbd> و<kbd>Pear</kbd> باستخدام تنسيق نتيجة API الأحدث.",
 	"apihelp-query+pageassessments-example-simple": "احصل على بيانات المشروع والتقييم لصفحة <kbd>Apple</kbd>.",
-	"apihelp-query+pageassessments-example-subprojects": "الحصول على بيانات المشروع والتقييم (بما في ذلك للمشروعات الفرعية) لصفحة <kbd>Apple</kbd>.",
+	"apihelp-query+pageassessments-example-subprojects": "الحصول على بيانات المشروع والتقييم (بما في ذلك التي للمشاريع الفرعية) لصفحة <kbd>Apple</kbd>.",
 	"apihelp-query+projectpages-description": "قائمة بجميع الصفحات المرتبطة بمشروع واحد أو أكثر.",
 	"apihelp-query+projectpages-summary": "قائمة بجميع الصفحات المرتبطة بمشروع واحد أو أكثر.",
 	"apihelp-query+projectpages-param-assessments": "أيضًا اعرض تقييمات الصفحات التي تم إرجاعها.",
