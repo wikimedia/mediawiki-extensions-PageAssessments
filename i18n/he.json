@@ -8,6 +8,7 @@
 	},
 	"pageassessments-desc": "ההרחבה הזאת נועדה לאחסן הערכות דפים בטבלת מסד נתונים בעזרת פונקציית מפענח",
 	"apihelp-query+pageassessments-description": "להחזיר מיזמים משויכים והערכות לדפים שניתנו.",
+	"apihelp-query+pageassessments-summary": "החזרת מיזמים משויכים והערכות לדפים הנתונים.",
 	"apihelp-query+pageassessments-param-limit": "מגבלה למספר הכולל של המיזמים שיוחזרו (הסך לכל הדפים).",
 	"apihelp-query+pageassessments-param-subprojects": "אפשר גם להחזיר הערכות לפי תת־מיזמים.",
 	"apihelp-query+pageassessments-example-formatversion": "לקבל נתונים על מיזם והערכה עבור הדפים <kbd>Apple</kbd> ו־<kbd>Pear</kbd>, באמצעות תסדיר תוצאות ה־API החדש.",
