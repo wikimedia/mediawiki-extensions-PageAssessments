@@ -46,7 +46,7 @@ class Hooks {
 	/**
 	 * Update assessment records after talk page is saved
 	 * @param LinksUpdate &$linksUpdate
-	 * @param mixed $ticket
+	 * @param mixed|null $ticket
 	 */
 	public static function onLinksUpdateComplete( &$linksUpdate, $ticket = null ) {
 		$assessmentsOnTalkPages = RequestContext::getMain()->getConfig()->get(
@@ -94,7 +94,7 @@ class Hooks {
 	 * @param User &$user
 	 * @param string $reason
 	 * @param int $id
-	 * @param Content $content
+	 * @param Content|null $content
 	 * @param LogEntry $logEntry
 	 */
 	public static function onArticleDeleteComplete(

@@ -39,7 +39,7 @@ class PageAssessmentsDAO implements IDBAccessObject {
 	 * Driver function that handles updating assessment data in database
 	 * @param Title $titleObj Title object of the subject page
 	 * @param array $assessmentData Data for all assessments compiled
-	 * @param mixed $ticket Transaction ticket
+	 * @param mixed|null $ticket Transaction ticket
 	 */
 	public static function doUpdates( $titleObj, $assessmentData, $ticket = null ) {
 		global $wgUpdateRowsPerQuery, $wgPageAssessmentsSubprojects;
@@ -192,7 +192,7 @@ class PageAssessmentsDAO implements IDBAccessObject {
 	/**
 	 * Insert a new wikiproject into the projects table
 	 * @param string $project Wikiproject title
-	 * @param int $parentId ID of the parent project (for subprojects) (optional)
+	 * @param int|null $parentId ID of the parent project (for subprojects) (optional)
 	 * @return int Insert Id for new project
 	 */
 	public static function insertProject( $project, $parentId = null ) {
