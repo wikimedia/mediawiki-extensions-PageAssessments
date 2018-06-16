@@ -2,14 +2,21 @@
 	"@metadata": {
 		"authors": [
 			"Arash.pt",
-			"Reza1615"
+			"Reza1615",
+			"Ladsgroup"
 		]
 	},
+	"pageassessments-desc": "این افزونه برای نگه‌داری داده‌های اندازه‌گیری‌های صفحات است تا در توابع تجزیه استفاده شود",
 	"apihelp-query+projects-description": "فهرست همه پروژه‌ها",
+	"apihelp-query+projects-summary": "فهرست همه پروژه‌ها",
+	"apiwarn-pageassessments-badproject": "نام پروژه قابل فهمیدن نیست: $1",
+	"pageassessments-special": "اندازه‌گیری‌های صفحات",
 	"pageassessments-project": "پروژه",
 	"pageassessments-page-namespace": "فضای نام صفحه",
 	"pageassessments-page-title": "عنوان صفحه",
 	"pageassessments-search": "جستجو کن",
+	"pageassessments-importance": "اهمیت",
 	"pageassessments-class": "کلاس",
-	"pageassessments-timestamp": "برچسب زمان"
+	"pageassessments-timestamp": "برچسب زمان",
+	"pageassessments-total-results": "مجموع نتایج: $1"
 }
