@@ -23,7 +23,6 @@
 
 namespace MediaWiki\Extension\PageAssessments;
 
-use Article;
 use Content;
 use DatabaseUpdater;
 use LinksUpdate;
@@ -31,6 +30,7 @@ use LogEntry;
 use Parser;
 use RequestContext;
 use User;
+use WikiPage;
 
 class Hooks {
 
@@ -90,15 +90,22 @@ class Hooks {
 
 	/**
 	 * Delete assessment records when page is deleted
-	 * @param Article &$article
-	 * @param User &$user
+	 * @param WikiPage &$article
+	 * @param User|null &$user
 	 * @param string $reason
 	 * @param int $id
 	 * @param Content|null $content
-	 * @param LogEntry $logEntry
+	 * @param LogEntry|null $logEntry
+	 * @param int|null $archivedRevisionCount
 	 */
 	public static function onArticleDeleteComplete(
-		&$article, &$user, $reason, $id, $content = null, $logEntry
+		&$article,
+		&$user,
+		$reason,
+		$id,
+		$content = null,
+		$logEntry = null,
+		$archivedRevisionCount = null
 	) {
 		PageAssessmentsDAO::deleteRecordsForPage( $id );
 	}
