@@ -70,7 +70,7 @@ class SpecialPage extends QueryPage {
 	/**
 	 * The information for the database query. Don't include an ORDER or LIMIT clause, they will
 	 * be added.
-	 * @return string[]
+	 * @return array[]
 	 */
 	public function getQueryInfo() {
 		$info = [
