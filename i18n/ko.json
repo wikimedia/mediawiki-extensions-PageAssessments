@@ -12,5 +12,6 @@
 	"pageassessments-project": "프로젝트",
 	"pageassessments-page-title": "문서 제목",
 	"pageassessments-search": "검색",
+	"pageassessments-total-results": "총 결과: $1",
 	"pageassessments-error-namespace-filter": "이름공간으로 필터링하려면 프로젝트 또는 문서 제목도 필터링해야 합니다."
 }
