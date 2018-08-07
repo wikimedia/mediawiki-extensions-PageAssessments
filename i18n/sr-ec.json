@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Zoranzoki21"
+			"Zoranzoki21",
+			"BadDog"
 		]
 	},
-	"apihelp-query+projects-param-subprojects": "Такође, обухвата подпројекте."
+	"apihelp-query+projects-param-subprojects": "Такође, обухвата подпројекте.",
+	"pageassessments-timestamp": "Временска ознака"
 }
