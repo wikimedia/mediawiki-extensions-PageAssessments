@@ -10,6 +10,7 @@
 	"apihelp-query+projects-description": "فهرست همه پروژه‌ها",
 	"apihelp-query+projects-summary": "فهرست همه پروژه‌ها",
 	"apihelp-query+projects-param-subprojects": "همچنین شامل زیرپروژه‌ها هم شود.",
+	"apihelp-query+projects-example": "گرفتن فهرست همه پروژه‌ها.",
 	"apiwarn-pageassessments-badproject": "نام پروژه قابل فهمیدن نیست: $1",
 	"pageassessments-special": "اندازه‌گیری‌های صفحات",
 	"pageassessments-project": "پروژه",
