@@ -228,10 +228,10 @@ class SpecialPage extends QueryPage {
 
 		// HTML table row.
 		return Html::rawElement( 'tr', [],
-			Html::rawElement( 'td', [], $result->project ).
-			Html::rawElement( 'td', [], $pageLink ).
-			Html::rawElement( 'td', [], $result->importance ).
-			Html::rawElement( 'td', [], $result->class ).
+			Html::rawElement( 'td', [], $result->project ) .
+			Html::rawElement( 'td', [], $pageLink ) .
+			Html::rawElement( 'td', [], $result->importance ) .
+			Html::rawElement( 'td', [], $result->class ) .
 			Html::rawElement( 'td', [], $timestampLink )
 		);
 	}
