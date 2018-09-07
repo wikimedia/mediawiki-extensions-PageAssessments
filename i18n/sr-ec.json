@@ -5,8 +5,18 @@
 			"BadDog"
 		]
 	},
+	"pageassessments-desc": "Овај додатак је за складиштење процена страница у табели базе података уз помоћ могућности рашчлањивача",
 	"apihelp-query+projects-description": "Списак свих пројеката.",
 	"apihelp-query+projects-summary": "Списак свих пројеката.",
 	"apihelp-query+projects-param-subprojects": "Такође, обухвата подпројекте.",
-	"pageassessments-timestamp": "Временска ознака"
+	"pageassessments-special": "Процене странице",
+	"pageassessments-project": "Пројекат",
+	"pageassessments-page-namespace": "Именски простор странице",
+	"pageassessments-page-title": "Наслов странице",
+	"pageassessments-search": "Претражи",
+	"pageassessments-importance": "Значај",
+	"pageassessments-class": "Класа",
+	"pageassessments-timestamp": "Временска ознака",
+	"pageassessments-total-results": "Укупно резултата: $1",
+	"pageassessments-error-namespace-filter": "Филтрирање по именском простору такође захтева филтрирање по пројекту или наслову странице."
 }
