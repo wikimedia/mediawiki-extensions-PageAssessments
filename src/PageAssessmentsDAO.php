@@ -129,8 +129,6 @@ class PageAssessmentsDAO implements IDBAccessObject {
 			}
 			$i++;
 		}
-
-		return;
 	}
 
 	/**
