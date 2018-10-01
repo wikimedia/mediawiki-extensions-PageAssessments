@@ -16,3 +16,8 @@ $specialPageAliases['en'] = [
 $specialPageAliases['hu'] = [
 	'PageAssessments' => [ 'Cikkértékelés' ],
 ];
+
+/** 한국어 (Korean) */
+$specialPageAliases['ko'] = [
+	'PageAssessments' => [ '문서평가' ],
+];
