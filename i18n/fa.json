@@ -7,6 +7,7 @@
 		]
 	},
 	"pageassessments-desc": "این افزونه برای نگه‌داری داده‌های اندازه‌گیری‌های صفحات است تا در توابع تجزیه استفاده شود",
+	"apihelp-query+projectpages-param-limit": "حداکثر صفحاتی که برگردانده می‌شود.",
 	"apihelp-query+projects-description": "فهرست همه پروژه‌ها",
 	"apihelp-query+projects-summary": "فهرست همه پروژه‌ها",
 	"apihelp-query+projects-param-subprojects": "همچنین شامل زیرپروژه‌ها هم شود.",
