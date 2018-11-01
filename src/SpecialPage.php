@@ -260,7 +260,7 @@ class SpecialPage extends QueryPage {
 	 * Get the fields that the results are currently ordered by.
 	 * @return string[]
 	 */
-	function getOrderFields() {
+	public function getOrderFields() {
 		$permitted = [ 'project', 'page_title', 'timestamp' ];
 		$requested = $this->getRequest()->getVal( 'sort' );
 		if ( in_array( $requested, $permitted ) ) {
@@ -274,7 +274,7 @@ class SpecialPage extends QueryPage {
 	 * value; anything starting with 'desc' is considered 'desecending'.
 	 * @return bool
 	 */
-	function sortDescending() {
+	public function sortDescending() {
 		return stripos( $this->getRequest()->getVal( 'dir' ), 'desc' ) === 0;
 	}
 
