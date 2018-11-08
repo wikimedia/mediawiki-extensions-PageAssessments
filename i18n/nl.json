@@ -1,9 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Festina90"
+			"Festina90",
+			"Mainframe98"
 		]
 	},
 	"apihelp-query+projectpages-example-simple-1": "Verkrijg de eerste 10 pagina's geassocieeerd met het  WikiProject <kbd>Medicine</kbd> of WikiProject <kbd>Anatomy</kbd>.",
+	"pageassessments-page-namespace": "Paginanaamruimte",
+	"pageassessments-page-title": "Paginanaam",
+	"pageassessments-search": "Zoeken",
+	"pageassessments-timestamp": "Tijdstip",
 	"pageassessments-error-namespace-filter": "Het filteren bij naamruimte heeft ook nood aan de filtering onder project of pagina titel."
 }
