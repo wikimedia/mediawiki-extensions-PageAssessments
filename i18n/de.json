@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Metalhead64"
+			"Metalhead64",
+			"Hwboehm"
 		]
 	},
 	"pageassessments-desc": "Diese Erweiterung dient der Speicherung von Seitenbewertungen in einer Datenbanktabelle mithilfe einer Parserfunktion",
@@ -9,9 +10,11 @@
 	"apihelp-query+pageassessments-summary": "Gibt zugewiesene Projekte und Bewertungen für die angegebenen Seiten zurück.",
 	"apihelp-query+pageassessments-param-limit": "Grenze für die Gesamtanzahl der zurückgegebenen Projekte (gesamt für alle Seiten).",
 	"apihelp-query+pageassessments-param-subprojects": "Gibt auch Bewertungen von Unterprojekten zurück.",
+	"apihelp-query+pageassessments-example-simple": "Ruft Projekt- und Bewertungsdaten für die Seite <kbd>Apfel</kbd> ab.",
 	"apihelp-query+projectpages-description": "Listet alle Seiten auf, die mit einem oder mehreren Projekten verbunden sind.",
 	"apihelp-query+projectpages-summary": "Listet alle Seiten auf, die mit einem oder mehreren Projekten verknüpft sind.",
 	"apihelp-query+projectpages-param-assessments": "Gibt auch Bewertungen für die zurückgegebenen Seiten zurück.",
+	"apihelp-query+projectpages-param-projects": "Die Projekte, für die Seiten aufgelistet werden sollen. Wenn dieser Parameter weggelassen wird, werden alle Projekte einbezogen.",
 	"apihelp-query+projectpages-param-limit": "Die maximale Anzahl der zurückzugebenden Seiten.",
 	"apihelp-query+projectpages-example-simple-1": "Ruft die ersten 10 Seiten ab, die mit den Wikiprojekten <kbd>Medizin</kbd> oder <kbd>Anatomie</kbd> verknüpft sind.",
 	"apihelp-query+projects-description": "Listet alle Projekte auf.",
