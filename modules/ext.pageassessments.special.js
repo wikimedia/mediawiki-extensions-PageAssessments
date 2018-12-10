@@ -1,4 +1,4 @@
-( function ( $, mw, OO ) {
+( function () {
 
 	/**
 	 * Page title autocompletion.
@@ -39,7 +39,7 @@
 			var allProjects = mw.config.get( 'wgPageAssessmentProjects' ),
 				matchingProjects = [];
 			if ( Array.isArray( allProjects ) ) {
-				$.each( allProjects, function ( index, value ) {
+				allProjects.forEach( function ( value ) {
 					if ( value.substring( 0, userInput.length ).toLocaleLowerCase() === userInput.toLocaleLowerCase() ) {
 						matchingProjects.push( value );
 					}
@@ -49,4 +49,4 @@
 		}
 	} );
 
-}( jQuery, mediaWiki, OO ) );
+}() );
