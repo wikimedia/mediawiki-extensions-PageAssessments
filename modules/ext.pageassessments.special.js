@@ -7,7 +7,7 @@
 		fetch: function ( userInput, response, maxRows ) {
 			var apiParams, request,
 				node = this[ 0 ],
-				namespace = OO.ui.infuse( 'pageassessments-namespace' ),
+				namespace = OO.ui.infuse( $( '#pageassessments-namespace' ) ),
 				api = new mw.Api();
 			apiParams = {
 				action: 'opensearch',
