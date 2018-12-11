@@ -36,15 +36,13 @@
 	 */
 	$( 'input[name="project"]' ).suggestions( {
 		fetch: function ( userInput, response, maxRows ) {
-			var allProjects = mw.config.get( 'wgPageAssessmentProjects' ),
-				matchingProjects = [];
-			if ( Array.isArray( allProjects ) ) {
-				allProjects.forEach( function ( value ) {
-					if ( value.substring( 0, userInput.length ).toLocaleLowerCase() === userInput.toLocaleLowerCase() ) {
-						matchingProjects.push( value );
-					}
-				} );
-			}
+			var matchingProjects,
+				allProjects = mw.config.get( 'wgPageAssessmentProjects' ) || [];
+
+			matchingProjects = allProjects.filter( function ( value ) {
+				return value.substring( 0, userInput.length ).toLocaleLowerCase() === userInput.toLocaleLowerCase();
+			} );
+
 			response( matchingProjects.slice( 0, maxRows ) );
 		}
 	} );
