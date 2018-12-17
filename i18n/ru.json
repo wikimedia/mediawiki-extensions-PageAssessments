@@ -2,9 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Alex Great",
-			"Redredsonia"
+			"Redredsonia",
+			"Nk88"
 		]
 	},
 	"apihelp-query+projects-description": "Перечислить все проекты.",
-	"apihelp-query+projects-example-subprojects": "Получить список всех проектов и подпроектов."
+	"apihelp-query+projects-example-subprojects": "Получить список всех проектов и подпроектов.",
+	"pageassessments-project": "Проект",
+	"pageassessments-search": "Найти",
+	"pageassessments-importance": "Значение",
+	"pageassessments-class": "Класс",
+	"pageassessments-timestamp": "Отметка",
+	"pageassessments-total-results": "Всего результатов: $1"
 }
