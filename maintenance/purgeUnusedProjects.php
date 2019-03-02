@@ -67,5 +67,5 @@ class PurgeUnusedProjects extends Maintenance {
 
 }
 
-$maintClass = "PurgeUnusedProjects";
+$maintClass = PurgeUnusedProjects::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
