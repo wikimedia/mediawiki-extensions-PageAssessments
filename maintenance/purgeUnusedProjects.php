@@ -49,6 +49,12 @@ class PurgeUnusedProjects extends Maintenance {
 		// Combine the two lists
 		$usedProjectIds = array_unique( array_merge( $projectIds1, $projectIds2 ) );
 
+		// Protect against lack of projects in some environments - T219935
+		if ( !count( $usedProjectIds ) ) {
+			$this->output( "No projects found.\nDone.\n" );
+			return;
+		}
+
 		if ( $this->hasOption( 'dry-run' ) ) {
 			$finalCount = count( $usedProjectIds );
 		} else {
