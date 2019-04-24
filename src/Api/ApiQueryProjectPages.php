@@ -1,5 +1,11 @@
 <?php
 
+namespace MediaWiki\Extension\PageAssessments\Api;
+
+use ApiBase;
+use ApiQueryGeneratorBase;
+use ApiQuery;
+use Title;
 use MediaWiki\Extension\PageAssessments\PageAssessmentsDAO;
 
 /*

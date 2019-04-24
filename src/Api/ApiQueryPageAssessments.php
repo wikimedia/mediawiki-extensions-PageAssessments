@@ -1,5 +1,11 @@
 <?php
 
+namespace MediaWiki\Extension\PageAssessments\Api;
+
+use ApiBase;
+use ApiQueryBase;
+use ApiQuery;
+
 /*
  * API query module that returns associated projects and assessment data for a given set
  * of pages. (T119997)

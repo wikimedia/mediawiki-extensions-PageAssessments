@@ -15,16 +15,16 @@
 		"MediaWiki": ">= 1.29.0"
 	},
 	"APIListModules": {
-		"projectpages": "ApiQueryProjectPages",
-		"projects": "ApiQueryProjects"
+		"projectpages": "MediaWiki\\Extension\\PageAssessments\\Api\\ApiQueryProjectPages",
+		"projects": "MediaWiki\\Extension\\PageAssessments\\Api\\ApiQueryProjects"
 	},
 	"APIPropModules": {
-		"pageassessments": "ApiQueryPageAssessments"
+		"pageassessments": "MediaWiki\\Extension\\PageAssessments\\Api\\ApiQueryPageAssessments"
 	},
 	"AutoloadClasses": {
-		"ApiQueryPageAssessments": "api/ApiQueryPageAssessments.php",
-		"ApiQueryProjectPages": "api/ApiQueryProjectPages.php",
-		"ApiQueryProjects": "api/ApiQueryProjects.php",
+		"MediaWiki\\Extension\\PageAssessments\\Api\\ApiQueryPageAssessments": "src/Api/ApiQueryPageAssessments.php",
+		"MediaWiki\\Extension\\PageAssessments\\Api\\ApiQueryProjectPages": "src/Api/ApiQueryProjectPages.php",
+		"MediaWiki\\Extension\\PageAssessments\\Api\\ApiQueryProjects": "src/Api/ApiQueryProjects.php",
 		"MediaWiki\\Extension\\PageAssessments\\Hooks": "src/Hooks.php",
 		"MediaWiki\\Extension\\PageAssessments\\NamespaceSelect": "src/NamespaceSelect.php",
 		"MediaWiki\\Extension\\PageAssessments\\PageAssessmentsDAO": "src/PageAssessmentsDAO.php",

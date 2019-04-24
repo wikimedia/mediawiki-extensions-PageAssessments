@@ -1,5 +1,11 @@
 <?php
 
+namespace MediaWiki\Extension\PageAssessments\Api;
+
+use ApiBase;
+use ApiQueryBase;
+use ApiQuery;
+
 /*
  * API module for retrieving all the projects on a wiki
  */
