@@ -6,7 +6,8 @@
 			"Wladek92",
 			"Trial",
 			"Thibaut120094",
-			"Orlodrim"
+			"Orlodrim",
+			"Urhixidur"
 		]
 	},
 	"pageassessments-desc": "Cette extension permet de stocker les évaluations de la page dans une table de base de données à l'aide d'une fonction d'analyse syntaxique.",
@@ -34,7 +35,7 @@
 	"apiwarn-pageassessments-badproject": "Nom de projet non reconnu: $1.",
 	"pageassessments-special": "Évaluations de page",
 	"pageassessments-project": "Projet",
-	"pageassessments-page-namespace": "Espace de nom de la page",
+	"pageassessments-page-namespace": "Espace de noms de la page",
 	"pageassessments-page-title": "Titre de la page",
 	"pageassessments-search": "Rechercher",
 	"pageassessments-importance": "Importance",
