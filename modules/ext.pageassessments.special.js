@@ -3,10 +3,12 @@
 	/**
 	 * Page title autocompletion.
 	 */
+	// eslint-disable-next-line no-jquery/no-global-selector
 	$( 'input[name="page_title"]' ).suggestions( {
 		fetch: function ( userInput, response, maxRows ) {
 			var apiParams, request,
 				node = this[ 0 ],
+				// eslint-disable-next-line no-jquery/no-global-selector
 				namespace = OO.ui.infuse( $( '#pageassessments-namespace' ) ),
 				api = new mw.Api();
 			apiParams = {
@@ -34,6 +36,7 @@
 	/**
 	 * Project name autocompletion.
 	 */
+	// eslint-disable-next-line no-jquery/no-global-selector
 	$( 'input[name="project"]' ).suggestions( {
 		fetch: function ( userInput, response, maxRows ) {
 			var matchingProjects,
