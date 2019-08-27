@@ -232,6 +232,6 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:PageAssessments';
+		return 'https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:PageAssessments';
 	}
 }
