@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"apihelp-query+projects-description": "List opp alle prosjektene.",
+	"apihelp-query+projects-summary": "List opp alle prosjektene.",
+	"apihelp-query+projects-param-subprojects": "Inkluder også underprosjekter.",
+	"apihelp-query+projects-example": "Hent ei liste over alle prosjekter.",
+	"apihelp-query+projects-example-subprojects": "Hent ei liste over alle prosjekter og underprosjekter.",
+	"apiwarn-pageassessments-badproject": "Ukjent prosjektnavn: $1."
+}

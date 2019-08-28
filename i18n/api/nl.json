@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Festina90"
+		]
+	},
+	"apihelp-query+projectpages-example-simple-1": "Verkrijg de eerste 10 pagina's geassocieeerd met het  WikiProject <kbd>Medicine</kbd> of WikiProject <kbd>Anatomy</kbd>."
+}

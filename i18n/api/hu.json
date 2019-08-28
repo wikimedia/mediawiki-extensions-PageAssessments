@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tacsipacsi"
+		]
+	},
+	"apihelp-query+pageassessments-description": "A megadott lapokhoz kapcsolódó műhelyek és értékelések lekérése.",
+	"apihelp-query+pageassessments-summary": "A megadott lapokhoz kapcsolódó műhelyek és értékelések lekérése.",
+	"apihelp-query+pageassessments-param-limit": "A visszaadott műhelyek maximális száma (maximum az összes laphoz).",
+	"apihelp-query+pageassessments-param-subprojects": "Az alműhelyek értékelésének lekérése a főműhelyeké mellett.",
+	"apihelp-query+pageassessments-example-formatversion": "Műhely- és értékelésadatok lekérése az <kbd>Apple</kbd> és <kbd>Pear</kbd> lapokhoz, az új API-eredményformátum használatával.",
+	"apihelp-query+pageassessments-example-simple": "Műhely- és értékelésadatok lekérése az <kbd>Apple</kbd> laphoz.",
+	"apihelp-query+pageassessments-example-subprojects": "Műhely- és értékelésadatok (beleértve az alprojekteket) lekérése az <kbd>Apple</kbd> laphoz.",
+	"apihelp-query+projectpages-description": "Egy vagy több műhelyhez kapcsolódó lapok listázása.",
+	"apihelp-query+projectpages-summary": "Egy vagy több műhelyhez kapcsolódó lapok listázása.",
+	"apihelp-query+projectpages-param-assessments": "Az értékelések visszaadása a lapokkal együtt.",
+	"apihelp-query+projectpages-param-projects": "A listázandó műhely. Ha nincs megadva, az összes műhely be lesz foglalva.",
+	"apihelp-query+projectpages-param-limit": "A lekérdezendő lapok maximális száma.",
+	"apihelp-query+projectpages-example-simple-1": "A <kbd>Medicine</kbd> vagy az <kbd>Anatomy</kbd> műhelyhez kapcsolódó első 10 lap lekérése.",
+	"apihelp-query+projectpages-example-simple-2": "A <kbd>Medicine</kbd> műhelyhez kapcsolódó első 10 lap lekérése az értékelési adatokkal együtt.",
+	"apihelp-query+projectpages-example-generator": "Lapinformációk lekérése a <kbd>Textile Arts</kbd> műhelyhez kapcsolódó első 10 lapról.",
+	"apihelp-query+projects-description": "Az összes műhely listázása.",
+	"apihelp-query+projects-summary": "Az összes műhely listázása.",
+	"apihelp-query+projects-param-subprojects": "Alműhelyek befoglalása.",
+	"apihelp-query+projects-example": "Az összes műhely listázása.",
+	"apihelp-query+projects-example-subprojects": "Az összes műhely és alműhely listázása.",
+	"apiwarn-pageassessments-nogeneratorassessments": "Nem lehet lekérni a lapok értékelését a <kbd>generator=projectpages</kbd> paraméter használatával.",
+	"apiwarn-pageassessments-badproject": "Ismeretlen műhelynév: $1."
+}

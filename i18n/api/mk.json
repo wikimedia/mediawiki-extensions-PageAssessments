@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"apihelp-query+pageassessments-description": "Добивање на поврзаните проекти и оценки за дадените страници.",
+	"apihelp-query+pageassessments-summary": "Добивање на поврзаните проекти и оценки за дадените страници.",
+	"apihelp-query+pageassessments-param-limit": "Граница на вкупниот број на проекти што се даваат (вкупно за сите страници).",
+	"apihelp-query+pageassessments-param-subprojects": "Давај оценки и за потпроекти.",
+	"apihelp-query+pageassessments-example-formatversion": "Добивање на податоци од проектно оценување за страниците <kbd>Јаболко</kbd> и <kbd>Круша</kbd>, користејќи го поновиот формат на исход во приложникот.",
+	"apihelp-query+pageassessments-example-simple": "Добивање на податоци од проектно оценување за страницата <kbd>Јаболко</kbd>.",
+	"apihelp-query+pageassessments-example-subprojects": "Испис на податоци од оценки на проекти (вкл. потпроекти) за страницата <kbd>Apple</kbd>.",
+	"apihelp-query+projectpages-description": "Список на сите страници поврзани со еден или повеќе проекти.",
+	"apihelp-query+projectpages-summary": "Список на сите страници со еден или повеќе проекти.",
+	"apihelp-query+projectpages-param-assessments": "Дај ги и оценките за добиените страници.",
+	"apihelp-query+projectpages-param-projects": "За кои проекти да се наведат страници. Ако параметаров се изостави, тогаш ќе бидат вклучени сите проекти.",
+	"apihelp-query+projectpages-param-limit": "Највеќе страници за прикажување.",
+	"apihelp-query+projectpages-example-simple-1": "Добивање на првите 10 страници поврзани со википроектот <kbd>Медицина</kbd> или википроектот <kbd>Анатомија</kbd>.",
+	"apihelp-query+projectpages-example-simple-2": "Добивање на првите десет страници поврзани со википроектот <kbd>Медицина</kbd>, вклучувајќи ги податоците од оценувањето.",
+	"apihelp-query+projectpages-example-generator": "Добивање на првите десет страници поврзани со википроектот <kbd>Текстилни уметности</kbd>.",
+	"apihelp-query+projects-description": "Наведи ги сите проекти.",
+	"apihelp-query+projects-summary": "Список на сите проекти.",
+	"apihelp-query+projects-param-subprojects": "Вклучи и потпроекти.",
+	"apihelp-query+projects-example": "Дава список на сите проекти.",
+	"apihelp-query+projects-example-subprojects": "Дај список на сите проекти и потпроекти.",
+	"apiwarn-pageassessments-nogeneratorassessments": "Не можев да го добијам исходот од оценката ан страници од <kbd>generator=projectpages</kbd>.",
+	"apiwarn-pageassessments-badproject": "Називот на проектот не е препознаен: $1."
+}

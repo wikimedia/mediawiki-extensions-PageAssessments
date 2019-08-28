@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Elisardojm"
+		]
+	},
+	"apihelp-query+pageassessments-description": "Devolve os proxectos e as avaliacións asociadas para as páxinas indicadas.",
+	"apihelp-query+pageassessments-summary": "Devolve os proxectos e as avaliacións asociadas para as páxinas indicadas.",
+	"apihelp-query+pageassessments-param-limit": "Límite do número total de proxectos devoltos (total para todas as páxinas)",
+	"apihelp-query+pageassessments-param-subprojects": "Devolver tamén avaliacións por subproxectos.",
+	"apihelp-query+pageassessments-example-formatversion": "Obtén os datos do proxecto e de avaliación para as páxinas <kbd>Mazá</kbd> and <kbd>Pera</kbd>, usando o formato da nova API.",
+	"apihelp-query+pageassessments-example-simple": "Obtén o proxecto e os datos de avaliación para a páxina <kbd>Mazá</kbd>.",
+	"apihelp-query+pageassessments-example-subprojects": "Obter os datos do proxecto e de avaliación (incluíndo subproxectos) da páxina <kbd>Apple</kbd>.",
+	"apihelp-query+projectpages-description": "Lista todas as páxinas asociadas con un ou máis proxectos.",
+	"apihelp-query+projectpages-summary": "Lista todas as páxinas asociadas cun ou máis proxectos.",
+	"apihelp-query+projectpages-param-assessments": "Tamén devolve a avaliación das páxinas devoltas.",
+	"apihelp-query+projectpages-param-projects": "Proxectos para os que listar as páxinas. Se non se indica o parámetro, incluiranse tódolos proxectos.",
+	"apihelp-query+projectpages-param-limit": "Número máximo de resultados a devolver.",
+	"apihelp-query+projectpages-example-simple-1": "Obtén as dez primeiras páxinas asociadas ó proxecto wiki <kbd>Medicina</kbd> ou ó proxecto wiki <kbd>Anatomía</kbd>.",
+	"apihelp-query+projectpages-example-simple-2": "Obter as 10 primeiras páxinas asociadas co Wikiproxecto <kbd>Medicina</kbd>, incluíndo os datos de avaliación.",
+	"apihelp-query+projectpages-example-generator": "Obter a información de páxina para as 10 primeiras páxinas asociadas co WikiProxecto <kbd>Textile Arts</kbd>.",
+	"apihelp-query+projects-description": "Listar tódolos proxectos.",
+	"apihelp-query+projects-summary": "Listar tódolos proxectos.",
+	"apihelp-query+projects-param-subprojects": "Incluír tamén os subproxectos.",
+	"apihelp-query+projects-example": "Obter unha lista de tódolos proxectos.",
+	"apihelp-query+projects-example-subprojects": "Obter unha lista de tódolos proxectos e subproxectos.",
+	"apiwarn-pageassessments-nogeneratorassessments": "Non é posible obter resultados de avaliación de páxinas de <kbd>generator=projectpages</kbd>.",
+	"apiwarn-pageassessments-badproject": "Nome de proxecto non recoñecidoː $1."
+}

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"apihelp-query+pageassessments-description": "Tuèrne le pruggette assocaite e le valutazione pe le pàggene indicate.",
+	"apihelp-query+pageassessments-summary": "Tuèrne le pruggette assocaite e le valutazione pe le pàggene indicate.",
+	"apihelp-query+projects-description": "Elenghe tutte le pruggette.",
+	"apihelp-query+projects-summary": "Elenghe tutte le pruggette."
+}
