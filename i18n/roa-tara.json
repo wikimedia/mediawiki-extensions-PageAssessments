@@ -4,6 +4,8 @@
 			"Joetaras"
 		]
 	},
+	"pageassessments-desc": "Sta estenzione jè pe memorizzà le valutaziune d'a pàgene jndr'à 'na tabbelle de database cu l'aijute de 'na funzione analizzatrice",
+	"pageassessments-special": "Valutaziune d'a pàgene",
 	"pageassessments-project": "Proggette",
 	"pageassessments-page-namespace": "Namespace d'a pàgene",
 	"pageassessments-page-title": "Titole d'a vôsce",
@@ -11,5 +13,6 @@
 	"pageassessments-importance": "'Mbortanze",
 	"pageassessments-class": "Classe",
 	"pageassessments-timestamp": "Orarie de stambe",
-	"pageassessments-total-results": "Resultate totale: $1"
+	"pageassessments-total-results": "Resultate totale: $1",
+	"pageassessments-error-namespace-filter": "Stoche a filtre pe namespace ca vole 'nu filtre pure pe pruggette o titole d'a pàgene."
 }
