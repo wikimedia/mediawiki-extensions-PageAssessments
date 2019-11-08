@@ -4,6 +4,8 @@
 			"Jon Harald Søby"
 		]
 	},
+	"pageassessments-desc": "Utvidelsen er for å lagre sidevurderinger i en databasetabell med hjelp av en parserfunksjon",
+	"pageassessments-special": "Sidevurderinger",
 	"pageassessments-project": "Prosjekt",
 	"pageassessments-page-namespace": "Sidenavnerom",
 	"pageassessments-page-title": "Sidetittel",
@@ -11,5 +13,6 @@
 	"pageassessments-importance": "Viktighet",
 	"pageassessments-class": "Klasse",
 	"pageassessments-timestamp": "Tidsstempel",
-	"pageassessments-total-results": "Totalt antall resultater: $1"
+	"pageassessments-total-results": "Totalt antall resultater: $1",
+	"pageassessments-error-namespace-filter": "Filtrering etter navnerom krever også filtrering etter prosjekt eller sidetittel."
 }
