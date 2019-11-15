@@ -330,12 +330,17 @@ class PageAssessmentsDAO implements IDBAccessObject {
 
 	/**
 	 * Function called on parser init
-	 * @param Parser &$parser Parser object
+	 * @param Parser $parser Parser object
 	 * @param string $project Wikiproject name
 	 * @param string $class Class of article
 	 * @param string $importance Importance of article
 	 */
-	public static function cacheAssessment( &$parser, $project = '', $class = '', $importance = '' ) {
+	public static function cacheAssessment(
+		Parser $parser,
+		$project = '',
+		$class = '',
+		$importance = ''
+	) {
 		$parserData = $parser->getOutput()->getExtensionData( 'ext-pageassessment-assessmentdata' );
 		$values = [ $project, $class, $importance ];
 		if ( $parserData == null ) {

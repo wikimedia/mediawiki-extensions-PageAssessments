@@ -36,19 +36,19 @@ class Hooks {
 
 	/**
 	 * Register the parser function hook
-	 * @param Parser &$parser
+	 * @param Parser $parser
 	 */
-	public static function onParserFirstCallInit( Parser &$parser ) {
+	public static function onParserFirstCallInit( Parser $parser ) {
 		$callback = PageAssessmentsDAO::class . '::cacheAssessment';
 		$parser->setFunctionHook( 'assessment', $callback );
 	}
 
 	/**
 	 * Update assessment records after talk page is saved
-	 * @param LinksUpdate &$linksUpdate
+	 * @param LinksUpdate $linksUpdate
 	 * @param mixed|null $ticket
 	 */
-	public static function onLinksUpdateComplete( &$linksUpdate, $ticket = null ) {
+	public static function onLinksUpdateComplete( LinksUpdate $linksUpdate, $ticket = null ) {
 		$assessmentsOnTalkPages = RequestContext::getMain()->getConfig()->get(
 			'PageAssessmentsOnTalkPages'
 		);
@@ -90,8 +90,8 @@ class Hooks {
 
 	/**
 	 * Delete assessment records when page is deleted
-	 * @param WikiPage &$article
-	 * @param User|null &$user
+	 * @param WikiPage $article
+	 * @param User|null $user
 	 * @param string $reason
 	 * @param int $id
 	 * @param Content|null $content
@@ -99,8 +99,8 @@ class Hooks {
 	 * @param int|null $archivedRevisionCount
 	 */
 	public static function onArticleDeleteComplete(
-		&$article,
-		&$user,
+		$article,
+		$user,
 		$reason,
 		$id,
 		$content = null,
