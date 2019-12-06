@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Diyapazon"
+			"Diyapazon",
+			"BaRaN6161 TURK"
 		]
 	},
+	"pageassessments-desc": "Bu uzantı, sayfa değerlendirmelerini bir ayrıştırıcı işlevinin yardımıyla bir veritabanı tablosunda depolamak içindir",
 	"pageassessments-special": "Sayfa değerlendirmeleri",
 	"pageassessments-project": "Proje",
 	"pageassessments-page-namespace": "Sayfa ad alanı",
@@ -11,5 +13,7 @@
 	"pageassessments-search": "Ara",
 	"pageassessments-importance": "Önem",
 	"pageassessments-class": "Sınıf",
-	"pageassessments-timestamp": "Zaman damgası"
+	"pageassessments-timestamp": "Zaman damgası",
+	"pageassessments-total-results": "Toplam sonuç: $1",
+	"pageassessments-error-namespace-filter": "Ad alanına göre filtreleme ayrıca proje veya sayfa başlığına göre filtreleme gerektirir."
 }
