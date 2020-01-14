@@ -3,8 +3,8 @@
 namespace MediaWiki\Extension\PageAssessments\Api;
 
 use ApiBase;
-use ApiQueryBase;
 use ApiQuery;
+use ApiQueryBase;
 
 /*
  * API module for retrieving all the projects on a wiki

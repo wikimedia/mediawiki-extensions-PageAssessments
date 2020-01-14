@@ -3,10 +3,10 @@
 namespace MediaWiki\Extension\PageAssessments\Api;
 
 use ApiBase;
-use ApiQueryGeneratorBase;
 use ApiQuery;
-use Title;
+use ApiQueryGeneratorBase;
 use MediaWiki\Extension\PageAssessments\PageAssessmentsDAO;
+use Title;
 
 /*
  * API module for retrieving all the pages associated with a project, for example,
