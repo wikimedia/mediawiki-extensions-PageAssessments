@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bugoslav"
+		]
+	},
+	"pageassessments-desc": "Ovo proširenje služi pohrani ocjenjivanja stranica u tablicu baze podataka uz pomoć parserske funkcije",
+	"pageassessments-special": "Ocjenjivanja stranica",
+	"pageassessments-project": "Projekt",
+	"pageassessments-page-namespace": "Imenski prostor stranice",
+	"pageassessments-page-title": "Naslov stranice",
+	"pageassessments-search": "Traži",
+	"pageassessments-importance": "Važnost",
+	"pageassessments-class": "Razred",
+	"pageassessments-timestamp": "Vremenski pečat",
+	"pageassessments-total-results": "Ukupno rezultata: $1",
+	"pageassessments-error-namespace-filter": "Filtriranje po imenskom prostoru koje također zahtijeva filtriranja po projektu ili naslovu stranice"
+}
