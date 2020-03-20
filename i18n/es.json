@@ -13,7 +13,7 @@
 	"pageassessments-search": "Buscar",
 	"pageassessments-importance": "Importancia",
 	"pageassessments-class": "Clase",
-	"pageassessments-timestamp": "Marca de tiempo",
+	"pageassessments-timestamp": "Cronomarcador",
 	"pageassessments-total-results": "Número total de resultados: $1",
 	"pageassessments-error-namespace-filter": "Filtrar por espacio de nombres también requiere filtrar por proyecto o título de página."
 }
