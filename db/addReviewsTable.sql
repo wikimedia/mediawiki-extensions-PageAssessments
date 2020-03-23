@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS /*_*/page_assessments (
 	PRIMARY KEY (pa_page_id, pa_project_id)
 )/*$wgDBTableOptions*/;
 
-CREATE INDEX /*i*/pa_project ON /*_*/ page_assessments (pa_project_id, pa_page_id);
+CREATE INDEX /*i*/pa_project ON /*_*/page_assessments (pa_project_id, pa_page_id);

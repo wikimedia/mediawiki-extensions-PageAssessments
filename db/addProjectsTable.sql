@@ -15,4 +15,4 @@ CREATE TABLE IF NOT EXISTS /*_*/page_assessments_projects (
   PRIMARY KEY (pap_project_id)
 )/*$wgDBTableOptions*/;
 
-CREATE UNIQUE INDEX /*i*/pap_project_title ON /*_*/ page_assessments_projects (pap_project_title);
+CREATE UNIQUE INDEX /*i*/pap_project_title ON /*_*/page_assessments_projects (pap_project_title);
