@@ -20,5 +20,5 @@
 	"pageassessments-class": "Classe",
 	"pageassessments-timestamp": "Horodatage",
 	"pageassessments-total-results": "Total des résultats : $1",
-	"pageassessments-error-namespace-filter": "Le filtrage par espace de noms nécessite aussi un filtrage par projet ou titre de page."
+	"pageassessments-error-namespace-filter": "Veuillez saisir un nom de projet ou un titre de page."
 }
