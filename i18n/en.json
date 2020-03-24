@@ -15,5 +15,5 @@
 	"pageassessments-class": "Class",
 	"pageassessments-timestamp": "Timestamp",
 	"pageassessments-total-results": "Total results: $1",
-	"pageassessments-error-namespace-filter": "Filtering by namespace also requires filtering by project or page title."
+	"pageassessments-error-namespace-filter": "Please enter a project name or page title."
 }

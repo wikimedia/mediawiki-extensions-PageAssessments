@@ -47,7 +47,6 @@ class NamespaceSelect extends HTMLSelectNamespace {
 			'value' => $value,
 			'name' => $this->mName,
 			'id' => $this->mID,
-			'includeAllValue' => $this->mAllValue,
 			'exclude' => $excludedNsIds,
 		] );
 		return $widget;
