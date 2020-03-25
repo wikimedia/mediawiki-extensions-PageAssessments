@@ -15,5 +15,5 @@
 	"pageassessments-class": "Клас",
 	"pageassessments-timestamp": "Часова мітка",
 	"pageassessments-total-results": "Загальна кількість результатів: $1",
-	"pageassessments-error-namespace-filter": "Фільтрування за простором назв також вимагає фільтрування за проектом чи назвою сторінки."
+	"pageassessments-error-namespace-filter": "Будь ласка, введіть назву проекту чи назву сторінки."
 }

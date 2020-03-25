@@ -15,5 +15,5 @@
 	"pageassessments-class": "Sınıf",
 	"pageassessments-timestamp": "Zaman damgası",
 	"pageassessments-total-results": "Toplam sonuç: $1",
-	"pageassessments-error-namespace-filter": "Ad alanına göre filtreleme ayrıca proje veya sayfa başlığına göre filtreleme gerektirir."
+	"pageassessments-error-namespace-filter": "Lütfen bir proje adı veya sayfa başlığı girin."
 }

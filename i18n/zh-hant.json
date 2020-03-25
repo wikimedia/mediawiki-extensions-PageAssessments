@@ -17,5 +17,5 @@
 	"pageassessments-class": "類別",
 	"pageassessments-timestamp": "時間戳記",
 	"pageassessments-total-results": "結果總數：$1",
-	"pageassessments-error-namespace-filter": "按命名空間作篩選，會一併需要按專案或頁面標題作篩選。"
+	"pageassessments-error-namespace-filter": "請輸入專案名稱或頁面標題。"
 }
