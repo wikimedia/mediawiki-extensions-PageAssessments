@@ -136,7 +136,7 @@ class SpecialPage extends QueryPage {
 			. $this->getTableHeader( 'page_title', 'page-title' )
 			. Html::element( 'th', [], wfMessage( 'pageassessments-importance' )->text() )
 			. Html::element( 'th', [], wfMessage( 'pageassessments-class' )->text() )
-			. $this->getTableHeader( 'timestamp', 'timestamp' )
+			. Html::element( 'th', [], wfMessage( 'pageassessments-timestamp' )->text() )
 			. Html::closeElement( 'tr' )
 			. Html::closeElement( 'thead' )
 			. Html::openElement( 'tbody' );
@@ -257,7 +257,7 @@ class SpecialPage extends QueryPage {
 	 * @return string[]
 	 */
 	public function getOrderFields() {
-		$permitted = [ 'project', 'page_title', 'timestamp' ];
+		$permitted = [ 'project', 'page_title' ];
 		$requested = $this->getRequest()->getVal( 'sort' );
 		if ( in_array( $requested, $permitted ) ) {
 			return [ $requested ];
