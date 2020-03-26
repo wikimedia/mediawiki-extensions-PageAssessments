@@ -16,5 +16,5 @@
 	"pageassessments-class": "מחלקה",
 	"pageassessments-timestamp": "חותם־זמן",
 	"pageassessments-total-results": "סך התוצאות: $1",
-	"pageassessments-error-namespace-filter": "סינון לפי מרחב שם דורש גם סינון לפי מיזם או כותרת דף."
+	"pageassessments-error-namespace-filter": "נא להזין שם מיזם או כותרת דף."
 }
