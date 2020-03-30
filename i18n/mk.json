@@ -14,5 +14,5 @@
 	"pageassessments-class": "Класа",
 	"pageassessments-timestamp": "Време и датум",
 	"pageassessments-total-results": "Вкупен исход: $1",
-	"pageassessments-error-namespace-filter": "Филтрирањето по именски простор воедно бара и филтрирање по проект или наслов на страница."
+	"pageassessments-error-namespace-filter": "Внесете име на проект или наслов на страница."
 }
