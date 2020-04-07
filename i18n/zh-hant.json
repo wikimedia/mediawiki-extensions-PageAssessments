@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liuxinyu970226",
-			"烈羽",
 			"Corainn",
-			"Kly"
+			"Kly",
+			"Liuxinyu970226",
+			"烈羽"
 		]
 	},
 	"pageassessments-desc": "此擴充用於在資料庫表格裡，以解析函式的協助之下來儲存頁面評比",

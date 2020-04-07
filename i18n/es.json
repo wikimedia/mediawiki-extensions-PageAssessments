@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Macofe",
 			"Dgstranz",
-			"Fitoschido"
+			"Fitoschido",
+			"Macofe"
 		]
 	},
 	"pageassessments-desc": "Añade una función de análisis para almacenar evaluaciones de páginas",
