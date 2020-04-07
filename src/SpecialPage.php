@@ -157,8 +157,7 @@ class SpecialPage extends QueryPage {
 	 * @return string HTML table header.
 	 */
 	protected function getTableHeader( $field, $messageKey ) {
-		// message keys: pageassessments-project, pageassessments-page-title,
-		// pageassessments-timestamp
+		// message keys: pageassessments-project, pageassessments-page-title
 		$text = wfMessage( 'pageassessments-' . $messageKey )->text();
 
 		// If this special page is being included, don't enable header sorting.
