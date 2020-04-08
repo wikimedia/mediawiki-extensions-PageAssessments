@@ -237,8 +237,7 @@ class SpecialPage extends QueryPage {
 	 */
 	public function execute( $parameters ) {
 		// Set up.
-		$out = $this->getOutput();
-		$out->setPageTitle( $this->getDescription() );
+		$this->setHeaders();
 		$this->addHelpLink( 'Extension:PageAssessments' );
 
 		// Output form.
@@ -247,8 +246,19 @@ class SpecialPage extends QueryPage {
 			$form->show();
 		}
 
-		// Leave the output of the search results to QueryPage.
-		parent::execute( $parameters );
+		$request = $this->getRequest();
+		$ns = $request->getVal( 'namespace' );
+		$project = $request->getVal( 'project' );
+		$pageTitle = $request->getVal( 'page_title' );
+
+		// Require namespace and either project name or page title to execute query.
+		// Note that this also prevents execution on initial page load.
+		// See T168599 and discussion in T248280.
+		if ( ( strlen( $ns ) && $ns !== 'all' ) &&
+			( strlen( $project ) || strlen( $pageTitle ) )
+		) {
+			parent::execute( $parameters );
+		}
 	}
 
 	/**
