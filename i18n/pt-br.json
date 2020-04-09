@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dr03ramos",
 			"Felipe L. Ewald"
 		]
 	},
@@ -14,5 +15,5 @@
 	"pageassessments-class": "Classe",
 	"pageassessments-timestamp": "Data e hora",
 	"pageassessments-total-results": "Resultados totais: $1",
-	"pageassessments-error-namespace-filter": "O filtro por espaço nominal também requer filtragem por título de projeto ou página."
+	"pageassessments-error-namespace-filter": "Por favor digite um nome de projeto ou título de página."
 }
