@@ -3,6 +3,7 @@
 		"authors": [
 			"Festina90",
 			"Mainframe98",
+			"PonkoSasuke",
 			"Romaine"
 		]
 	},
@@ -13,5 +14,5 @@
 	"pageassessments-class": "Klasse",
 	"pageassessments-timestamp": "Tijdstip",
 	"pageassessments-total-results": "Totaal van resultaten: $1",
-	"pageassessments-error-namespace-filter": "Het filteren bij naamruimte heeft ook nood aan de filtering onder project of pagina titel."
+	"pageassessments-error-namespace-filter": "Geef een projectnaam of paginatitel in."
 }
