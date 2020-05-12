@@ -57,8 +57,12 @@
 		"PageAssessments": "MediaWiki\\Extension\\PageAssessments\\SpecialPage"
 	},
 	"config": {
-		"PageAssessmentsOnTalkPages": true,
-		"PageAssessmentsSubprojects": false
+		"PageAssessmentsOnTalkPages": {
+			"value": true
+		},
+		"PageAssessmentsSubprojects": {
+			"value": false
+		}
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }
