@@ -2,11 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Alex Great",
+			"Diman Russkov",
 			"Nk88",
 			"Redredsonia"
 		]
 	},
+	"pageassessments-desc": "Это расширение предназначено для хранения оценок страниц в таблице базы данных с помощью функции парсера.",
 	"pageassessments-project": "Проект",
+	"pageassessments-page-namespace": "Пространство имён страницы",
+	"pageassessments-page-title": "Заголовок страницы",
 	"pageassessments-search": "Найти",
 	"pageassessments-importance": "Значение",
 	"pageassessments-class": "Класс",
