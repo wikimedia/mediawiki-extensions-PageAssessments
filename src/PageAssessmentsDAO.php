@@ -147,7 +147,8 @@ class PageAssessmentsDAO implements IDBAccessObject {
 				$projectName = $dbr->selectField(
 					'page_assessments_projects',
 					'pap_project_title',
-					[ 'pap_project_id' => $projectId ]
+					[ 'pap_project_id' => $projectId ],
+					__METHOD__
 				);
 				// Store the project name in instance cache
 				self::$projectNames[$projectId] = $projectName;
@@ -183,7 +184,8 @@ class PageAssessmentsDAO implements IDBAccessObject {
 		return $dbr->selectField(
 			'page_assessments_projects',
 			'pap_project_id',
-			[ 'pap_project_title' => $project ]
+			[ 'pap_project_title' => $project ],
+			__METHOD__
 		);
 	}
 
@@ -242,7 +244,8 @@ class PageAssessmentsDAO implements IDBAccessObject {
 		$record = $dbr->select(
 			'page_assessments',
 			[ 'pa_class', 'pa_importance', 'pa_project_id', 'pa_page_id' ],
-			$conds
+			$conds,
+			__METHOD__
 		);
 		foreach ( $record as $row ) {
 			if ( $row->pa_importance == $values['pa_importance'] &&

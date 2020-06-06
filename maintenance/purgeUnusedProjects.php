@@ -27,12 +27,12 @@ class PurgeUnusedProjects extends Maintenance {
 		$dbw = $this->getDB( DB_MASTER );
 		$dbr = $this->getDB( DB_REPLICA );
 		// Count all the projects
-		$initialCount = $dbr->selectField( 'page_assessments_projects', 'COUNT(*)' );
+		$initialCount = $dbr->selectField( 'page_assessments_projects', 'COUNT(*)', [], __METHOD__ );
 		$this->output( "Projects before purge: $initialCount\n" );
 
 		// Build a list of all the projects that are parents of other projects
 		$projectIds1 = [];
-		$res = $dbr->select( 'page_assessments_projects', 'DISTINCT( pap_parent_id )' );
+		$res = $dbr->select( 'page_assessments_projects', 'DISTINCT( pap_parent_id )', [], __METHOD__ );
 		foreach ( $res as $row ) {
 			if ( $row->pap_parent_id ) {
 				$projectIds1[] = $row->pap_parent_id;
@@ -43,7 +43,7 @@ class PurgeUnusedProjects extends Maintenance {
 
 		// Build a list of all the projects that are used in assessments
 		$projectIds2 = [];
-		$res = $dbr->select( 'page_assessments', 'DISTINCT( pa_project_id )' );
+		$res = $dbr->select( 'page_assessments', 'DISTINCT( pa_project_id )', [], __METHOD__ );
 		foreach ( $res as $row ) {
 			if ( $row->pa_project_id ) {
 				$projectIds2[] = $row->pa_project_id;
@@ -70,7 +70,7 @@ class PurgeUnusedProjects extends Maintenance {
 			$this->output( "Done.\n" );
 			$lbFactory->waitForReplication();
 			// Recount all the projects
-			$finalCount = $dbr->selectField( 'page_assessments_projects', 'COUNT(*)' );
+			$finalCount = $dbr->selectField( 'page_assessments_projects', 'COUNT(*)', [], __METHOD__ );
 		}
 		$this->output( "Projects after purge: $finalCount\n" );
 	}
