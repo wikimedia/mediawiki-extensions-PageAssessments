@@ -14,5 +14,5 @@
 	"pageassessments-class": "Klasse",
 	"pageassessments-timestamp": "Tidsstempel",
 	"pageassessments-total-results": "Totalt antall resultater: $1",
-	"pageassessments-error-namespace-filter": "Filtrering etter navnerom krever også filtrering etter prosjekt eller sidetittel."
+	"pageassessments-error-namespace-filter": "skriv inn et prosjektnavn eller en sidetittel."
 }
