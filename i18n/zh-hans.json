@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Liuxinyu970226",
-			"Shizhao"
+			"Shizhao",
+			"VulpesVulpes825"
 		]
 	},
 	"pageassessments-desc": "此扩展用于在数据库表单中，在解析器函数的帮助下存储页面评价",
@@ -15,5 +16,5 @@
 	"pageassessments-class": "等级",
 	"pageassessments-timestamp": "时间戳",
 	"pageassessments-total-results": "结果总数：$1",
-	"pageassessments-error-namespace-filter": "按名字空间过滤时同样需要按项目或页面标题过滤。"
+	"pageassessments-error-namespace-filter": "请输入专题名称或页面标题"
 }
