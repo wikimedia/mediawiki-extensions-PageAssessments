@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Hwboehm",
-			"Metalhead64"
+			"Metalhead64",
+			"Umherirrender"
 		]
 	},
 	"pageassessments-desc": "Diese Erweiterung dient der Speicherung von Seitenbewertungen in einer Datenbanktabelle mithilfe einer Parserfunktion",
@@ -15,5 +16,5 @@
 	"pageassessments-class": "Klasse",
 	"pageassessments-timestamp": "Zeitstempel",
 	"pageassessments-total-results": "Ergebnisse insgesamt: $1",
-	"pageassessments-error-namespace-filter": "Eine Filterung nach Namensraum erfordert auch eine Filterung nach Projekt oder Seitentitel."
+	"pageassessments-error-namespace-filter": "Bitte einen Projekt-Namen oder Seiten-Titel eingeben."
 }
