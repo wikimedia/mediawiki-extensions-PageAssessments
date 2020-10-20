@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Andriy.v",
 			"Piramidion",
 			"Ата"
 		]
 	},
 	"pageassessments-desc": "Це розширення призначене для зберігання оцінок сторінок у таблиці бази даних з допомогою парсерної функції",
 	"pageassessments-special": "Оцінювання сторінок",
-	"pageassessments-project": "Проект",
+	"pageassessments-project": "Проєкт",
 	"pageassessments-page-namespace": "Простір назв сторінки",
 	"pageassessments-page-title": "Назва сторінки",
 	"pageassessments-search": "Пошук",

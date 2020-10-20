@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Andriy.v",
 			"Piramidion",
 			"Ата"
 		]
@@ -9,9 +10,9 @@
 	"apihelp-query+pageassessments-summary": "Видати відповідні проекти та оцінки для поданих сторінок.",
 	"apihelp-query+pageassessments-param-limit": "Обмеження загальної кількості виведених проектів (загалом для всіх сторінок).",
 	"apihelp-query+pageassessments-param-subprojects": "Також вивести оцінки за підпроектами.",
-	"apihelp-query+pageassessments-example-formatversion": "Отримати дані про проект та оцінку для сторінок <kbd>Apple</kbd> та <kbd>Pear</kbd>, використовуючи новіший формат результатів API.",
-	"apihelp-query+pageassessments-example-simple": "Отримати дані про проект та оцінку для сторінки <kbd>Apple</kbd>.",
-	"apihelp-query+pageassessments-example-subprojects": "Отримати дані про проект і оцінки (включно з підпроектами) для сторінки <kbd>Apple</kbd>.",
+	"apihelp-query+pageassessments-example-formatversion": "Отримати дані про проєкт та оцінку для сторінок <kbd>Apple</kbd> та <kbd>Pear</kbd>, використовуючи новіший формат результатів API.",
+	"apihelp-query+pageassessments-example-simple": "Отримати дані про проєкт та оцінку для сторінки <kbd>Apple</kbd>.",
+	"apihelp-query+pageassessments-example-subprojects": "Отримати дані про проєкт і оцінки (включно з підпроєктами) для сторінки <kbd>Apple</kbd>.",
 	"apihelp-query+projectpages-description": "Вивести список усіх сторінок, пов'язаних з одним чи більше проектами.",
 	"apihelp-query+projectpages-summary": "Вивести список усіх сторінок, пов'язаних з одним чи більше проектами.",
 	"apihelp-query+projectpages-param-assessments": "Також вивести оцінки для виведених сторінок.",
