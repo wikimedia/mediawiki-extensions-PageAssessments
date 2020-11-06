@@ -14,5 +14,5 @@
 	"pageassessments-class": "Classe",
 	"pageassessments-timestamp": "Data e hora",
 	"pageassessments-total-results": "Número total de resultados: $1",
-	"pageassessments-error-namespace-filter": "A filtragem por espaço nominal também requer filtragem por projeto ou título de página."
+	"pageassessments-error-namespace-filter": "Introduza um nome de projeto ou um título de página, por favor."
 }
