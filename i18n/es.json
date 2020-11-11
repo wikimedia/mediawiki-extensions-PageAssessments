@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"ArenaL5",
 			"Dgstranz",
 			"Fitoschido",
 			"Macofe"
@@ -15,5 +16,5 @@
 	"pageassessments-class": "Clase",
 	"pageassessments-timestamp": "Cronomarcador",
 	"pageassessments-total-results": "Número total de resultados: $1",
-	"pageassessments-error-namespace-filter": "Filtrar por espacio de nombres también requiere filtrar por proyecto o título de página."
+	"pageassessments-error-namespace-filter": "Por favor, introduzca un nombre de proyecto o título de página."
 }
