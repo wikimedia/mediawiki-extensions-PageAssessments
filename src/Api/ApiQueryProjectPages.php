@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\PageAssessments\Api;
 
 use ApiBase;
+use ApiPageSet;
 use ApiQuery;
 use ApiQueryGeneratorBase;
 use MediaWiki\Extension\PageAssessments\PageAssessmentsDAO;
@@ -20,22 +21,30 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	 */
 	private $projectIds = [];
 
+	/** @inheritDoc */
 	public function __construct( ApiQuery $query, $moduleName ) {
 		// The prefix pp is already used by the pageprops module, so using wpp instead.
 		parent::__construct( $query, $moduleName, 'wpp' );
 	}
 
-	// for a generator module, you can either execute it on its own...
+	/**
+	 * Evaluate the parameters, perform the requested query, and set up the result
+	 */
 	public function execute() {
 		$this->run();
 	}
 
-	// ... or from the results of another query
+	/**
+	 * Evaluate the parameters, perform the requested query, and set up the result for generator mode
+	 * @param ApiPageSet $resultPageSet
+	 */
 	public function executeGenerator( $resultPageSet ) {
 		$this->run( $resultPageSet );
 	}
 
-	// this is what actually does the (further) querying/generation of result set
+	/**
+	 * @param ApiPageSet|null $resultPageSet
+	 */
 	private function run( $resultPageSet = null ) {
 		$params = $this->extractRequestParams();
 
@@ -99,6 +108,10 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 		}
 	}
 
+	/**
+	 * @param array $params
+	 * @param ApiPageSet|null $resultPageSet
+	 */
 	private function buildDbQuery( array $params, $resultPageSet ) {
 		$this->addTables( [ 'page', 'page_assessments' ] );
 		$this->addFields( [
@@ -164,6 +177,9 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 		}
 	}
 
+	/**
+	 * @param string $continueParam
+	 */
 	private function handleQueryContinuation( $continueParam ) {
 		$continues = explode( '|', $continueParam );
 		$this->dieContinueUsageIf( count( $continues ) !== 2 );
@@ -178,6 +194,10 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 			"(pa_project_id = $continueProject AND pa_page_id >= $continuePage)" );
 	}
 
+	/**
+	 * @param \stdClass $row
+	 * @return array
+	 */
 	private function generateResultVals( $row ) {
 		$title = Title::makeTitle( $row->namespace, $row->title );
 
@@ -197,6 +217,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 		return $vals;
 	}
 
+	/** @inheritDoc */
 	public function getAllowedParams() {
 		return [
 			'assessments' => [
@@ -220,6 +241,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 		];
 	}
 
+	/** @inheritDoc */
 	public function getExamplesMessages() {
 		return [
 			'action=query&list=projectpages&wppprojects=Medicine|Anatomy'
@@ -231,6 +253,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 		];
 	}
 
+	/** @inheritDoc */
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:PageAssessments';
 	}

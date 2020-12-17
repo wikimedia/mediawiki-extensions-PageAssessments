@@ -11,6 +11,7 @@ use ApiQueryBase;
  */
 class ApiQueryProjects extends ApiQueryBase {
 
+	/** @inheritDoc */
 	public function __construct( ApiQuery $query, $moduleName ) {
 		parent::__construct( $query, $moduleName, 'pj' );
 	}
@@ -54,6 +55,7 @@ class ApiQueryProjects extends ApiQueryBase {
 		$result->addValue( 'query', 'projects', $projects );
 	}
 
+	/** @inheritDoc */
 	public function getAllowedParams() {
 		global $wgPageAssessmentsSubprojects;
 
@@ -67,10 +69,7 @@ class ApiQueryProjects extends ApiQueryBase {
 		return $allowedParams;
 	}
 
-	/**
-	 * Return usage examples for this module
-	 * @return array
-	 */
+	/** @inheritDoc */
 	public function getExamplesMessages() {
 		global $wgPageAssessmentsSubprojects;
 
@@ -84,6 +83,7 @@ class ApiQueryProjects extends ApiQueryBase {
 		return $exampleMessages;
 	}
 
+	/** @inheritDoc */
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:PageAssessments';
 	}

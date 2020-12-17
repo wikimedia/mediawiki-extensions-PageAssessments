@@ -202,8 +202,8 @@ class SpecialPage extends QueryPage {
 	 * result data. You should be able to grab SQL results off of it.
 	 * If the function returns false, the line output will be skipped.
 	 * @param Skin $skin The current skin
-	 * @param object $result Result row
-	 * @return string|bool String or false to skip
+	 * @param \stdClass $result Result row
+	 * @return string
 	 */
 	public function formatResult( $skin, $result ) {
 		$renderer = $this->getLinkRenderer();
@@ -223,10 +223,10 @@ class SpecialPage extends QueryPage {
 
 		// HTML table row.
 		return Html::rawElement( 'tr', [],
-			Html::rawElement( 'td', [], $result->project ) .
+			Html::element( 'td', [], $result->project ) .
 			Html::rawElement( 'td', [], $pageLink ) .
-			Html::rawElement( 'td', [], $result->importance ) .
-			Html::rawElement( 'td', [], $result->class ) .
+			Html::element( 'td', [], $result->importance ) .
+			Html::element( 'td', [], $result->class ) .
 			Html::rawElement( 'td', [], $timestampLink )
 		);
 	}

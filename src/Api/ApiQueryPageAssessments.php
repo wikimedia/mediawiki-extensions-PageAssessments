@@ -12,10 +12,14 @@ use ApiQueryBase;
  */
 class ApiQueryPageAssessments extends ApiQueryBase {
 
+	/** @inheritDoc */
 	public function __construct( ApiQuery $query, $moduleName ) {
 		parent::__construct( $query, $moduleName, 'pa' );
 	}
 
+	/**
+	 * Evaluate the parameters, perform the requested query, and set up the result
+	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
 		$pages = $this->getPageSet()->getGoodTitles();
@@ -70,6 +74,10 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		}
 	}
 
+	/**
+	 * @param array $pages
+	 * @param array $params
+	 */
 	private function buildDbQuery( array $pages, array $params ) {
 		global $wgPageAssessmentsSubprojects;
 
@@ -110,6 +118,9 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		}
 	}
 
+	/**
+	 * @param string $continueParam
+	 */
 	private function handleQueryContinuation( $continueParam ) {
 		$continues = explode( '|', $continueParam );
 		$this->dieContinueUsageIf( count( $continues ) !== 2 );
@@ -124,6 +135,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 			"(pa_page_id = $continuePage AND pa_project_id >= $continueProject)" );
 	}
 
+	/** @inheritDoc */
 	public function getAllowedParams() {
 		global $wgPageAssessmentsSubprojects;
 
@@ -146,6 +158,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		return $allowedParams;
 	}
 
+	/** @inheritDoc */
 	public function getExamplesMessages() {
 		global $wgPageAssessmentsSubprojects;
 
@@ -162,6 +175,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		return $exampleMessages;
 	}
 
+	/** @inheritDoc */
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:PageAssessments';
 	}
