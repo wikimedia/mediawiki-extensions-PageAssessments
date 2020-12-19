@@ -134,9 +134,9 @@ class SpecialPage extends QueryPage {
 			. Html::openElement( 'tr' )
 			. $this->getTableHeader( 'project', 'project' )
 			. $this->getTableHeader( 'page_title', 'page-title' )
-			. Html::element( 'th', [], wfMessage( 'pageassessments-importance' )->text() )
-			. Html::element( 'th', [], wfMessage( 'pageassessments-class' )->text() )
-			. Html::element( 'th', [], wfMessage( 'pageassessments-timestamp' )->text() )
+			. Html::element( 'th', [], $this->msg( 'pageassessments-importance' )->text() )
+			. Html::element( 'th', [], $this->msg( 'pageassessments-class' )->text() )
+			. Html::element( 'th', [], $this->msg( 'pageassessments-timestamp' )->text() )
 			. Html::closeElement( 'tr' )
 			. Html::closeElement( 'thead' )
 			. Html::openElement( 'tbody' );
@@ -158,7 +158,7 @@ class SpecialPage extends QueryPage {
 	 */
 	protected function getTableHeader( $field, $messageKey ) {
 		// message keys: pageassessments-project, pageassessments-page-title
-		$text = wfMessage( 'pageassessments-' . $messageKey )->text();
+		$text = $this->msg( 'pageassessments-' . $messageKey )->text();
 
 		// If this special page is being included, don't enable header sorting.
 		if ( $this->including() ) {
