@@ -326,7 +326,7 @@ class SpecialPage extends QueryPage {
 		$form = HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() );
 		$form->setMethod( 'get' );
 		$form->setSubmitTextMsg( 'pageassessments-search' );
-		$form->setSubmitCallback( function ( array $data, HTMLForm $form ) {
+		$form->setSubmitCallback( static function ( array $data, HTMLForm $form ) {
 			// Filtering only by namespace can be slow, disallow it:
 			// https://phabricator.wikimedia.org/T168599
 			if ( $data['namespace'] !== null
