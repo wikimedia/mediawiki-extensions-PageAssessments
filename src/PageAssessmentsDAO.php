@@ -196,7 +196,7 @@ class PageAssessmentsDAO implements IDBAccessObject {
 	 * @return int Insert Id for new project
 	 */
 	public static function insertProject( $project, $parentId = null ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$values = [
 			'pap_project_title' => $project,
 			'pap_project_id' => $dbw->nextSequenceValue( 'pap_project_id_seq' )
@@ -256,7 +256,7 @@ class PageAssessmentsDAO implements IDBAccessObject {
 			}
 		}
 		// Make updates if there are changes
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$dbw->update( 'page_assessments', $values, $conds, __METHOD__ );
 		return true;
 	}
@@ -267,7 +267,7 @@ class PageAssessmentsDAO implements IDBAccessObject {
 	 * @return bool true
 	 */
 	public static function insertRecord( $values ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		// Use IGNORE in case 2 records for the same project are added at once.
 		// This normally shouldn't happen, but is possible. (See T152080)
 		$dbw->insert( 'page_assessments', $values, __METHOD__, [ 'IGNORE' ] );
@@ -278,7 +278,7 @@ class PageAssessmentsDAO implements IDBAccessObject {
 	 * Get all projects associated with a given page (as project IDs)
 	 * @param int $pageId Page ID
 	 * @param int $flags IDBAccessObject::READ_* constant. This can be used to
-	 *     force reading from the master database. See docs at IDBAccessObject.php.
+	 *     force reading from the primary database. See docs at IDBAccessObject.php.
 	 * @return array $results All projects associated with given page
 	 */
 	public static function getAllProjects( $pageId, $flags = self::READ_NORMAL ) {
@@ -306,7 +306,7 @@ class PageAssessmentsDAO implements IDBAccessObject {
 	 * @return bool true
 	 */
 	public static function deleteRecord( $values ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$conds = [
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project_id' => $values['pa_project_id']
@@ -323,7 +323,7 @@ class PageAssessmentsDAO implements IDBAccessObject {
 	 * @return bool true
 	 */
 	public static function deleteRecordsForPage( $id ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$conds = [
 			'pa_page_id' => $id,
 		];
