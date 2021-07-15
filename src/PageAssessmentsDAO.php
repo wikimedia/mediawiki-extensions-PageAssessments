@@ -204,7 +204,10 @@ class PageAssessmentsDAO implements IDBAccessObject {
 		if ( $parentId ) {
 			$values[ 'pap_parent_id' ] = (int)$parentId;
 		}
-		$dbw->insert( 'page_assessments_projects', $values, __METHOD__ );
+		// Use IGNORE in case two projects with the same name are added at once.
+		// This normally shouldn't happen, but is possible perhaps from clicking
+		// 'Publish changes' twice in very quick succession. (See T286671)
+		$dbw->insert( 'page_assessments_projects', $values, __METHOD__, [ 'IGNORE' ] );
 		$id = $dbw->insertId();
 		return $id;
 	}
