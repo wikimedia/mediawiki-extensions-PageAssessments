@@ -14,7 +14,7 @@ class PageAssessmentsDAOTest extends MediaWikiTestCase {
 	/**
 	 * Setup for tests
 	 */
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->tablesUsed = [ 'page_assessments' ];
 	}
