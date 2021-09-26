@@ -22,8 +22,8 @@
 namespace MediaWiki\Extension\PageAssessments;
 
 use HTMLSelectNamespace;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Widget\NamespaceInputWidget;
-use MWNamespace;
 
 /**
  * This is an HTML form field for selecting non-talk namespaces. It excludes all namespaces with
@@ -39,10 +39,14 @@ class NamespaceSelect extends HTMLSelectNamespace {
 	 * @return NamespaceInputWidget
 	 */
 	public function getInputOOUI( $value ) {
-		$nsIds = array_keys( MWNamespace::getCanonicalNamespaces() );
-		$excludedNsIds = array_values( array_filter( $nsIds, static function ( $ns ) {
-			return MWNamespace::isTalk( $ns );
-		} ) );
+		$namespaceInfo = MediaWikiServices::getInstance()->getNamespaceInfo();
+		$nsIds = array_keys( $namespaceInfo->getCanonicalNamespaces() );
+		$excludedNsIds = array_values( array_filter(
+			$nsIds,
+			static function ( $ns ) use ( $namespaceInfo ) {
+				return $namespaceInfo->isTalk( $ns );
+			}
+		) );
 		$widget = new NamespaceInputWidget( [
 			'value' => $value,
 			'name' => $this->mName,
