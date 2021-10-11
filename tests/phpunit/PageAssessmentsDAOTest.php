@@ -9,7 +9,7 @@ use MediaWiki\Extension\PageAssessments\PageAssessmentsDAO;
  * @group Database
  * @group PageAssessments
  */
-class PageAssessmentsDAOTest extends MediaWikiTestCase {
+class PageAssessmentsDAOTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * Setup for tests
