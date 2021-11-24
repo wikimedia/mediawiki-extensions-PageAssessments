@@ -4,10 +4,12 @@
 			"Alex Great",
 			"Diman Russkov",
 			"Nk88",
-			"Redredsonia"
+			"Redredsonia",
+			"Kaganer"
 		]
 	},
 	"pageassessments-desc": "Это расширение предназначено для хранения оценок страниц в таблице базы данных с помощью функции парсера.",
+	"pageassessments-special": "Оценки страницы",
 	"pageassessments-project": "Проект",
 	"pageassessments-page-namespace": "Пространство имён страницы",
 	"pageassessments-page-title": "Заголовок страницы",
@@ -15,5 +17,6 @@
 	"pageassessments-importance": "Значение",
 	"pageassessments-class": "Класс",
 	"pageassessments-timestamp": "Отметка",
-	"pageassessments-total-results": "Всего результатов: $1"
+	"pageassessments-total-results": "Всего результатов: $1",
+	"pageassessments-error-namespace-filter": "Введите название проекта или название страницы."
 }

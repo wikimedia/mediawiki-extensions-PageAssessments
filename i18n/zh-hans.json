@@ -3,13 +3,14 @@
 		"authors": [
 			"Liuxinyu970226",
 			"Shizhao",
-			"VulpesVulpes825"
+			"VulpesVulpes825",
+			"Xiplus"
 		]
 	},
 	"pageassessments-desc": "此扩展用于在数据库表单中，在解析器函数的帮助下存储页面评价",
 	"pageassessments-special": "页面评价",
 	"pageassessments-project": "专题",
-	"pageassessments-page-namespace": "页面名字空间",
+	"pageassessments-page-namespace": "页面命名空间",
 	"pageassessments-page-title": "页面标题",
 	"pageassessments-search": "搜索",
 	"pageassessments-importance": "重要性",
