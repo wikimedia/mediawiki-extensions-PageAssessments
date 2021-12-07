@@ -16,5 +16,5 @@
 	"pageassessments-class": "الصنف",
 	"pageassessments-timestamp": "الطابع الزمني",
 	"pageassessments-total-results": "مجموع النتائج: $1",
-	"pageassessments-error-namespace-filter": "تتطلب التصفية حسب النطاق أيضا التصفية حسب عنوان المشروع أو الصفحة."
+	"pageassessments-error-namespace-filter": "فضلًا أدخل اسم المشروع أو عنوان الصفحة."
 }

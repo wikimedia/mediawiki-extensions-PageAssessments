@@ -3,7 +3,8 @@
 		"authors": [
 			"Andriy.v",
 			"Piramidion",
-			"Ата"
+			"Ата",
+			"DDPAT"
 		]
 	},
 	"pageassessments-desc": "Це розширення призначене для зберігання оцінок сторінок у таблиці бази даних з допомогою парсерної функції",
@@ -16,5 +17,5 @@
 	"pageassessments-class": "Клас",
 	"pageassessments-timestamp": "Часова мітка",
 	"pageassessments-total-results": "Загальна кількість результатів: $1",
-	"pageassessments-error-namespace-filter": "Будь ласка, введіть назву проекту чи назву сторінки."
+	"pageassessments-error-namespace-filter": "Будь ласка, введіть назву проєкту чи назву сторінки."
 }
