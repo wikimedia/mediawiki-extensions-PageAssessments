@@ -4,9 +4,13 @@
 			"Ykhwong"
 		]
 	},
+	"pageassessments-special": "문서 평가",
 	"pageassessments-project": "프로젝트",
+	"pageassessments-page-namespace": "문서 이름공간",
 	"pageassessments-page-title": "문서 제목",
 	"pageassessments-search": "검색",
+	"pageassessments-importance": "중요도",
+	"pageassessments-timestamp": "타임스탬프",
 	"pageassessments-total-results": "총 결과: $1",
-	"pageassessments-error-namespace-filter": "이름공간으로 필터링하려면 프로젝트 또는 문서 제목도 필터링해야 합니다."
+	"pageassessments-error-namespace-filter": "프로젝트 이름 또는 문서 제목을 입력해 주십시오."
 }

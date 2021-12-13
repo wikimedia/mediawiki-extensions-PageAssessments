@@ -2,18 +2,20 @@
 	"@metadata": {
 		"authors": [
 			"Liuxinyu970226",
-			"Shizhao"
+			"Shizhao",
+			"VulpesVulpes825",
+			"Xiplus"
 		]
 	},
 	"pageassessments-desc": "此扩展用于在数据库表单中，在解析器函数的帮助下存储页面评价",
 	"pageassessments-special": "页面评价",
 	"pageassessments-project": "专题",
-	"pageassessments-page-namespace": "页面名字空间",
+	"pageassessments-page-namespace": "页面命名空间",
 	"pageassessments-page-title": "页面标题",
 	"pageassessments-search": "搜索",
 	"pageassessments-importance": "重要性",
 	"pageassessments-class": "等级",
 	"pageassessments-timestamp": "时间戳",
 	"pageassessments-total-results": "结果总数：$1",
-	"pageassessments-error-namespace-filter": "按名字空间过滤时同样需要按项目或页面标题过滤。"
+	"pageassessments-error-namespace-filter": "请输入专题名称或页面标题"
 }

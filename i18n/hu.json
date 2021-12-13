@@ -14,5 +14,5 @@
 	"pageassessments-class": "Besorolás",
 	"pageassessments-timestamp": "Időbélyeg",
 	"pageassessments-total-results": "Összes találat: $1",
-	"pageassessments-error-namespace-filter": "A névtér szerinti szűréshez műhely vagy lapcím szerinti szűrés is szükséges."
+	"pageassessments-error-namespace-filter": "Írj be egy műhelynevet vagy lapcímet."
 }

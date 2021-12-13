@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Elisardojm"
+			"Elisardojm",
+			"ArenaL5"
 		]
 	},
 	"pageassessments-desc": "Esta extensión permite almacenar as avaliacións de páxinas nunha táboa dunha base de datos coa axuda dunha función de análise sintáctica.",
@@ -14,5 +15,5 @@
 	"pageassessments-class": "Clase",
 	"pageassessments-timestamp": "Data e hora",
 	"pageassessments-total-results": "Resultados totais: $1",
-	"pageassessments-error-namespace-filter": "O filtro por espazo de nomes tamén require un filtro por proxecto ou título de páxina."
+	"pageassessments-error-namespace-filter": "Por favor, introduza un nome de proxecto ou título de páxina."
 }
