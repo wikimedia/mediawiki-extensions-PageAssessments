@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Daud I.F. Argana"
+		]
+	},
+	"pageassessments-desc": "Ekstensi ini untuk menyimpan penilaian halaman dalam tabel basis data dengan bantuan fungsi parser",
+	"pageassessments-special": "Penilaian halaman",
+	"pageassessments-project": "Proyek",
+	"pageassessments-page-namespace": "Ruang nama halaman",
+	"pageassessments-page-title": "Judul halaman",
+	"pageassessments-search": "Cari",
+	"pageassessments-importance": "Kepentingan",
+	"pageassessments-class": "Kelas",
+	"pageassessments-timestamp": "Stempel waktu",
+	"pageassessments-total-results": "Total hasil: $1",
+	"pageassessments-error-namespace-filter": "Tolong masukkan nama proyek atau judul halaman"
+}
