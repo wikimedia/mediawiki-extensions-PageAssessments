@@ -127,7 +127,7 @@ class SpecialPage extends QueryPage {
 		if ( $num < 1 ) {
 			return false;
 		}
-		$out->addModuleStyles( 'mediawiki.pager.tablePager' );
+		$out->addModuleStyles( 'mediawiki.pager.styles' );
 		$tableClasses = 'mw-datatable page-assessments TablePager';
 		$html = Html::openElement( 'table', [ 'class' => $tableClasses ] )
 			. Html::openElement( 'thead' )
