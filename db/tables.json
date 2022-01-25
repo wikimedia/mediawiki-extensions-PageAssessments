@@ -1,0 +1,78 @@
+[
+	{
+		"name": "page_assessments_projects",
+		"comment": "Add wikiprojects table",
+		"columns": [
+			{
+				"name": "pap_project_id",
+				"comment": "Generated ID of the project",
+				"type": "integer",
+				"options": { "autoincrement": true, "notnull": true, "unsigned": true }
+			},
+			{
+				"name": "pap_project_title",
+				"comment": "Name of the project assessing the page. In the case of a subproject or task force, this will be a combination of the project and subproject name, e.g. Films/Korean cinema task force.",
+				"type": "string",
+				"options": { "notnull": false, "length": 255 }
+			},
+			{
+				"name": "pap_parent_id",
+				"comment": "ID of the parent project (for subprojects and task forces)",
+				"type": "integer",
+				"options": { "notnull": false, "unsigned": true }
+			}
+		],
+		"indexes": [
+			{
+				"name": "pap_project_title",
+				"columns": [ "pap_project_title" ],
+				"unique": true
+			}
+		],
+		"pk": [ "pap_project_id" ]
+	},
+	{
+		"name": "page_assessments",
+		"comment": "Add article assessments table",
+		"columns": [
+			{
+				"name": "pa_page_id",
+				"comment": "ID of the page",
+				"type": "integer",
+				"options": { "notnull": true, "unsigned": true }
+			},
+			{
+				"name": "pa_project_id",
+				"comment": "ID of the project assessing the page",
+				"type": "integer",
+				"options": { "notnull": true, "unsigned": true }
+			},
+			{
+				"name": "pa_class",
+				"comment": "class of the page, e.g. 'B'",
+				"type": "string",
+				"options": { "notnull": false, "length": 20 }
+			},
+			{
+				"name": "pa_importance",
+				"comment": "importance of the page for the project, e.g. 'Low'",
+				"type": "string",
+				"options": { "notnull": false, "length": 20 }
+			},
+			{
+				"name": "pa_page_revision",
+				"comment": "revision of the page upon assessment",
+				"type": "integer",
+				"options": { "notnull": true, "unsigned": true }
+			}
+		],
+		"indexes": [
+			{
+				"name": "pa_project",
+				"columns": [ "pa_project_id", "pa_page_id" ],
+				"unique": false
+			}
+		],
+		"pk": [ "pa_page_id", "pa_project_id" ]
+	}
+]

@@ -80,12 +80,13 @@ class Hooks {
 	 */
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater = null ) {
 		$dbDir = __DIR__ . '/../db';
+		$type = $updater->getDB()->getType();
 		$updater->addExtensionTable( 'page_assessments_projects',
-			"$dbDir/addProjectsTable.sql" );
-		$updater->addExtensionTable( 'page_assessments',
-			"$dbDir/addReviewsTable.sql" );
-		$updater->addExtensionField( 'page_assessments_projects',
-			'pap_parent_id', "$dbDir/patch-subprojects.sql" );
+			"$dbDir/$type/tables-generated.sql" );
+		if ( $type === 'mysql' ) {
+			$updater->addExtensionField( 'page_assessments_projects',
+				'pap_parent_id', "$dbDir/mysql/patch-subprojects.sql" );
+		}
 	}
 
 	/**
