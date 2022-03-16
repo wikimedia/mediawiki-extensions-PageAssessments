@@ -92,20 +92,21 @@ class SpecialPage extends QueryPage {
 				'revision' => [ 'JOIN', 'page_id = rev_page AND pa_page_revision = rev_id' ],
 			],
 		];
+		$request = $this->getRequest();
 		// Project.
-		$project = $this->getRequest()->getVal( 'project' );
-		if ( strlen( $project ) > 0 ) {
+		$project = $request->getVal( 'project', '' );
+		if ( $project !== '' ) {
 			$info['conds']['pap_project_title'] = $project;
 		}
 		// Page title.
-		$pageTitle = $this->getRequest()->getVal( 'page_title' );
-		if ( strlen( $pageTitle ) > 0 ) {
+		$pageTitle = $request->getVal( 'page_title', '' );
+		if ( $pageTitle !== '' ) {
 			$title = Title::newFromText( $pageTitle )->getDBkey();
 			$info['conds']['page_title'] = $title;
 		}
 		// Namespace (if it's set, it's either an integer >= 0, 'all', or the empty string).
-		$namespace = $this->getRequest()->getVal( 'namespace' );
-		if ( strlen( $namespace ) > 0 && $namespace !== 'all' ) {
+		$namespace = $request->getVal( 'namespace', '' );
+		if ( $namespace !== '' && $namespace !== 'all' ) {
 			$info['conds']['page_namespace'] = $namespace;
 		}
 		return $info;
@@ -187,9 +188,10 @@ class SpecialPage extends QueryPage {
 	 */
 	public function linkParameters() {
 		$params = [];
+		$request = $this->getRequest();
 		foreach ( [ 'project', 'namespace', 'page_title', 'sort', 'dir' ] as $key ) {
-			$val = $this->getRequest()->getVal( $key );
-			if ( $val ) {
+			$val = $request->getVal( $key, '' );
+			if ( $val !== '' ) {
 				$params[$key] = $val;
 			}
 		}
@@ -247,15 +249,15 @@ class SpecialPage extends QueryPage {
 		}
 
 		$request = $this->getRequest();
-		$ns = $request->getVal( 'namespace' );
-		$project = $request->getVal( 'project' );
-		$pageTitle = $request->getVal( 'page_title' );
+		$ns = $request->getVal( 'namespace', '' );
+		$project = $request->getVal( 'project', '' );
+		$pageTitle = $request->getVal( 'page_title', '' );
 
 		// Require namespace and either project name or page title to execute query.
 		// Note that this also prevents execution on initial page load.
 		// See T168599 and discussion in T248280.
-		if ( ( strlen( $ns ) && $ns !== 'all' ) &&
-			( strlen( $project ) || strlen( $pageTitle ) )
+		if ( ( $ns !== '' && $ns !== 'all' ) &&
+			( $project !== '' || $pageTitle !== '' )
 		) {
 			parent::execute( $parameters );
 		}
@@ -267,7 +269,7 @@ class SpecialPage extends QueryPage {
 	 */
 	public function getOrderFields() {
 		$permitted = [ 'project', 'page_title' ];
-		$requested = $this->getRequest()->getVal( 'sort' );
+		$requested = $this->getRequest()->getVal( 'sort', '' );
 		if ( in_array( $requested, $permitted ) ) {
 			return [ $requested ];
 		}
@@ -280,7 +282,7 @@ class SpecialPage extends QueryPage {
 	 * @return bool
 	 */
 	public function sortDescending() {
-		return stripos( $this->getRequest()->getVal( 'dir' ), 'desc' ) === 0;
+		return stripos( $this->getRequest()->getVal( 'dir', 'asc' ), 'desc' ) === 0;
 	}
 
 	/**
@@ -331,9 +333,8 @@ class SpecialPage extends QueryPage {
 			// https://phabricator.wikimedia.org/T168599
 			if ( $data['namespace'] !== null
 				&& $data['namespace'] !== 'all'
-				// strlen( null ) produces 0
-				&& !strlen( $data['project'] )
-				&& !strlen( $data['page_title'] )
+				&& ( $data['project'] === null || $data['project'] === '' )
+				&& ( $data['page_title'] === null || $data['page_title'] === '' )
 			) {
 				return Status::newFatal( 'pageassessments-error-namespace-filter' );
 			}
