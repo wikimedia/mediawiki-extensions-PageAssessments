@@ -5,6 +5,7 @@ namespace MediaWiki\Extension\PageAssessments\Api;
 use ApiBase;
 use ApiQuery;
 use ApiQueryBase;
+use Wikimedia\ParamValidator\TypeDef\IntegerDef;
 
 /*
  * API query module that returns associated projects and assessment data for a given set
@@ -144,9 +145,9 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 			'limit' => [
 				ApiBase::PARAM_DFLT => 10,
 				ApiBase::PARAM_TYPE => 'limit',
-				ApiBase::PARAM_MIN => 1,
-				ApiBase::PARAM_MAX => ApiBase::LIMIT_BIG1,
-				ApiBase::PARAM_MAX2 => ApiBase::LIMIT_BIG2,
+				IntegerDef::PARAM_MIN => 1,
+				IntegerDef::PARAM_MAX => ApiBase::LIMIT_BIG1,
+				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_BIG2,
 			],
 		];
 		if ( $wgPageAssessmentsSubprojects ) {
