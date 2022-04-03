@@ -5,6 +5,7 @@ namespace MediaWiki\Extension\PageAssessments\Api;
 use ApiBase;
 use ApiQuery;
 use ApiQueryBase;
+use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\IntegerDef;
 
 /*
@@ -143,8 +144,8 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		$allowedParams = [
 			'continue' => [ ApiBase::PARAM_HELP_MSG => 'api-help-param-continue' ],
 			'limit' => [
-				ApiBase::PARAM_DFLT => 10,
-				ApiBase::PARAM_TYPE => 'limit',
+				ParamValidator::PARAM_DEFAULT => 10,
+				ParamValidator::PARAM_TYPE => 'limit',
 				IntegerDef::PARAM_MIN => 1,
 				IntegerDef::PARAM_MAX => ApiBase::LIMIT_BIG1,
 				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_BIG2,
@@ -152,8 +153,8 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		];
 		if ( $wgPageAssessmentsSubprojects ) {
 			$allowedParams[ 'subprojects' ] = [
-				ApiBase::PARAM_DFLT => false,
-				ApiBase::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_DEFAULT => false,
+				ParamValidator::PARAM_TYPE => 'boolean',
 			];
 		}
 		return $allowedParams;

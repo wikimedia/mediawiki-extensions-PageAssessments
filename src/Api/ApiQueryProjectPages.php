@@ -8,6 +8,7 @@ use ApiQuery;
 use ApiQueryGeneratorBase;
 use MediaWiki\Extension\PageAssessments\PageAssessmentsDAO;
 use Title;
+use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\IntegerDef;
 
 /*
@@ -222,16 +223,16 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	public function getAllowedParams() {
 		return [
 			'assessments' => [
-				ApiBase::PARAM_DFLT => false,
-				ApiBase::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_DEFAULT => false,
+				ParamValidator::PARAM_TYPE => 'boolean',
 			],
 			'projects' => [
-				ApiBase::PARAM_ISMULTI => true,
-				ApiBase::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'limit' => [
-				ApiBase::PARAM_DFLT => 10,
-				ApiBase::PARAM_TYPE => 'limit',
+				ParamValidator::PARAM_DEFAULT => 10,
+				ParamValidator::PARAM_TYPE => 'limit',
 				IntegerDef::PARAM_MIN => 1,
 				IntegerDef::PARAM_MAX => ApiBase::LIMIT_BIG1,
 				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_BIG2,

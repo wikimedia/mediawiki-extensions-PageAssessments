@@ -2,9 +2,9 @@
 
 namespace MediaWiki\Extension\PageAssessments\Api;
 
-use ApiBase;
 use ApiQuery;
 use ApiQueryBase;
+use Wikimedia\ParamValidator\ParamValidator;
 
 /*
  * API module for retrieving all the projects on a wiki
@@ -62,8 +62,8 @@ class ApiQueryProjects extends ApiQueryBase {
 		$allowedParams = [];
 		if ( $wgPageAssessmentsSubprojects ) {
 			$allowedParams[ 'subprojects' ] = [
-				ApiBase::PARAM_DFLT => false,
-				ApiBase::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_DEFAULT => false,
+				ParamValidator::PARAM_TYPE => 'boolean',
 			];
 		}
 		return $allowedParams;
