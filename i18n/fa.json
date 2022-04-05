@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Arash.pt",
+			"Beginneruser",
 			"Ladsgroup",
 			"Reza1615"
 		]
 	},
 	"pageassessments-desc": "این افزونه برای نگه‌داری داده‌های اندازه‌گیری‌های صفحات است تا در توابع تجزیه استفاده شود",
-	"pageassessments-special": "اندازه‌گیری‌های صفحات",
+	"pageassessments-special": "اندازه‌گیری‌های صفحه‌ها",
 	"pageassessments-project": "پروژه",
 	"pageassessments-page-namespace": "فضای نام صفحه",
 	"pageassessments-page-title": "عنوان صفحه",
