@@ -3,11 +3,12 @@
 		"authors": [
 			"Arash.pt",
 			"Ladsgroup",
-			"Reza1615"
+			"Reza1615",
+			"Beginneruser"
 		]
 	},
 	"pageassessments-desc": "این افزونه برای نگه‌داری داده‌های اندازه‌گیری‌های صفحات است تا در توابع تجزیه استفاده شود",
-	"pageassessments-special": "اندازه‌گیری‌های صفحات",
+	"pageassessments-special": "اندازه‌گیری‌های صفحه‌ها",
 	"pageassessments-project": "پروژه",
 	"pageassessments-page-namespace": "فضای نام صفحه",
 	"pageassessments-page-title": "عنوان صفحه",
