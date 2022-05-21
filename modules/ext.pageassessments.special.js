@@ -43,7 +43,7 @@
 				allProjects = mw.config.get( 'wgPageAssessmentProjects' ) || [];
 
 			matchingProjects = allProjects.filter( function ( value ) {
-				return value.substring( 0, userInput.length ).toLocaleLowerCase() === userInput.toLocaleLowerCase();
+				return value.slice( 0, Math.max( 0, userInput.length ) ).toLocaleLowerCase() === userInput.toLocaleLowerCase();
 			} );
 
 			response( matchingProjects.slice( 0, maxRows ) );
