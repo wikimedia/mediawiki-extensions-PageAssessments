@@ -197,10 +197,7 @@ class PageAssessmentsDAO implements IDBAccessObject {
 	 */
 	public static function insertProject( $project, $parentId = null ) {
 		$dbw = wfGetDB( DB_PRIMARY );
-		$values = [
-			'pap_project_title' => $project,
-			'pap_project_id' => $dbw->nextSequenceValue( 'pap_project_id_seq' )
-		];
+		$values = [ 'pap_project_title' => $project ];
 		if ( $parentId ) {
 			$values[ 'pap_parent_id' ] = (int)$parentId;
 		}
