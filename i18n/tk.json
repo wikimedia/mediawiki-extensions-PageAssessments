@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"TayfunEt."
+		]
+	},
+	"pageassessments-desc": "Bu giňeltme, derňew funksiýasynyň kömegi bilen sahypa bahalaryny maglumat bazasynyň tablisasynda saklamak üçin",
+	"pageassessments-special": "Sahypa baha bermek",
+	"pageassessments-project": "Taslama",
+	"pageassessments-page-namespace": "Sahypa at giňişligi",
+	"pageassessments-page-title": "Sahypanyň ady",
+	"pageassessments-search": "Gözle",
+	"pageassessments-importance": "Möhümligi",
+	"pageassessments-class": "Synp",
+	"pageassessments-timestamp": "Wagt belgisi",
+	"pageassessments-total-results": "Jemi netijeler: $1",
+	"pageassessments-error-namespace-filter": "Taslamanyň adyny ýa-da sahypanyň adyny ýazmagyňyzy haýyş edýäris."
+}
