@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"pageassessments-desc": "Iste extension es pro immagazinar evalutationes de paginas in un tabella de base de datos con le adjuta de un function del analysator syntactic.",
+	"pageassessments-special": "Evalutationes de paginas",
+	"pageassessments-project": "Projecto",
+	"pageassessments-page-namespace": "Spatio de nomines del pagina",
+	"pageassessments-page-title": "Titulo del pagina",
+	"pageassessments-search": "Cercar",
+	"pageassessments-importance": "Importantia",
+	"pageassessments-class": "Classe",
+	"pageassessments-timestamp": "Data e hora",
+	"pageassessments-total-results": "Total de resultatos: $1",
+	"pageassessments-error-namespace-filter": "Per favor insere un nomine de projecto o un titulo de pagina."
+}
