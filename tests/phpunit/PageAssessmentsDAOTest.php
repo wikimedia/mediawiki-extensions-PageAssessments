@@ -75,7 +75,7 @@ class PageAssessmentsDAOTest extends MediaWikiIntegrationTestCase {
 		$pageBody->deleteRecord( $values );
 		$res = $this->db->select( 'page_assessments', '*' );
 		$row = $res->fetchRow();
-		$this->assertEmpty( $row );
+		$this->assertFalse( $row );
 	}
 
 	/**
@@ -99,7 +99,7 @@ class PageAssessmentsDAOTest extends MediaWikiIntegrationTestCase {
 		// Since the projects may be returned in any order, we can't do a simple
 		// assertEquals() on the arrays. Instead we compare the arrays using array_diff()
 		// in both directions and make sure that the results are empty.
-		$this->assertEmpty( array_merge( array_diff( $expected, $res ), array_diff( $res, $expected ) ) );
+		$this->assertSame( [], array_merge( array_diff( $expected, $res ), array_diff( $res, $expected ) ) );
 	}
 
 	/**
