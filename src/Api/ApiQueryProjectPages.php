@@ -183,17 +183,11 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	 * @param string $continueParam
 	 */
 	private function handleQueryContinuation( $continueParam ) {
-		$continues = explode( '|', $continueParam );
-		$this->dieContinueUsageIf( count( $continues ) !== 2 );
-
-		$continueProject = (int)$continues[0];
-		$continuePage = (int)$continues[1];
-		// die if PHP has made unhelpful falsy conversions
-		$this->dieContinueUsageIf( $continues[0] !== (string)$continueProject );
-		$this->dieContinueUsageIf( $continues[1] !== (string)$continuePage );
-
-		$this->addWhere( "pa_project_id > $continueProject OR " .
-			"(pa_project_id = $continueProject AND pa_page_id >= $continuePage)" );
+		$continues = $this->parseContinueParamOrDie( $continueParam, [ 'int', 'int' ] );
+		$this->addWhere( $this->getDB()->buildComparison( '>=', [
+			'pa_project_id' => $continues[0],
+			'pa_page_id' => $continues[1],
+		] ) );
 	}
 
 	/**

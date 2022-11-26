@@ -124,17 +124,11 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 	 * @param string $continueParam
 	 */
 	private function handleQueryContinuation( $continueParam ) {
-		$continues = explode( '|', $continueParam );
-		$this->dieContinueUsageIf( count( $continues ) !== 2 );
-
-		$continuePage = (int)$continues[0];
-		$continueProject = (int)$continues[1];
-		// die if PHP has made unhelpful falsy conversions
-		$this->dieContinueUsageIf( $continues[0] !== (string)$continuePage );
-		$this->dieContinueUsageIf( $continues[1] !== (string)$continueProject );
-
-		$this->addWhere( "pa_page_id > $continuePage OR " .
-			"(pa_page_id = $continuePage AND pa_project_id >= $continueProject)" );
+		$continues = $this->parseContinueParamOrDie( $continueParam, [ 'int', 'int' ] );
+		$this->addWhere( $this->getDB()->buildComparison( '>=', [
+			'pa_page_id' => $continues[0],
+			'pa_project_id' => $continues[1],
+		] ) );
 	}
 
 	/** @inheritDoc */
