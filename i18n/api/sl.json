@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"apihelp-query+pageassessments-example-simple": "Pridobi podatke o projektu in oceni za stran <kbd>Jabolko</kbd>."
+}
