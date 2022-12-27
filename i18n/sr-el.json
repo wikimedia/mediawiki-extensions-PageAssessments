@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"pageassessments-desc": "Ovaj dodatak je za skladištenje procena stranica u tabeli baze podataka uz pomoć mogućnosti raščlanjivača",
+	"pageassessments-special": "Procene stranice",
+	"pageassessments-project": "Projekat",
+	"pageassessments-page-namespace": "Imenski prostor stranice",
+	"pageassessments-page-title": "Naslov stranice",
+	"pageassessments-search": "Pretraži",
+	"pageassessments-importance": "Značaj",
+	"pageassessments-class": "Klasa",
+	"pageassessments-timestamp": "Vremenska oznaka",
+	"pageassessments-total-results": "Ukupno rezultata: $1",
+	"pageassessments-error-namespace-filter": "Molimo unesite naziv projekta ili stranice."
+}
