@@ -39,8 +39,7 @@ class Hooks {
 	 * @param Parser $parser
 	 */
 	public static function onParserFirstCallInit( Parser $parser ) {
-		$callback = PageAssessmentsDAO::class . '::cacheAssessment';
-		$parser->setFunctionHook( 'assessment', $callback );
+		$parser->setFunctionHook( 'assessment', [ PageAssessmentsDAO::class, 'cacheAssessment' ] );
 	}
 
 	/**
