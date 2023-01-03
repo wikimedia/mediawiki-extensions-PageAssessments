@@ -4,6 +4,7 @@
 			"Vlad5250"
 		]
 	},
+	"pageassessments-desc": "Ovo proširenje služi pohrani ocjenjivanja stranica u tablicu baze podataka uz pomoć parserske funkcije.",
 	"pageassessments-special": "Provjera stranica",
 	"pageassessments-project": "Projekat",
 	"pageassessments-page-namespace": "Imenski prostor stranice",
@@ -12,5 +13,6 @@
 	"pageassessments-importance": "Važnost",
 	"pageassessments-class": "Klasa",
 	"pageassessments-timestamp": "Vremenska oznaka",
-	"pageassessments-total-results": "Ukupni ishod: $1"
+	"pageassessments-total-results": "Ukupno rezultata: $1",
+	"pageassessments-error-namespace-filter": "Molimo unesite naziv projekta ili stranice."
 }
