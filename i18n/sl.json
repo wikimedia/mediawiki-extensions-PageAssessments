@@ -4,7 +4,15 @@
 			"Eleassar"
 		]
 	},
+	"pageassessments-desc": "Ta razširitev je namenjena shranjevanju ocen strani v tabeli podatkovne zbirke z uporabo funkcije razčlenjevalnika",
+	"pageassessments-special": "Ocene strani",
 	"pageassessments-project": "Projekt",
+	"pageassessments-page-namespace": "Imenski prostor strani",
+	"pageassessments-page-title": "Naslov strani",
 	"pageassessments-search": "Išči",
-	"pageassessments-timestamp": "Čas"
+	"pageassessments-importance": "Pomen",
+	"pageassessments-class": "Razred",
+	"pageassessments-timestamp": "Čas",
+	"pageassessments-total-results": "Skupaj zadetkov: $1",
+	"pageassessments-error-namespace-filter": "Vnesite ime projekta ali naslov strani."
 }
