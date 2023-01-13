@@ -21,3 +21,8 @@ $specialPageAliases['hu'] = [
 $specialPageAliases['ko'] = [
 	'PageAssessments' => [ '문서평가' ],
 ];
+
+/** 中文 (Chinese) */
+$specialPageAliases['zh'] = [
+	'PageAssessments' => [ '页面评级', '頁面評級' ],
+];
