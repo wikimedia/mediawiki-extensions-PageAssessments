@@ -1,21 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
+			"A2569875",
 			"Corainn",
 			"Kly",
 			"Liuxinyu970226",
+			"Stang",
 			"烈羽"
 		]
 	},
 	"pageassessments-desc": "此擴充用於在資料庫表格裡，以解析函式的協助之下來儲存頁面評比",
-	"pageassessments-special": "頁面評比",
+	"pageassessments-special": "頁面評級",
 	"pageassessments-project": "專題",
 	"pageassessments-page-namespace": "頁面命名空間",
 	"pageassessments-page-title": "頁面標題",
 	"pageassessments-search": "搜尋",
-	"pageassessments-importance": "重要性",
-	"pageassessments-class": "類別",
+	"pageassessments-importance": "重要度",
+	"pageassessments-class": "等級",
 	"pageassessments-timestamp": "時間戳記",
 	"pageassessments-total-results": "結果總數：$1",
-	"pageassessments-error-namespace-filter": "請輸入專案名稱或頁面標題。"
+	"pageassessments-error-namespace-filter": "請輸入專題名稱或頁面標題。"
 }
