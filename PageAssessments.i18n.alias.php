@@ -24,7 +24,7 @@ $specialPageAliases['ko'] = [
 
 /** नेपाली (Nepali) */
 $specialPageAliases['ne'] = [
-	'PageAssessents' => [ 'पृष्ठ_मूल्याङ्कन' ],
+	'PageAssessments' => [ 'पृष्ठ_मूल्याङ्कन' ],
 ];
 
 /** 中文 (Chinese) */
