@@ -5,5 +5,15 @@
 			"बडा काजी"
 		]
 	},
-	"pageassessments-search": "खोज्नुहोस्"
+	"pageassessments-desc": "यो विस्तार पार्सर प्रकार्यको मद्दतले डाटाबेस तालिकामा पृष्ठ मूल्याङ्कनहरू भण्डारण गर्नको लागि हो।",
+	"pageassessments-special": "पृष्ठ मूल्याङ्कन",
+	"pageassessments-project": "परियोजना",
+	"pageassessments-page-namespace": "पृष्ठको नामपद",
+	"pageassessments-page-title": "पृष्ठ शीर्षक",
+	"pageassessments-search": "खोज्नुहोस्",
+	"pageassessments-importance": "महत्व",
+	"pageassessments-class": "मापदण्ड",
+	"pageassessments-timestamp": "समयछाप",
+	"pageassessments-total-results": "कुल नतिजाहरू: $1",
+	"pageassessments-error-namespace-filter": "कृपया परियोजनाको नाम वा पृष्ठ शीर्षक प्रविष्ट गर्नुहोस्।"
 }
