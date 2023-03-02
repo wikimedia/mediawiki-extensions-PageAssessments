@@ -9,7 +9,7 @@
 			"Xiplus"
 		]
 	},
-	"pageassessments-desc": "此扩展用于在数据库表单中，在解析器函数的帮助下存储页面评价",
+	"pageassessments-desc": "此扩展用于在解析器函数的帮助下将页面评估存储在数据库表中",
 	"pageassessments-special": "页面评级",
 	"pageassessments-project": "专题",
 	"pageassessments-page-namespace": "页面命名空间",
