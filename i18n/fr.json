@@ -7,10 +7,11 @@
 			"Thibaut120094",
 			"Trial",
 			"Urhixidur",
-			"Wladek92"
+			"Wladek92",
+			"Verdy p"
 		]
 	},
-	"pageassessments-desc": "Cette extension permet de stocker les évaluations de la page dans une table de base de données à l'aide d'une fonction d'analyse syntaxique.",
+	"pageassessments-desc": "Cette extension permet de stocker les évaluations de page dans une table de base de données à l’aide d’une fonction de l’analyseur.",
 	"pageassessments-special": "Évaluations de page",
 	"pageassessments-project": "Projet",
 	"pageassessments-page-namespace": "Espace de noms de la page",
@@ -19,6 +20,6 @@
 	"pageassessments-importance": "Importance",
 	"pageassessments-class": "Classe",
 	"pageassessments-timestamp": "Horodatage",
-	"pageassessments-total-results": "Total des résultats : $1",
+	"pageassessments-total-results": "Total des résultats : $1",
 	"pageassessments-error-namespace-filter": "Veuillez saisir un nom de projet ou un titre de page."
 }
