@@ -6,14 +6,12 @@
 			"ديفيد"
 		]
 	},
-	"apihelp-query+pageassessments-description": "اعرض المشاريع والتقييمات المرتبطة بالصفحات المعطاة.",
 	"apihelp-query+pageassessments-summary": "اعرض المشاريع والتقييمات المرتبطة بالصفحات المعطاة.",
 	"apihelp-query+pageassessments-param-limit": "الحد الأقصى لإجمالي عدد المشاريع المُرجعة (الإجمالي لكل الصفحات).",
 	"apihelp-query+pageassessments-param-subprojects": "أيضًا اعرض تقييمات المشاريع الفرعية.",
 	"apihelp-query+pageassessments-example-formatversion": "احصل على بيانات المشروع والتقييم للصفحات <kbd>Apple</kbd> و<kbd>Pear</kbd> باستخدام تنسيق نتيجة API الأحدث.",
 	"apihelp-query+pageassessments-example-simple": "احصل على بيانات المشروع والتقييم لصفحة <kbd>Apple</kbd>.",
 	"apihelp-query+pageassessments-example-subprojects": "الحصول على بيانات المشروع والتقييم (بما في ذلك التي للمشاريع الفرعية) لصفحة <kbd>Apple</kbd>.",
-	"apihelp-query+projectpages-description": "قائمة بجميع الصفحات المرتبطة بمشروع واحد أو أكثر.",
 	"apihelp-query+projectpages-summary": "قائمة بجميع الصفحات المرتبطة بمشروع واحد أو أكثر.",
 	"apihelp-query+projectpages-param-assessments": "أيضًا اعرض تقييمات الصفحات التي تم إرجاعها.",
 	"apihelp-query+projectpages-param-projects": "المشاريع المراد عرض صفحاتها. إذا أُهمل الوسيط، ستضمن جميع المشاريع.",
@@ -21,7 +19,6 @@
 	"apihelp-query+projectpages-example-simple-1": "احصل على أول 10 صفحات بمشروع الويكي <kbd>Medicine</kbd> أو مشروع الويكي <kbd>Anatomy</kbd>.",
 	"apihelp-query+projectpages-example-simple-2": "احصل على أول 10 صفحات مرتبطة بمشروع ويكي <kbd>Medicine</kbd>، بما في ذلك بيانات التقييم.",
 	"apihelp-query+projectpages-example-generator": "احصل على أول 10 صفحات مرتبطة بمشروع ويكي <kbd>Textile Arts</kbd>.",
-	"apihelp-query+projects-description": "قائمة بجميع المشاريع.",
 	"apihelp-query+projects-summary": "قائمة بجميع المشاريع.",
 	"apihelp-query+projects-param-subprojects": "أيضًا ضمن المشاريع الفرعية.",
 	"apihelp-query+projects-example": "احصل على قائمة بجميع المشاريع.",

@@ -4,14 +4,12 @@
 			"Jon Harald Søby"
 		]
 	},
-	"apihelp-query+pageassessments-description": "Returner tilknyttede prosjekter og vurderinger for de gitte sidene.",
 	"apihelp-query+pageassessments-summary": "Returner tilknyttede prosjekter og vurderinger for de gitte sidene.",
 	"apihelp-query+pageassessments-param-limit": "Grense for totalt antall prosjekter som returneres (totalt for alle sider).",
 	"apihelp-query+pageassessments-param-subprojects": "Returner også vurderinger etter underprosjekter.",
 	"apihelp-query+pageassessments-example-formatversion": "Hent prosjekt- og vurderingsdata for sidene <kbd>Apple</kbd> og <kbd>Pear</kbd>, med det nye API-resultatformatet.",
 	"apihelp-query+pageassessments-example-simple": "Hent prosjekt- og vurderingsdata for siden <kbd>Apple</kbd>.",
 	"apihelp-query+pageassessments-example-subprojects": "Hent prosjekt- og vurderingsdata (inkludert for underprosjekter) for siden <kbd>Apple</kbd>.",
-	"apihelp-query+projectpages-description": "List opp alle sider som er tilknyttet ett eller flere prosjekter.",
 	"apihelp-query+projectpages-summary": "List opp alle sider tylknyttet ett eller flere prosjekter.",
 	"apihelp-query+projectpages-param-assessments": "Returner også vurderinger for sidene som returneres.",
 	"apihelp-query+projectpages-param-projects": "Prosjektene sider skal listes opp fra. Hvis denne parameteren omgås vil alle prosjekter inkluderes.",
@@ -19,7 +17,6 @@
 	"apihelp-query+projectpages-example-simple-1": "Hent de første 10 sidene tilknyttet wikiprosjektet <kbd>Medicine</kbd> eller wikiprosjektet <kbd>Anatomy</kbd>.",
 	"apihelp-query+projectpages-example-simple-2": "Hent de første 10 sidene tilknyttet wikiprosjektet <kbd>Medicine</kbd>, inkludert vurderingsdata.",
 	"apihelp-query+projectpages-example-generator": "Hent sideinformasjon for de 10 første sidene tilknyttet wikiprosjektet <kbd>Textile Arts</kbd>.",
-	"apihelp-query+projects-description": "List opp alle prosjektene.",
 	"apihelp-query+projects-summary": "List opp alle prosjektene.",
 	"apihelp-query+projects-param-subprojects": "Inkluder også underprosjekter.",
 	"apihelp-query+projects-example": "Hent ei liste over alle prosjekter.",

@@ -5,14 +5,12 @@
 			"Shizhao"
 		]
 	},
-	"apihelp-query+pageassessments-description": "返回给定页面的关联专题与评估。",
 	"apihelp-query+pageassessments-summary": "返回给定页面的关联专题与评估。",
 	"apihelp-query+pageassessments-param-limit": "返回的专题总数限制（所有页面的总数）。",
 	"apihelp-query+pageassessments-param-subprojects": "也返回子专题的评估。",
 	"apihelp-query+pageassessments-example-formatversion": "获取页面<kbd>Apple</kbd>和<kbd>Pear</kbd>的专题与评价数据，使用更新的API结果格式。",
 	"apihelp-query+pageassessments-example-simple": "获取页面<kbd>Apple</kbd>的专题与评估数据。",
 	"apihelp-query+pageassessments-example-subprojects": "获取页面<kbd>Apple</kbd>的专题与评估数据（为子专题包含）。",
-	"apihelp-query+projectpages-description": "列出所有与一个或多个专题相关联的页面。",
 	"apihelp-query+projectpages-summary": "列出所有与一个或多个专题相关联的页面。",
 	"apihelp-query+projectpages-param-assessments": "并将返回页面的评价一并返回。",
 	"apihelp-query+projectpages-param-projects": "要列举页面的专题。如果此参数被忽略，所有专题将被包含。",
@@ -20,7 +18,6 @@
 	"apihelp-query+projectpages-example-simple-1": "获取与<kbd>Medicine</kbd>或<kbd>Anatomy</kbd>专题相关联的前10个页面。",
 	"apihelp-query+projectpages-example-simple-2": "获取与<kbd>Medicine</kbd>专题相关联的前10个页面，包含评估数据。",
 	"apihelp-query+projectpages-example-generator": "获取与<kbd>Textile Arts</kbd>专题相关联的前10个页面的页面信息。",
-	"apihelp-query+projects-description": "列举所有专题。",
 	"apihelp-query+projects-summary": "列举所有专题。",
 	"apihelp-query+projects-param-subprojects": "也包括子专题。",
 	"apihelp-query+projects-example": "获取所有专题的列表。",

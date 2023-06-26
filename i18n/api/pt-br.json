@@ -4,14 +4,12 @@
 			"Felipe L. Ewald"
 		]
 	},
-	"apihelp-query+pageassessments-description": "Retornar projetos associados e avaliações para as páginas determinadas.",
 	"apihelp-query+pageassessments-summary": "Retornar projetos associados e avaliações para as páginas determinadas.",
 	"apihelp-query+pageassessments-param-limit": "Limite para o número total de projetos retornados (total para todas as páginas).",
 	"apihelp-query+pageassessments-param-subprojects": "Também retornar avaliações por subprojetos.",
 	"apihelp-query+pageassessments-example-formatversion": "Obtenha dados de projeto e avaliação para páginas <kbd>Apple</kbd> e <kbd>Pear</kbd>, usando o formato de resultado mais recente da API.",
 	"apihelp-query+pageassessments-example-simple": "Obter dados de projeto e avaliação para a página <kbd>Apple</kbd>.",
 	"apihelp-query+pageassessments-example-subprojects": "Obtenha dados de projeto e avaliação (incluindo para subprojetos) para a página <kbd>Apple</kbd>.",
-	"apihelp-query+projectpages-description": "Liste todas as páginas associadas a um ou mais projetos.",
 	"apihelp-query+projectpages-summary": "Liste todas as páginas associadas a um ou mais projetos.",
 	"apihelp-query+projectpages-param-assessments": "Também retorna avaliações para as páginas retornadas.",
 	"apihelp-query+projectpages-param-projects": "Os projetos para os quais listar páginas. Se esse parâmetro for omitido, todos os projetos serão incluídos.",
@@ -19,7 +17,6 @@
 	"apihelp-query+projectpages-example-simple-1": "Obtenha as primeiras 10 páginas associadas ao WikiProject  <kbd>Medicine</kbd> ou WikiProject <kbd>Anatomy</kbd>.",
 	"apihelp-query+projectpages-example-simple-2": "Obtenha as primeiras 10 páginas associadas ao WikiProject <kbd>Medicine</kbd>, incluindo dados de avaliação.",
 	"apihelp-query+projectpages-example-generator": "Obter informações de página para as 10 primeiras páginas associadas ao WikiProject <kbd>Textile Arts</kbd>.",
-	"apihelp-query+projects-description": "Lista todos os projetos.",
 	"apihelp-query+projects-summary": "Lista todos os projetos.",
 	"apihelp-query+projects-param-subprojects": "Também inclui subprojetos.",
 	"apihelp-query+projects-example": "Obter uma lista de todos os projetos.",

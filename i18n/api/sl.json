@@ -4,14 +4,12 @@
 			"Eleassar"
 		]
 	},
-	"apihelp-query+pageassessments-description": "Vrne povezane projekte in ocene za predložene strani.",
 	"apihelp-query+pageassessments-summary": "Vrne povezane projekte in ocene za predložene strani.",
 	"apihelp-query+pageassessments-param-limit": "Omejitev skupnega števila vrnjenih projektov (skupaj za vse strani).",
 	"apihelp-query+pageassessments-param-subprojects": "Vrne tudi ocene po podprojektih.",
 	"apihelp-query+pageassessments-example-formatversion": "Pridobitev podatkov o projektih in ocenah za strani <kbd>Apple</kbd> in <kbd>Pear</kbd> v novejšem API-zapisu zadetkov.",
 	"apihelp-query+pageassessments-example-simple": "Pridobi podatke o projektu in oceni za stran <kbd>Jabolko</kbd>.",
 	"apihelp-query+pageassessments-example-subprojects": "Pridobitev podatkov o projektih in ocenah (vključno s podprojekti) za stran <kbd>Apple</kbd>.",
-	"apihelp-query+projectpages-description": "Navede vse strani, povezane z enim ali več projekti.",
 	"apihelp-query+projectpages-summary": "Navede vse strani, povezane z enim ali več projekti.",
 	"apihelp-query+projectpages-param-assessments": "Vrni tudi ocene za vrnjene strani.",
 	"apihelp-query+projectpages-param-projects": "Projekti za navedbo seznama strani. Če ta parameter izpustite, bodo vključeni vsi projekti.",
@@ -19,7 +17,6 @@
 	"apihelp-query+projectpages-example-simple-1": "Pridobitev prvih 10 strani, povezanih z vikiprojektom <kbd>Medicina</kbd> ali WikiProjektom <kbd>Anatomija</kbd>.",
 	"apihelp-query+projectpages-example-simple-2": "Pridobitev prvih 10 strani, povezanih z vikiprojektom <kbd>Medicina</kbd>, vključno s podatki o ocenah.",
 	"apihelp-query+projectpages-example-generator": "Pridobitev informacij o straneh za prvih 10 strani, povezanih z vikiprojektom <kbd>Tekstilna umetnost</kbd>.",
-	"apihelp-query+projects-description": "Navedi vse projekte.",
 	"apihelp-query+projects-summary": "Navedi vse projekte.",
 	"apihelp-query+projects-param-subprojects": "Vključi tudi podprojekte.",
 	"apihelp-query+projects-example": "Pridobi seznam vseh projektov.",

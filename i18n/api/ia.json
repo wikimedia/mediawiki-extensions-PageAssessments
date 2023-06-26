@@ -4,14 +4,12 @@
 			"McDutchie"
 		]
 	},
-	"apihelp-query+pageassessments-description": "Restituer le projectos e evalutationes associate al paginas date.",
 	"apihelp-query+pageassessments-summary": "Restituer le projectos e evalutationes associate al paginas date.",
 	"apihelp-query+pageassessments-param-limit": "Limite pro le numero total de projectos restituite (total pro tote le paginas).",
 	"apihelp-query+pageassessments-param-subprojects": "Tamben restituer evalutationes per subprojectos.",
 	"apihelp-query+pageassessments-example-formatversion": "Obtener datos de projecto e evalutation pro le paginas <kbd>Apple</kbd> e <kbd>Pear</kbd>, usante le formato nove de resultato API.",
 	"apihelp-query+pageassessments-example-simple": "Obtener datos de projecto e evalutation pro le pagina <kbd>Apple</kbd>.",
 	"apihelp-query+pageassessments-example-subprojects": "Obtener datos de projecto e evalutation (includente illos de subprojectos) pro le pagina <kbd>Apple</kbd>.",
-	"apihelp-query+projectpages-description": "Listar tote le paginas associate a un o plus projectos.",
 	"apihelp-query+projectpages-summary": "Listar tote le paginas associate a un o plus projectos.",
 	"apihelp-query+projectpages-param-assessments": "Tamben restituer evalutationes pro le paginas restituite.",
 	"apihelp-query+projectpages-param-projects": "Le projectos pro le quales listar paginas. Si iste parametro se omitte, tote le projectos es includite.",
@@ -19,7 +17,6 @@
 	"apihelp-query+projectpages-example-simple-1": "Obtener le prime 10 paginas associate al WikiProjecto <kbd>Medicine</kbd> o al WikiProjecto <kbd>Anatomy</kbd>.",
 	"apihelp-query+projectpages-example-simple-2": "Obtener le prime 10 paginas associate al WikiProjecto <kbd>Medicine</kbd>, includente le datos de evalutation.",
 	"apihelp-query+projectpages-example-generator": "Obtener informationes de pagina sur le prime 10 paginas associate al WikiProjecto <kbd>Textile Arts</kbd>.",
-	"apihelp-query+projects-description": "Listar tote le projectos.",
 	"apihelp-query+projects-summary": "Listar tote le projectos",
 	"apihelp-query+projects-param-subprojects": "Tamben includer subprojectos.",
 	"apihelp-query+projects-example": "Obtener un lista de tote le projectos.",

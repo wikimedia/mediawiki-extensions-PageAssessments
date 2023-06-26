@@ -6,14 +6,12 @@
 			"烈羽"
 		]
 	},
-	"apihelp-query+pageassessments-description": "回傳指定頁面的關聯專案與評比。",
 	"apihelp-query+pageassessments-summary": "回傳指定頁面的關聯專案與評比。",
 	"apihelp-query+pageassessments-param-limit": "所回傳專案的總數限制（所有頁面總計）。",
 	"apihelp-query+pageassessments-param-subprojects": "另一同依子專案回傳評比。",
 	"apihelp-query+pageassessments-example-formatversion": "取得頁面 <kbd>Apple</kbd> 與 <kbd>Pear</kbd> 的專案與評比資料，使用較新的 API 結果格式。",
 	"apihelp-query+pageassessments-example-simple": "取得頁面 <kbd>Apple</kbd> 的專案與評比。",
 	"apihelp-query+pageassessments-example-subprojects": "取得頁面 <kbd>Apple</kbd> 的專案與評比資料（包含子專案）。",
-	"apihelp-query+projectpages-description": "列出所有關聯一個或多個專案的頁面。",
 	"apihelp-query+projectpages-summary": "列出所有關聯一個或多個專案的頁面。",
 	"apihelp-query+projectpages-param-assessments": "並一同回傳所回傳頁面的評比。",
 	"apihelp-query+projectpages-param-projects": "要列出頁面的專案。如果忽略此參數，會包含所有的專案。",
@@ -21,7 +19,6 @@
 	"apihelp-query+projectpages-example-simple-1": "取得關聯 wiki 專案 <kbd>Medicine</kbd> 或 wiki 專案 <kbd>Anatomy</kbd> 的前 10 個頁面。",
 	"apihelp-query+projectpages-example-simple-2": "取得關聯 wiki 專案 <kbd>Medicine</kbd> 的前 10 個頁面，包含評比資料。",
 	"apihelp-query+projectpages-example-generator": "取得關聯 wiki 專案 <kbd>Textile Arts</kbd> 的前 10 個頁面。",
-	"apihelp-query+projects-description": "列出所有專案",
 	"apihelp-query+projects-summary": "列出所有專案",
 	"apihelp-query+projects-param-subprojects": "另包含子專題。",
 	"apihelp-query+projects-example": "取得所有專案的清單。",

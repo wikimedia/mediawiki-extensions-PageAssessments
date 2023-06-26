@@ -6,9 +6,7 @@
 			"Macofe"
 		]
 	},
-	"apihelp-query+projectpages-description": "Mostrar todas las páginas asociadas con uno o más proyectos.",
 	"apihelp-query+projectpages-param-limit": "Número máximo de páginas que devolver.",
-	"apihelp-query+projects-description": "Listar todos los proyectos.",
 	"apihelp-query+projects-summary": "Enumerar todos los proyectos.",
 	"apihelp-query+projects-param-subprojects": "Incluir también subproyectos.",
 	"apihelp-query+projects-example": "Obtener una lista de todos los proyectos.",

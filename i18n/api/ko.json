@@ -4,7 +4,6 @@
 			"Ykhwong"
 		]
 	},
-	"apihelp-query+projects-description": "모든 프로젝트를 나열합니다.",
 	"apihelp-query+projects-summary": "모든 프로젝트를 나열합니다.",
 	"apihelp-query+projects-param-subprojects": "하위 프로젝트도 포함합니다.",
 	"apihelp-query+projects-example": "모든 프로젝트의 목록을 가져옵니다.",

@@ -6,7 +6,6 @@
 			"Zoranzoki21"
 		]
 	},
-	"apihelp-query+projects-description": "Списак свих пројеката.",
 	"apihelp-query+projects-summary": "Списак свих пројеката.",
 	"apihelp-query+projects-param-subprojects": "Такође, обухвата подпројекте."
 }

@@ -5,7 +5,6 @@
 			"আফতাবুজ্জামান"
 		]
 	},
-	"apihelp-query+projects-description": "সব প্রকল্পের তালিকা।",
 	"apihelp-query+projects-param-subprojects": "এছাড়াও উপপ্রকল্প অন্তর্ভুক্ত করুন।",
 	"apihelp-query+projects-example-subprojects": "সব প্রকল্প এবং উপপ্রকল্পের একটি তালিকা পান।"
 }

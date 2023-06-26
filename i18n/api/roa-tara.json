@@ -4,14 +4,12 @@
 			"Joetaras"
 		]
 	},
-	"apihelp-query+pageassessments-description": "Tuèrne le pruggette assocaite e le valutazione pe le pàggene indicate.",
 	"apihelp-query+pageassessments-summary": "Tuèrne le pruggette assocaite e le valutazione pe le pàggene indicate.",
 	"apihelp-query+pageassessments-param-limit": "Limite pu numere totale de pruggette turnate (totale pe tutte le pàggene).",
 	"apihelp-query+pageassessments-param-subprojects": "Tuèrne pure le valutaziune pe le sottopruggette.",
 	"apihelp-query+pageassessments-example-formatversion": "Pigghie 'u pruggette e le date de valutazione pe le pàggene <kbd>Apple</kbd> e <kbd>Pear</kbd>, ausanne 'u nuève formate de resultate de l'API.",
 	"apihelp-query+pageassessments-example-simple": "Pigghie 'u pruggette e le date de valutazione pa pàgene <kbd>Apple</kbd>.",
 	"apihelp-query+pageassessments-example-subprojects": "Pigghie 'u pruggette e le date de valutazione ('ngludenne le sottepruggette) pa pàgene <kbd>Apple</kbd>.",
-	"apihelp-query+projectpages-description": "Elenghe de tutte le pàggene associate cu une o cchiù pruggette.",
 	"apihelp-query+projectpages-summary": "Elenghe de tutte le pàggene associate cu une o cchiù pruggette.",
 	"apihelp-query+projectpages-param-assessments": "Tuèrne pure le valutaziune sus a le pàggene turnate.",
 	"apihelp-query+projectpages-param-projects": "Le pruggette addò s'onna elengà le pàggene. Ce stu parametre jè zumbate, tutte le pruggette avènene mise.",
@@ -19,7 +17,6 @@
 	"apihelp-query+projectpages-example-simple-1": "Pigghie le prime 10 pàggene associate cu 'u UicchiPruggette <kbd>Medicine</kbd> o 'u UicchiPruggette <kbd>Anatomy</kbd>.",
 	"apihelp-query+projectpages-example-simple-2": "Pigghie le prime 10 pàggene associate cu 'u UicchiPruggette <kbd>Medicine</kbd>, 'ngludenne le date de valutazione.",
 	"apihelp-query+projectpages-example-generator": "Pigghie le 'mbormaziune de le prime 10 pàggene associate cu 'u UicchiPruggette <kbd>Textile Arts</kbd>.",
-	"apihelp-query+projects-description": "Elenghe tutte le pruggette.",
 	"apihelp-query+projects-summary": "Elenghe tutte le pruggette.",
 	"apihelp-query+projects-param-subprojects": "'Nglude pure le sottepruggette.",
 	"apihelp-query+projects-example": "Pigghie 'n'elenghe de tutte le pruggette.",

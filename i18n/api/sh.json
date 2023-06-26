@@ -4,15 +4,12 @@
 			"Vlad5250"
 		]
 	},
-	"apihelp-query+pageassessments-description": "Dohvaćanje povezanih projekata i procjena za dane stranice.",
 	"apihelp-query+pageassessments-summary": "Dohvaćanje povezanih projekata i procjena za dane stranice.",
 	"apihelp-query+pageassessments-param-limit": "Ograničenje ukupnog broja dohvaćenih projekata (ukupno za sve stranice).",
 	"apihelp-query+pageassessments-param-subprojects": "Davaj ocjene i po potprojektima.",
 	"apihelp-query+pageassessments-example-formatversion": "Dohvaćanje podataka o projektnoj procjeni za stranice <kbd>Apple</kbd> i <kbd>Pear</kbd>, koristeći noviji format rezultata u priložniku.",
 	"apihelp-query+pageassessments-example-simple": "Dohvaćanje podataka o projektnoj procjeni za stranicu <kbd>Apple</kbd>",
 	"apihelp-query+pageassessments-example-subprojects": "Iscrtavanje podataka o procjenama projekata (uključujući za podprojekte) za stranicu <kbd>Apple</kbd>.",
-	"apihelp-query+projectpages-description": "Popis svih stranica povezanih s jednim ili više projekata.",
 	"apihelp-query+projectpages-summary": "Popis svih stranica s jednim ili više projekata.",
-	"apihelp-query+projects-description": "Daj popis svih projekata.",
 	"apihelp-query+projects-summary": "Daj popis svih projekata."
 }

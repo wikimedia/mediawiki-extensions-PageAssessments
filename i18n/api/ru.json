@@ -5,6 +5,5 @@
 			"Redredsonia"
 		]
 	},
-	"apihelp-query+projects-description": "Перечислить все проекты.",
 	"apihelp-query+projects-example-subprojects": "Получить список всех проектов и подпроектов."
 }
