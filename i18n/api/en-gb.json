@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Reedy"
+		]
+	},
+	"apiwarn-pageassessments-badproject": "Project name not recognised: $1."
+}
