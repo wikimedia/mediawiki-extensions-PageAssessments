@@ -5,6 +5,11 @@
 			"Nokeoo"
 		]
 	},
+	"apihelp-query+projectpages-param-projects": "Projektai, kurių puslapiai pateikiami. Jei šis parametras praleistas, bus įtraukti visi projektai.",
+	"apihelp-query+projectpages-param-limit": "Maksimalus grąžinamų puslapių skaičius.",
+	"apihelp-query+projects-summary": "Išvardynti visus projektus.",
+	"apihelp-query+projects-param-subprojects": "Taip pat įtraukti paprojekčius.",
 	"apihelp-query+projects-example": "Gauti visų projektų sąrašą.",
+	"apihelp-query+projects-example-subprojects": "Gauti visų projektų ir paprojekčių sąrašą.",
 	"apiwarn-pageassessments-badproject": "Projekto pavadinimas neatpažintas: $1."
 }
