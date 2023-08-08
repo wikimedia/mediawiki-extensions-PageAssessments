@@ -1,14 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Eitvys200"
+			"Eitvys200",
+			"Nokeoo"
 		]
 	},
 	"pageassessments-project": "Projektas",
+	"pageassessments-page-namespace": "Puslapio vardų sritis",
 	"pageassessments-page-title": "Puslapio pavadinimas",
 	"pageassessments-search": "Ieškoti",
 	"pageassessments-importance": "Svarba",
 	"pageassessments-class": "Klasė",
 	"pageassessments-timestamp": "Laiko žyma",
-	"pageassessments-total-results": "Viso rezultatų: $1"
+	"pageassessments-total-results": "Viso rezultatų: $1",
+	"pageassessments-error-namespace-filter": "Įveskite projekto arba puslapio pavadinimą."
 }
