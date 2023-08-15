@@ -5,6 +5,8 @@
 			"Nokeoo"
 		]
 	},
+	"apihelp-query+pageassessments-param-limit": "Viso grąžintinų projektų skaičiaus limitas (viso visiems puslapiams).",
+	"apihelp-query+projectpages-summary": "Nurodyti visus puslapius, susijusius su vienu ar daugiau projektų.",
 	"apihelp-query+projectpages-param-projects": "Projektai, kurių puslapiai pateikiami. Jei šis parametras praleistas, bus įtraukti visi projektai.",
 	"apihelp-query+projectpages-param-limit": "Maksimalus grąžinamų puslapių skaičius.",
 	"apihelp-query+projects-summary": "Išvardynti visus projektus.",
