@@ -27,8 +27,8 @@ namespace MediaWiki\Extension\PageAssessments;
 use DBAccessObjectUtils;
 use IDBAccessObject;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use Parser;
-use Title;
 
 class PageAssessmentsDAO implements IDBAccessObject {
 
