@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Felipe L. Ewald"
 		]
 	},
@@ -14,7 +15,7 @@
 	"apihelp-query+projectpages-param-assessments": "Também retorna avaliações para as páginas retornadas.",
 	"apihelp-query+projectpages-param-projects": "Os projetos para os quais listar páginas. Se esse parâmetro for omitido, todos os projetos serão incluídos.",
 	"apihelp-query+projectpages-param-limit": "O número máximo de páginas para retornar.",
-	"apihelp-query+projectpages-example-simple-1": "Obtenha as primeiras 10 páginas associadas ao WikiProject  <kbd>Medicine</kbd> ou WikiProject <kbd>Anatomy</kbd>.",
+	"apihelp-query+projectpages-example-simple-1": "Obtenha as primeiras 10 páginas associadas ao WikiProject <kbd>Medicine</kbd> ou WikiProject <kbd>Anatomy</kbd>.",
 	"apihelp-query+projectpages-example-simple-2": "Obtenha as primeiras 10 páginas associadas ao WikiProject <kbd>Medicine</kbd>, incluindo dados de avaliação.",
 	"apihelp-query+projectpages-example-generator": "Obter informações de página para as 10 primeiras páginas associadas ao WikiProject <kbd>Textile Arts</kbd>.",
 	"apihelp-query+projects-summary": "Lista todos os projetos.",
