@@ -24,30 +24,36 @@
 namespace MediaWiki\Extension\PageAssessments;
 
 use Content;
-use DatabaseUpdater;
 use LinksUpdate;
 use LogEntry;
+use MediaWiki\Hook\LinksUpdateCompleteHook;
+use MediaWiki\Hook\ParserFirstCallInitHook;
+use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use Parser;
 use RequestContext;
 use User;
 use WikiPage;
 
-class Hooks {
+class Hooks implements
+	ParserFirstCallInitHook,
+	LinksUpdateCompleteHook,
+	ArticleDeleteCompleteHook
+{
 
 	/**
 	 * Register the parser function hook
 	 * @param Parser $parser
 	 */
-	public static function onParserFirstCallInit( Parser $parser ) {
+	public function onParserFirstCallInit( $parser ) {
 		$parser->setFunctionHook( 'assessment', [ PageAssessmentsDAO::class, 'cacheAssessment' ] );
 	}
 
 	/**
 	 * Update assessment records after talk page is saved
 	 * @param LinksUpdate $linksUpdate
-	 * @param mixed|null $ticket
+	 * @param mixed $ticket
 	 */
-	public static function onLinksUpdateComplete( LinksUpdate $linksUpdate, $ticket = null ) {
+	public function onLinksUpdateComplete( $linksUpdate, $ticket ) {
 		$assessmentsOnTalkPages = RequestContext::getMain()->getConfig()->get(
 			'PageAssessmentsOnTalkPages'
 		);
@@ -74,21 +80,6 @@ class Hooks {
 	}
 
 	/**
-	 * Run database updates
-	 * @param DatabaseUpdater|null $updater DatabaseUpdater object
-	 */
-	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater = null ) {
-		$dbDir = __DIR__ . '/../db';
-		$type = $updater->getDB()->getType();
-		$updater->addExtensionTable( 'page_assessments_projects',
-			"$dbDir/$type/tables-generated.sql" );
-		if ( $type === 'mysql' ) {
-			$updater->addExtensionField( 'page_assessments_projects',
-				'pap_parent_id', "$dbDir/mysql/patch-subprojects.sql" );
-		}
-	}
-
-	/**
 	 * Delete assessment records when page is deleted
 	 * @param WikiPage $article
 	 * @param User|null $user
@@ -98,14 +89,14 @@ class Hooks {
 	 * @param LogEntry|null $logEntry
 	 * @param int|null $archivedRevisionCount
 	 */
-	public static function onArticleDeleteComplete(
+	public function onArticleDeleteComplete(
 		$article,
 		$user,
 		$reason,
 		$id,
-		$content = null,
-		$logEntry = null,
-		$archivedRevisionCount = null
+		$content,
+		$logEntry,
+		$archivedRevisionCount
 	) {
 		PageAssessmentsDAO::deleteRecordsForPage( $id );
 	}

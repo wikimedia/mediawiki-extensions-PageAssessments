@@ -29,10 +29,18 @@
 		"PageAssessmentsAlias": "PageAssessments.i18n.alias.php"
 	},
 	"Hooks": {
-		"ParserFirstCallInit": "MediaWiki\\Extension\\PageAssessments\\Hooks::onParserFirstCallInit",
-		"LoadExtensionSchemaUpdates": "MediaWiki\\Extension\\PageAssessments\\Hooks::onLoadExtensionSchemaUpdates",
-		"LinksUpdateComplete": "MediaWiki\\Extension\\PageAssessments\\Hooks::onLinksUpdateComplete",
-		"ArticleDeleteComplete": "MediaWiki\\Extension\\PageAssessments\\Hooks::onArticleDeleteComplete"
+		"ParserFirstCallInit": "main",
+		"LoadExtensionSchemaUpdates": "schema",
+		"LinksUpdateComplete": "main",
+		"ArticleDeleteComplete": "main"
+	},
+	"HookHandlers": {
+		"main": {
+			"class": "MediaWiki\\Extension\\PageAssessments\\Hooks"
+		},
+		"schema": {
+			"class": "MediaWiki\\Extension\\PageAssessments\\SchemaHooks"
+		}
 	},
 	"MessagesDirs": {
 		"PageAssessments": [
