@@ -61,10 +61,10 @@ class SpecialPage extends QueryPage {
 	 *
 	 * Overridden here because we want proper sentence casing, rather than 'PageAssessments'.
 	 *
-	 * @return string
+	 * @inheritDoc
 	 */
 	public function getDescription() {
-		return $this->msg( 'pageassessments-special' )->text();
+		return $this->msg( 'pageassessments-special' );
 	}
 
 	/**
