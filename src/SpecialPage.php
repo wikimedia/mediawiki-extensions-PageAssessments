@@ -100,9 +100,10 @@ class SpecialPage extends QueryPage {
 		}
 		// Page title.
 		$pageTitle = $request->getVal( 'page_title', '' );
-		if ( $pageTitle !== '' ) {
-			$title = Title::newFromText( $pageTitle )->getDBkey();
-			$info['conds']['page_title'] = $title;
+		$pageTitle = Title::newFromText( $pageTitle );
+
+		if ( $pageTitle ) {
+			$info['conds']['page_title'] = $pageTitle->getDBkey();
 		}
 		// Namespace (if it's set, it's either an integer >= 0, 'all', or the empty string).
 		$namespace = $request->getVal( 'namespace', '' );
@@ -235,9 +236,9 @@ class SpecialPage extends QueryPage {
 
 	/**
 	 * Output the special page.
-	 * @param string $parameters The parameters to the special page.
+	 * @param string|null $par
 	 */
-	public function execute( $parameters ) {
+	public function execute( $par ) {
 		// Set up.
 		$this->setHeaders();
 		$this->addHelpLink( 'Extension:PageAssessments' );
@@ -259,7 +260,7 @@ class SpecialPage extends QueryPage {
 		if ( ( $ns !== '' && $ns !== 'all' ) &&
 			( $project !== '' || $pageTitle !== '' )
 		) {
-			parent::execute( $parameters );
+			parent::execute( $par );
 		}
 	}
 
