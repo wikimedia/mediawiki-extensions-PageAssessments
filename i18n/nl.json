@@ -3,14 +3,18 @@
 		"authors": [
 			"Festina90",
 			"Mainframe98",
+			"McDutchie",
 			"PonkoSasuke",
 			"Romaine"
 		]
 	},
+	"pageassessments-desc": "Deze uitbreiding is bedoeld voor het opslaan van paginabeoordelingen in een databasetabel met behulp van een parserfunctie.",
+	"pageassessments-special": "Paginabeoordelingen",
 	"pageassessments-project": "Project",
 	"pageassessments-page-namespace": "Paginanaamruimte",
 	"pageassessments-page-title": "Paginanaam",
 	"pageassessments-search": "Zoeken",
+	"pageassessments-importance": "Belang",
 	"pageassessments-class": "Klasse",
 	"pageassessments-timestamp": "Tijdstip",
 	"pageassessments-total-results": "Totaal van resultaten: $1",
