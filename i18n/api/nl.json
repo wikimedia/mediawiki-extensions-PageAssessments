@@ -2,8 +2,27 @@
 	"@metadata": {
 		"authors": [
 			"Festina90",
-			"Amire80"
+			"Amire80",
+			"McDutchie"
 		]
 	},
-	"apihelp-query+projectpages-example-simple-1": "Verkrijg de eerste 10 pagina's geassocieeerd met het WikiProject <kbd>Medicine</kbd> of WikiProject <kbd>Anatomy</kbd>."
+	"apihelp-query+pageassessments-summary": "Bijbehorende projecten en beoordelingen voor de opgegeven pagina’s retourneren.",
+	"apihelp-query+pageassessments-param-limit": "Limiet voor het totale aantal geretourneerde projecten (totaal voor alle pagina’s).",
+	"apihelp-query+pageassessments-param-subprojects": "Ook beoordelingen per deelproject retourneren.",
+	"apihelp-query+pageassessments-example-formatversion": "Ontvang project- en beoordelingsgegevens voor de pagina’s <kbd>Apple</kbd> en <kbd>Pear</kbd>, met gebruik van het nieuwere API-resultaatformaat.",
+	"apihelp-query+pageassessments-example-simple": "Ontvang project- en beoordelingsgegevens voor de pagina <kbd>Apple</kbd>.",
+	"apihelp-query+pageassessments-example-subprojects": "Ontvang project- en beoordelingsgegevens (ook voor deelprojecten) voor de pagina <kbd>Apple</kbd>.",
+	"apihelp-query+projectpages-summary": "Een lijst maken van alle pagina’s die aan een of meer projecten zijn gekoppeld.",
+	"apihelp-query+projectpages-param-assessments": "Ook beoordelingen retourneren voor de geretourneerde pagina’s.",
+	"apihelp-query+projectpages-param-projects": "De projecten waarvoor pagina’s moeten worden vermeld. Als deze parameter wordt weggelaten, worden alle projecten meegenomen.",
+	"apihelp-query+projectpages-param-limit": "Het maximale aantal te retourneren pagina’s.",
+	"apihelp-query+projectpages-example-simple-1": "Verkrijg de eerste 10 pagina's geassocieeerd met het WikiProject <kbd>Medicine</kbd> of WikiProject <kbd>Anatomy</kbd>.",
+	"apihelp-query+projectpages-example-simple-2": "Ontvang de eerste 10 pagina’s die verband houden met WikiProject <kbd>Medicine</kbd>, met inbegrip van beoordelingsgegevens.",
+	"apihelp-query+projectpages-example-generator": "Ontvang pagina-informatie voor de eerste 10 pagina’s die zijn gekoppeld aan WikiProject <kbd>Textile Arts</kbd>.",
+	"apihelp-query+projects-summary": "Een lijst maken van alle projecten.",
+	"apihelp-query+projects-param-subprojects": "Ook deelprojecten meenemen.",
+	"apihelp-query+projects-example": "Ontvang een lijst met alle projecten.",
+	"apihelp-query+projects-example-subprojects": "Ontvang een lijst met alle projecten en deelprojecten.",
+	"apiwarn-pageassessments-nogeneratorassessments": "Het is niet mogelijk om paginabeoordelingsresultaten op te halen uit <kbd>generator=projectpages</kbd>.",
+	"apiwarn-pageassessments-badproject": "Projectnaam niet herkend: $1."
 }
