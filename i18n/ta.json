@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"ElangoRamanujam"
+			"ElangoRamanujam",
+			"Fahimrazick"
 		]
 	},
 	"pageassessments-project": "திட்டம்",
 	"pageassessments-page-title": "பக்கத் தலைப்பு",
-	"pageassessments-search": "தேடுக",
+	"pageassessments-search": "தேடு",
 	"pageassessments-importance": "முக்கியத்துவம்",
 	"pageassessments-class": "வகுப்பு",
 	"pageassessments-timestamp": "நேரமுத்திரை",
