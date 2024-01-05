@@ -21,14 +21,14 @@
 
 namespace MediaWiki\Extension\PageAssessments;
 
-use Html;
 use HTMLForm;
 use HTMLTextField;
+use MediaWiki\Html\Html;
+use MediaWiki\Output\OutputPage;
+use MediaWiki\SpecialPage\QueryPage;
+use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
-use OutputPage;
-use QueryPage;
 use Skin;
-use Status;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 

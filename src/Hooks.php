@@ -24,14 +24,14 @@
 namespace MediaWiki\Extension\PageAssessments;
 
 use Content;
-use LinksUpdate;
 use LogEntry;
+use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
 use MediaWiki\Hook\LinksUpdateCompleteHook;
 use MediaWiki\Hook\ParserFirstCallInitHook;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
+use MediaWiki\User\User;
 use Parser;
 use RequestContext;
-use User;
 use WikiPage;
 
 class Hooks implements
