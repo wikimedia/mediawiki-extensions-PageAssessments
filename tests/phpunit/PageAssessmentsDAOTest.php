@@ -12,14 +12,6 @@ use MediaWiki\Extension\PageAssessments\PageAssessmentsDAO;
 class PageAssessmentsDAOTest extends MediaWikiIntegrationTestCase {
 
 	/**
-	 * Setup for tests
-	 */
-	protected function setUp(): void {
-		parent::setUp();
-		$this->tablesUsed = [ 'page_assessments' ];
-	}
-
-	/**
 	 * @covers MediaWiki\Extension\PageAssessments\PageAssessmentsDAO::insertRecord()
 	 */
 	public function testInsert() {
