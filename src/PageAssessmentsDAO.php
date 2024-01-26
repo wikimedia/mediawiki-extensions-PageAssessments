@@ -30,7 +30,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use Parser;
 
-class PageAssessmentsDAO implements IDBAccessObject {
+class PageAssessmentsDAO {
 
 	/** @var array Instance cache associating project IDs with project names */
 	protected static $projectNames = [];
@@ -78,7 +78,7 @@ class PageAssessmentsDAO implements IDBAccessObject {
 			}
 		}
 		// Get a list of all the projects previously assigned to the page.
-		$projectsInDb = self::getAllProjects( $pageId, self::READ_LATEST );
+		$projectsInDb = self::getAllProjects( $pageId, IDBAccessObject::READ_LATEST );
 
 		$toInsert = array_diff( $projects, $projectsInDb );
 		$toDelete = array_diff( $projectsInDb, $projects );
@@ -281,7 +281,7 @@ class PageAssessmentsDAO implements IDBAccessObject {
 	 *     force reading from the primary database. See docs at IDBAccessObject.php.
 	 * @return array $results All projects associated with given page
 	 */
-	public static function getAllProjects( $pageId, $flags = self::READ_NORMAL ) {
+	public static function getAllProjects( $pageId, $flags = IDBAccessObject::READ_NORMAL ) {
 		list( $index, $options ) = DBAccessObjectUtils::getDBOptions( $flags );
 		$db = wfGetDB( $index );
 		$res = $db->select(
