@@ -5,8 +5,6 @@
  * projects that were used in an assessment by mistake or for testing.
  */
 
-use MediaWiki\MediaWikiServices;
-
 $IP = getenv( 'MW_INSTALL_PATH' );
 if ( $IP === false ) {
 	$IP = __DIR__ . '/../../..';
@@ -39,8 +37,6 @@ class PurgeUnusedProjects extends Maintenance {
 			}
 		}
 
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-
 		// Build a list of all the projects that are used in assessments
 		$projectIds2 = [];
 		$res = $dbr->select( 'page_assessments', 'DISTINCT( pa_project_id )', [], __METHOD__ );
@@ -68,7 +64,7 @@ class PurgeUnusedProjects extends Maintenance {
 			$conds = [ 'pap_project_id NOT IN (' . $dbr->makeList( $usedProjectIds ) . ')' ];
 			$dbw->delete( 'page_assessments_projects', $conds, __METHOD__ );
 			$this->output( "Done.\n" );
-			$lbFactory->waitForReplication();
+			$this->waitForReplication();
 			// Recount all the projects
 			$finalCount = $dbr->selectField( 'page_assessments_projects', 'COUNT(*)', [], __METHOD__ );
 		}
