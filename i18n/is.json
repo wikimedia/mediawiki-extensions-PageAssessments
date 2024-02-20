@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Snævar",
-			"Sveinn í Felli"
+			"Sveinn í Felli",
+			"Stefán Örvar Sigmundsson"
 		]
 	},
-	"pageassessments-desc": "Þessi viðbót geymir mat á síðum í gangnabanka töflu með hjálp þáttunar aðgerðar.",
+	"pageassessments-desc": "Þessi viðbót er til að geyma síðumat í gagnagrunnstöflu með hjálp þáttaraaðgerðar",
 	"pageassessments-project": "Verkefni",
 	"pageassessments-page-namespace": "Nafnrými síðunnar",
 	"pageassessments-page-title": "Titill síðu",
