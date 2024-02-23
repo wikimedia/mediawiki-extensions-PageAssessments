@@ -294,7 +294,7 @@ class SpecialPage extends QueryPage {
 		$this->getOutput()->addModules( 'ext.pageassessments.special' );
 
 		// Add a list of all projects to the page's JS.
-		$projects = wfGetDB( DB_REPLICA )->selectFieldValues(
+		$projects = $this->getDBLoadBalancer()->getConnection( DB_REPLICA )->selectFieldValues(
 			[ 'page_assessments_projects' ],
 			'pap_project_title',
 			'',

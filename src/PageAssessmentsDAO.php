@@ -29,11 +29,22 @@ use IDBAccessObject;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use Parser;
+use Wikimedia\Rdbms\IDatabase;
 
 class PageAssessmentsDAO {
 
 	/** @var array Instance cache associating project IDs with project names */
 	protected static $projectNames = [];
+
+	/**
+	 * Get a database connection
+	 * @param int $index (DB_REPLICA|DB_PRIMARY)
+	 * @return IDatabase
+	 */
+	private static function getDBConnection( int $index ) {
+		return MediaWikiServices::getInstance()->getDBLoadBalancer()
+			->getConnection( $index );
+	}
 
 	/**
 	 * Driver function that handles updating assessment data in database
@@ -143,7 +154,7 @@ class PageAssessmentsDAO {
 			if ( isset( self::$projectNames[$projectId] ) ) {
 				return self::$projectNames[$projectId];
 			} else {
-				$dbr = wfGetDB( DB_REPLICA );
+				$dbr = self::getDBConnection( DB_REPLICA );
 				$projectName = $dbr->selectField(
 					'page_assessments_projects',
 					'pap_project_title',
@@ -180,7 +191,7 @@ class PageAssessmentsDAO {
 	 * @return int|false project ID or false if not found
 	 */
 	public static function getProjectId( $project ) {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = self::getDBConnection( DB_REPLICA );
 		return $dbr->selectField(
 			'page_assessments_projects',
 			'pap_project_id',
@@ -196,7 +207,7 @@ class PageAssessmentsDAO {
 	 * @return int Insert Id for new project
 	 */
 	public static function insertProject( $project, $parentId = null ) {
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = self::getDBConnection( DB_PRIMARY );
 		$values = [ 'pap_project_title' => $project ];
 		if ( $parentId ) {
 			$values[ 'pap_parent_id' ] = (int)$parentId;
@@ -235,7 +246,7 @@ class PageAssessmentsDAO {
 	 * @return bool true
 	 */
 	public static function updateRecord( $values ) {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = self::getDBConnection( DB_REPLICA );
 		$conds = [
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project_id' => $values['pa_project_id']
@@ -256,7 +267,7 @@ class PageAssessmentsDAO {
 			}
 		}
 		// Make updates if there are changes
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = self::getDBConnection( DB_PRIMARY );
 		$dbw->update( 'page_assessments', $values, $conds, __METHOD__ );
 		return true;
 	}
@@ -267,7 +278,7 @@ class PageAssessmentsDAO {
 	 * @return bool true
 	 */
 	public static function insertRecord( $values ) {
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = self::getDBConnection( DB_PRIMARY );
 		// Use IGNORE in case 2 records for the same project are added at once.
 		// This normally shouldn't happen, but is possible. (See T152080)
 		$dbw->insert( 'page_assessments', $values, __METHOD__, [ 'IGNORE' ] );
@@ -282,8 +293,8 @@ class PageAssessmentsDAO {
 	 * @return array $results All projects associated with given page
 	 */
 	public static function getAllProjects( $pageId, $flags = IDBAccessObject::READ_NORMAL ) {
-		list( $index, $options ) = DBAccessObjectUtils::getDBOptions( $flags );
-		$db = wfGetDB( $index );
+		[ $index, $options ] = DBAccessObjectUtils::getDBOptions( $flags );
+		$db = self::getDBConnection( $index );
 		$res = $db->select(
 			'page_assessments',
 			'pa_project_id',
@@ -306,7 +317,7 @@ class PageAssessmentsDAO {
 	 * @return bool true
 	 */
 	public static function deleteRecord( $values ) {
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = self::getDBConnection( DB_PRIMARY );
 		$conds = [
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project_id' => $values['pa_project_id']
@@ -323,7 +334,7 @@ class PageAssessmentsDAO {
 	 * @return bool true
 	 */
 	public static function deleteRecordsForPage( $id ) {
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = self::getDBConnection( DB_PRIMARY );
 		$conds = [
 			'pa_page_id' => $id,
 		];
