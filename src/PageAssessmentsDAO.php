@@ -24,26 +24,24 @@
 
 namespace MediaWiki\Extension\PageAssessments;
 
-use DBAccessObjectUtils;
 use IDBAccessObject;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use Parser;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 
 class PageAssessmentsDAO {
 
 	/** @var array Instance cache associating project IDs with project names */
 	protected static $projectNames = [];
 
-	/**
-	 * Get a database connection
-	 * @param int $index (DB_REPLICA|DB_PRIMARY)
-	 * @return IDatabase
-	 */
-	private static function getDBConnection( int $index ) {
-		return MediaWikiServices::getInstance()->getDBLoadBalancer()
-			->getConnection( $index );
+	private static function getReplicaDBConnection(): IReadableDatabase {
+		return MediaWikiServices::getInstance()->getConnectionProvider()->getReplicaDatabase();
+	}
+
+	private static function getPrimaryDBConnection(): IDatabase {
+		return MediaWikiServices::getInstance()->getConnectionProvider()->getPrimaryDatabase();
 	}
 
 	/**
@@ -55,8 +53,8 @@ class PageAssessmentsDAO {
 	public static function doUpdates( $titleObj, $assessmentData, $ticket = null ) {
 		global $wgUpdateRowsPerQuery, $wgPageAssessmentsSubprojects;
 
-		$factory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$ticket = $ticket ?: $factory->getEmptyTransactionTicket( __METHOD__ );
+		$dbProvider = MediaWikiServices::getInstance()->getConnectionProvider();
+		$ticket = $ticket ?: $dbProvider->getEmptyTransactionTicket( __METHOD__ );
 
 		$pageId = $titleObj->getArticleID();
 		$revisionId = $titleObj->getLatestRevID();
@@ -121,7 +119,7 @@ class PageAssessmentsDAO {
 				}
 				// Check for database lag if there's a huge number of assessments
 				if ( $i > 0 && $i % $wgUpdateRowsPerQuery == 0 ) {
-					$factory->commitAndWaitForReplication( __METHOD__, $ticket );
+					$dbProvider->commitAndWaitForReplication( __METHOD__, $ticket );
 				}
 				$i++;
 			}
@@ -136,7 +134,7 @@ class PageAssessmentsDAO {
 			self::deleteRecord( $values );
 			// Check for database lag if there's a huge number of deleted assessments
 			if ( $i > 0 && $i % $wgUpdateRowsPerQuery == 0 ) {
-				$factory->commitAndWaitForReplication( __METHOD__, $ticket );
+				$dbProvider->commitAndWaitForReplication( __METHOD__, $ticket );
 			}
 			$i++;
 		}
@@ -154,7 +152,7 @@ class PageAssessmentsDAO {
 			if ( isset( self::$projectNames[$projectId] ) ) {
 				return self::$projectNames[$projectId];
 			} else {
-				$dbr = self::getDBConnection( DB_REPLICA );
+				$dbr = self::getReplicaDBConnection();
 				$projectName = $dbr->selectField(
 					'page_assessments_projects',
 					'pap_project_title',
@@ -191,7 +189,7 @@ class PageAssessmentsDAO {
 	 * @return int|false project ID or false if not found
 	 */
 	public static function getProjectId( $project ) {
-		$dbr = self::getDBConnection( DB_REPLICA );
+		$dbr = self::getReplicaDBConnection();
 		return $dbr->selectField(
 			'page_assessments_projects',
 			'pap_project_id',
@@ -207,7 +205,7 @@ class PageAssessmentsDAO {
 	 * @return int Insert Id for new project
 	 */
 	public static function insertProject( $project, $parentId = null ) {
-		$dbw = self::getDBConnection( DB_PRIMARY );
+		$dbw = self::getPrimaryDBConnection();
 		$values = [ 'pap_project_title' => $project ];
 		if ( $parentId ) {
 			$values[ 'pap_parent_id' ] = (int)$parentId;
@@ -246,7 +244,7 @@ class PageAssessmentsDAO {
 	 * @return bool true
 	 */
 	public static function updateRecord( $values ) {
-		$dbr = self::getDBConnection( DB_REPLICA );
+		$dbr = self::getReplicaDBConnection();
 		$conds = [
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project_id' => $values['pa_project_id']
@@ -267,7 +265,7 @@ class PageAssessmentsDAO {
 			}
 		}
 		// Make updates if there are changes
-		$dbw = self::getDBConnection( DB_PRIMARY );
+		$dbw = self::getPrimaryDBConnection();
 		$dbw->update( 'page_assessments', $values, $conds, __METHOD__ );
 		return true;
 	}
@@ -278,7 +276,7 @@ class PageAssessmentsDAO {
 	 * @return bool true
 	 */
 	public static function insertRecord( $values ) {
-		$dbw = self::getDBConnection( DB_PRIMARY );
+		$dbw = self::getPrimaryDBConnection();
 		// Use IGNORE in case 2 records for the same project are added at once.
 		// This normally shouldn't happen, but is possible. (See T152080)
 		$dbw->insert( 'page_assessments', $values, __METHOD__, [ 'IGNORE' ] );
@@ -293,15 +291,17 @@ class PageAssessmentsDAO {
 	 * @return array $results All projects associated with given page
 	 */
 	public static function getAllProjects( $pageId, $flags = IDBAccessObject::READ_NORMAL ) {
-		[ $index, $options ] = DBAccessObjectUtils::getDBOptions( $flags );
-		$db = self::getDBConnection( $index );
-		$res = $db->select(
-			'page_assessments',
-			'pa_project_id',
-			[ 'pa_page_id' => $pageId ],
-			__METHOD__,
-			$options
-		);
+		if ( ( $flags & IDBAccessObject::READ_LATEST ) == IDBAccessObject::READ_LATEST ) {
+			$db = self::getPrimaryDBConnection();
+		} else {
+			$db = self::getReplicaDBConnection();
+		}
+		$res = $db->newSelectQueryBuilder()
+			->select( 'pa_project_id' )
+			->from( 'page_assessments' )
+			->where( [ 'pa_page_id' => $pageId ] )
+			->recency( $flags )
+			->caller( __METHOD__ )->fetchResultSet();
 		$results = [];
 		if ( $res ) {
 			foreach ( $res as $row ) {
@@ -317,7 +317,7 @@ class PageAssessmentsDAO {
 	 * @return bool true
 	 */
 	public static function deleteRecord( $values ) {
-		$dbw = self::getDBConnection( DB_PRIMARY );
+		$dbw = self::getPrimaryDBConnection();
 		$conds = [
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project_id' => $values['pa_project_id']
@@ -334,7 +334,7 @@ class PageAssessmentsDAO {
 	 * @return bool true
 	 */
 	public static function deleteRecordsForPage( $id ) {
-		$dbw = self::getDBConnection( DB_PRIMARY );
+		$dbw = self::getPrimaryDBConnection();
 		$conds = [
 			'pa_page_id' => $id,
 		];
