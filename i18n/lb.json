@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Volvox"
+		]
+	},
+	"pageassessments-desc": "Dës Erweiderung ass dofir geduecht fir Säitebewäertungen mat Hëllef vun enger Parserfunktioun an engem Datebanktableau ze späicheren",
+	"pageassessments-special": "Säitebewäertung",
+	"pageassessments-project": "Projet",
+	"pageassessments-page-namespace": "Säitennummraum",
+	"pageassessments-page-title": "Säitentitel",
+	"pageassessments-search": "Sichen",
+	"pageassessments-importance": "Wichtegkeet",
+	"pageassessments-class": "Klass",
+	"pageassessments-timestamp": "Zäitstempel",
+	"pageassessments-total-results": "Resultater insgesamt: $1",
+	"pageassessments-error-namespace-filter": "Gitt wgl. den Numm oder den Titel vun engem Projet an."
+}
