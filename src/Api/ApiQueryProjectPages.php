@@ -50,7 +50,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	private function run( $resultPageSet = null ) {
 		$params = $this->extractRequestParams();
 
-		if ( $params['assessments'] && isset( $resultPageSet ) ) {
+		if ( $params['assessments'] && $resultPageSet !== null ) {
 			$this->addWarning( 'apiwarn-pageassessments-nogeneratorassessments' );
 		}
 
