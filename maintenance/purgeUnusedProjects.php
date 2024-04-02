@@ -62,7 +62,11 @@ class PurgeUnusedProjects extends Maintenance {
 			// Delete all the projects that aren't used in any current assessments
 			// and aren't parents of other projects.
 			$conds = [ 'pap_project_id NOT IN (' . $dbr->makeList( $usedProjectIds ) . ')' ];
-			$dbw->delete( 'page_assessments_projects', $conds, __METHOD__ );
+			$dbw->newDeleteQueryBuilder()
+				->deleteFrom( 'page_assessments_projects' )
+				->where( $conds )
+				->caller( __METHOD__ )
+				->execute();
 			$this->output( "Done.\n" );
 			$this->waitForReplication();
 			// Recount all the projects

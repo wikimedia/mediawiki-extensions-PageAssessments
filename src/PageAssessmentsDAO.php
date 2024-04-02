@@ -210,10 +210,15 @@ class PageAssessmentsDAO {
 		if ( $parentId ) {
 			$values[ 'pap_parent_id' ] = (int)$parentId;
 		}
-		// Use IGNORE in case two projects with the same name are added at once.
-		// This normally shouldn't happen, but is possible perhaps from clicking
-		// 'Publish changes' twice in very quick succession. (See T286671)
-		$dbw->insert( 'page_assessments_projects', $values, __METHOD__, [ 'IGNORE' ] );
+		$dbw->newInsertQueryBuilder()
+			->insertInto( 'page_assessments_projects' )
+			// Use ignore() in case two projects with the same name are added at once.
+			// This normally shouldn't happen, but is possible perhaps from clicking
+			// 'Publish changes' twice in very quick succession. (See T286671)
+			->ignore()
+			->row( $values )
+			->caller( __METHOD__ )
+			->execute();
 		$id = $dbw->insertId();
 		return $id;
 	}
@@ -279,7 +284,12 @@ class PageAssessmentsDAO {
 		$dbw = self::getPrimaryDBConnection();
 		// Use IGNORE in case 2 records for the same project are added at once.
 		// This normally shouldn't happen, but is possible. (See T152080)
-		$dbw->insert( 'page_assessments', $values, __METHOD__, [ 'IGNORE' ] );
+		$dbw->newInsertQueryBuilder()
+			->insertInto( 'page_assessments' )
+			->ignore()
+			->row( $values )
+			->caller( __METHOD__ )
+			->execute();
 		return true;
 	}
 
@@ -322,7 +332,11 @@ class PageAssessmentsDAO {
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project_id' => $values['pa_project_id']
 		];
-		$dbw->delete( 'page_assessments', $conds, __METHOD__ );
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'page_assessments' )
+			->where( $conds )
+			->caller( __METHOD__ )
+			->execute();
 		return true;
 	}
 
@@ -338,7 +352,11 @@ class PageAssessmentsDAO {
 		$conds = [
 			'pa_page_id' => $id,
 		];
-		$dbw->delete( 'page_assessments', $conds, __METHOD__ );
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'page_assessments' )
+			->where( $conds )
+			->caller( __METHOD__ )
+			->execute();
 		return true;
 	}
 
