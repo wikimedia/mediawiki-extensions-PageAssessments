@@ -271,7 +271,12 @@ class PageAssessmentsDAO {
 		}
 		// Make updates if there are changes
 		$dbw = self::getPrimaryDBConnection();
-		$dbw->update( 'page_assessments', $values, $conds, __METHOD__ );
+		$dbw->newUpdateQueryBuilder()
+			->update( 'page_assessments' )
+			->set( $values )
+			->where( $conds )
+			->caller( __METHOD__ )
+			->execute();
 		return true;
 	}
 
