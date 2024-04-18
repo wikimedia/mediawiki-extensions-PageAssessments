@@ -318,10 +318,8 @@ class PageAssessmentsDAO {
 			->recency( $flags )
 			->caller( __METHOD__ )->fetchResultSet();
 		$results = [];
-		if ( $res ) {
-			foreach ( $res as $row ) {
-				$results[] = $row->pa_project_id;
-			}
+		foreach ( $res as $row ) {
+			$results[] = $row->pa_project_id;
 		}
 		return $results;
 	}
