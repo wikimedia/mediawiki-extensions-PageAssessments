@@ -65,8 +65,11 @@ class PageAssessmentsDAOTest extends MediaWikiIntegrationTestCase {
 			'pa_project_id' => '3'
 		];
 		$pageBody->deleteRecord( $values );
-		$res = $this->db->select( 'page_assessments', '*' );
-		$row = $res->fetchRow();
+		$row = $this->db->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'page_assessments' )
+			->caller( __METHOD__ )
+			->fetchRow();
 		$this->assertFalse( $row );
 	}
 

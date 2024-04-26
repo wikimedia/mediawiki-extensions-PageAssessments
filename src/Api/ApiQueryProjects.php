@@ -39,7 +39,7 @@ class ApiQueryProjects extends ApiQueryBase {
 		// If this wiki distinguishes between projects and subprojects, exclude
 		// subprojects (i.e. projects with parents) unless explicitly asked for.
 		if ( $wgPageAssessmentsSubprojects && !$params['subprojects'] ) {
-			$this->addWhere( 'pap_parent_id IS NULL' );
+			$this->addWhere( [ 'pap_parent_id' => null ] );
 		}
 		$this->addOption( 'ORDER BY', 'pap_project_title' );
 

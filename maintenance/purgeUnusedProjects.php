@@ -25,12 +25,21 @@ class PurgeUnusedProjects extends Maintenance {
 		$dbw = $this->getDB( DB_PRIMARY );
 		$dbr = $this->getDB( DB_REPLICA );
 		// Count all the projects
-		$initialCount = $dbr->selectField( 'page_assessments_projects', 'COUNT(*)', [], __METHOD__ );
+		$initialCount = $dbr->newSelectQueryBuilder()
+			->select( 'COUNT(*)' )
+			->from( 'page_assessments_projects' )
+			->caller( __METHOD__ )
+			->fetchField();
 		$this->output( "Projects before purge: $initialCount\n" );
 
 		// Build a list of all the projects that are parents of other projects
 		$projectIds1 = [];
-		$res = $dbr->select( 'page_assessments_projects', 'DISTINCT( pap_parent_id )', [], __METHOD__ );
+		$res = $dbr->newSelectQueryBuilder()
+			->select( 'pap_parent_id' )
+			->distinct()
+			->from( 'page_assessments_projects' )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 		foreach ( $res as $row ) {
 			if ( $row->pap_parent_id ) {
 				$projectIds1[] = $row->pap_parent_id;
@@ -39,7 +48,12 @@ class PurgeUnusedProjects extends Maintenance {
 
 		// Build a list of all the projects that are used in assessments
 		$projectIds2 = [];
-		$res = $dbr->select( 'page_assessments', 'DISTINCT( pa_project_id )', [], __METHOD__ );
+		$res = $dbr->newSelectQueryBuilder()
+			->select( 'pa_project_id' )
+			->distinct()
+			->from( 'page_assessments' )
+			->caller( __METHOD__ )
+			->fetchResultset();
 		foreach ( $res as $row ) {
 			if ( $row->pa_project_id ) {
 				$projectIds2[] = $row->pa_project_id;
@@ -47,7 +61,7 @@ class PurgeUnusedProjects extends Maintenance {
 		}
 
 		// Combine the two lists
-		$usedProjectIds = array_unique( array_merge( $projectIds1, $projectIds2 ) );
+		$usedProjectIds = array_values( array_unique( array_merge( $projectIds1, $projectIds2 ) ) );
 
 		// Protect against lack of projects in some environments - T219935
 		if ( !count( $usedProjectIds ) ) {
@@ -61,7 +75,7 @@ class PurgeUnusedProjects extends Maintenance {
 			$this->output( "Purging unused projects from page_assessments_projects...\n" );
 			// Delete all the projects that aren't used in any current assessments
 			// and aren't parents of other projects.
-			$conds = [ 'pap_project_id NOT IN (' . $dbr->makeList( $usedProjectIds ) . ')' ];
+			$conds = $dbr->expr( 'pap_project_id', '!=', $usedProjectIds );
 			$dbw->newDeleteQueryBuilder()
 				->deleteFrom( 'page_assessments_projects' )
 				->where( $conds )
@@ -70,7 +84,11 @@ class PurgeUnusedProjects extends Maintenance {
 			$this->output( "Done.\n" );
 			$this->waitForReplication();
 			// Recount all the projects
-			$finalCount = $dbr->selectField( 'page_assessments_projects', 'COUNT(*)', [], __METHOD__ );
+			$finalCount = $dbr->newSelectQueryBuilder()
+				->select( 'COUNT(*)' )
+				->from( 'page_assessments_projects' )
+				->caller( __METHOD__ )
+				->fetchField();
 		}
 		$this->output( "Projects after purge: $finalCount\n" );
 	}

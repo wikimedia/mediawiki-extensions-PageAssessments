@@ -153,12 +153,12 @@ class PageAssessmentsDAO {
 				return self::$projectNames[$projectId];
 			} else {
 				$dbr = self::getReplicaDBConnection();
-				$projectName = $dbr->selectField(
-					'page_assessments_projects',
-					'pap_project_title',
-					[ 'pap_project_id' => $projectId ],
-					__METHOD__
-				);
+				$projectName = $dbr->newSelectQueryBuilder()
+					->select( 'pap_project_title' )
+					->from( 'page_assessments_projects' )
+					->where( [ 'pap_project_id' => $projectId ] )
+					->caller( __METHOD__ )
+					->fetchField();
 				// Store the project name in instance cache
 				self::$projectNames[$projectId] = $projectName;
 				return $projectName;
@@ -190,12 +190,12 @@ class PageAssessmentsDAO {
 	 */
 	public static function getProjectId( $project ) {
 		$dbr = self::getReplicaDBConnection();
-		return $dbr->selectField(
-			'page_assessments_projects',
-			'pap_project_id',
-			[ 'pap_project_title' => $project ],
-			__METHOD__
-		);
+		return $dbr->newSelectQueryBuilder()
+			->select( 'pap_project_id' )
+			->from( 'page_assessments_projects' )
+			->where( [ 'pap_project_title' => $project ] )
+			->caller( __METHOD__ )
+			->fetchField();
 	}
 
 	/**
@@ -255,12 +255,12 @@ class PageAssessmentsDAO {
 			'pa_project_id' => $values['pa_project_id']
 		];
 		// Check if there are no updates to be done
-		$record = $dbr->select(
-			'page_assessments',
-			[ 'pa_class', 'pa_importance', 'pa_project_id', 'pa_page_id' ],
-			$conds,
-			__METHOD__
-		);
+		$record = $dbr->newSelectQueryBuilder()
+			->select( [ 'pa_class', 'pa_importance', 'pa_project_id', 'pa_page_id' ] )
+			->from( 'page_assessments' )
+			->where( $conds )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 		foreach ( $record as $row ) {
 			if ( $row->pa_importance == $values['pa_importance'] &&
 				$row->pa_class == $values['pa_class']

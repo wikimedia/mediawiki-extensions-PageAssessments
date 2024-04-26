@@ -102,7 +102,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		// If this wiki distinguishes between projects and subprojects, exclude
 		// subprojects (i.e. projects with parents) unless explicitly asked for.
 		if ( $wgPageAssessmentsSubprojects && !$params['subprojects'] ) {
-			$this->addWhere( 'pap_parent_id IS NULL' );
+			$this->addWhere( [ 'pap_parent_id' => null ] );
 		}
 		$this->addOption( 'LIMIT', $params['limit'] + 1 );
 
@@ -114,7 +114,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		// assure strict ordering, but mysql gets cranky if you order by a field
 		// when there's only one to sort
 		if ( count( $pages ) > 1 ) {
-			$this->addOption( 'ORDER BY', 'pa_page_id, pa_project_id' );
+			$this->addOption( 'ORDER BY', [ 'pa_page_id', 'pa_project_id' ] );
 		} else {
 			$this->addOption( 'ORDER BY', 'pa_project_id' );
 		}

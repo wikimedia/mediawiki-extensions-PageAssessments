@@ -173,7 +173,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 
 		// If more than 1 project is requested, order by project first.
 		if ( count( $this->projectIds ) > 1 ) {
-			$this->addOption( 'ORDER BY', 'pa_project_id, pa_page_id' );
+			$this->addOption( 'ORDER BY', [ 'pa_project_id', 'pa_page_id' ] );
 		} else {
 			$this->addOption( 'ORDER BY', 'pa_page_id' );
 		}
