@@ -24,12 +24,10 @@ class PageAssessmentsDAOTest extends MediaWikiIntegrationTestCase {
 			'pa_page_revision' => '20'
 		];
 		$pageBody->insertRecord( $values );
-		$this->assertSelect(
-			'page_assessments', // Table
-			[ 'pa_page_id', 'pa_class', 'pa_importance' ], // Fields to select
-			[], // Conditions
-			[ [ '10', 'A', 'High' ] ] // Expected values
-		);
+		$this->newSelectQueryBuilder()
+			->select( [ 'pa_page_id', 'pa_class', 'pa_importance' ] )
+			->from( 'page_assessments' )
+			->assertRowValue( [ '10', 'A', 'High' ] );
 	}
 
 	/**
@@ -46,12 +44,10 @@ class PageAssessmentsDAOTest extends MediaWikiIntegrationTestCase {
 			'pa_page_revision' => '21'
 		];
 		$pageBody->updateRecord( $values );
-		$this->assertSelect(
-			'page_assessments',
-			[ 'pa_page_id', 'pa_class', 'pa_importance' ],
-			[],
-			[ [ '10', 'B', 'Low' ] ]
-		);
+		$this->newSelectQueryBuilder()
+			->select( [ 'pa_page_id', 'pa_class', 'pa_importance' ] )
+			->from( 'page_assessments' )
+			->assertRowValue( [ '10', 'B', 'Low' ] );
 	}
 
 	/**
