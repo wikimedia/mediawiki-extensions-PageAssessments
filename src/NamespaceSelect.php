@@ -21,7 +21,7 @@
 
 namespace MediaWiki\Extension\PageAssessments;
 
-use HTMLSelectNamespace;
+use MediaWiki\HTMLForm\Field\HTMLSelectNamespace;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Widget\NamespaceInputWidget;
 

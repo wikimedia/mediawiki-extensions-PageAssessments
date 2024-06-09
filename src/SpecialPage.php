@@ -21,9 +21,9 @@
 
 namespace MediaWiki\Extension\PageAssessments;
 
-use HTMLForm;
-use HTMLTextField;
 use MediaWiki\Html\Html;
+use MediaWiki\HTMLForm\Field\HTMLTextField;
+use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\SpecialPage\QueryPage;
 use MediaWiki\Status\Status;

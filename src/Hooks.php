@@ -25,13 +25,13 @@ namespace MediaWiki\Extension\PageAssessments;
 
 use Content;
 use LogEntry;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
 use MediaWiki\Hook\LinksUpdateCompleteHook;
 use MediaWiki\Hook\ParserFirstCallInitHook;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
+use MediaWiki\Parser\Parser;
 use MediaWiki\User\User;
-use Parser;
-use RequestContext;
 use WikiPage;
 
 class Hooks implements

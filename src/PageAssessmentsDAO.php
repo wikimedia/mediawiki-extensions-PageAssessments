@@ -26,8 +26,8 @@ namespace MediaWiki\Extension\PageAssessments;
 
 use IDBAccessObject;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\Parser;
 use MediaWiki\Title\Title;
-use Parser;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IReadableDatabase;
 
