@@ -24,7 +24,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
-		$pages = $this->getPageSet()->getGoodTitles();
+		$pages = $this->getPageSet()->getGoodPages();
 		// are there pages to get project/assessment info for?
 		if ( !count( $pages ) ) {
 			return;  // If not, return so other prop modules can run
