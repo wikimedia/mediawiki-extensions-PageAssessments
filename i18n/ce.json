@@ -4,5 +4,15 @@
 			"Умар"
 		]
 	},
-	"pageassessments-page-namespace": "АгӀонан цӀерийн меттиг"
+	"pageassessments-desc": "ХӀара шордар агӀонан мах хадорш Ӏалашдан лерина йу базин таблицехь, парсеран функцица.",
+	"pageassessments-special": "АгӀонан мах хадор",
+	"pageassessments-project": "Проект",
+	"pageassessments-page-namespace": "АгӀонан цӀерийн меттиг",
+	"pageassessments-page-title": "АгӀонан корта",
+	"pageassessments-search": "Лахар",
+	"pageassessments-importance": "МаьӀна",
+	"pageassessments-class": "Класс",
+	"pageassessments-timestamp": "Билгало",
+	"pageassessments-total-results": "Дерриге а жамӀаш: $1",
+	"pageassessments-error-namespace-filter": "Проектан йа агӀонан цӀе йазйе."
 }
