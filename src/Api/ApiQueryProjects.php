@@ -29,8 +29,6 @@ class ApiQueryProjects extends ApiQueryBase {
 	 * Evaluate the parameters, perform the requested query, and set up the result
 	 */
 	public function execute() {
-		global $wgPageAssessmentsSubprojects;
-
 		$params = $this->extractRequestParams();
 
 		// Set the database query parameters
@@ -38,7 +36,7 @@ class ApiQueryProjects extends ApiQueryBase {
 		$this->addFields( [ 'project_title' => 'pap_project_title' ] );
 		// If this wiki distinguishes between projects and subprojects, exclude
 		// subprojects (i.e. projects with parents) unless explicitly asked for.
-		if ( $wgPageAssessmentsSubprojects && !$params['subprojects'] ) {
+		if ( $this->getConfig()->get( 'PageAssessmentsSubprojects' ) && !$params['subprojects'] ) {
 			$this->addWhere( [ 'pap_parent_id' => null ] );
 		}
 		$this->addOption( 'ORDER BY', 'pap_project_title' );
@@ -57,10 +55,8 @@ class ApiQueryProjects extends ApiQueryBase {
 
 	/** @inheritDoc */
 	public function getAllowedParams() {
-		global $wgPageAssessmentsSubprojects;
-
 		$allowedParams = [];
-		if ( $wgPageAssessmentsSubprojects ) {
+		if ( $this->getConfig()->get( 'PageAssessmentsSubprojects' ) ) {
 			$allowedParams[ 'subprojects' ] = [
 				ParamValidator::PARAM_DEFAULT => false,
 				ParamValidator::PARAM_TYPE => 'boolean',
@@ -71,12 +67,10 @@ class ApiQueryProjects extends ApiQueryBase {
 
 	/** @inheritDoc */
 	public function getExamplesMessages() {
-		global $wgPageAssessmentsSubprojects;
-
 		$exampleMessages = [
 			'action=query&list=projects' => 'apihelp-query+projects-example',
 		];
-		if ( $wgPageAssessmentsSubprojects ) {
+		if ( $this->getConfig()->get( 'PageAssessmentsSubprojects' ) ) {
 			$exampleMessages[ 'action=query&list=projects&pjsubprojects=true' ] =
 				'apihelp-query+projects-example-subprojects';
 		}
