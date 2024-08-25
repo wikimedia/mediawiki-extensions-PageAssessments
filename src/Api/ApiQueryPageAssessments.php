@@ -81,8 +81,6 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 	 * @param array $params
 	 */
 	private function buildDbQuery( array $pages, array $params ) {
-		global $wgPageAssessmentsSubprojects;
-
 		// build basic DB query
 		$this->addTables( [ 'page_assessments', 'page_assessments_projects' ] );
 		$this->addFields( [
@@ -101,7 +99,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		$this->addWhereFld( 'pa_page_id', array_keys( $pages ) );
 		// If this wiki distinguishes between projects and subprojects, exclude
 		// subprojects (i.e. projects with parents) unless explicitly asked for.
-		if ( $wgPageAssessmentsSubprojects && !$params['subprojects'] ) {
+		if ( $this->getConfig()->get( 'PageAssessmentsSubprojects' ) && !$params['subprojects'] ) {
 			$this->addWhere( [ 'pap_parent_id' => null ] );
 		}
 		$this->addOption( 'LIMIT', $params['limit'] + 1 );
@@ -133,8 +131,6 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 
 	/** @inheritDoc */
 	public function getAllowedParams() {
-		global $wgPageAssessmentsSubprojects;
-
 		$allowedParams = [
 			'continue' => [ ApiBase::PARAM_HELP_MSG => 'api-help-param-continue' ],
 			'limit' => [
@@ -145,7 +141,7 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_BIG2,
 			],
 		];
-		if ( $wgPageAssessmentsSubprojects ) {
+		if ( $this->getConfig()->get( 'PageAssessmentsSubprojects' ) ) {
 			$allowedParams[ 'subprojects' ] = [
 				ParamValidator::PARAM_DEFAULT => false,
 				ParamValidator::PARAM_TYPE => 'boolean',
@@ -156,15 +152,13 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 
 	/** @inheritDoc */
 	public function getExamplesMessages() {
-		global $wgPageAssessmentsSubprojects;
-
 		$exampleMessages = [
 			'action=query&prop=pageassessments&titles=Apple|Pear&formatversion=2'
 				=> 'apihelp-query+pageassessments-example-formatversion',
 			'action=query&prop=pageassessments&titles=Apple'
 				=> 'apihelp-query+pageassessments-example-simple',
 		];
-		if ( $wgPageAssessmentsSubprojects ) {
+		if ( $this->getConfig()->get( 'PageAssessmentsSubprojects' ) ) {
 			$exampleMessages['action=query&prop=pageassessments&titles=Apple&pasubprojects=true'] =
 				'apihelp-query+pageassessments-example-subprojects';
 		}
