@@ -2,10 +2,10 @@
 
 namespace MediaWiki\Extension\PageAssessments\Api;
 
-use ApiBase;
-use ApiPageSet;
-use ApiQuery;
-use ApiQueryGeneratorBase;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiPageSet;
+use MediaWiki\Api\ApiQuery;
+use MediaWiki\Api\ApiQueryGeneratorBase;
 use MediaWiki\Extension\PageAssessments\PageAssessmentsDAO;
 use MediaWiki\Title\Title;
 use Wikimedia\ParamValidator\ParamValidator;

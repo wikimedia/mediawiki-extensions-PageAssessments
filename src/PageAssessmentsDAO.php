@@ -24,11 +24,11 @@
 
 namespace MediaWiki\Extension\PageAssessments;
 
-use IDBAccessObject;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\Parser;
 use MediaWiki\Title\Title;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IDBAccessObject;
 use Wikimedia\Rdbms\IReadableDatabase;
 
 class PageAssessmentsDAO {
