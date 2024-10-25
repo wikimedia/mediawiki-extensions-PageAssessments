@@ -11,8 +11,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class ApiQueryProjects extends ApiQueryBase {
 
-	/** @inheritDoc */
-	public function __construct( ApiQuery $query, $moduleName ) {
+	public function __construct( ApiQuery $query, string $moduleName ) {
 		parent::__construct( $query, $moduleName, 'pj' );
 	}
 

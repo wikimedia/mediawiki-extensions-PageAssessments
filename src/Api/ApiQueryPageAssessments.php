@@ -14,8 +14,7 @@ use Wikimedia\ParamValidator\TypeDef\IntegerDef;
  */
 class ApiQueryPageAssessments extends ApiQueryBase {
 
-	/** @inheritDoc */
-	public function __construct( ApiQuery $query, $moduleName ) {
+	public function __construct( ApiQuery $query, string $moduleName ) {
 		parent::__construct( $query, $moduleName, 'pa' );
 	}
 

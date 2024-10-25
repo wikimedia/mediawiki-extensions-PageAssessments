@@ -23,8 +23,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	 */
 	private $projectIds = [];
 
-	/** @inheritDoc */
-	public function __construct( ApiQuery $query, $moduleName ) {
+	public function __construct( ApiQuery $query, string $moduleName ) {
 		// The prefix pp is already used by the pageprops module, so using wpp instead.
 		parent::__construct( $query, $moduleName, 'wpp' );
 	}
