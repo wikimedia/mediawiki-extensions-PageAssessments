@@ -32,7 +32,8 @@
 		"ParserFirstCallInit": "main",
 		"LoadExtensionSchemaUpdates": "schema",
 		"LinksUpdateComplete": "main",
-		"ArticleDeleteComplete": "main"
+		"ArticleDeleteComplete": "main",
+		"CirrusSearchAddQueryFeatures": "cirrussearch"
 	},
 	"HookHandlers": {
 		"main": {
@@ -40,6 +41,9 @@
 		},
 		"schema": {
 			"class": "MediaWiki\\Extension\\PageAssessments\\SchemaHooks"
+		},
+		"cirrussearch": {
+			"class": "MediaWiki\\Extension\\PageAssessments\\CirrusSearchHooks"
 		}
 	},
 	"MessagesDirs": {

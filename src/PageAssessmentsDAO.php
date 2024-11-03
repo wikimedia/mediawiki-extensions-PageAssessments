@@ -24,8 +24,10 @@
 
 namespace MediaWiki\Extension\PageAssessments;
 
+use CirrusSearch\WeightedTagsUpdater;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\Parser;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Title\Title;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IDBAccessObject;
@@ -138,6 +140,61 @@ class PageAssessmentsDAO {
 			}
 			$i++;
 		}
+
+		// TODO: Do this only if any projects were actually changed
+		self::updateSearchIndex( $titleObj, $assessmentData );
+	}
+
+	/**
+	 * Update projects in the CirrusSearch index.
+	 *
+	 * @param Title $titleObj
+	 * @param array $assessmentData
+	 */
+	public static function updateSearchIndex( Title $titleObj, array $assessmentData ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
+			return;
+		}
+		/** @var WeightedTagsUpdater $updater */
+		$updater = MediaWikiServices::getInstance()->getService( WeightedTagsUpdater::SERVICE );
+		$tags = [];
+		foreach ( $assessmentData as $parserData ) {
+			if ( !isset( $parserData[0] ) || $parserData[0] == '' || str_contains( $parserData[0], '|' ) ) {
+				// Ignore empty or invalid project names. Pipe character is not allowed in weighted_tags.
+				continue;
+			}
+			$name = $parserData[0]; // Name already cleaned above in doUpdates()
+			$weight = self::importanceToWeight( $parserData[ 2 ] );
+			$tags[ $name ] = $weight;
+		}
+
+		if ( $tags === [] ) {
+			$updater->resetWeightedTags(
+				$titleObj->toPageIdentity(),
+				[ 'ext.pageassessments.project' ],
+				'page-assessment-update'
+			);
+		} else {
+			$updater->updateWeightedTags(
+				$titleObj->toPageIdentity(),
+				'ext.pageassessments.project',
+				$tags,
+				'page-assessment-update'
+			);
+		}
+	}
+
+	private static function importanceToWeight( string $importance ): int {
+		// TODO: Read from local JSON page in MediaWiki namespace?
+		$importanceMap = [
+			'top' => 100,
+			'high' => 80,
+			'mid' => 60,
+			'low' => 40,
+			'unknown' => 40, // Consider unknown as low-importance
+			'na' => 10
+		];
+		return $importanceMap[ strtolower( $importance ) ] ?? 10;
 	}
 
 	/**
