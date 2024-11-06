@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nemoralis"
+		]
+	},
+	"pageassessments-desc": "Bu uzantı təhliledici funksiyanın köməyi ilə verilənlər bazası cədvəlində səhifə qiymətləndirmələrini saxlamaq üçündür",
+	"pageassessments-special": "Səhifə qiymətləndirmələri",
+	"pageassessments-project": "Layihə",
+	"pageassessments-page-namespace": "Səhifə ad fəzası",
+	"pageassessments-page-title": "Səhifə başlığı",
+	"pageassessments-search": "Axtar",
+	"pageassessments-importance": "Əhəmiyyət",
+	"pageassessments-class": "Sinif",
+	"pageassessments-timestamp": "Vaxt",
+	"pageassessments-total-results": "Ümumi nəticə: $1",
+	"pageassessments-error-namespace-filter": "Layihənin adını və ya səhifənin adını daxil edin."
+}
