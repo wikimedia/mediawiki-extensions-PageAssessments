@@ -58,6 +58,7 @@ class PageAssessmentsDAO {
 		$dbProvider = MediaWikiServices::getInstance()->getConnectionProvider();
 		$ticket = $ticket ?: $dbProvider->getEmptyTransactionTicket( __METHOD__ );
 
+		$nochange = true;
 		$pageId = $titleObj->getArticleID();
 		$revisionId = $titleObj->getLatestRevID();
 		// Compile a list of projects found in the parserData to find out which
@@ -116,8 +117,10 @@ class PageAssessmentsDAO {
 				];
 				if ( in_array( $projectId, $toInsert ) ) {
 					self::insertRecord( $values );
+					$nochange = false;
 				} elseif ( in_array( $projectId, $toUpdate ) ) {
 					self::updateRecord( $values );
+					$nochange = false;
 				}
 				// Check for database lag if there's a huge number of assessments
 				if ( $i > 0 && $i % $wgUpdateRowsPerQuery == 0 ) {
@@ -134,6 +137,7 @@ class PageAssessmentsDAO {
 				'pa_project_id' => $project
 			];
 			self::deleteRecord( $values );
+			$nochange = false;
 			// Check for database lag if there's a huge number of deleted assessments
 			if ( $i > 0 && $i % $wgUpdateRowsPerQuery == 0 ) {
 				$dbProvider->commitAndWaitForReplication( __METHOD__, $ticket );
@@ -141,8 +145,9 @@ class PageAssessmentsDAO {
 			$i++;
 		}
 
-		// TODO: Do this only if any projects were actually changed
-		self::updateSearchIndex( $titleObj, $assessmentData );
+		if ( !$nochange ) {
+			self::updateSearchIndex( $titleObj, $assessmentData );
+		}
 	}
 
 	/**
