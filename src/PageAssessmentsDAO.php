@@ -163,7 +163,8 @@ class PageAssessmentsDAO {
 				// Ignore empty or invalid project names. Pipe character is not allowed in weighted_tags.
 				continue;
 			}
-			$name = $parserData[0]; // Name already cleaned above in doUpdates()
+			// Name already cleaned above in doUpdates()
+			$name = $parserData[0];
 			$weight = self::importanceToWeight( $parserData[ 2 ] );
 			$tags[ $name ] = $weight;
 		}
@@ -191,7 +192,8 @@ class PageAssessmentsDAO {
 			'high' => 80,
 			'mid' => 60,
 			'low' => 40,
-			'unknown' => 40, // Consider unknown as low-importance
+			// Consider unknown as low-importance
+			'unknown' => 40,
 			'na' => 10
 		];
 		return $importanceMap[ strtolower( $importance ) ] ?? 10;

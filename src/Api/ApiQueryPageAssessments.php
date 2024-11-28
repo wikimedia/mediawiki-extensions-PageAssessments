@@ -26,7 +26,8 @@ class ApiQueryPageAssessments extends ApiQueryBase {
 		$pages = $this->getPageSet()->getGoodPages();
 		// are there pages to get project/assessment info for?
 		if ( !count( $pages ) ) {
-			return;  // If not, return so other prop modules can run
+			// If not, return so other prop modules can run
+			return;
 		}
 
 		$this->buildDbQuery( $pages, $params );
