@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ajeje Brazorf"
+			"Ajeje Brazorf",
+			"GianAntonucci"
 		]
 	},
 	"apihelp-query+projects-param-subprojects": "Ncludi puru li suttapruggetti.",
-	"apihelp-query+projects-example": "Otteni n'elencu di tutti li suttapruggetti.",
-	"apihelp-query+projects-example-subprojects": "Otteni n'elencu di tutti li pruggetti e suttapruggetti."
+	"apihelp-query+projects-example": "Utteni na lista di tutti li pruggetti.",
+	"apihelp-query+projects-example-subprojects": "Utteni na lista di tutti li pruggetti e suttapruggetti."
 }
