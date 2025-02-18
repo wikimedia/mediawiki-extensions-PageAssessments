@@ -43,11 +43,15 @@ class PageAssessmentsDAOTest extends MediaWikiIntegrationTestCase {
 			'pa_importance' => 'Low',
 			'pa_page_revision' => '21'
 		];
-		$pageBody->updateRecord( $values );
+		$changed = $pageBody->updateRecord( $values );
+		$this->assertTrue( $changed );
 		$this->newSelectQueryBuilder()
 			->select( [ 'pa_page_id', 'pa_class', 'pa_importance' ] )
 			->from( 'page_assessments' )
 			->assertRowValue( [ '10', 'B', 'Low' ] );
+		// Perform the same update twice and check that it's a noop
+		$changed = $pageBody->updateRecord( $values );
+		$this->assertFalse( $changed );
 	}
 
 	/**

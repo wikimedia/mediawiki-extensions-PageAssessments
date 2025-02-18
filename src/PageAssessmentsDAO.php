@@ -58,7 +58,7 @@ class PageAssessmentsDAO {
 		$dbProvider = MediaWikiServices::getInstance()->getConnectionProvider();
 		$ticket = $ticket ?: $dbProvider->getEmptyTransactionTicket( __METHOD__ );
 
-		$nochange = true;
+		$changed = false;
 		$pageId = $titleObj->getArticleID();
 		$revisionId = $titleObj->getLatestRevID();
 		// Compile a list of projects found in the parserData to find out which
@@ -117,10 +117,11 @@ class PageAssessmentsDAO {
 				];
 				if ( in_array( $projectId, $toInsert ) ) {
 					self::insertRecord( $values );
-					$nochange = false;
+					$changed = true;
 				} elseif ( in_array( $projectId, $toUpdate ) ) {
-					self::updateRecord( $values );
-					$nochange = false;
+					if ( self::updateRecord( $values ) ) {
+						$changed = true;
+					}
 				}
 				// Check for database lag if there's a huge number of assessments
 				if ( $i > 0 && $i % $wgUpdateRowsPerQuery == 0 ) {
@@ -137,7 +138,7 @@ class PageAssessmentsDAO {
 				'pa_project_id' => $project
 			];
 			self::deleteRecord( $values );
-			$nochange = false;
+			$changed = true;
 			// Check for database lag if there's a huge number of deleted assessments
 			if ( $i > 0 && $i % $wgUpdateRowsPerQuery == 0 ) {
 				$dbProvider->commitAndWaitForReplication( __METHOD__, $ticket );
@@ -145,7 +146,7 @@ class PageAssessmentsDAO {
 			$i++;
 		}
 
-		if ( !$nochange ) {
+		if ( $changed ) {
 			self::updateSearchIndex( $titleObj, $assessmentData );
 		}
 	}
@@ -310,7 +311,7 @@ class PageAssessmentsDAO {
 	/**
 	 * Update record in DB if there are new values
 	 * @param array $values New values to be entered into the DB
-	 * @return bool true
+	 * @return bool true if an update was performed false otherwise
 	 */
 	public static function updateRecord( $values ) {
 		$dbr = self::getReplicaDBConnection();
@@ -330,7 +331,7 @@ class PageAssessmentsDAO {
 				$row->pa_class == $values['pa_class']
 			) {
 				// Return if no update is needed
-				return true;
+				return false;
 			}
 		}
 		// Make updates if there are changes
