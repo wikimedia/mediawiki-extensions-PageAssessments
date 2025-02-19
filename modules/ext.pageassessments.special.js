@@ -6,7 +6,7 @@
 	// eslint-disable-next-line no-jquery/no-global-selector
 	$( 'input[name="page_title"]' ).suggestions( {
 		fetch: function ( userInput, response, maxRows ) {
-			var apiParams, request,
+			let apiParams, request,
 				node = this[ 0 ],
 				// eslint-disable-next-line no-jquery/no-global-selector
 				namespace = OO.ui.infuse( $( '#pageassessments-namespace' ) ),
@@ -18,13 +18,13 @@
 				limit: maxRows
 			};
 			request = api.get( apiParams )
-				.done( function ( data ) {
+				.done( ( data ) => {
 					response( data[ 1 ] );
 				} );
 			$.data( node, 'request', request );
 		},
 		cancel: function () {
-			var node = this[ 0 ],
+			const node = this[ 0 ],
 				request = $.data( node, 'request' );
 			if ( request ) {
 				request.abort();
@@ -39,12 +39,10 @@
 	// eslint-disable-next-line no-jquery/no-global-selector
 	$( 'input[name="project"]' ).suggestions( {
 		fetch: function ( userInput, response, maxRows ) {
-			var matchingProjects,
+			let matchingProjects,
 				allProjects = mw.config.get( 'wgPageAssessmentProjects' ) || [];
 
-			matchingProjects = allProjects.filter( function ( value ) {
-				return value.slice( 0, Math.max( 0, userInput.length ) ).toLocaleLowerCase() === userInput.toLocaleLowerCase();
-			} );
+			matchingProjects = allProjects.filter( ( value ) => value.slice( 0, Math.max( 0, userInput.length ) ).toLocaleLowerCase() === userInput.toLocaleLowerCase() );
 
 			response( matchingProjects.slice( 0, maxRows ) );
 		}
