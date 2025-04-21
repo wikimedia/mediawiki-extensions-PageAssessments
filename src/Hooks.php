@@ -23,16 +23,16 @@
 
 namespace MediaWiki\Extension\PageAssessments;
 
-use LogEntry;
 use MediaWiki\Content\Content;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
 use MediaWiki\Hook\LinksUpdateCompleteHook;
 use MediaWiki\Hook\ParserFirstCallInitHook;
+use MediaWiki\Logging\LogEntry;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Parser\Parser;
 use MediaWiki\User\User;
-use WikiPage;
 
 class Hooks implements
 	ParserFirstCallInitHook,
