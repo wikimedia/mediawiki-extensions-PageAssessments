@@ -390,6 +390,33 @@ class PageAssessmentsDAO {
 	}
 
 	/**
+	 * Get all assessment data associated with the given page
+	 *
+	 * @param int $pageId Page ID
+	 * @return array $results All projects names and assessments associated with the given page
+	 */
+	public static function getAllAssessments( int $pageId ): array {
+		$db = self::getReplicaDBConnection();
+		$res = $db->newSelectQueryBuilder()
+			->select( [ 'pap_project_title', 'pa_class', 'pa_importance' ] )
+			->from( 'page_assessments' )
+			->join( 'page_assessments_projects', null, [ 'pap_project_id = pa_project_id' ] )
+			->where( [ 'pa_page_id' => $pageId ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$results = [];
+		foreach ( $res as $row ) {
+			$results[] = [
+				'name' => $row->pap_project_title,
+				'class' => $row->pa_class,
+				'importance' => $row->pa_importance
+			];
+		}
+		return $results;
+	}
+
+	/**
 	 * Delete a record from DB
 	 * @param array $values Conditions for looking up records to delete
 	 * @return bool true
