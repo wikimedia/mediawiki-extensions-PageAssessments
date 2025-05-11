@@ -4,8 +4,8 @@ namespace MediaWiki\Extension\PageAssessments;
 
 use CirrusSearch\Query\SimpleKeywordFeature;
 use CirrusSearch\Search\SearchContext;
+use CirrusSearch\Search\WeightedTagsHooks;
 use CirrusSearch\WarningCollector;
-use CirrusSearch\Wikimedia\WeightedTagsHooks;
 use Elastica\Query\DisMax;
 use Elastica\Query\Term;
 
