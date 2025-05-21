@@ -76,5 +76,17 @@
 			"value": false
 		}
 	},
+	"attributes": {
+		"Scribunto": {
+			"LuaExtraTitleAttributes": {
+				"projects": {
+					"class": "MediaWiki\\Extension\\PageAssessments\\LuaProjectsAttributeResolver",
+					"services": [
+						"MainConfig"
+					]
+				}
+			}
+		}
+	},
 	"manifest_version": 2
 }

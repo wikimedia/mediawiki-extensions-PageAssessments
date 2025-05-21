@@ -1,0 +1,62 @@
+!! Version 2
+
+# Force the test runner to ensure Scribunto is loaded
+!! functionhooks
+invoke
+!! endfunctionhooks
+
+!! article
+Page with 1 project
+!! text
+This is a sample page.
+!! endarticle
+
+!! article
+Talk:Page with 1 project
+!! text
+{{#assessment:Golf|A|Low}}
+!! endarticle
+
+!! article
+Page with no projects
+!! text
+This is a sample page.
+!! endarticle
+
+!! article
+Module:Get assessments
+!! text
+local p = {}
+p.main = function(frame)
+	local projects = mw.title.new(frame.args.page).projects
+	return mw.text.jsonEncode(projects)
+end
+return p
+!! endarticle
+
+!! test
+Test page with 1 associated project
+!! wikitext
+{{#invoke:Get assessments|main|page=Page with 1 project}}
+!! html
+<p>[{"class":"A","name":"Golf","importance":"Low"}]
+</p>
+!! end
+
+!! test
+Test page with no associated projects
+!! wikitext
+{{#invoke:Get assessments|main|page=Page with no projects}}
+!! html
+<p>[]
+</p>
+!! end
+
+!! test
+Test querying projects on a special page
+!! wikitext
+{{#invoke:Get assessments|main|page=Special:RecentChanges}}
+!! html
+<p>[]
+</p>
+!! end
