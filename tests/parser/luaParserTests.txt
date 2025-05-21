@@ -28,7 +28,7 @@ Module:Get assessments
 !! text
 local p = {}
 p.main = function(frame)
-	local projects = mw.title.new(frame.args.page).projects
+	local projects = mw.title.new(frame.args.page).pageAssessments
 	return mw.text.jsonEncode(projects)
 end
 return p
