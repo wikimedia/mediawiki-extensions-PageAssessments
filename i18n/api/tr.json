@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"BaRaN6161 TURK"
+			"BaRaN6161 TURK",
+			"Joseph"
 		]
 	},
 	"apihelp-query+pageassessments-description": "Verilen sayfalar için ilgili projeleri ve değerlendirmeleri iade edin.",
@@ -15,7 +16,7 @@
 	"apihelp-query+projectpages-summary": "Bir veya daha fazla projeyle ilişkili tüm sayfaları listeleyin.",
 	"apihelp-query+projectpages-param-assessments": "Ayrıca döndürülen sayfalar için iade değerlendirmeleri.",
 	"apihelp-query+projectpages-param-projects": "Sayfaları listeleyecek projeler. Bu parametre atlanırsa, tüm projeler dahil edilir.",
-	"apihelp-query+projectpages-param-limit": "Döndürülecek maksimum sayfa sayısı.",
+	"apihelp-query+projectpages-param-limit": "Döndürülecek en fazla sayfa sayısı.",
 	"apihelp-query+projectpages-example-simple-1": "WikiProject <kbd>Medicine</kbd> veya WikiProject <kbd>Anatomy</kbd> ile ilişkili ilk 10 sayfayı edinin.",
 	"apihelp-query+projectpages-example-simple-2": "Değerlendirme verileri dahil olmak üzere WikiProject <kbd>Medicine</kbd> ile ilişkili ilk 10 sayfayı edinin.",
 	"apihelp-query+projectpages-example-generator": "WikiProject <kbd>Textile Arts</kbd> ile ilişkili ilk 10 sayfa için sayfa bilgisi alın.",
