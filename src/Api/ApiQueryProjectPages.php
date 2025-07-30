@@ -68,12 +68,12 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 			$count = 0;
 			foreach ( $db_res as $row ) {
 				if ( ++$count > $params['limit'] ) {
-					$this->setContinueEnumParameter( 'continue', "$row->project_id|$row->page_id" );
+					$this->setContinueEnumParameter( 'continue', "$row->pa_project_id|$row->pa_page_id" );
 					break;
 				}
 
 				// Change project id back into its corresponding project title
-				$projectTitle = $row->project_name;
+				$projectTitle = $row->pap_project_title;
 				if ( !$projectTitle ) {
 					continue;
 				}
@@ -81,11 +81,11 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 				// Add information to result
 				$vals = $this->generateResultVals( $row );
 				$fit = $result->addValue(
-					[ 'query', 'projects', $projectTitle ], $row->page_id, $vals
+					[ 'query', 'projects', $projectTitle ], $row->pa_page_id, $vals
 				);
 
 				if ( !$fit ) {
-					$this->setContinueEnumParameter( 'continue', "$row->project_id|$row->page_id" );
+					$this->setContinueEnumParameter( 'continue', "$row->pa_project_id|$row->pa_page_id" );
 					break;
 				}
 
@@ -100,7 +100,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 			$count = 0;
 			foreach ( $db_res as $row ) {
 				if ( ++$count > $params['limit'] ) {
-					$this->setContinueEnumParameter( 'continue', "$row->project_id|$row->page_id" );
+					$this->setContinueEnumParameter( 'continue', "$row->pa_project_id|$row->pa_page_id" );
 					break;
 				}
 
@@ -115,10 +115,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	 */
 	private function buildDbQuery( array $params, $resultPageSet ) {
 		$this->addTables( [ 'page', 'page_assessments' ] );
-		$this->addFields( [
-			'page_id' => 'pa_page_id',
-			'project_id' => 'pa_project_id',
-		] );
+		$this->addFields( [ 'pa_page_id', 'pa_project_id' ] );
 		$this->addJoinConds( [
 			'page' => [
 				'JOIN',
@@ -128,11 +125,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 
 		if ( $resultPageSet === null ) {
 			$this->addTables( 'page_assessments_projects' );
-			$this->addFields( [
-				'title' => 'page_title',
-				'namespace' => 'page_namespace',
-				'project_name' => 'pap_project_title'
-			] );
+			$this->addFields( [ 'page_title', 'page_namespace', 'pap_project_title' ] );
 			$this->addJoinConds( [
 				'page_assessments_projects' => [
 					'JOIN',
@@ -140,10 +133,7 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 				]
 			] );
 			if ( $params['assessments'] ) {
-				$this->addFields( [
-					'class' => 'pa_class',
-					'importance' => 'pa_importance'
-				] );
+				$this->addFields( [ 'pa_class', 'pa_importance' ] );
 			}
 		} else {
 			$this->addFields( $resultPageSet->getPageTableFields() );
@@ -194,18 +184,18 @@ class ApiQueryProjectPages extends ApiQueryGeneratorBase {
 	 * @return array
 	 */
 	private function generateResultVals( $row ) {
-		$title = Title::makeTitle( $row->namespace, $row->title );
+		$title = Title::makeTitle( $row->page_namespace, $row->page_title );
 
 		$vals = [
-			'pageid' => (int)$row->page_id,
-			'ns' => (int)$row->namespace,
+			'pageid' => (int)$row->pa_page_id,
+			'ns' => (int)$row->page_namespace,
 			'title' => $title->getPrefixedText(),
 		];
 
-		if ( isset( $row->class ) && isset( $row->importance ) ) {
+		if ( isset( $row->pa_class ) && isset( $row->pa_importance ) ) {
 			$vals['assessment'] = [
-				'class' => $row->class,
-				'importance' => $row->importance,
+				'class' => $row->pa_class,
+				'importance' => $row->pa_importance,
 			];
 		}
 
