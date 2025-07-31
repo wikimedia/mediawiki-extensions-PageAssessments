@@ -28,6 +28,11 @@ $specialPageAliases['ne'] = [
 	'PageAssessments' => [ 'पृष्ठ_मूल्याङ्कन' ],
 ];
 
+/** Chinese (中文) */
+$specialPageAliases['zh'] = [
+	'PageAssessments' => [ 'PageAssessments' ],
+];
+
 /** Simplified Chinese (中文（简体）) */
 $specialPageAliases['zh-hans'] = [
 	'PageAssessments' => [ '页面评级' ],
