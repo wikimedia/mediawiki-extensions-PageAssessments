@@ -6,7 +6,7 @@ use MediaWiki\Api\ApiQuery;
 use MediaWiki\Api\ApiQueryBase;
 use Wikimedia\ParamValidator\ParamValidator;
 
-/*
+/**
  * API module for retrieving all the projects on a wiki
  */
 class ApiQueryProjects extends ApiQueryBase {

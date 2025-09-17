@@ -8,7 +8,7 @@ use MediaWiki\Api\ApiQueryBase;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\IntegerDef;
 
-/*
+/**
  * API query module that returns associated projects and assessment data for a given set
  * of pages. (T119997)
  */

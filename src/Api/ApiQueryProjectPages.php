@@ -11,7 +11,7 @@ use MediaWiki\Title\Title;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\IntegerDef;
 
-/*
+/**
  * API module for retrieving all the pages associated with a project, for example,
  * WikiProject Medicine. (T119997)
  */
