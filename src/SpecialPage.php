@@ -44,7 +44,11 @@ class SpecialPage extends QueryPage {
 	public function __construct() {
 		parent::__construct();
 		$this->mName = 'PageAssessments';
-		$this->mIncludable = true;
+	}
+
+	/** @inheritDoc */
+	public function isIncludable(): bool {
+		return true;
 	}
 
 	/**
