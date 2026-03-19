@@ -29,23 +29,34 @@
 		"PageAssessmentsAlias": "PageAssessments.i18n.alias.php"
 	},
 	"Hooks": {
-		"ParserFirstCallInit": "main",
+		"ParserFirstCallInit": "parser",
 		"LoadExtensionSchemaUpdates": "schema",
-		"LinksUpdateComplete": "main",
-		"ArticleDeleteComplete": "main",
+		"LinksUpdateComplete": "parser",
 		"CirrusSearchAddQueryFeatures": "cirrussearch"
 	},
 	"HookHandlers": {
-		"main": {
-			"class": "MediaWiki\\Extension\\PageAssessments\\Hooks"
+		"parser": {
+			"class": "MediaWiki\\Extension\\PageAssessments\\HookHandler\\ParserHooks",
+			"services": [
+				"NamespaceInfo",
+				"MainConfig"
+			]
 		},
 		"schema": {
-			"class": "MediaWiki\\Extension\\PageAssessments\\SchemaHooks"
+			"class": "MediaWiki\\Extension\\PageAssessments\\HookHandler\\SchemaHooks"
 		},
 		"cirrussearch": {
-			"class": "MediaWiki\\Extension\\PageAssessments\\CirrusSearchHooks"
+			"class": "MediaWiki\\Extension\\PageAssessments\\HookHandler\\CirrusSearchHooks"
 		}
 	},
+	"DomainEventIngresses": [
+		{
+			"events": [
+				"PageDeleted"
+			],
+			"class": "MediaWiki\\Extension\\PageAssessments\\EventIngress"
+		}
+	],
 	"MessagesDirs": {
 		"PageAssessments": [
 			"i18n",
