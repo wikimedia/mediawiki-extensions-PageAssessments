@@ -42,10 +42,10 @@ class PageAssessmentsStore {
 	 * Driver function that handles updating assessment data in database
 	 * @param Title $titleObj Title object of the subject page
 	 * @param array $assessmentData Data for all assessments compiled
-	 * @param mixed|null $ticket Transaction ticket
+	 * @return bool true if any changes were made to the database, false otherwise
 	 */
-	public function doUpdates( Title $titleObj, array $assessmentData, mixed $ticket = null ): void {
-		$ticket = $ticket ?: $this->connectionProvider->getEmptyTransactionTicket( __METHOD__ );
+	public function doUpdates( Title $titleObj, array $assessmentData ): bool {
+		$ticket = $this->connectionProvider->getEmptyTransactionTicket( __METHOD__ );
 
 		$changed = false;
 		$pageId = $titleObj->getArticleID();
@@ -137,6 +137,8 @@ class PageAssessmentsStore {
 		if ( $changed ) {
 			$this->updateSearchIndex( $titleObj, $assessmentDataToStore );
 		}
+
+		return $changed;
 	}
 
 	/**

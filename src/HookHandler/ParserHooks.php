@@ -6,20 +6,24 @@ namespace MediaWiki\Extension\PageAssessments\HookHandler;
 use MediaWiki\Config\Config;
 use MediaWiki\Deferred\DeferrableUpdate;
 use MediaWiki\Extension\PageAssessments\PageAssessmentsStore;
+use MediaWiki\Hook\ParserAfterParseHook;
+use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Parser\Hook\ParserFirstCallInitHook;
 use MediaWiki\Parser\Parser;
+use MediaWiki\Parser\StripState;
 use MediaWiki\Revision\RenderedRevision;
 use MediaWiki\Storage\Hook\RevisionDataUpdatesHook;
 use MediaWiki\Title\NamespaceInfo;
 use MediaWiki\Title\Title;
 
-class ParserHooks implements ParserFirstCallInitHook, RevisionDataUpdatesHook {
+class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, RevisionDataUpdatesHook {
 
-	public const EXT_DATA_KEY = 'ext-pageassessment-assessmentdata';
+	public const string EXT_DATA_KEY = 'ext-pageassessment-assessmentdata';
 
 	public function __construct(
 		private readonly PageAssessmentsStore $store,
 		private readonly NamespaceInfo $namespaceInfo,
+		private readonly WikiPageFactory $wikiPageFactory,
 		private readonly Config $config,
 	) {
 	}
@@ -50,11 +54,31 @@ class ParserHooks implements ParserFirstCallInitHook, RevisionDataUpdatesHook {
 		if ( $parserData == null ) {
 			$parserData = [];
 		}
+
+		// This gets used in the $wgPageAssessments JS var. Key by project to make it easier to
+		// see if a specific project is present, and match the format of ApiQueryPageAssessments.
 		$parserData[ $project ] = [
 			'class' => $class,
 			'importance' => $importance
 		];
 		$parser->getOutput()->setExtensionData( self::EXT_DATA_KEY, $parserData );
+	}
+
+	/**
+	 * If we are on the subject page and assessments are on talk,
+	 * duplicate the assessment data in the subject page's parser cache.
+	 * This is later fetched by OutputPageHooks::onOutputPageParserOutput().
+	 *
+	 * @param Parser $parser
+	 * @param string &$text
+	 * @param StripState $stripState
+	 */
+	public function onParserAfterParse( $parser, &$text, $stripState ): void {
+		$title = Title::newFromPageReference( $parser->getPage() );
+		if ( !$title->isTalkPage() && $this->config->get( 'PageAssessmentsOnTalkPages' ) ) {
+			$assessmentData = $this->store->getAllAssessments( $title->getArticleID() );
+			$parser->getOutput()->setExtensionData( self::EXT_DATA_KEY, $assessmentData );
+		}
 	}
 
 	/**
@@ -64,7 +88,7 @@ class ParserHooks implements ParserFirstCallInitHook, RevisionDataUpdatesHook {
 	 * @param RenderedRevision $renderedRevision
 	 * @param DeferrableUpdate[] &$updates
 	 */
-	public function onRevisionDataUpdates( $title, $renderedRevision, &$updates ): void {
+	public function onRevisionDataUpdates( $title, $renderedRevision, &$updates ) {
 		$isTalkPage = $title->isTalkPage();
 		$assessmentsOnTalkPages = $this->config->get( 'PageAssessmentsOnTalkPages' );
 
@@ -85,7 +109,13 @@ class ParserHooks implements ParserFirstCallInitHook, RevisionDataUpdatesHook {
 			if ( $isTalkPage ) {
 				$title = Title::newFromLinkTarget( $this->namespaceInfo->getSubjectPage( $title ) );
 			}
-			$this->store->doUpdates( $title, $assessmentData );
+
+			$changed = $this->store->doUpdates( $title, $assessmentData );
+
+			// Refresh cache of subject page if applicable, so that $wgPageAssessments stays up to date.
+			if ( $changed && $isTalkPage ) {
+				$this->wikiPageFactory->newFromTitle( $title )->updateParserCache();
+			}
 		}
 	}
 }

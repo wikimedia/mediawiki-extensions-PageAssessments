@@ -41,9 +41,11 @@
 	],
 	"Hooks": {
 		"ParserFirstCallInit": "parser",
+		"ParserAfterParse": "parser",
 		"LoadExtensionSchemaUpdates": "schema",
 		"RevisionDataUpdates": "parser",
-		"CirrusSearchAddQueryFeatures": "cirrussearch"
+		"CirrusSearchAddQueryFeatures": "cirrussearch",
+		"OutputPageParserOutput": "outputpage"
 	},
 	"HookHandlers": {
 		"parser": {
@@ -51,6 +53,7 @@
 			"services": [
 				"PageAssessments.Store",
 				"NamespaceInfo",
+				"WikiPageFactory",
 				"MainConfig"
 			]
 		},
@@ -59,6 +62,13 @@
 		},
 		"cirrussearch": {
 			"class": "MediaWiki\\Extension\\PageAssessments\\HookHandler\\CirrusSearchHooks"
+		},
+		"outputpage": {
+			"class": "MediaWiki\\Extension\\PageAssessments\\HookHandler\\OutputPageHooks",
+			"services": [
+				"NamespaceInfo",
+				"MainConfig"
+			]
 		}
 	},
 	"DomainEventIngresses": [
