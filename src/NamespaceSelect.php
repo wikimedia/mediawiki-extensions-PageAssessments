@@ -47,13 +47,12 @@ class NamespaceSelect extends HTMLSelectNamespace {
 				return $namespaceInfo->isTalk( $ns );
 			}
 		) );
-		$widget = new NamespaceInputWidget( [
+		return new NamespaceInputWidget( [
 			'value' => $value,
 			'name' => $this->mName,
 			'id' => $this->mID,
 			'exclude' => $excludedNsIds,
 		] );
-		return $widget;
 	}
 
 }

@@ -5,7 +5,7 @@ namespace MediaWiki\Extension\PageAssessments\HookHandler;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
-use MediaWiki\Extension\PageAssessments\PageAssessmentsDAO;
+use MediaWiki\Extension\PageAssessments\PageAssessmentsStore;
 use MediaWiki\Hook\LinksUpdateCompleteHook;
 use MediaWiki\Hook\ParserFirstCallInitHook;
 use MediaWiki\Parser\Parser;
@@ -17,6 +17,7 @@ class ParserHooks implements ParserFirstCallInitHook, LinksUpdateCompleteHook {
 	public const EXT_DATA_KEY = 'ext-pageassessment-assessmentdata';
 
 	public function __construct(
+		private readonly PageAssessmentsStore $store,
 		private readonly NamespaceInfo $namespaceInfo,
 		private readonly Config $config,
 	) {
@@ -27,7 +28,30 @@ class ParserHooks implements ParserFirstCallInitHook, LinksUpdateCompleteHook {
 	 * @param Parser $parser
 	 */
 	public function onParserFirstCallInit( $parser ): void {
-		$parser->setFunctionHook( 'assessment', [ PageAssessmentsDAO::class, 'cacheAssessment' ] );
+		$parser->setFunctionHook( 'assessment', $this->cacheAssessment( ... ) );
+	}
+
+	/**
+	 * Function called on parser init
+	 * @param Parser $parser Parser object
+	 * @param string $project Wikiproject name
+	 * @param string $class Class of article
+	 * @param string $importance Importance of article
+	 * @fixme Not Parsoid-compatible due to re-setting extension data, should use appendExtensionData instead.
+	 */
+	private function cacheAssessment(
+		Parser $parser,
+		string $project = '',
+		string $class = '',
+		string $importance = ''
+	): void {
+		$parserData = $parser->getOutput()->getExtensionData( self::EXT_DATA_KEY );
+		$values = [ $project, $class, $importance ];
+		if ( $parserData == null ) {
+			$parserData = [];
+		}
+		$parserData[] = $values;
+		$parser->getOutput()->setExtensionData( self::EXT_DATA_KEY, $parserData );
 	}
 
 	/**
@@ -55,8 +79,7 @@ class ParserHooks implements ParserFirstCallInitHook, LinksUpdateCompleteHook {
 			if ( $title->isTalkPage() ) {
 				$title = Title::newFromLinkTarget( $this->namespaceInfo->getSubjectPage( $title ) );
 			}
-			PageAssessmentsDAO::doUpdates( $title, $assessmentData, $ticket );
+			$this->store->doUpdates( $title, $assessmentData, $ticket );
 		}
 	}
-
 }

@@ -15,7 +15,12 @@
 		"MediaWiki": ">= 1.46"
 	},
 	"APIListModules": {
-		"projectpages": "MediaWiki\\Extension\\PageAssessments\\Api\\ApiQueryProjectPages",
+		"projectpages": {
+			"class": "MediaWiki\\Extension\\PageAssessments\\Api\\ApiQueryProjectPages",
+			"services": [
+				"PageAssessments.Store"
+			]
+		},
 		"projects": "MediaWiki\\Extension\\PageAssessments\\Api\\ApiQueryProjects"
 	},
 	"APIPropModules": {
@@ -24,10 +29,16 @@
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\PageAssessments\\": "src/"
 	},
+	"TestAutoloadNamespaces": {
+		"MediaWiki\\Extension\\PageAssessments\\Tests\\": "tests/phpunit/"
+	},
 	"ExtensionMessagesFiles": {
 		"PageAssessmentsMagic": "PageAssessments.i18n.magic.php",
 		"PageAssessmentsAlias": "PageAssessments.i18n.alias.php"
 	},
+	"ServiceWiringFiles": [
+		"src/ServiceWiring.php"
+	],
 	"Hooks": {
 		"ParserFirstCallInit": "parser",
 		"LoadExtensionSchemaUpdates": "schema",
@@ -38,6 +49,7 @@
 		"parser": {
 			"class": "MediaWiki\\Extension\\PageAssessments\\HookHandler\\ParserHooks",
 			"services": [
+				"PageAssessments.Store",
 				"NamespaceInfo",
 				"MainConfig"
 			]
@@ -54,7 +66,10 @@
 			"events": [
 				"PageDeleted"
 			],
-			"class": "MediaWiki\\Extension\\PageAssessments\\EventIngress"
+			"class": "MediaWiki\\Extension\\PageAssessments\\EventIngress",
+			"services": [
+				"PageAssessments.Store"
+			]
 		}
 	],
 	"MessagesDirs": {
@@ -93,6 +108,7 @@
 				"pageAssessments": {
 					"class": "MediaWiki\\Extension\\PageAssessments\\LuaProjectsAttributeResolver",
 					"services": [
+						"PageAssessments.Store",
 						"MainConfig"
 					]
 				}

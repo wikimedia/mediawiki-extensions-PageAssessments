@@ -11,7 +11,10 @@ class LuaProjectsAttributeResolver extends TitleAttributeResolver {
 
 	private bool $assessmentsOnTalkPage;
 
-	public function __construct( Config $config ) {
+	public function __construct(
+		private readonly PageAssessmentsStore $store,
+		readonly Config $config
+	) {
 		$this->assessmentsOnTalkPage = $config->get( 'PageAssessmentsOnTalkPages' );
 	}
 
@@ -31,7 +34,7 @@ class LuaProjectsAttributeResolver extends TitleAttributeResolver {
 		$this->addTemplateLink( $assessmentPageTitle );
 		$this->incrementExpensiveFunctionCount();
 
-		$projects = PageAssessmentsDAO::getAllAssessments( $title->getId() );
+		$projects = $this->store->getAllAssessments( $title->getId() );
 		// Sort to ensure output is stable
 		sort( $projects );
 		return self::makeArrayOneBased( $projects );

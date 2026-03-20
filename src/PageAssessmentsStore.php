@@ -1,51 +1,41 @@
 <?php
 declare( strict_types = 1 );
 
-/**
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * PageAssessments extension body
- *
- * @file
- * @ingroup Extensions
- */
-
 namespace MediaWiki\Extension\PageAssessments;
 
 use CirrusSearch\WeightedTagsUpdater;
-use MediaWiki\Extension\PageAssessments\HookHandler\ParserHooks;
-use MediaWiki\MediaWikiServices;
-use MediaWiki\Parser\Parser;
+use MediaWiki\Config\Config;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Title\Title;
+use Wikimedia\Rdbms\IConnectionProvider;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IDBAccessObject;
 use Wikimedia\Rdbms\IReadableDatabase;
 
-class PageAssessmentsDAO {
+class PageAssessmentsStore {
 
-	/** @var array Instance cache associating project IDs with project names */
-	protected static array $projectNames = [];
+	private bool $cirrusSearchLoaded;
+	private int $updateRowsPerQuery;
+	private bool $subprojectsEnabled;
 
-	private static function getReplicaDBConnection(): IReadableDatabase {
-		return MediaWikiServices::getInstance()->getConnectionProvider()->getReplicaDatabase();
+	public function __construct(
+		private readonly IConnectionProvider $connectionProvider,
+		readonly ExtensionRegistry $extensionRegistry,
+		readonly Config $config,
+		private readonly ?WeightedTagsUpdater $weightedTagsUpdater,
+	) {
+		$this->cirrusSearchLoaded = $extensionRegistry->isLoaded( 'CirrusSearch' );
+		$this->updateRowsPerQuery = $this->config->get( MainConfigNames::UpdateRowsPerQuery );
+		$this->subprojectsEnabled = $this->config->get( 'PageAssessmentsSubprojects' );
 	}
 
-	private static function getPrimaryDBConnection(): IDatabase {
-		return MediaWikiServices::getInstance()->getConnectionProvider()->getPrimaryDatabase();
+	private function getReplicaDBConnection(): IReadableDatabase {
+		return $this->connectionProvider->getReplicaDatabase();
+	}
+
+	private function getPrimaryDBConnection(): IDatabase {
+		return $this->connectionProvider->getPrimaryDatabase();
 	}
 
 	/**
@@ -54,11 +44,8 @@ class PageAssessmentsDAO {
 	 * @param array $assessmentData Data for all assessments compiled
 	 * @param mixed|null $ticket Transaction ticket
 	 */
-	public static function doUpdates( Title $titleObj, array $assessmentData, mixed $ticket = null ): void {
-		global $wgUpdateRowsPerQuery, $wgPageAssessmentsSubprojects;
-
-		$dbProvider = MediaWikiServices::getInstance()->getConnectionProvider();
-		$ticket = $ticket ?: $dbProvider->getEmptyTransactionTicket( __METHOD__ );
+	public function doUpdates( Title $titleObj, array $assessmentData, mixed $ticket = null ): void {
+		$ticket = $ticket ?: $this->connectionProvider->getEmptyTransactionTicket( __METHOD__ );
 
 		$changed = false;
 		$pageId = $titleObj->getArticleID();
@@ -70,21 +57,21 @@ class PageAssessmentsDAO {
 			// If the name of the project is set...
 			if ( isset( $parserData[0] ) && $parserData[0] !== '' ) {
 				// Clean the project name.
-				$projectName = self::cleanProjectTitle( $parserData[0] );
+				$projectName = $this->cleanProjectTitle( $parserData[0] );
 				// Replace the original project name with the cleaned project
 				// name in the assessment data, since we'll need it to match later.
 				$assessmentData[$key][0] = $projectName;
 				// Get the corresponding ID from page_assessments_projects table.
-				$projectId = self::getProjectId( $projectName );
+				$projectId = $this->getProjectId( $projectName );
 				// If there is no existing project by that name, add it to the table.
 				if ( $projectId === null ) {
-					if ( $wgPageAssessmentsSubprojects ) {
+					if ( $this->subprojectsEnabled ) {
 						// Extract possible parent from the project name.
-						$parentId = self::extractParentProjectId( $projectName );
+						$parentId = $this->extractParentProjectId( $projectName );
 						// Insert project data into the database table.
-						$projectId = self::insertProject( $projectName, $parentId );
+						$projectId = $this->insertProject( $projectName, $parentId );
 					} else {
-						$projectId = self::insertProject( $projectName );
+						$projectId = $this->insertProject( $projectName );
 					}
 				}
 				// Add the project's ID to the array.
@@ -92,7 +79,7 @@ class PageAssessmentsDAO {
 			}
 		}
 		// Get a list of all the projects previously assigned to the page.
-		$projectsInDb = self::getAllProjects( $pageId, IDBAccessObject::READ_LATEST );
+		$projectsInDb = $this->getAllProjects( $pageId, IDBAccessObject::READ_LATEST );
 
 		$toInsert = array_diff( $projects, $projectsInDb );
 		$toDelete = array_diff( $projectsInDb, $projects );
@@ -118,16 +105,16 @@ class PageAssessmentsDAO {
 					'pa_page_revision' => $revisionId
 				];
 				if ( in_array( $projectId, $toInsert ) ) {
-					self::insertRecord( $values );
+					$this->insertRecord( $values );
 					$changed = true;
 				} elseif ( in_array( $projectId, $toUpdate ) ) {
-					if ( self::updateRecord( $values ) ) {
+					if ( $this->updateRecord( $values ) ) {
 						$changed = true;
 					}
 				}
 				// Check for database lag if there's a huge number of assessments
-				if ( $i > 0 && $i % $wgUpdateRowsPerQuery == 0 ) {
-					$dbProvider->commitAndWaitForReplication( __METHOD__, $ticket );
+				if ( $i > 0 && $i % $this->updateRowsPerQuery === 0 ) {
+					$this->connectionProvider->commitAndWaitForReplication( __METHOD__, $ticket );
 				}
 				$i++;
 			}
@@ -139,17 +126,17 @@ class PageAssessmentsDAO {
 				'pa_page_id' => $pageId,
 				'pa_project_id' => $project
 			];
-			self::deleteRecord( $values );
+			$this->deleteRecord( $values );
 			$changed = true;
 			// Check for database lag if there's a huge number of deleted assessments
-			if ( $i > 0 && $i % $wgUpdateRowsPerQuery == 0 ) {
-				$dbProvider->commitAndWaitForReplication( __METHOD__, $ticket );
+			if ( $i > 0 && $i % $this->updateRowsPerQuery === 0 ) {
+				$this->connectionProvider->commitAndWaitForReplication( __METHOD__, $ticket );
 			}
 			$i++;
 		}
 
 		if ( $changed ) {
-			self::updateSearchIndex( $titleObj, $assessmentData );
+			$this->updateSearchIndex( $titleObj, $assessmentData );
 		}
 	}
 
@@ -159,12 +146,10 @@ class PageAssessmentsDAO {
 	 * @param Title $titleObj
 	 * @param array $assessmentData
 	 */
-	public static function updateSearchIndex( Title $titleObj, array $assessmentData ): void {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
+	public function updateSearchIndex( Title $titleObj, array $assessmentData ): void {
+		if ( !$this->cirrusSearchLoaded ) {
 			return;
 		}
-		/** @var WeightedTagsUpdater $updater */
-		$updater = MediaWikiServices::getInstance()->getService( WeightedTagsUpdater::SERVICE );
 		$tags = [];
 		foreach ( $assessmentData as $parserData ) {
 			if ( !isset( $parserData[0] ) || $parserData[0] == '' || str_contains( $parserData[0], '|' ) ) {
@@ -173,27 +158,25 @@ class PageAssessmentsDAO {
 			}
 			// Name already cleaned above in doUpdates()
 			$name = $parserData[0];
-			$weight = self::importanceToWeight( $parserData[ 2 ] );
+			$weight = $this->importanceToWeight( $parserData[ 2 ] );
 			$tags[ $name ] = $weight;
 		}
 
 		if ( $tags === [] ) {
-			$updater->resetWeightedTags(
+			$this->weightedTagsUpdater?->resetWeightedTags(
 				$titleObj->toPageIdentity(),
-				[ 'ext.pageassessments.project' ],
-				'page-assessment-update'
+				[ 'ext.pageassessments.project' ]
 			);
 		} else {
-			$updater->updateWeightedTags(
+			$this->weightedTagsUpdater?->updateWeightedTags(
 				$titleObj->toPageIdentity(),
 				'ext.pageassessments.project',
-				$tags,
-				'page-assessment-update'
+				$tags
 			);
 		}
 	}
 
-	private static function importanceToWeight( string $importance ): int {
+	private function importanceToWeight( string $importance ): int {
 		// TODO: Read from local JSON page in MediaWiki namespace?
 		$importanceMap = [
 			'top' => 100,
@@ -208,33 +191,6 @@ class PageAssessmentsDAO {
 	}
 
 	/**
-	 * Get name for the given wikiproject
-	 * @param int $projectId The ID of the project
-	 * @return string|false The name of the project or false if not found
-	 */
-	public static function getProjectName( int $projectId ): false|string {
-		// Check for a valid project ID
-		if ( $projectId > 0 ) {
-			// See if the project name is already in the instance cache
-			if ( isset( self::$projectNames[$projectId] ) ) {
-				return self::$projectNames[$projectId];
-			} else {
-				$dbr = self::getReplicaDBConnection();
-				$projectName = $dbr->newSelectQueryBuilder()
-					->select( 'pap_project_title' )
-					->from( 'page_assessments_projects' )
-					->where( [ 'pap_project_id' => $projectId ] )
-					->caller( __METHOD__ )
-					->fetchField();
-				// Store the project name in instance cache
-				self::$projectNames[$projectId] = $projectName;
-				return $projectName;
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * Extract parent from a project name and return the ID. For example, if the
 	 * project name is "Novels/Crime task force", the parent will be "Novels",
 	 * i.e. WikiProject Novels.
@@ -242,10 +198,10 @@ class PageAssessmentsDAO {
 	 * @param string $projectName Project title
 	 * @return ?int project ID or false if not found
 	 */
-	protected static function extractParentProjectId( string $projectName ): ?int {
+	protected function extractParentProjectId( string $projectName ): ?int {
 		$projectNameParts = explode( '/', $projectName );
 		if ( count( $projectNameParts ) > 1 && $projectNameParts[0] !== '' ) {
-			return self::getProjectId( $projectNameParts[0] );
+			return $this->getProjectId( $projectNameParts[0] );
 		}
 		return null;
 	}
@@ -255,9 +211,9 @@ class PageAssessmentsDAO {
 	 * @param string $project Project title
 	 * @return ?int project ID or null if not found
 	 */
-	public static function getProjectId( string $project ): ?int {
-		$dbr = self::getReplicaDBConnection();
-		$ret = $dbr->newSelectQueryBuilder()
+	public function getProjectId( string $project ): ?int {
+		$ret = $this->getReplicaDBConnection()
+			->newSelectQueryBuilder()
 			->select( 'pap_project_id' )
 			->from( 'page_assessments_projects' )
 			->where( [ 'pap_project_title' => $project ] )
@@ -269,11 +225,11 @@ class PageAssessmentsDAO {
 	/**
 	 * Insert a new wikiproject into the projects table
 	 * @param string $project Wikiproject title
-	 * @param int|null $parentId ID of the parent project (for subprojects) (optional)
+	 * @param ?int $parentId ID of the parent project (for subprojects) (optional)
 	 * @return int Insert Id for new project
 	 */
-	public static function insertProject( string $project, ?int $parentId = null ): int {
-		$dbw = self::getPrimaryDBConnection();
+	public function insertProject( string $project, ?int $parentId = null ): int {
+		$dbw = $this->getPrimaryDBConnection();
 		$values = [ 'pap_project_title' => $project ];
 		if ( $parentId ) {
 			$values[ 'pap_parent_id' ] = $parentId;
@@ -299,7 +255,7 @@ class PageAssessmentsDAO {
 	 * @param string $project WikiProject title
 	 * @return string Cleaned-up WikiProject title
 	 */
-	public static function cleanProjectTitle( string $project ): string {
+	public function cleanProjectTitle( string $project ): string {
 		// Remove any bold formatting.
 		$project = str_replace( "'''", "", $project );
 		// Remove "the" prefix for subprojects (common on English Wikipedia).
@@ -315,14 +271,14 @@ class PageAssessmentsDAO {
 	 * @param array $values New values to be entered into the DB
 	 * @return bool true if an update was performed false otherwise
 	 */
-	public static function updateRecord( array $values ): bool {
-		$dbr = self::getReplicaDBConnection();
+	public function updateRecord( array $values ): bool {
 		$conds = [
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project_id' => $values['pa_project_id']
 		];
 		// Check if there are no updates to be done
-		$record = $dbr->newSelectQueryBuilder()
+		$record = $this->getReplicaDBConnection()
+			->newSelectQueryBuilder()
 			->select( [ 'pa_class', 'pa_importance', 'pa_project_id', 'pa_page_id' ] )
 			->from( 'page_assessments' )
 			->where( $conds )
@@ -337,8 +293,8 @@ class PageAssessmentsDAO {
 			}
 		}
 		// Make updates if there are changes
-		$dbw = self::getPrimaryDBConnection();
-		$dbw->newUpdateQueryBuilder()
+		$this->getPrimaryDBConnection()
+			->newUpdateQueryBuilder()
 			->update( 'page_assessments' )
 			->set( $values )
 			->where( $conds )
@@ -352,11 +308,11 @@ class PageAssessmentsDAO {
 	 * @param array $values New values to be entered into the DB
 	 * @return bool true
 	 */
-	public static function insertRecord( array $values ): bool {
-		$dbw = self::getPrimaryDBConnection();
+	public function insertRecord( array $values ): bool {
 		// Use IGNORE in case 2 records for the same project are added at once.
 		// This normally shouldn't happen, but is possible. (See T152080)
-		$dbw->newInsertQueryBuilder()
+		$this->getPrimaryDBConnection()
+			->newInsertQueryBuilder()
 			->insertInto( 'page_assessments' )
 			->ignore()
 			->row( $values )
@@ -372,11 +328,11 @@ class PageAssessmentsDAO {
 	 *     force reading from the primary database. See docs at IDBAccessObject.php.
 	 * @return array $results All projects associated with given page
 	 */
-	public static function getAllProjects( int $pageId, int $flags = IDBAccessObject::READ_NORMAL ): array {
+	public function getAllProjects( int $pageId, int $flags = IDBAccessObject::READ_NORMAL ): array {
 		if ( ( $flags & IDBAccessObject::READ_LATEST ) == IDBAccessObject::READ_LATEST ) {
-			$db = self::getPrimaryDBConnection();
+			$db = $this->getPrimaryDBConnection();
 		} else {
-			$db = self::getReplicaDBConnection();
+			$db = $this->getReplicaDBConnection();
 		}
 		$res = $db->newSelectQueryBuilder()
 			->select( 'pa_project_id' )
@@ -397,9 +353,9 @@ class PageAssessmentsDAO {
 	 * @param int $pageId Page ID
 	 * @return array $results All projects names and assessments associated with the given page
 	 */
-	public static function getAllAssessments( int $pageId ): array {
-		$db = self::getReplicaDBConnection();
-		$res = $db->newSelectQueryBuilder()
+	public function getAllAssessments( int $pageId ): array {
+		$res = $this->getReplicaDBConnection()
+			->newSelectQueryBuilder()
 			->select( [ 'pap_project_title', 'pa_class', 'pa_importance' ] )
 			->from( 'page_assessments' )
 			->join( 'page_assessments_projects', null, [ 'pap_project_id = pa_project_id' ] )
@@ -423,13 +379,13 @@ class PageAssessmentsDAO {
 	 * @param array $values Conditions for looking up records to delete
 	 * @return bool true
 	 */
-	public static function deleteRecord( array $values ): bool {
-		$dbw = self::getPrimaryDBConnection();
+	public function deleteRecord( array $values ): bool {
 		$conds = [
 			'pa_page_id' => $values['pa_page_id'],
 			'pa_project_id' => $values['pa_project_id']
 		];
-		$dbw->newDeleteQueryBuilder()
+		$this->getPrimaryDBConnection()
+			->newDeleteQueryBuilder()
 			->deleteFrom( 'page_assessments' )
 			->where( $conds )
 			->caller( __METHOD__ )
@@ -443,39 +399,15 @@ class PageAssessmentsDAO {
 	 * when the page is parsed again.
 	 * @param int $id Page ID of deleted page
 	 */
-	public static function deleteRecordsForPage( int $id ): void {
-		$dbw = self::getPrimaryDBConnection();
+	public function deleteRecordsForPage( int $id ): void {
 		$conds = [
 			'pa_page_id' => $id,
 		];
-		$dbw->newDeleteQueryBuilder()
+		$this->getPrimaryDBConnection()
+			->newDeleteQueryBuilder()
 			->deleteFrom( 'page_assessments' )
 			->where( $conds )
 			->caller( __METHOD__ )
 			->execute();
 	}
-
-	/**
-	 * Function called on parser init
-	 * @param Parser $parser Parser object
-	 * @param string $project Wikiproject name
-	 * @param string $class Class of article
-	 * @param string $importance Importance of article
-	 * @fixme Not Parsoid-compatible due to re-setting extension data, should use appendExtensionData instead.
-	 */
-	public static function cacheAssessment(
-		Parser $parser,
-		string $project = '',
-		string $class = '',
-		string $importance = ''
-	): void {
-		$parserData = $parser->getOutput()->getExtensionData( ParserHooks::EXT_DATA_KEY );
-		$values = [ $project, $class, $importance ];
-		if ( $parserData == null ) {
-			$parserData = [];
-		}
-		$parserData[] = $values;
-		$parser->getOutput()->setExtensionData( ParserHooks::EXT_DATA_KEY, $parserData );
-	}
-
 }
