@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Winston Sung"
+			"Winston Sung",
+			"Aca"
 		]
 	},
 	"pageassessments-desc": "Ovo proširenje služi pohrani ocjenjivanja stranica u tablicu baze podataka uz pomoć parserske funkcije.",
@@ -14,5 +15,5 @@
 	"pageassessments-class": "Klasa",
 	"pageassessments-timestamp": "Vremenska oznaka",
 	"pageassessments-total-results": "Ukupno rezultata: $1",
-	"pageassessments-error-namespace-filter": "Molimo unesite naziv projekta ili stranice."
+	"pageassessments-error-namespace-filter": "Unesite naziv projekta ili stranice."
 }
