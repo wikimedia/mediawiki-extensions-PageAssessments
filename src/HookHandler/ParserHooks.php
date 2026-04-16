@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 namespace MediaWiki\Extension\PageAssessments\HookHandler;
 
 use MediaWiki\Config\Config;
+use MediaWiki\Deferred\Hook\LinksUpdateCompleteHook;
 use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
 use MediaWiki\Extension\PageAssessments\PageAssessmentsStore;
-use MediaWiki\Hook\LinksUpdateCompleteHook;
-use MediaWiki\Hook\ParserFirstCallInitHook;
+use MediaWiki\Parser\Hook\ParserFirstCallInitHook;
 use MediaWiki\Parser\Parser;
 use MediaWiki\Title\NamespaceInfo;
 use MediaWiki\Title\Title;
