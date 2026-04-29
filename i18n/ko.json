@@ -1,15 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ykhwong"
+			"Ykhwong",
+			"Tensama0415"
 		]
 	},
+	"pageassessments-desc": "이 확장 기능은 파서 함수를 이용하여 문서 평가 결과를 데이터베이스 테이블에 저장하기 위한 것입니다",
 	"pageassessments-special": "문서 평가",
 	"pageassessments-project": "프로젝트",
 	"pageassessments-page-namespace": "문서 이름공간",
 	"pageassessments-page-title": "문서 제목",
 	"pageassessments-search": "검색",
 	"pageassessments-importance": "중요도",
+	"pageassessments-class": "클래스",
 	"pageassessments-timestamp": "타임스탬프",
 	"pageassessments-total-results": "총 결과: $1",
 	"pageassessments-error-namespace-filter": "프로젝트 이름 또는 문서 제목을 입력해 주십시오."
