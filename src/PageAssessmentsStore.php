@@ -53,14 +53,15 @@ class PageAssessmentsStore {
 		// Compile a list of projects found in the parserData to find out which
 		// assessment records need to be inserted, deleted, or updated.
 		$projects = [];
-		foreach ( $assessmentData as $key => $parserData ) {
+		$assessmentDataToStore = [];
+		foreach ( $assessmentData as $project => $parserData ) {
 			// If the name of the project is set...
-			if ( isset( $parserData[0] ) && $parserData[0] !== '' ) {
+			if ( $project !== '' ) {
 				// Clean the project name.
-				$projectName = $this->cleanProjectTitle( $parserData[0] );
+				$projectName = $this->cleanProjectTitle( $project );
 				// Replace the original project name with the cleaned project
 				// name in the assessment data, since we'll need it to match later.
-				$assessmentData[$key][0] = $projectName;
+				$assessmentDataToStore[ $projectName ] = $parserData;
 				// Get the corresponding ID from page_assessments_projects table.
 				$projectId = $this->getProjectId( $projectName );
 				// If there is no existing project by that name, add it to the table.
@@ -75,7 +76,7 @@ class PageAssessmentsStore {
 					}
 				}
 				// Add the project's ID to the array.
-				$projects[$projectName] = $projectId;
+				$projects[ $projectName ] = $projectId;
 			}
 		}
 		// Get a list of all the projects previously assigned to the page.
@@ -88,20 +89,18 @@ class PageAssessmentsStore {
 		$i = 0;
 
 		// Add and update assessment records to the database
-		foreach ( $assessmentData as $parserData ) {
+		foreach ( $assessmentDataToStore as $project => $parserData ) {
 			// Make sure the name of the project is set.
-			if ( !isset( $parserData[0] ) || $parserData[0] == '' ) {
+			if ( $project === '' ) {
 				continue;
 			}
-			$projectId = $projects[$parserData[0]];
+			$projectId = $projects[$project];
 			if ( $projectId && $pageId ) {
-				$class = $parserData[1];
-				$importance = $parserData[2];
 				$values = [
 					'pa_page_id' => $pageId,
 					'pa_project_id' => $projectId,
-					'pa_class' => $class,
-					'pa_importance' => $importance,
+					'pa_class' => $parserData['class'],
+					'pa_importance' => $parserData['importance'],
 					'pa_page_revision' => $revisionId
 				];
 				if ( in_array( $projectId, $toInsert ) ) {
@@ -136,7 +135,7 @@ class PageAssessmentsStore {
 		}
 
 		if ( $changed ) {
-			$this->updateSearchIndex( $titleObj, $assessmentData );
+			$this->updateSearchIndex( $titleObj, $assessmentDataToStore );
 		}
 	}
 
@@ -151,15 +150,10 @@ class PageAssessmentsStore {
 			return;
 		}
 		$tags = [];
-		foreach ( $assessmentData as $parserData ) {
-			if ( !isset( $parserData[0] ) || $parserData[0] == '' || str_contains( $parserData[0], '|' ) ) {
-				// Ignore empty or invalid project names. Pipe character is not allowed in weighted_tags.
-				continue;
-			}
-			// Name already cleaned above in doUpdates()
-			$name = $parserData[0];
-			$weight = $this->importanceToWeight( $parserData[ 2 ] );
-			$tags[ $name ] = $weight;
+		foreach ( $assessmentData as $project => $parserData ) {
+			// $project name already cleaned above in doUpdates()
+			$weight = $this->importanceToWeight( $parserData['importance'] );
+			$tags[ $project ] = $weight;
 		}
 
 		if ( $tags === [] ) {
@@ -262,6 +256,8 @@ class PageAssessmentsStore {
 		// This is case-sensitive on purpose, as there are some legitimate
 		// subproject titles starting with "The", e.g. "The Canterbury Tales".
 		$project = str_replace( "/the ", "/", $project );
+		// Remove pipe characters, which aren't permitted in weighted tags.
+		$project = str_replace( '|', '', $project );
 		// Truncate to 255 characters to avoid DB warnings.
 		return substr( $project, 0, 255 );
 	}
@@ -351,7 +347,7 @@ class PageAssessmentsStore {
 	 * Get all assessment data associated with the given page
 	 *
 	 * @param int $pageId Page ID
-	 * @return array $results All projects names and assessments associated with the given page
+	 * @return array $results All assessments associated with the given page, keyed by project.
 	 */
 	public function getAllAssessments( int $pageId ): array {
 		$res = $this->getReplicaDBConnection()
@@ -365,12 +361,14 @@ class PageAssessmentsStore {
 
 		$results = [];
 		foreach ( $res as $row ) {
-			$results[] = [
-				'name' => $row->pap_project_title,
+			$results[ $row->pap_project_title ] = [
 				'class' => $row->pa_class,
 				'importance' => $row->pa_importance
 			];
 		}
+		// Sort to ensure output is stable.
+		ksort( $results );
+
 		return $results;
 	}
 

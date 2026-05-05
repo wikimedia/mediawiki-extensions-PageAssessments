@@ -39,7 +39,7 @@ Test page with 1 associated project
 !! wikitext
 {{#invoke:Get assessments|main|page=Page with 1 project}}
 !! html
-<p>[{"class":"A","name":"Golf","importance":"Low"}]
+<p>{"Golf":{"importance":"Low","class":"A"}}
 </p>
 !! end
 
