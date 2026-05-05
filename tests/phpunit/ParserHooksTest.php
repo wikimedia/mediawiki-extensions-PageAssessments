@@ -26,20 +26,20 @@ class ParserHooksTest extends MediaWikiIntegrationTestCase {
 		$ret = $this->insertPage(
 			'PageAssessmentsTestPage',
 			'{{#assessment:Medicine|B|Low}}' .
-				'{{#assessment:Biology|C|Mid}}' .
-				'{{#assessment:Philosophy|Start|High}}'
+			'{{#assessment:Biology|C|Mid}}' .
+			'{{#assessment:Philosophy|Start|High}}'
 		);
 		$records = $this->store->getAllAssessments( $ret['title']->getArticleId() );
 		$this->assertCount( 3, $records );
-		$this->assertSame( 'Medicine', $records[0]['name'] );
-		$this->assertSame( 'B', $records[0]['class'] );
-		$this->assertSame( 'Low', $records[0]['importance'] );
-		$this->assertSame( 'Biology', $records[1]['name'] );
-		$this->assertSame( 'C', $records[1]['class'] );
-		$this->assertSame( 'Mid', $records[1]['importance'] );
-		$this->assertSame( 'Philosophy', $records[2]['name'] );
-		$this->assertSame( 'Start', $records[2]['class'] );
-		$this->assertSame( 'High', $records[2]['importance'] );
+		$this->assertArrayHasKey( 'Medicine', $records );
+		$this->assertSame( 'B', $records['Medicine']['class'] );
+		$this->assertSame( 'Low', $records['Medicine']['importance'] );
+		$this->assertArrayHasKey( 'Biology', $records );
+		$this->assertSame( 'C', $records['Biology']['class'] );
+		$this->assertSame( 'Mid', $records['Biology']['importance'] );
+		$this->assertArrayHasKey( 'Philosophy', $records );
+		$this->assertSame( 'Start', $records['Philosophy']['class'] );
+		$this->assertSame( 'High', $records['Philosophy']['importance'] );
 	}
 
 	public function testDataIsSavedFromTalk(): void {
@@ -56,8 +56,8 @@ class ParserHooksTest extends MediaWikiIntegrationTestCase {
 		$this->editPage( $talkTitle, '{{#assessment:Medicine|B|Low}}' );
 		$records = $this->store->getAllAssessments( $subjectTitle->getArticleID() );
 		$this->assertCount( 1, $records );
-		$this->assertSame( 'Medicine', $records[0]['name'] );
-		$this->assertSame( 'B', $records[0]['class'] );
-		$this->assertSame( 'Low', $records[0]['importance'] );
+		$this->assertArrayHasKey( 'Medicine', $records );
+		$this->assertSame( 'B', $records['Medicine']['class'] );
+		$this->assertSame( 'Low', $records['Medicine']['importance'] );
 	}
 }

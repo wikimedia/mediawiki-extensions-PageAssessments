@@ -42,7 +42,7 @@
 	"Hooks": {
 		"ParserFirstCallInit": "parser",
 		"LoadExtensionSchemaUpdates": "schema",
-		"LinksUpdateComplete": "parser",
+		"RevisionDataUpdates": "parser",
 		"CirrusSearchAddQueryFeatures": "cirrussearch"
 	},
 	"HookHandlers": {

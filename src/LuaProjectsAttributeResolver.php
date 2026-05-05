@@ -34,23 +34,6 @@ class LuaProjectsAttributeResolver extends TitleAttributeResolver {
 		$this->addTemplateLink( $assessmentPageTitle );
 		$this->incrementExpensiveFunctionCount();
 
-		$projects = $this->store->getAllAssessments( $title->getId() );
-		// Sort to ensure output is stable
-		sort( $projects );
-		return self::makeArrayOneBased( $projects );
-	}
-
-	/**
-	 * Renumber an array for return to Lua. Duplicates Scribunto TitleLibrary::makeArrayOneBased.
-	 * TODO: unify them.
-	 *
-	 * @param array $arr
-	 * @return array
-	 */
-	private static function makeArrayOneBased( array $arr ) {
-		if ( !$arr ) {
-			return $arr;
-		}
-		return array_combine( range( 1, count( $arr ) ), array_values( $arr ) );
+		return $this->store->getAllAssessments( $title->getId() );
 	}
 }
