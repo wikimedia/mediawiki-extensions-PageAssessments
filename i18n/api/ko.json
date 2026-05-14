@@ -1,11 +1,27 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ykhwong"
+			"Ykhwong",
+			"Tensama0415"
 		]
 	},
+	"apihelp-query+pageassessments-summary": "주어진 문서와 관련된 프로젝트 및 평가 결과를 반환합니다.",
+	"apihelp-query+pageassessments-param-limit": "반환되는 프로젝트의 총 개수 제한(모든 문서 총합)입니다.",
+	"apihelp-query+pageassessments-param-subprojects": "하위 프로젝트의 평가도 반환합니다.",
+	"apihelp-query+pageassessments-example-formatversion": "새로운 API 결과 형식을 사용하여 <kbd>Apple</kbd> 및 <kbd>Pear</kbd> 문서의 프로젝트 및 평가 데이터를 가져옵니다.",
+	"apihelp-query+pageassessments-example-simple": "<kbd>Apple</kbd> 문서에 대한 프로젝트 및 평가 데이터를 가져옵니다.",
+	"apihelp-query+pageassessments-example-subprojects": "<kbd>Apple</kbd> 문서에 대한 프로젝트 및 평가 데이터(하위 프로젝트 포함)를 가져옵니다.",
+	"apihelp-query+projectpages-summary": "하나 이상의 프로젝트와 관련된 모든 문서를 나열합니다.",
+	"apihelp-query+projectpages-param-assessments": "반환된 문서에 대한 평가도 반환합니다.",
+	"apihelp-query+projectpages-param-projects": "문서 목록을 표시할 프로젝트입니다. 이 매개변수를 생략하면 모든 프로젝트가 포함됩니다.",
+	"apihelp-query+projectpages-param-limit": "반환할 문서의 최대 수입니다.",
+	"apihelp-query+projectpages-example-simple-1": "<kbd>Medicine</kbd> 위키프로젝트 또는<kbd>Anatomy</kbd> 위키프로젝트와 관련된 첫 10개 문서를 가져옵니다.",
+	"apihelp-query+projectpages-example-simple-2": "<kbd>Medicine</kbd> 위키프로젝트와 관련된 첫 10개 문서를 평가 데이터를 포함해 가져옵니다.",
+	"apihelp-query+projectpages-example-generator": "<kbd>Textile Arts</kbd> 위키프로젝트와 관련된 첫 10개 문서의 정보를 가져옵니다.",
 	"apihelp-query+projects-summary": "모든 프로젝트를 나열합니다.",
 	"apihelp-query+projects-param-subprojects": "하위 프로젝트도 포함합니다.",
 	"apihelp-query+projects-example": "모든 프로젝트의 목록을 가져옵니다.",
+	"apihelp-query+projects-example-subprojects": "모든 프로젝트와 하위 프로젝트의 목록을 가져옵니다.",
+	"apiwarn-pageassessments-nogeneratorassessments": "<kbd>generator=projectpages</kbd>에서 문서 평가 결과를 가져올 수 없습니다.",
 	"apiwarn-pageassessments-badproject": "프로젝트 이름을 인식할 수 없습니다: $1."
 }
