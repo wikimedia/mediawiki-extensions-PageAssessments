@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"AhmedG612"
+		]
+	},
+	"apihelp-query+pageassessments-summary": "Soo celi mashruucyada iyo qiimeynta la xiriira bogagga la siiyay.",
+	"apihelp-query+pageassessments-param-limit": "Xadka tirada guud ee mashruucyada la soo celinayo (wadarta dhammaan bogagga).",
+	"apihelp-query+pageassessments-param-subprojects": "Sidoo kale soo celi qiimeynta ay sameeyeen mashruucyada-hoosaadyadu",
+	"apihelp-query+pageassessments-example-formatversion": "Hel xogta mashruuca iyo qiimeynta bogagga <kbd>Apple</kbd> iyo <kbd>Pear</kbd>, adigoo isticmaalaya qaabka natiijada API-ga ee cusub.",
+	"apihelp-query+pageassessments-example-simple": "Hel xogta mashruuca iyo qiimeynta bogga <kbd>Apple</kbd>.",
+	"apihelp-query+pageassessments-example-subprojects": "Hel xogta mashruuca iyo qiimeynta (oo ay ku jiraan kuwa mashruucyada-hoosaadyada) ee bogga <kbd>Apple</kbd>.",
+	"apihelp-query+projectpages-summary": "Liis garee dhammaan bogagga la xiriira hal ama ka badan mashruuc.",
+	"apihelp-query+projectpages-param-assessments": "Sidoo kale soo celi qiimeynta bogagga la soo celiyay.",
+	"apihelp-query+projectpages-param-projects": "Mashruucyada lagu liis gareynayo bogagga. Haddii halbeeggan la reebo, dhammaan mashruucyada ayaa la soo dari doonaa.",
+	"apihelp-query+projectpages-param-limit": "Tirada ugu badan ee bogagga la soo celinayo.",
+	"apihelp-query+projectpages-example-simple-1": "Hel 10-ka bog ee ugu horreeya ee la xiriira WikiProject <kbd>Medicine</kbd> ama WikiProject <kbd>Anatomy</kbd>.",
+	"apihelp-query+projectpages-example-simple-2": "Hel 10-ka bog ee ugu horreeya ee la xiriira WikiProject <kbd>Medicine</kbd>, adigoo ku daraya xogta qiimeynta.",
+	"apihelp-query+projectpages-example-generator": "Hel xogta bogga ee 10-ka bog ee ugu horreeya ee la xiriira WikiProject <kbd>Textile Arts</kbd>.",
+	"apihelp-query+projects-summary": "Liiska dhammaan mashruucyada.",
+	"apihelp-query+projects-param-subprojects": "Sidoo kale ku dar mashruucyada-hoosaadyada.",
+	"apihelp-query+projects-example": "Hel liiska dhammaan mashruucyada.",
+	"apihelp-query+projects-example-subprojects": "Hel liiska dhammaan mashruucyada iyo mashruucyada-hoosaadyada.",
+	"apiwarn-pageassessments-nogeneratorassessments": "Suurtagal ma aha in laga soo helo natiijooyinka qiimeynta bogagga <kbd>generator=projectpages</kbd>.",
+	"apiwarn-pageassessments-badproject": "Magaca mashruuca lama aqoonsan: $1."
+}
