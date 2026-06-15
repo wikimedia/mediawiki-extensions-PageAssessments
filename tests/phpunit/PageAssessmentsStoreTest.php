@@ -1,4 +1,5 @@
 <?php
+declare( strict_types = 1 );
 
 namespace MediaWiki\Extension\PageAssessments\Tests;
 
@@ -19,6 +20,21 @@ class PageAssessmentsStoreTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->store = $this->getServiceContainer()->get( 'PageAssessments.Store' );
+	}
+
+	public function testDoUpdates(): void {
+		$title = $this->getExistingTestPage( 'Test page' )->getTitle();
+		$this->store->doUpdates( $title, [
+			// Corrupt data; Key should be the project name as a string.
+			5 => [ 'class' => 'GA', 'importance' => 'Low' ],
+			// Valid data
+			'Medicine' => [ 'class' => 'B', 'importance' => 'High' ],
+		] );
+		$this->newSelectQueryBuilder()
+			->select( [ 'pa_page_id', 'pap_project_title', 'pa_class', 'pa_importance' ] )
+			->from( 'page_assessments' )
+			->join( 'page_assessments_projects', null, [ 'pa_project_id = pap_project_id' ] )
+			->assertRowValue( [ (string)$title->getArticleId(), 'Medicine', 'B', 'High' ] );
 	}
 
 	public function testInsert() {
@@ -83,7 +99,7 @@ class PageAssessmentsStoreTest extends MediaWikiIntegrationTestCase {
 		];
 		// Insert another record
 		$this->store->insertRecord( $values );
-		$res = $this->store->getAllProjects( '10' );
+		$res = $this->store->getAllProjects( 10 );
 		$expected = [ 3, 4 ];
 		// Since the projects may be returned in any order, we can't do a simple
 		// assertEquals() on the arrays. Instead we compare the arrays using array_diff()

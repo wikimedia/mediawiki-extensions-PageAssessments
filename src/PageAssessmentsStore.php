@@ -56,7 +56,7 @@ class PageAssessmentsStore {
 		$assessmentDataToStore = [];
 		foreach ( $assessmentData as $project => $parserData ) {
 			// If the name of the project is set...
-			if ( $project !== '' ) {
+			if ( is_string( $project ) && $project !== '' ) {
 				// Clean the project name.
 				$projectName = $this->cleanProjectTitle( $project );
 				// Replace the original project name with the cleaned project
