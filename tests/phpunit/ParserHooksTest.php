@@ -44,8 +44,8 @@ class ParserHooksTest extends MediaWikiIntegrationTestCase {
 
 	public function testDataIsSavedFromTalk(): void {
 		$this->overrideConfigValue( 'PageAssessmentsOnTalkPages', true );
-		$subjectTitle = Title::newFromText( 'PageAssessmentsTestPage' );
-		$talkTitle = Title::newFromText( 'Talk:PageAssessmentsTestPage' );
+		$subjectTitle = Title::makeTitle( NS_MAIN, 'PageAssessmentsTestPage' );
+		$talkTitle = Title::makeTitle( NS_TALK, 'PageAssessmentsTestPage' );
 		$this->insertPage( $talkTitle, '{{#assessment:Medicine|B|Low}}' );
 		$records = $this->store->getAllAssessments( $subjectTitle->getArticleID() );
 		// Should be empty since the subject page doesn't exist.
