@@ -47,9 +47,11 @@ readonly class OutputPageHooks implements OutputPageParserOutputHook {
 			return;
 		}
 
-		$extData = $parserOutput->getExtensionData( ParserHooks::EXT_DATA_KEY );
-		if ( $extData ) {
-			$outputPage->addJsConfigVars( self::JS_CONFIG_VAR, $extData );
+		$assessmentData = ParserHooks::extractAssessmentDataFromParserOutput(
+			$parserOutput
+		);
+		if ( $assessmentData !== [] ) {
+			$outputPage->addJsConfigVars( self::JS_CONFIG_VAR, $assessmentData );
 		}
 	}
 }

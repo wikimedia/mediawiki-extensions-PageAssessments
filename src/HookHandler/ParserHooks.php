@@ -10,6 +10,7 @@ use MediaWiki\Hook\ParserAfterParseHook;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Parser\Hook\ParserFirstCallInitHook;
 use MediaWiki\Parser\Parser;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Parser\StripState;
 use MediaWiki\Revision\RenderedRevision;
 use MediaWiki\Storage\Hook\RevisionDataUpdatesHook;
@@ -42,7 +43,6 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 	 * @param string $project Wikiproject name
 	 * @param string $class Class of article
 	 * @param string $importance Importance of article
-	 * @fixme Not Parsoid-compatible due to re-setting extension data, should use appendExtensionData instead.
 	 */
 	private function cacheAssessment(
 		Parser $parser,
@@ -50,18 +50,68 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 		string $class = '',
 		string $importance = ''
 	): void {
-		$parserData = $parser->getOutput()->getExtensionData( self::EXT_DATA_KEY );
-		if ( $parserData == null ) {
-			$parserData = [];
-		}
+		self::storeAssessmentDataInParserOutput(
+			$parser->getOutput(), $project, $class, $importance
+		);
+	}
 
-		// This gets used in the $wgPageAssessments JS var. Key by project to make it easier to
-		// see if a specific project is present, and match the format of ApiQueryPageAssessments.
-		$parserData[ $project ] = [
-			'class' => $class,
-			'importance' => $importance
-		];
-		$parser->getOutput()->setExtensionData( self::EXT_DATA_KEY, $parserData );
+	public static function storeAssessmentDataInParserOutput(
+		ParserOutput $parserOutput,
+		string $project, string $class, string $importance,
+	) {
+		// Keep the page assessment data as three unioned sets, so that it
+		// is compatible with Parsoid Selective Update.  We will reconstruct
+		// this into an array indexed by $project before emitting it in the
+		// JS vars
+		$parserOutput->appendExtensionData(
+			self::EXT_DATA_KEY . "|projects", $project
+		);
+		$parserOutput->appendExtensionData(
+			self::EXT_DATA_KEY . "|class|{$project}", $class
+		);
+		$parserOutput->appendExtensionData(
+			self::EXT_DATA_KEY . "|importance|{$project}|{$class}", $importance
+		);
+	}
+
+	public static function extractAssessmentDataFromParserOutput(
+		ParserOutput $parserOutput
+	): array {
+		$assessmentData =
+			// check the bare key name for backward compatibility (MW < 1.47)
+			$parserOutput->getExtensionData( self::EXT_DATA_KEY ) ?? [];
+		$projects = $parserOutput->getExtensionData(
+			self::EXT_DATA_KEY . "|projects"
+		) ?? [];
+		foreach ( $projects as $project => $unused1 ) {
+			$classes = $parserOutput->getExtensionData(
+				self::EXT_DATA_KEY . "|class|{$project}"
+			) ?? [];
+			foreach ( $classes as $class => $unused2 ) {
+				$importances = $parserOutput->getExtensionData(
+					self::EXT_DATA_KEY . "|importance|{$project}|{$class}"
+				) ?? [];
+				foreach ( $importances as $importance => $unused3 ) {
+					if ( isset( $assessmentData[$project] ) ) {
+						// There's already an assessment for this project
+						// on the page.  We could keep all of them, or
+						// flag an error, or choose one deterministically.
+						// We'll chose the lexicographically "first"
+						$prev = $assessmentData[$project]['class'] . '|' .
+							  $assessmentData[$project]['importance'];
+						$curr = "{$class}|{$importance}";
+						if ( $prev <= $curr ) {
+							continue;
+						}
+					}
+					$assessmentData[$project] = [
+						'class' => $class,
+						'importance' => $importance,
+					];
+				}
+			}
+		}
+		return $assessmentData;
 	}
 
 	/**
@@ -86,7 +136,13 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 			$this->config->get( 'PageAssessmentsOnTalkPages' )
 		) {
 			$assessmentData = $this->store->getAllAssessments( $title->getArticleID() );
-			$parser->getOutput()->setExtensionData( self::EXT_DATA_KEY, $assessmentData );
+			foreach ( $assessmentData as $project => [
+				'class' => $class, 'importance' => $importance
+			] ) {
+				self::storeAssessmentDataInParserOutput(
+					$parser->getOutput(), $project, $class, $importance
+				);
+			}
 		}
 	}
 
@@ -106,13 +162,13 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 			( !$assessmentsOnTalkPages && !$isTalkPage )
 		) {
 			$parserOutput = $renderedRevision->getRevisionParserOutput();
-			if ( $parserOutput->getExtensionData( self::EXT_DATA_KEY ) !== null ) {
-				$assessmentData = $parserOutput->getExtensionData( self::EXT_DATA_KEY );
-			} else {
-				// Even if there is no assessment data, we still need to run doUpdates
-				// in case any assessment data was deleted from the page.
-				$assessmentData = [];
-			}
+			$assessmentData = self::extractAssessmentDataFromParserOutput(
+				$parserOutput
+			);
+			// Even if there is no assessment data (it's []), we still
+			// need to run doUpdates in case any assessment data was
+			// deleted from the page.
+
 			// Assessment data should only be associated with subject pages regardless
 			// of whether it is recorded on talk pages or subject pages.
 			if ( $isTalkPage ) {
