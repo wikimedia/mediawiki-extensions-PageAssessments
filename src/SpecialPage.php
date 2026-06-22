@@ -41,7 +41,9 @@ class SpecialPage extends QueryPage {
 	/**
 	 * Create this special page, giving it a name and making it transcludable.
 	 */
-	public function __construct() {
+	public function __construct(
+		private readonly PageAssessmentsProcessor $processor
+	) {
 		parent::__construct();
 		$this->mName = 'PageAssessments';
 	}
@@ -100,7 +102,7 @@ class SpecialPage extends QueryPage {
 		// Project.
 		$project = $request->getVal( 'project', '' );
 		if ( $project !== '' ) {
-			$info['conds']['pap_project_title'] = $project;
+			$info['conds']['pap_project_title'] = $this->processor->normalizeProjectName( $project );
 		}
 		// Page title.
 		$pageTitle = $request->getVal( 'page_title', '' );

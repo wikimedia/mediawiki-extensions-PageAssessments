@@ -16,3 +16,4 @@ The following configuration variables can be set from your LocalSettings.php fil
 
 * `$wgPageAssessmentsOnTalkPages`: Set to 'true' if page assessments are recorded on talk pages, or 'false' if page assessments are recorded directly on main namespace pages. Default is true.
 * `$wgPageAssessmentsSubprojects`: Set to 'true' if the wiki distinguishes between projects and subprojects. Default is false.
+* `$wgPageAssessmentsNamespace`: The namespace number used for WikiProject pages; used for resolving projects written in multiple language variants. Default is -1, which disables variant conversion.

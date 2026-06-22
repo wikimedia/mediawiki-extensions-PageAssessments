@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace MediaWiki\Extension\PageAssessments;
 
 use MediaWiki\Config\Config;
+use MediaWiki\Language\ILanguageConverter;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use Wikimedia\Parsoid\Core\ContentMetadataCollector;
@@ -14,6 +15,7 @@ readonly class PageAssessmentsProcessor {
 	public function __construct(
 		private Config $config,
 		private PageAssessmentsStore $store,
+		private ILanguageConverter $languageConverter,
 	) {
 	}
 
@@ -60,6 +62,26 @@ readonly class PageAssessmentsProcessor {
 		);
 	}
 
+	/**
+	 * Normalize a WikiProject name by resolving it to the canonical
+	 * spelling of its LanguageConverter variant, if any. This is the
+	 * same logic that is used for category variants in CategoryLinksTable
+	 * in core.
+	 */
+	public function normalizeProjectName( string $project ): string {
+		$projectNs = $this->config->get( 'PageAssessmentsNamespace' );
+		if ( $projectNs < 0 ) {
+			return $project;
+		}
+		$projectTitle = Title::newFromText( $project, $projectNs );
+		if ( $projectTitle === null ) {
+			return $project;
+		}
+		// This method passes $project and $projectTitle by reference
+		$this->languageConverter->findVariantLink( $project, $projectTitle, true );
+		return $projectTitle->getText();
+	}
+
 	public function extractAssessmentDataFromParserOutput(
 		ParserOutput $parserOutput
 	): array {
@@ -70,6 +92,7 @@ readonly class PageAssessmentsProcessor {
 			self::EXT_DATA_KEY . "|projects"
 		) ?? [];
 		foreach ( $projects as $project => $unused1 ) {
+			$projectKey = $this->normalizeProjectName( $project );
 			$classes = $parserOutput->getExtensionData(
 				self::EXT_DATA_KEY . "|class|{$project}"
 			) ?? [];
@@ -78,19 +101,19 @@ readonly class PageAssessmentsProcessor {
 					self::EXT_DATA_KEY . "|importance|{$project}|{$class}"
 				) ?? [];
 				foreach ( $importances as $importance => $unused3 ) {
-					if ( isset( $assessmentData[$project] ) ) {
+					if ( isset( $assessmentData[$projectKey] ) ) {
 						// There's already an assessment for this project
 						// on the page.  We could keep all of them, or
 						// flag an error, or choose one deterministically.
 						// We'll chose the lexicographically "first"
-						$prev = $assessmentData[$project]['class'] . '|' .
-							  $assessmentData[$project]['importance'];
+						$prev = $assessmentData[$projectKey]['class'] . '|' .
+							  $assessmentData[$projectKey]['importance'];
 						$curr = "{$class}|{$importance}";
 						if ( $prev <= $curr ) {
 							continue;
 						}
 					}
-					$assessmentData[$project] = [
+					$assessmentData[$projectKey] = [
 						'class' => $class,
 						'importance' => $importance,
 					];

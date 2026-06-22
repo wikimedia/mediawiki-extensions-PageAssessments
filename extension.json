@@ -117,7 +117,12 @@
 		}
 	},
 	"SpecialPages": {
-		"PageAssessments": "MediaWiki\\Extension\\PageAssessments\\SpecialPage"
+		"PageAssessments": {
+			"class": "MediaWiki\\Extension\\PageAssessments\\SpecialPage",
+			"services": [
+				"PageAssessments.AssessmentsProcessor"
+			]
+		}
 	},
 	"config": {
 		"PageAssessmentsOnTalkPages": {
@@ -125,6 +130,9 @@
 		},
 		"PageAssessmentsSubprojects": {
 			"value": false
+		},
+		"PageAssessmentsNamespace": {
+			"value": -1
 		}
 	},
 	"attributes": {

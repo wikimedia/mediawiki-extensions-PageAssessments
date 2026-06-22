@@ -13,7 +13,8 @@ return [
 	): PageAssessmentsProcessor {
 		return new PageAssessmentsProcessor(
 			$services->getMainConfig(),
-			$services->get( 'PageAssessments.Store' )
+			$services->get( 'PageAssessments.Store' ),
+			$services->getLanguageConverterFactory()->getLanguageConverter()
 		);
 	},
 	'PageAssessments.Store' => static function (
