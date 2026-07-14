@@ -75,7 +75,11 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 	 */
 	public function onParserAfterParse( $parser, &$text, $stripState ): void {
 		$title = Title::newFromPageReference( $parser->getPage() );
-		if ( !$title->isTalkPage() && $this->config->get( 'PageAssessmentsOnTalkPages' ) ) {
+		if (
+			$title->canHaveTalkPage() &&
+			!$title->isTalkPage() &&
+			$this->config->get( 'PageAssessmentsOnTalkPages' )
+		) {
 			$assessmentData = $this->store->getAllAssessments( $title->getArticleID() );
 			$parser->getOutput()->setExtensionData( self::EXT_DATA_KEY, $assessmentData );
 		}
