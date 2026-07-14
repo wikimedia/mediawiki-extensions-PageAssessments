@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"شاه زمان پټان"
+		]
+	},
+	"apihelp-query+pageassessments-summary": "د ورکړل شويو مخونو لپاره اړون پروژې او ارزونې بېرته راگرځوي.",
+	"apihelp-query+pageassessments-param-limit": "د ټولو راستنېدونکو پروژو د شمېر محدوديت (د ټولو مخونو ټولټال).",
+	"apihelp-query+pageassessments-param-subprojects": "د څېرمه‌پروژو له مخې ارزونې راگرځول.",
+	"apihelp-query+pageassessments-example-formatversion": "د نوې ای‌پي‌آی پايلې بڼې کارولو سره د <kbd>بټنگ</kbd> او <kbd>مڼې</kbd> مخونو لپاره پروژه او ارزونې اومتوک ترلاسه کړئ.",
+	"apihelp-query+pageassessments-example-simple": "د <kbd>مڼې</kbd> مخ لپاره د پروژې او ارزونې اومتوکي ترلاسه کول.",
+	"apihelp-query+pageassessments-example-subprojects": "د <kbd>مڼې</kbd> مخ لپاره پروژه او ارزونې اومتوک ترلاسه کول (د څېرمه‌پروژو په گډون).",
+	"apihelp-query+projectpages-summary": "يوې يا ډېرو پروژو سره تړلي ټول مخونه لړليکول.",
+	"apihelp-query+projectpages-param-assessments": "همدارنگه د بېرته‌راستانه شويو مخونو لپاره د ارزونې مالومات بېرته راگرځول.",
+	"apihelp-query+projectpages-param-projects": "هغه پروژې چې مخونه د هغې لپاره لړليک کېږي. که دا ارزښت پرېښودل شي؛ ټولې پروژې به پکې راونغاړل شي.",
+	"apihelp-query+projectpages-param-limit": "د بېرته‌راگرځېدونکو مخونو ډېر شمېر.",
+	"apihelp-query+projectpages-example-simple-1": "د ويکي‌پروژې <kbd>درمل</kbd> يا ويکي‌پروژې <kbd>اناتومي</kbd> اړوند لومړي ۱۰ مخونه ترلاسه کول.",
+	"apihelp-query+projectpages-example-simple-2": "د ويکي‌پروژې <kbd>درمل</kbd>اړوند لومړي ۱۰ مخونه د هغې د ارزونې اومتوک په شمول ترلاسه کول.",
+	"apihelp-query+projectpages-example-generator": "د ويکي‌پروژې <kbd>اوبدلو هنر</kbd>  اړوند لومړي ۱۰ مخونو مخ مالومات ترلاسه‌کول.",
+	"apihelp-query+projects-summary": "ټولې پروژې لړليکول.",
+	"apihelp-query+projects-param-subprojects": "څېرمه‌پروژې هم پکې راونغاړئ.",
+	"apihelp-query+projects-example": "د ټولو پروژو لړليک ترلاسه‌کول.",
+	"apihelp-query+projects-example-subprojects": "د ټولو پروژو او څېرمه‌پروژو لړليک ترلاسه‌کول.",
+	"apiwarn-pageassessments-nogeneratorassessments": "له <kbd>generator=projectpages</kbd> څخه د مخ ارزونې پايلې ترلاسه‌کول ناشوني دي.",
+	"apiwarn-pageassessments-badproject": "د پروژې نوم پېژندل شوی نه دی: $1."
+}

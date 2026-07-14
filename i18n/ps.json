@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"شاه زمان پټان"
+		]
+	},
+	"pageassessments-desc": "دا شاتاړی د ټوټه‌کوونکي کړنچار په مرسته اومتوک‌اډانې لښتيال کې د مخونو اروزنې ساتلو لپاره دی.",
+	"pageassessments-special": "مخ ارزونې",
+	"pageassessments-project": "پروژه",
+	"pageassessments-page-namespace": "مخ نوم‌تشيال",
+	"pageassessments-page-title": "مخ سرليک",
+	"pageassessments-search": "پلټل",
+	"pageassessments-importance": "ارزښت",
+	"pageassessments-class": "ټولگی",
+	"pageassessments-timestamp": "وخت‌ټاپه",
+	"pageassessments-total-results": "ټولې پايلې: $1",
+	"pageassessments-error-namespace-filter": "مهرباني وکړئ د پروژې نوم يا د مخ سرليک دننه کړئ."
+}
