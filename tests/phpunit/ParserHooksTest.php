@@ -3,7 +3,10 @@ declare( strict_types = 1 );
 
 namespace MediaWiki\Extension\PageAssessments\Tests;
 
+use MediaWiki\Actions\ActionEntryPoint;
 use MediaWiki\Extension\PageAssessments\PageAssessmentsStore;
+use MediaWiki\Request\FauxRequest;
+use MediaWiki\Tests\MockEnvironment;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 
@@ -71,7 +74,15 @@ class ParserHooksTest extends MediaWikiIntegrationTestCase {
 		$this->setService( 'PageAssessments.Store', $mockStore );
 		$this->insertPage( $subjectTitle, 'Test' );
 		$this->insertPage( $talkTitle, '{{#assessment:Medicine|B|Low}}' );
-		// For good measure; Perform null edit to re-trigger the assessment parsing and saving.
-		$this->editPage( $talkTitle, '{{#assessment:Medicine|B|Low}}' );
+
+		// Simulate a full page view including parsing of interface messgaes.
+		$request = new FauxRequest( [ 'title' => $subjectTitle->getPrefixedDBkey() ] );
+		$env = new MockEnvironment( $request );
+		$context = $env->makeFauxContext();
+		$entryPoint = new ActionEntryPoint( $context, $env, $this->getServiceContainer() );
+		$entryPoint->enableOutputCapture();
+		$entryPoint->run();
+		// Combined with ->enableOutputCapture(), this suppresses the HTML from being sent to stdout.
+		$entryPoint->getCapturedOutput();
 	}
 }
