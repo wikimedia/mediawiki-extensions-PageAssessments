@@ -74,6 +74,11 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 	 * @param StripState $stripState
 	 */
 	public function onParserAfterParse( $parser, &$text, $stripState ): void {
+		// Skip for parses of messages (T374761#12134375).
+		if ( $parser->getOptions()?->isMessage() ) {
+			return;
+		}
+
 		$title = Title::newFromPageReference( $parser->getPage() );
 		if (
 			$title->canHaveTalkPage() &&

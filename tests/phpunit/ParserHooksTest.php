@@ -60,4 +60,18 @@ class ParserHooksTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( 'B', $records['Medicine']['class'] );
 		$this->assertSame( 'Low', $records['Medicine']['importance'] );
 	}
+
+	public function testParserAfterParseOnlyForPageText(): void {
+		$this->overrideConfigValue( 'PageAssessmentsOnTalkPages', true );
+		$subjectTitle = Title::makeTitle( NS_MAIN, 'PageAssessmentsTestPage' );
+		$talkTitle = Title::makeTitle( NS_TALK, 'PageAssessmentsTestPage' );
+		$mockStore = $this->createMock( PageAssessmentsStore::class );
+		$mockStore->expects( $this->once() )
+			->method( 'getAllAssessments' );
+		$this->setService( 'PageAssessments.Store', $mockStore );
+		$this->insertPage( $subjectTitle, 'Test' );
+		$this->insertPage( $talkTitle, '{{#assessment:Medicine|B|Low}}' );
+		// For good measure; Perform null edit to re-trigger the assessment parsing and saving.
+		$this->editPage( $talkTitle, '{{#assessment:Medicine|B|Low}}' );
+	}
 }
