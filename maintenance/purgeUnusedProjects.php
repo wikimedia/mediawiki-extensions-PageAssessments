@@ -27,7 +27,7 @@ class PurgeUnusedProjects extends Maintenance {
 
 	public function execute() {
 		$dbw = $this->getDB( DB_PRIMARY );
-		$dbr = $this->getDB( DB_REPLICA );
+		$dbr = $this->getReplicaDB();
 		// Count all the projects
 		$initialCount = $dbr->newSelectQueryBuilder()
 			->select( 'COUNT(*)' )
