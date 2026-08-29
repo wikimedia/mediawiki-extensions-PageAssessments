@@ -47,7 +47,7 @@ readonly class OutputPageHooks implements OutputPageParserOutputHook {
 			return;
 		}
 
-		$assessmentData = ParserHooks::extractAssessmentDataFromParserOutput(
+		$assessmentData = AssessmentsProcessor::extractAssessmentDataFromParserOutput(
 			$parserOutput
 		);
 		if ( $assessmentData !== [] ) {

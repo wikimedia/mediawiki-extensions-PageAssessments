@@ -88,6 +88,20 @@
 			"i18n/api"
 		]
 	},
+	"ParsoidModules": [
+		{
+			"name": "PageAssessments",
+			"domProcessors": [
+				{
+					"class": "MediaWiki\\Extension\\PageAssessments\\HookHandler\\ParsoidAssessmentsProcessor",
+					"services": [
+						"PageAssessments.Store",
+						"MainConfig"
+					]
+				}
+			]
+		}
+	],
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
 		"remoteExtPath": "examples/PageAssessments"

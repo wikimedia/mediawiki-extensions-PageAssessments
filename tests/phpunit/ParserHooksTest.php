@@ -75,8 +75,30 @@ class ParserHooksTest extends MediaWikiIntegrationTestCase {
 		$this->insertPage( $subjectTitle, 'Test' );
 		$this->insertPage( $talkTitle, '{{#assessment:Medicine|B|Low}}' );
 
-		// Simulate a full page view including parsing of interface messgaes.
-		$request = new FauxRequest( [ 'title' => $subjectTitle->getPrefixedDBkey() ] );
+		// Simulate a full page view including parsing of interface messages (with legacy parser)
+		$request = new FauxRequest( [ 'title' => $subjectTitle->getPrefixedDBkey(), 'useParsoid' => 0 ] );
+		$env = new MockEnvironment( $request );
+		$context = $env->makeFauxContext();
+		$entryPoint = new ActionEntryPoint( $context, $env, $this->getServiceContainer() );
+		$entryPoint->enableOutputCapture();
+		$entryPoint->run();
+		// Combined with ->enableOutputCapture(), this suppresses the HTML from being sent to stdout.
+		$entryPoint->getCapturedOutput();
+	}
+
+	public function testParsoidWtPostProcess(): void {
+		$this->overrideConfigValue( 'PageAssessmentsOnTalkPages', true );
+		$subjectTitle = Title::makeTitle( NS_MAIN, 'PageAssessmentsTestPage' );
+		$talkTitle = Title::makeTitle( NS_TALK, 'PageAssessmentsTestPage' );
+		$mockStore = $this->createMock( PageAssessmentsStore::class );
+		$mockStore->expects( $this->once() )
+			->method( 'getAllAssessments' );
+		$this->setService( 'PageAssessments.Store', $mockStore );
+		$this->insertPage( $subjectTitle, 'Test' );
+		$this->insertPage( $talkTitle, '{{#assessment:Medicine|B|Low}}' );
+
+		// Simulate a full page view including parsing of interface messages (with Parsoid)
+		$request = new FauxRequest( [ 'title' => $subjectTitle->getPrefixedDBkey(), 'useParsoid' => 1 ] );
 		$env = new MockEnvironment( $request );
 		$context = $env->makeFauxContext();
 		$entryPoint = new ActionEntryPoint( $context, $env, $this->getServiceContainer() );
