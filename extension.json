@@ -54,6 +54,7 @@
 				"PageAssessments.Store",
 				"NamespaceInfo",
 				"WikiPageFactory",
+				"PageAssessments.AssessmentsProcessor",
 				"MainConfig"
 			]
 		},
@@ -67,6 +68,7 @@
 			"class": "MediaWiki\\Extension\\PageAssessments\\HookHandler\\OutputPageHooks",
 			"services": [
 				"NamespaceInfo",
+				"PageAssessments.AssessmentsProcessor",
 				"MainConfig"
 			]
 		}
@@ -95,8 +97,7 @@
 				{
 					"class": "MediaWiki\\Extension\\PageAssessments\\HookHandler\\ParsoidAssessmentsProcessor",
 					"services": [
-						"PageAssessments.Store",
-						"MainConfig"
+						"PageAssessments.AssessmentsProcessor"
 					]
 				}
 			]

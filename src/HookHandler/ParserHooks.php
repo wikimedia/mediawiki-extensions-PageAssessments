@@ -22,6 +22,7 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 		private readonly PageAssessmentsStore $store,
 		private readonly NamespaceInfo $namespaceInfo,
 		private readonly WikiPageFactory $wikiPageFactory,
+		private readonly AssessmentsProcessor $assessmentsProcessor,
 		private readonly Config $config,
 	) {
 	}
@@ -73,8 +74,8 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 		}
 
 		$title = Title::newFromPageReference( $parser->getPage() );
-		AssessmentsProcessor::copyPageAssessmentsToParserOutput(
-			$title, $parser->getOutput(), $this->config, $this->store
+		$this->assessmentsProcessor->copyPageAssessmentsToParserOutput(
+			$title, $parser->getOutput()
 		);
 	}
 
@@ -94,7 +95,7 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 			( !$assessmentsOnTalkPages && !$isTalkPage )
 		) {
 			$parserOutput = $renderedRevision->getRevisionParserOutput();
-			$assessmentData = AssessmentsProcessor::extractAssessmentDataFromParserOutput(
+			$assessmentData = $this->assessmentsProcessor->extractAssessmentDataFromParserOutput(
 				$parserOutput
 			);
 			// Even if there is no assessment data (it's []), we still

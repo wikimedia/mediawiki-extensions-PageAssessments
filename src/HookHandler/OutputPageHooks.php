@@ -18,6 +18,7 @@ readonly class OutputPageHooks implements OutputPageParserOutputHook {
 
 	public function __construct(
 		private NamespaceInfo $namespaceInfo,
+		private AssessmentsProcessor $assessmentsProcessor,
 		Config $config,
 	) {
 		$this->assessmentsOnTalkPages = $config->get( 'PageAssessmentsOnTalkPages' );
@@ -47,7 +48,7 @@ readonly class OutputPageHooks implements OutputPageParserOutputHook {
 			return;
 		}
 
-		$assessmentData = AssessmentsProcessor::extractAssessmentDataFromParserOutput(
+		$assessmentData = $this->assessmentsProcessor->extractAssessmentDataFromParserOutput(
 			$parserOutput
 		);
 		if ( $assessmentData !== [] ) {

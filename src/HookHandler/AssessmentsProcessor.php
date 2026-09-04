@@ -9,23 +9,29 @@ use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use Wikimedia\Parsoid\Core\ContentMetadataCollector;
 
-class AssessmentsProcessor {
+readonly class AssessmentsProcessor {
 	public const string EXT_DATA_KEY = 'ext-pageassessment-assessmentdata';
+
+	public function __construct(
+		private Config $config,
+		private PageAssessmentsStore $store,
+	) {
+	}
 
 	/**
 	 * If we are on the subject page and assessments are on talk,
 	 * duplicate the assessment data in the subject page's parser cache.
 	 * This is later fetched by OutputPageHooks::onOutputPageParserOutput().
 	 */
-	public static function copyPageAssessmentsToParserOutput(
-		Title $title, ContentMetadataCollector $parserOutput, Config $config, PageAssessmentsStore $store
+	public function copyPageAssessmentsToParserOutput(
+		Title $title, ContentMetadataCollector $parserOutput
 	): void {
 		if (
 			$title->canHaveTalkPage() &&
 			!$title->isTalkPage() &&
-			$config->get( 'PageAssessmentsOnTalkPages' )
+			$this->config->get( 'PageAssessmentsOnTalkPages' )
 		) {
-			$assessmentData = $store->getAllAssessments( $title->getArticleID() );
+			$assessmentData = $this->store->getAllAssessments( $title->getArticleID() );
 			foreach ( $assessmentData as $project => [
 				'class' => $class, 'importance' => $importance
 			] ) {
@@ -55,7 +61,7 @@ class AssessmentsProcessor {
 		);
 	}
 
-	public static function extractAssessmentDataFromParserOutput(
+	public function extractAssessmentDataFromParserOutput(
 		ParserOutput $parserOutput
 	): array {
 		$assessmentData =
