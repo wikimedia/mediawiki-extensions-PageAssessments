@@ -1,15 +1,14 @@
 <?php
 declare( strict_types = 1 );
 
-namespace MediaWiki\Extension\PageAssessments\HookHandler;
+namespace MediaWiki\Extension\PageAssessments;
 
 use MediaWiki\Config\Config;
-use MediaWiki\Extension\PageAssessments\PageAssessmentsStore;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use Wikimedia\Parsoid\Core\ContentMetadataCollector;
 
-readonly class AssessmentsProcessor {
+readonly class PageAssessmentsProcessor {
 	public const string EXT_DATA_KEY = 'ext-pageassessment-assessmentdata';
 
 	public function __construct(

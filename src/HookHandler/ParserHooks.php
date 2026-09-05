@@ -5,6 +5,7 @@ namespace MediaWiki\Extension\PageAssessments\HookHandler;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Deferred\DeferrableUpdate;
+use MediaWiki\Extension\PageAssessments\PageAssessmentsProcessor;
 use MediaWiki\Extension\PageAssessments\PageAssessmentsStore;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Parser\Hook\ParserAfterParseHook;
@@ -22,7 +23,7 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 		private readonly PageAssessmentsStore $store,
 		private readonly NamespaceInfo $namespaceInfo,
 		private readonly WikiPageFactory $wikiPageFactory,
-		private readonly AssessmentsProcessor $assessmentsProcessor,
+		private readonly PageAssessmentsProcessor $assessmentsProcessor,
 		private readonly Config $config,
 	) {
 	}
@@ -48,7 +49,7 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 		string $class = '',
 		string $importance = ''
 	): void {
-		AssessmentsProcessor::storeAssessmentDataInParserOutput(
+		PageAssessmentsProcessor::storeAssessmentDataInParserOutput(
 			$parser->getOutput(), $project, $class, $importance
 		);
 	}

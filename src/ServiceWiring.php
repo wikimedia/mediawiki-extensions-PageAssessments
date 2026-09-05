@@ -2,7 +2,7 @@
 declare( strict_types = 1 );
 
 use CirrusSearch\WeightedTagsUpdater;
-use MediaWiki\Extension\PageAssessments\HookHandler\AssessmentsProcessor;
+use MediaWiki\Extension\PageAssessments\PageAssessmentsProcessor;
 use MediaWiki\Extension\PageAssessments\PageAssessmentsStore;
 use MediaWiki\MediaWikiServices;
 
@@ -10,8 +10,8 @@ use MediaWiki\MediaWikiServices;
 return [
 	'PageAssessments.AssessmentsProcessor' => static function (
 		MediaWikiServices $services
-	): AssessmentsProcessor {
-		return new AssessmentsProcessor(
+	): PageAssessmentsProcessor {
+		return new PageAssessmentsProcessor(
 			$services->getMainConfig(),
 			$services->get( 'PageAssessments.Store' )
 		);

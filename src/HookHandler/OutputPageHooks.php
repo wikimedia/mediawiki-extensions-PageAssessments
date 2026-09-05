@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace MediaWiki\Extension\PageAssessments\HookHandler;
 
 use MediaWiki\Config\Config;
+use MediaWiki\Extension\PageAssessments\PageAssessmentsProcessor;
 use MediaWiki\Output\Hook\OutputPageParserOutputHook;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Parser\ParserOutput;
@@ -18,7 +19,7 @@ readonly class OutputPageHooks implements OutputPageParserOutputHook {
 
 	public function __construct(
 		private NamespaceInfo $namespaceInfo,
-		private AssessmentsProcessor $assessmentsProcessor,
+		private PageAssessmentsProcessor $assessmentsProcessor,
 		Config $config,
 	) {
 		$this->assessmentsOnTalkPages = $config->get( 'PageAssessmentsOnTalkPages' );
