@@ -22,12 +22,14 @@
 namespace MediaWiki\Extension\PageAssessments;
 
 use MediaWiki\Html\Html;
+use MediaWiki\HTMLForm\Field\HTMLSelectNamespace;
 use MediaWiki\HTMLForm\Field\HTMLTextField;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Skin\Skin;
 use MediaWiki\SpecialPage\QueryPage;
 use MediaWiki\Status\Status;
+use MediaWiki\Title\NamespaceInfo;
 use MediaWiki\Title\Title;
 use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
@@ -42,7 +44,8 @@ class SpecialPage extends QueryPage {
 	 * Create this special page, giving it a name and making it transcludable.
 	 */
 	public function __construct(
-		private readonly PageAssessmentsProcessor $processor
+		private readonly PageAssessmentsProcessor $processor,
+		private readonly NamespaceInfo $namespaceInfo,
 	) {
 		parent::__construct();
 		$this->mName = 'PageAssessments';
@@ -308,6 +311,13 @@ class SpecialPage extends QueryPage {
 			->fetchFieldValues();
 		$this->getOutput()->addJsConfigVars( 'wgPageAssessmentProjects', $projects );
 
+		// Only show non-talk namespaces on this special page
+		$nsIds = array_keys( $this->namespaceInfo->getCanonicalNamespaces() );
+		$includeNsIds = array_values( array_filter(
+			$nsIds,
+			fn ( $ns ) => $this->namespaceInfo->isSubject( $ns )
+		) );
+
 		// Define the form fields.
 		$formDescriptor = [
 			'project' => [
@@ -318,9 +328,11 @@ class SpecialPage extends QueryPage {
 			],
 			'namespace' => [
 				'id' => 'pageassessments-namespace',
-				'class' => NamespaceSelect::class,
+				'class' => HTMLSelectNamespace::class,
 				'name' => 'namespace',
 				'label-message' => 'pageassessments-page-namespace',
+				'include' => $includeNsIds,
+				'all' => null,
 			],
 			'page_title' => [
 				'id' => 'pageassessments-page-title',

@@ -120,7 +120,8 @@
 		"PageAssessments": {
 			"class": "MediaWiki\\Extension\\PageAssessments\\SpecialPage",
 			"services": [
-				"PageAssessments.AssessmentsProcessor"
+				"PageAssessments.AssessmentsProcessor",
+				"NamespaceInfo"
 			]
 		}
 	},
