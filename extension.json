@@ -67,9 +67,7 @@
 		"outputpage": {
 			"class": "MediaWiki\\Extension\\PageAssessments\\HookHandler\\OutputPageHooks",
 			"services": [
-				"NamespaceInfo",
-				"PageAssessments.AssessmentsProcessor",
-				"MainConfig"
+				"PageAssessments.AssessmentsProcessor"
 			]
 		}
 	},

@@ -22,7 +22,6 @@ readonly class PageAssessmentsProcessor {
 	/**
 	 * If we are on the subject page and assessments are on talk,
 	 * duplicate the assessment data in the subject page's parser cache.
-	 * This is later fetched by OutputPageHooks::onOutputPageParserOutput().
 	 */
 	public function copyPageAssessmentsToParserOutput(
 		Title $title, ContentMetadataCollector $parserOutput
