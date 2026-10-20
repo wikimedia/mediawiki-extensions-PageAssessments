@@ -41,7 +41,7 @@ class PageAssessmentsProcessorTest extends MediaWikiIntegrationTestCase {
 		$this->insertPage( '铁道', 'WikiProject Railways', self::NS_WIKIPROJECT );
 
 		$parserOutput = new ParserOutput();
-		PageAssessmentsProcessor::storeAssessmentDataInParserOutput(
+		$this->getProcessor()->storeAssessmentDataInParserOutput(
 			$parserOutput, '鐵道', 'B', 'Low'
 		);
 
@@ -63,10 +63,10 @@ class PageAssessmentsProcessorTest extends MediaWikiIntegrationTestCase {
 		$this->insertPage( '铁道', 'WikiProject Railways', self::NS_WIKIPROJECT );
 
 		$parserOutput = new ParserOutput();
-		PageAssessmentsProcessor::storeAssessmentDataInParserOutput(
+		$this->getProcessor()->storeAssessmentDataInParserOutput(
 			$parserOutput, '鐵道', 'B', 'Low'
 		);
-		PageAssessmentsProcessor::storeAssessmentDataInParserOutput(
+		$this->getProcessor()->storeAssessmentDataInParserOutput(
 			$parserOutput, '铁道', 'C', 'Mid'
 		);
 
@@ -86,7 +86,7 @@ class PageAssessmentsProcessorTest extends MediaWikiIntegrationTestCase {
 		// Neither the Traditional nor Simplified WikiProject page exists,
 		// so there's nothing to normalize against.
 		$parserOutput = new ParserOutput();
-		PageAssessmentsProcessor::storeAssessmentDataInParserOutput(
+		$this->getProcessor()->storeAssessmentDataInParserOutput(
 			$parserOutput, '鐵道', 'B', 'Low'
 		);
 
@@ -106,7 +106,7 @@ class PageAssessmentsProcessorTest extends MediaWikiIntegrationTestCase {
 		$invalidProject = '#Fragment';
 
 		$parserOutput = new ParserOutput();
-		PageAssessmentsProcessor::storeAssessmentDataInParserOutput(
+		$this->getProcessor()->storeAssessmentDataInParserOutput(
 			$parserOutput, $invalidProject, 'B', 'Low'
 		);
 

@@ -49,7 +49,7 @@ class ParserHooks implements ParserAfterParseHook, ParserFirstCallInitHook, Revi
 		string $class = '',
 		string $importance = ''
 	): void {
-		PageAssessmentsProcessor::storeAssessmentDataInParserOutput(
+		$this->assessmentsProcessor->storeAssessmentDataInParserOutput(
 			$parser->getOutput(), $project, $class, $importance
 		);
 	}

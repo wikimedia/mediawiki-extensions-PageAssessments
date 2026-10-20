@@ -35,14 +35,14 @@ readonly class PageAssessmentsProcessor {
 			foreach ( $assessmentData as $project => [
 				'class' => $class, 'importance' => $importance
 			] ) {
-				self::storeAssessmentDataInParserOutput(
+				$this->storeAssessmentDataInParserOutput(
 					$parserOutput, $project, $class, $importance
 				);
 			}
 		}
 	}
 
-	public static function storeAssessmentDataInParserOutput(
+	public function storeAssessmentDataInParserOutput(
 		ContentMetadataCollector $parserOutput,
 		string $project, string $class, string $importance,
 	): void {
