@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"pageassessments-desc": "Toto rozšírenie ukladá hodnotenia stránok do databázovej tabuľky pomocou funkcie parsera",
+	"pageassessments-special": "Hodnotenia stránok",
+	"pageassessments-project": "Projekt",
+	"pageassessments-page-namespace": "Menný priestor stránky",
+	"pageassessments-page-title": "Názov stránky",
+	"pageassessments-search": "Hľadať",
+	"pageassessments-importance": "Dôležitosť",
+	"pageassessments-class": "Trieda",
+	"pageassessments-timestamp": "Časová pečiatka",
+	"pageassessments-total-results": "Výsledkov celkom: $1",
+	"pageassessments-error-namespace-filter": "Zadajte názov projektu alebo názov stránky."
+}
