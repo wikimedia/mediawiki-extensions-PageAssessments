@@ -38,7 +38,7 @@ use Wikimedia\Rdbms\IResultWrapper;
  * A special page for searching Page Assessments. Can also be transcluded (in which case the
  * search results' sorting links will be disabled).
  */
-class SpecialPage extends QueryPage {
+class SpecialPageAssessments extends QueryPage {
 
 	/**
 	 * Create this special page, giving it a name and making it transcludable.
