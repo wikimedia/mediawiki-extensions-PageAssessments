@@ -260,8 +260,8 @@ class PageAssessmentsStore {
 		$project = str_replace( "/the ", "/", $project );
 		// Remove pipe characters, which aren't permitted in weighted tags.
 		$project = str_replace( '|', '', $project );
-		// Truncate to 255 characters to avoid DB warnings.
-		return substr( $project, 0, 255 );
+		// Truncate to <=255 bytes to avoid DB warnings, but respect multi-byte sequences
+		return mb_strcut( $project, 0, 255 );
 	}
 
 	/**
