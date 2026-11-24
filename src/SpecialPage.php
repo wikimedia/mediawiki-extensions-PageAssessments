@@ -294,9 +294,11 @@ class SpecialPage extends QueryPage {
 		$this->getOutput()->addModules( 'ext.pageassessments.special' );
 
 		// Add a list of all projects to the page's JS.
-		$projects = $this->getDBLoadBalancer()->getConnection( DB_REPLICA )->newSelectQueryBuilder()
+		$dbr = $this->getDBLoadBalancer()->getConnection( DB_REPLICA );
+		$projects = $dbr->newSelectQueryBuilder()
 			->select( 'pap_project_title' )
 			->from( 'page_assessments_projects' )
+			->where( $dbr->expr( 'pap_project_title', '!=', null ) )
 			->orderBy( 'pap_project_title' )
 			->caller( __METHOD__ )
 			->fetchFieldValues();

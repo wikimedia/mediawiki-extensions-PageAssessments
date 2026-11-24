@@ -304,8 +304,8 @@ class PageAssessmentsDAO {
 		// This is case-sensitive on purpose, as there are some legitimate
 		// subproject titles starting with "The", e.g. "The Canterbury Tales".
 		$project = str_replace( "/the ", "/", $project );
-		// Truncate to 255 characters to avoid DB warnings.
-		return substr( $project, 0, 255 );
+		// Truncate to <=255 bytes to avoid DB warnings, but respect multi-byte sequences
+		return mb_strcut( $project, 0, 255 );
 	}
 
 	/**
